@@ -1,0 +1,15 @@
+<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+  <circle cx="50" cy="50" r="48" fill="#070b14" stroke="#1a1f2e" strokeWidth="1" />
+  <circle cx="50" cy="50" r="42" stroke="#b98cff" strokeWidth="1.5" strokeOpacity="0.8" filter="url(#glow)" />
+  <path d="M50 20 L80 65 L20 65 Z" stroke="#b98cff" strokeWidth="2" strokeLinejoin="round" filter="url(#glow)" />
+  <path d="M25 52 C35 38 65 38 75 52 C65 66 35 66 25 52 Z" fill="#4fe3ff" />
+  <circle cx="50" cy="52" r="8" fill="#05070d" />
+  <circle cx="52" cy="50" r="2" fill="white" fillOpacity="0.8" />
+  <path d="M35 78 Q50 85 65 78" stroke="#b98cff" strokeWidth="1.5" strokeLinecap="round" filter="url(#glow)" />
+</svg>
