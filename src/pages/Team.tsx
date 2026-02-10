@@ -29,7 +29,7 @@ const team = [
       'Outlier Ventures and Chainlink Build Program Alumni',
       'Scaled e-commerce brand to $4M+ revenue before successful exit',
       'Nvidia Deep Learning Certified Instructor',
-      'Finalist: Coindesk Consensus Pitchfest 2023',
+      'Finalist: Web Summit 2026 Impact Startup Showcase & Coindesk Consensus Pitchfest 2023',
     ],
     teaching: [
       {
