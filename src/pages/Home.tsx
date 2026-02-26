@@ -16,12 +16,12 @@ const focusAreas = [
   {
     icon: OpenFiIcon,
     title: 'Open Finance',
-    description: 'AI trading systems, stablecoin payment rails, tokenized assets, and programmable financial infrastructure.',
+    description: 'Stablecoin payment rails, tokenized assets, programmable settlement layers, and decentralized financial infrastructure.',
   },
   {
     icon: AINativeIcon,
     title: 'AI-Native Products',
-    description: 'Applied AI for trading agents, developer tools, and financial decision-making -- not generic AI, but products shipped.',
+    description: 'Autonomous trading agents, reinforcement learning systems, and AI-powered developer tools -- shipped products, not research.',
   },
   {
     icon: EdTechIcon,
