@@ -203,11 +203,11 @@ export default function Home() {
         <div className="relative z-10 max-w-7xl mx-auto px-6">
           <AnimatedSection className="max-w-3xl mb-20">
             <h2 className="display-text mb-6">
-              What We <span className="text-gradient-static">Build</span>
+              What We <span className="text-gradient-static">Do</span>
             </h2>
             <p className="body-large">
-              We build infrastructure for autonomous commerce, programmable
-              money, and AI-driven financial systems.
+              We build companies and advise technical founders. Our expertise: AI trading systems,
+              payment infrastructure for autonomous agents, and programmable financial rails.
             </p>
           </AnimatedSection>
 
