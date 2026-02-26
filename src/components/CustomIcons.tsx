@@ -1,11 +1,11 @@
 import { motion } from 'framer-motion';
 
-export function FinTechIcon({ className = '' }: { className?: string }) {
+export function OpenFiIcon({ className = '' }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
       <motion.path
         d="M24 4L44 14V34L24 44L4 34V14L24 4Z"
-        stroke="url(#fintech-gradient)"
+        stroke="url(#openfi-gradient)"
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -14,137 +14,9 @@ export function FinTechIcon({ className = '' }: { className?: string }) {
         animate={{ pathLength: 1, opacity: 1 }}
         transition={{ duration: 1.5, ease: "easeInOut" }}
       />
-      <motion.circle
-        cx="24"
-        cy="24"
-        r="8"
-        stroke="url(#fintech-gradient)"
-        strokeWidth="2"
-        fill="none"
-        initial={{ scale: 0, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 0.8, delay: 0.5 }}
-      />
       <motion.path
-        d="M24 16V12M24 36V32M16 24H12M36 24H32"
-        stroke="url(#fintech-gradient)"
-        strokeWidth="2"
-        strokeLinecap="round"
-        initial={{ pathLength: 0, opacity: 0 }}
-        animate={{ pathLength: 1, opacity: 1 }}
-        transition={{ duration: 1, delay: 0.8 }}
-      />
-      <defs>
-        <linearGradient id="fintech-gradient" x1="4" y1="4" x2="44" y2="44" gradientUnits="userSpaceOnUse">
-          <stop stopColor="currentColor" stopOpacity="1" />
-          <stop offset="1" stopColor="currentColor" stopOpacity="0.5" />
-        </linearGradient>
-      </defs>
-    </svg>
-  );
-}
-
-export function CommerceIcon({ className = '' }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <motion.path
-        d="M8 8H40V40H8V8Z"
-        stroke="url(#commerce-gradient)"
-        strokeWidth="2"
-        fill="none"
-        initial={{ pathLength: 0, opacity: 0 }}
-        animate={{ pathLength: 1, opacity: 1 }}
-        transition={{ duration: 1.2 }}
-      />
-      <motion.path
-        d="M16 16L32 32M32 16L16 32"
-        stroke="url(#commerce-gradient)"
-        strokeWidth="2"
-        strokeLinecap="round"
-        initial={{ pathLength: 0, opacity: 0 }}
-        animate={{ pathLength: 1, opacity: 1 }}
-        transition={{ duration: 1, delay: 0.4 }}
-      />
-      <motion.circle
-        cx="24"
-        cy="24"
-        r="4"
-        stroke="url(#commerce-gradient)"
-        strokeWidth="2"
-        fill="none"
-        initial={{ scale: 0, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 0.6, delay: 0.8 }}
-      />
-      <defs>
-        <linearGradient id="commerce-gradient" x1="8" y1="8" x2="40" y2="40" gradientUnits="userSpaceOnUse">
-          <stop stopColor="currentColor" stopOpacity="1" />
-          <stop offset="1" stopColor="currentColor" stopOpacity="0.5" />
-        </linearGradient>
-      </defs>
-    </svg>
-  );
-}
-
-export function AIIcon({ className = '' }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <motion.path
-        d="M24 8L32 16L24 24L32 32L24 40L16 32L24 24L16 16L24 8Z"
-        stroke="url(#ai-gradient)"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        fill="none"
-        initial={{ pathLength: 0, opacity: 0 }}
-        animate={{ pathLength: 1, opacity: 1 }}
-        transition={{ duration: 1.5 }}
-      />
-      <motion.path
-        d="M8 24H16M32 24H40"
-        stroke="url(#ai-gradient)"
-        strokeWidth="2"
-        strokeLinecap="round"
-        initial={{ pathLength: 0, opacity: 0 }}
-        animate={{ pathLength: 1, opacity: 1 }}
-        transition={{ duration: 0.8, delay: 0.6 }}
-      />
-      <motion.circle
-        cx="24"
-        cy="24"
-        r="3"
-        fill="url(#ai-gradient)"
-        initial={{ scale: 0, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 0.5, delay: 1 }}
-      />
-      <defs>
-        <linearGradient id="ai-gradient" x1="8" y1="8" x2="40" y2="40" gradientUnits="userSpaceOnUse">
-          <stop stopColor="currentColor" stopOpacity="1" />
-          <stop offset="1" stopColor="currentColor" stopOpacity="0.5" />
-        </linearGradient>
-      </defs>
-    </svg>
-  );
-}
-
-export function TokenIcon({ className = '' }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <motion.circle
-        cx="24"
-        cy="24"
-        r="16"
-        stroke="url(#token-gradient)"
-        strokeWidth="2"
-        fill="none"
-        initial={{ pathLength: 0, opacity: 0 }}
-        animate={{ pathLength: 1, opacity: 1 }}
-        transition={{ duration: 1.2 }}
-      />
-      <motion.path
-        d="M24 8V24L32 28"
-        stroke="url(#token-gradient)"
+        d="M14 24H20L24 18L28 30L32 24H38"
+        stroke="url(#openfi-gradient)"
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -156,27 +28,164 @@ export function TokenIcon({ className = '' }: { className?: string }) {
       <motion.circle
         cx="24"
         cy="24"
-        r="8"
-        stroke="url(#token-gradient)"
+        r="4"
+        stroke="url(#openfi-gradient)"
         strokeWidth="2"
         fill="none"
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 0.8, delay: 0.8 }}
+        transition={{ duration: 0.6, delay: 1 }}
       />
+      <defs>
+        <linearGradient id="openfi-gradient" x1="4" y1="4" x2="44" y2="44" gradientUnits="userSpaceOnUse">
+          <stop stopColor="currentColor" stopOpacity="1" />
+          <stop offset="1" stopColor="currentColor" stopOpacity="0.5" />
+        </linearGradient>
+      </defs>
+    </svg>
+  );
+}
+
+export function EdTechIcon({ className = '' }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
       <motion.path
-        d="M12 18L24 24L36 18M12 30L24 24L36 30"
-        stroke="url(#token-gradient)"
+        d="M24 6L44 16L24 26L4 16L24 6Z"
+        stroke="url(#edtech-gradient)"
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
         fill="none"
         initial={{ pathLength: 0, opacity: 0 }}
         animate={{ pathLength: 1, opacity: 1 }}
-        transition={{ duration: 1, delay: 1 }}
+        transition={{ duration: 1.2 }}
+      />
+      <motion.path
+        d="M12 20V32C12 32 18 38 24 38C30 38 36 32 36 32V20"
+        stroke="url(#edtech-gradient)"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        fill="none"
+        initial={{ pathLength: 0, opacity: 0 }}
+        animate={{ pathLength: 1, opacity: 1 }}
+        transition={{ duration: 1, delay: 0.4 }}
+      />
+      <motion.path
+        d="M44 16V30"
+        stroke="url(#edtech-gradient)"
+        strokeWidth="2"
+        strokeLinecap="round"
+        fill="none"
+        initial={{ pathLength: 0, opacity: 0 }}
+        animate={{ pathLength: 1, opacity: 1 }}
+        transition={{ duration: 0.6, delay: 0.8 }}
       />
       <defs>
-        <linearGradient id="token-gradient" x1="8" y1="8" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+        <linearGradient id="edtech-gradient" x1="4" y1="6" x2="44" y2="38" gradientUnits="userSpaceOnUse">
+          <stop stopColor="currentColor" stopOpacity="1" />
+          <stop offset="1" stopColor="currentColor" stopOpacity="0.5" />
+        </linearGradient>
+      </defs>
+    </svg>
+  );
+}
+
+export function AINativeIcon({ className = '' }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <motion.rect
+        x="8"
+        y="8"
+        width="32"
+        height="32"
+        rx="4"
+        stroke="url(#ainative-gradient)"
+        strokeWidth="2"
+        fill="none"
+        initial={{ pathLength: 0, opacity: 0 }}
+        animate={{ pathLength: 1, opacity: 1 }}
+        transition={{ duration: 1.2 }}
+      />
+      <motion.path
+        d="M16 28L22 16L28 28M18 24H26"
+        stroke="url(#ainative-gradient)"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        fill="none"
+        initial={{ pathLength: 0, opacity: 0 }}
+        animate={{ pathLength: 1, opacity: 1 }}
+        transition={{ duration: 1, delay: 0.4 }}
+      />
+      <motion.circle
+        cx="34"
+        cy="20"
+        r="3"
+        stroke="url(#ainative-gradient)"
+        strokeWidth="2"
+        fill="none"
+        initial={{ scale: 0, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 0.5, delay: 0.8 }}
+      />
+      <motion.path
+        d="M34 23V32"
+        stroke="url(#ainative-gradient)"
+        strokeWidth="2"
+        strokeLinecap="round"
+        fill="none"
+        initial={{ pathLength: 0, opacity: 0 }}
+        animate={{ pathLength: 1, opacity: 1 }}
+        transition={{ duration: 0.6, delay: 1 }}
+      />
+      <defs>
+        <linearGradient id="ainative-gradient" x1="8" y1="8" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+          <stop stopColor="currentColor" stopOpacity="1" />
+          <stop offset="1" stopColor="currentColor" stopOpacity="0.5" />
+        </linearGradient>
+      </defs>
+    </svg>
+  );
+}
+
+export function SpatialIcon({ className = '' }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <motion.path
+        d="M24 4L42 14V34L24 44L6 34V14L24 4Z"
+        stroke="url(#spatial-gradient)"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        fill="none"
+        initial={{ pathLength: 0, opacity: 0 }}
+        animate={{ pathLength: 1, opacity: 1 }}
+        transition={{ duration: 1.5 }}
+      />
+      <motion.path
+        d="M24 4V24M6 14L24 24M42 14L24 24"
+        stroke="url(#spatial-gradient)"
+        strokeWidth="2"
+        strokeLinecap="round"
+        fill="none"
+        initial={{ pathLength: 0, opacity: 0 }}
+        animate={{ pathLength: 1, opacity: 1 }}
+        transition={{ duration: 1, delay: 0.5 }}
+      />
+      <motion.circle
+        cx="24"
+        cy="24"
+        r="4"
+        stroke="url(#spatial-gradient)"
+        strokeWidth="2"
+        fill="none"
+        initial={{ scale: 0, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 0.6, delay: 1 }}
+      />
+      <defs>
+        <linearGradient id="spatial-gradient" x1="6" y1="4" x2="42" y2="44" gradientUnits="userSpaceOnUse">
           <stop stopColor="currentColor" stopOpacity="1" />
           <stop offset="1" stopColor="currentColor" stopOpacity="0.5" />
         </linearGradient>

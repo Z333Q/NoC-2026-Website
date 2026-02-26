@@ -3,13 +3,13 @@ import { useRef, useState } from 'react';
 import { Filter, ArrowUpRight, Rocket, Globe } from 'lucide-react';
 import ParticleField from '../components/ParticleField';
 
-const categories = ['All', 'Active', 'Building', 'Exited', 'FinTech', 'AI/ML', 'Spatial', 'E-commerce'];
+const categories = ['All', 'Active', 'Building', 'Exited', 'Open Finance', 'AI-Native', 'Spatial', 'EdTech'];
 
 const portfolio = [
   {
     id: 1,
     name: 'ReFi.Trading',
-    category: 'FinTech',
+    category: 'Open Finance',
     fund: 'Studio Built',
     stage: 'Co-Founded',
     status: 'Active',
@@ -32,7 +32,7 @@ const portfolio = [
   {
     id: 2,
     name: 'P402 Router',
-    category: 'FinTech',
+    category: 'Open Finance',
     fund: 'Studio Built',
     stage: 'Launched',
     status: 'Active',
@@ -55,7 +55,7 @@ const portfolio = [
   {
     id: 3,
     name: 'P402.shop',
-    category: 'AI/ML',
+    category: 'AI-Native',
     fund: 'Studio Built',
     stage: 'Launched',
     status: 'Active',
@@ -101,7 +101,7 @@ const portfolio = [
   {
     id: 5,
     name: 'Fan City / Puck.City',
-    category: 'FinTech',
+    category: 'Open Finance',
     fund: 'Studio Built',
     stage: 'Launched',
     status: 'Active',
@@ -124,7 +124,7 @@ const portfolio = [
   {
     id: 6,
     name: 'HazelHearts.xyz',
-    category: 'FinTech',
+    category: 'Open Finance',
     fund: 'Studio Built',
     stage: 'Launched',
     status: 'Active',
@@ -147,7 +147,7 @@ const portfolio = [
   {
     id: 7,
     name: 'Wholesome Linen',
-    category: 'E-commerce',
+    category: 'Previous',
     fund: 'Co-Founded',
     stage: 'Exited 2021',
     status: 'Exited',
@@ -456,7 +456,7 @@ export default function Portfolio() {
               animate={headerInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.4, duration: 0.6 }}
             >
-              Companies we've built and are building. From AI trading infrastructure to spatial computing,
+              Companies we've built and are building. From open finance infrastructure to spatial computing,
               these are ventures created with first principles thinking.
             </motion.p>
           </motion.div>

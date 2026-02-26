@@ -67,7 +67,7 @@ const benefits = [
   {
     icon: FortressIcon,
     title: 'Regulatory Navigation',
-    description: 'Legal structure guidance and compliance support for FinTech and token-based systems.',
+    description: 'Legal structure guidance and compliance support for open finance and token-based systems.',
   },
   {
     icon: InnovationIcon,
@@ -77,7 +77,7 @@ const benefits = [
 ];
 
 const requirements = [
-  'Founders building FinTech, AI trading, or payment infrastructure',
+  'Founders building in open finance, AI-native products, EdTech, or spatial computing',
   'Technical teams requiring operator-level expertise',
   'Funded startups needing fractional technical leadership',
   'Companies with budget for professional advisory services',
@@ -122,7 +122,7 @@ export default function Launchpad() {
             </h1>
             <p className="text-xl text-[var(--color-text-secondary)] mb-8 leading-relaxed">
               Work with operators who have built what you are building. Architecture, strategy,
-              and execution support for technical founders in FinTech and AI infrastructure.
+              and execution support for technical founders in open finance, AI, EdTech, and spatial computing.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link to="/contact" className="btn-primary flex items-center justify-center gap-2">
@@ -144,8 +144,8 @@ export default function Launchpad() {
               Service <span className="text-gradient-static">Offerings</span>
             </h2>
             <p className="text-[var(--color-text-secondary)] max-w-2xl mx-auto text-lg">
-              Hands-on technical advisory from operators who've built and scaled FinTech infrastructure,
-              AI trading systems, and programmable payment rails.
+              Hands-on technical advisory from operators who've built and scaled open finance infrastructure,
+              AI-native products, and education technology platforms.
             </p>
           </AnimatedSection>
 

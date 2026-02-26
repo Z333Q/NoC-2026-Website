@@ -213,7 +213,7 @@ export default function Insights() {
               <span className="text-gradient">Ideas</span> & Analysis
             </h1>
             <p className="text-xl text-[var(--color-text-secondary)] max-w-2xl mx-auto mb-6">
-              Thoughts on investing, technology, and building the future of digital commerce.
+              Thoughts on investing, technology, and building at the intersection of open finance, AI, and education.
             </p>
             {/* PLACEHOLDER: Update Tumblr link */}
             <a

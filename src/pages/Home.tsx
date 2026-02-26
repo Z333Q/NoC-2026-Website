@@ -10,28 +10,28 @@ import {
 } from 'lucide-react';
 import ParticleField from '../components/ParticleField';
 import MolecularOrb from '../components/MolecularOrb';
-import { FinTechIcon, CommerceIcon, AIIcon, TokenIcon } from '../components/CustomIcons';
+import { OpenFiIcon, AINativeIcon, EdTechIcon, SpatialIcon } from '../components/CustomIcons';
 
 const focusAreas = [
   {
-    icon: FinTechIcon,
-    title: 'FinTech',
-    description: 'AI-powered trading, autonomous payment protocols, and next-generation financial systems.',
+    icon: OpenFiIcon,
+    title: 'Open Finance',
+    description: 'AI trading systems, stablecoin payment rails, tokenized assets, and programmable financial infrastructure.',
   },
   {
-    icon: CommerceIcon,
-    title: 'Digital Commerce',
-    description: 'E-commerce innovation, marketplace platforms, and tokenized transaction models.',
+    icon: AINativeIcon,
+    title: 'AI-Native Products',
+    description: 'Applied AI for trading agents, developer tools, and financial decision-making -- not generic AI, but products shipped.',
   },
   {
-    icon: AIIcon,
-    title: 'AI & Automation',
-    description: 'Reinforcement learning agents, autonomous systems, and predictive infrastructure.',
+    icon: EdTechIcon,
+    title: 'EdTech & Applied Learning',
+    description: 'University-level curriculum in AI, blockchain, and product development. Nvidia DLI certified instruction.',
   },
   {
-    icon: TokenIcon,
-    title: 'Tokenization',
-    description: 'Asset-backed tokens, programmable ownership, and decentralized settlement layers.',
+    icon: SpatialIcon,
+    title: 'Spatial & Emerging Platforms',
+    description: 'VisionOS, Meta Quest, and next-platform experiences at the intersection of spatial computing and health.',
   },
 ];
 
@@ -153,8 +153,8 @@ export default function Home() {
               transition={{ duration: 0.8, delay: 0.7 }}
               className="body-large max-w-2xl mb-12"
             >
-              We build companies solving hard technical problems in financial technology,
-              autonomous systems, and programmable commerce.
+              We build companies at the intersection of open finance, applied AI,
+              spatial computing, and technical education.
             </motion.p>
 
             <motion.div
@@ -206,8 +206,8 @@ export default function Home() {
               What We <span className="text-gradient-static">Do</span>
             </h2>
             <p className="body-large">
-              We build companies and advise technical founders. Our expertise: AI trading systems,
-              payment infrastructure for autonomous agents, and programmable financial rails.
+              We build companies and advise technical founders across open finance, AI-native products,
+              spatial platforms, and education technology.
             </p>
           </AnimatedSection>
 

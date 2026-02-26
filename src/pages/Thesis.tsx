@@ -62,7 +62,7 @@ const faqs = [
   },
   {
     question: 'What sectors do you focus on?',
-    answer: 'Three core areas: (1) Payment protocols enabling AI agent transactions, (2) Algorithmic trading systems using reinforcement learning, and (3) Programmable settlement layers for tokenized assets. If you\'re building infrastructure that makes money programmable, agents autonomous, or markets more efficient—we want to talk.',
+    answer: 'Four core areas: (1) Open Finance -- AI trading, stablecoin payments, and tokenized financial rails, (2) AI-Native Products -- applied AI for trading agents and developer tools, (3) EdTech & Applied Learning -- technical education in AI, blockchain, and product development, and (4) Spatial & Emerging Platforms -- VisionOS, Meta Quest, and next-platform experiences. If you\'re building in these spaces, we want to talk.',
   },
   {
     question: 'How do your advisory engagements work?',
@@ -78,7 +78,7 @@ const faqs = [
   },
   {
     question: 'Who should reach out?',
-    answer: 'Technical founders building FinTech, AI trading, or payment infrastructure who value operator expertise. We work best with teams that have budget for professional services and are ready to move quickly. If you need hand-holding, we\'re not the right fit. If you need battle-tested operators to help you execute faster—let\'s talk.',
+    answer: 'Technical founders building in open finance, AI-native products, EdTech, or spatial computing who value operator expertise. We work best with teams that have budget for professional services and are ready to move quickly. If you need hand-holding, we\'re not the right fit. If you need battle-tested operators to help you execute faster -- let\'s talk.',
   },
 ];
 
@@ -151,13 +151,13 @@ export default function Thesis() {
                 Our <span className="text-gradient">Thesis</span>
               </h1>
               <p className="text-xl text-[var(--color-text-secondary)] mb-6 leading-relaxed">
-                We back founders solving hard technical problems in financial infrastructure,
-                autonomous systems, and programmable money.
+                We back founders solving hard technical problems in open finance, applied AI,
+                spatial computing, and education technology.
               </p>
               <p className="text-[var(--color-text-secondary)] mb-8">
-                Our thesis: AI agents need payment rails. Traders need algorithmic infrastructure. Commerce needs
-                programmable settlement. We invest in the protocols, platforms, and systems enabling this shift—companies
-                building foundational technology, not features.
+                Our thesis: AI agents need payment rails. Traders need algorithmic infrastructure. Learners need
+                technical depth from operators. We invest in the protocols, platforms, and systems enabling this
+                shift -- companies building foundational technology, not features.
               </p>
               <Link to="/contact" className="btn-primary inline-flex items-center gap-2">
                 <span>Get in Touch</span>
