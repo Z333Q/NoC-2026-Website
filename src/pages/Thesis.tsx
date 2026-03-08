@@ -44,7 +44,7 @@ const pillars = [
       '6-patent portfolio (1 USPTO filed, 5 drafted)',
       'Self-custodied execution via ERC-4337 account abstraction',
       'Targeting UAE ADGM Category 3A licensing',
-      '$2.45M raise at $15M post-money, backed by $300K+ non-dilutive capital',
+      'Backed by non-dilutive capital, raising institutional seed round',
     ],
     link: 'https://refi.trading',
   },
@@ -139,7 +139,7 @@ const faqs = [
   },
   {
     question: 'What does founder-market fit look like?',
-    answer: '20 years building financial infrastructure across payment hardware (Symstream), sovereign digital systems (Dubai Land Department), institutional capital ($1.2B+ at Peak Venture Partners), DTC e-commerce ($4M+ exit), and now autonomous AI agents. The throughline: building systems that move value at the edges of traditional finance.',
+    answer: 'Zeshan Ahmad brings 20 years building financial infrastructure across payment hardware (Symstream), sovereign digital systems (Dubai Land Department), institutional capital ($1.2B+ at Peak Venture Partners), DTC e-commerce ($4M+ exit), and now autonomous AI agents. Co-founder Daniel Oosthuyzen is a quant engineer whose quantitative modeling expertise drives the RL trading algorithms and risk engine at the core of ReFi Trading. The throughline: building systems that move value at the edges of traditional finance.',
   },
 ];
 

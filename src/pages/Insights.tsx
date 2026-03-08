@@ -13,6 +13,7 @@ import {
   FileText,
   Heart,
   ChevronRight,
+  PawPrint,
 } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { fallbackPosts } from '../data/insightsData';
@@ -134,6 +135,14 @@ function PostCard({ post, index }: { post: BlogPost; index: number }) {
   );
 }
 
+function BagheeOreoIcon() {
+  return (
+    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.88-2.88 2.89 2.89 0 0 1 2.88-2.88c.28 0 .54.04.79.1V9.01a6.36 6.36 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.64a8.26 8.26 0 0 0 4.84 1.55V6.74a4.83 4.83 0 0 1-1.08-.05Z" />
+    </svg>
+  );
+}
+
 function MarketWarsSeries({ posts }: { posts: BlogPost[] }) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-50px' });
@@ -150,7 +159,6 @@ function MarketWarsSeries({ posts }: { posts: BlogPost[] }) {
       initial={{ opacity: 0, y: 30 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-      className="mb-16"
     >
       <div className="glass-panel rounded-2xl p-8 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-[#00D4AA]/5 via-transparent to-[#00D4AA]/3" />
@@ -213,7 +221,105 @@ function MarketWarsSeries({ posts }: { posts: BlogPost[] }) {
   );
 }
 
-function PersonalBlogCard() {
+function SourcePane({
+  source,
+  posts,
+  delay = 0,
+}: {
+  source: 'refi' | 'p402';
+  posts: BlogPost[];
+  delay?: number;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: '-50px' });
+  const config = SOURCE_CONFIG[source];
+  const Icon = config.icon;
+  const sourcePosts = posts.filter((p) => p.source === source && !p.series_name).slice(0, 3);
+
+  const externalUrl = source === 'refi' ? 'https://refi.trading/blog' : 'https://www.p402.io/intelligence';
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 30 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ delay, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+      className="glass-panel rounded-2xl overflow-hidden relative h-full flex flex-col"
+    >
+      <div
+        className="absolute inset-0 opacity-[0.04]"
+        style={{
+          background: `radial-gradient(circle at top right, ${config.color}, transparent 60%)`,
+        }}
+      />
+
+      <div className="relative z-10 p-6 md:p-8 flex flex-col flex-1">
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center gap-3">
+            <div
+              className="w-10 h-10 rounded-xl flex items-center justify-center"
+              style={{ backgroundColor: `${config.color}15` }}
+            >
+              <Icon className="w-5 h-5" style={{ color: config.color }} />
+            </div>
+            <div>
+              <h3 className="font-bold text-lg">{config.label}</h3>
+              <p className="text-xs text-[var(--color-text-muted)]">
+                {source === 'refi' ? 'Research & Market Analysis' : 'Protocol Research & Papers'}
+              </p>
+            </div>
+          </div>
+          <a
+            href={externalUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-xs font-medium transition-all hover:gap-2"
+            style={{ color: config.color }}
+          >
+            View All
+            <ArrowRight className="w-3.5 h-3.5" />
+          </a>
+        </div>
+
+        <div className="space-y-3 flex-1">
+          {sourcePosts.map((post) => (
+            <a
+              key={post.id}
+              href={post.source_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex gap-4 p-4 rounded-xl bg-white/[0.02] border border-white/[0.05] hover:bg-white/[0.05] hover:border-white/[0.1] transition-all"
+            >
+              {post.image_url && (
+                <div className="w-20 h-20 rounded-lg overflow-hidden shrink-0 hidden sm:block">
+                  <img
+                    src={post.image_url}
+                    alt={post.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                </div>
+              )}
+              <div className="flex flex-col flex-1 min-w-0">
+                <div className="flex items-center gap-3 text-[10px] text-[var(--color-text-muted)] mb-1.5">
+                  <span>{post.category}</span>
+                  <span>{post.read_time}</span>
+                </div>
+                <h4 className="text-sm font-semibold leading-snug group-hover:text-white transition-colors line-clamp-2 mb-1">
+                  {post.title}
+                </h4>
+                <p className="text-xs text-[var(--color-text-muted)] line-clamp-1 mt-auto">
+                  {post.excerpt}
+                </p>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+function PersonalPane({ delay = 0 }: { delay?: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-50px' });
 
@@ -222,75 +328,77 @@ function PersonalBlogCard() {
       ref={ref}
       initial={{ opacity: 0, y: 30 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-      className="mt-16"
+      transition={{ delay, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+      className="glass-panel rounded-2xl overflow-hidden relative"
     >
-      <div className="glass-panel rounded-2xl overflow-hidden relative">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#F59E0B]/5 via-transparent to-[#F59E0B]/3" />
+      <div className="absolute inset-0 bg-gradient-to-br from-[#F59E0B]/[0.04] via-transparent to-transparent" />
 
-        <div className="relative z-10 p-8 md:p-10">
-          <div className="flex flex-col md:flex-row md:items-center gap-8">
-            <div className="flex-1">
-              <div className="flex items-center gap-3 mb-4">
-                <span
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-wider"
-                  style={{
-                    color: '#F59E0B',
-                    backgroundColor: 'rgba(245,158,11,0.1)',
-                    border: '1px solid rgba(245,158,11,0.25)',
-                  }}
-                >
-                  <Heart className="w-3 h-3" />
-                  Personal
-                </span>
+      <div className="relative z-10 p-6 md:p-8">
+        <div className="grid md:grid-cols-2 gap-8">
+          <div>
+            <div className="flex items-center gap-3 mb-4">
+              <div
+                className="w-10 h-10 rounded-xl flex items-center justify-center"
+                style={{ backgroundColor: 'rgba(245,158,11,0.1)' }}
+              >
+                <Heart className="w-5 h-5 text-[#F59E0B]" />
               </div>
-              <h3 className="text-2xl md:text-3xl font-bold mb-3">
-                Exploration & Discovery
-              </h3>
-              <p className="text-[var(--color-text-secondary)] mb-4 leading-relaxed">
-                Adventures and reflections from around the world with my wife Yuliia.
-                Life beyond the terminal -- travel, culture, food, and the occasional
-                philosophical tangent.
+              <div>
+                <h3 className="font-bold text-lg">Exploration & Discovery</h3>
+                <p className="text-xs text-[var(--color-text-muted)]">Life Beyond the Terminal</p>
+              </div>
+            </div>
+            <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed mb-5">
+              Adventures and reflections from around the world with my wife Yuliia.
+              Travel, culture, food, and the occasional philosophical tangent.
+            </p>
+            <a
+              href="https://weexploreanddiscover.tumblr.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all hover:gap-3"
+              style={{
+                backgroundColor: 'rgba(245,158,11,0.1)',
+                color: '#F59E0B',
+                border: '1px solid rgba(245,158,11,0.25)',
+              }}
+            >
+              <Rss className="w-4 h-4" />
+              Read the Blog
+              <ArrowRight className="w-4 h-4" />
+            </a>
+          </div>
+
+          <div className="flex flex-col justify-center">
+            <div className="p-5 rounded-xl bg-white/[0.03] border border-white/[0.06]">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center">
+                  <PawPrint className="w-4 h-4 text-[var(--color-text-muted)]" />
+                </div>
+                <div>
+                  <h4 className="text-sm font-semibold">Bagheera & Oreo</h4>
+                  <p className="text-[10px] text-[var(--color-text-muted)]">The real stars of the show</p>
+                </div>
+              </div>
+              <p className="text-xs text-[var(--color-text-secondary)] mb-4 leading-relaxed">
+                Two dogs, zero understanding of financial infrastructure,
+                maximum chaos. Follow their adventures on TikTok.
               </p>
-              <div className="flex flex-wrap items-center gap-4">
-                <a
-                  href="https://weexploreanddiscover.tumblr.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all hover:gap-3"
-                  style={{
-                    backgroundColor: 'rgba(245,158,11,0.1)',
-                    color: '#F59E0B',
-                    border: '1px solid rgba(245,158,11,0.25)',
-                  }}
-                >
-                  <Rss className="w-4 h-4" />
-                  Read the Blog
-                  <ArrowRight className="w-4 h-4" />
-                </a>
-                <a
-                  href="https://tiktok.com/bagheeandoreo"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold bg-white/5 text-[var(--color-text-secondary)] border border-[var(--color-border)] hover:border-[var(--color-border-hover)] hover:text-white transition-all"
-                >
-                  <BagheeOreoIcon />
-                  Baghee & Oreo on TikTok
-                </a>
-              </div>
+              <a
+                href="https://tiktok.com/@bagheeandoreo"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-sm font-medium text-[var(--color-text-secondary)] hover:text-white transition-colors"
+              >
+                <BagheeOreoIcon />
+                @bagheeandoreo on TikTok
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
             </div>
           </div>
         </div>
       </div>
     </motion.div>
-  );
-}
-
-function BagheeOreoIcon() {
-  return (
-    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.88-2.88 2.89 2.89 0 0 1 2.88-2.88c.28 0 .54.04.79.1V9.01a6.36 6.36 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.64a8.26 8.26 0 0 0 4.84 1.55V6.74a4.83 4.83 0 0 1-1.08-.05Z" />
-    </svg>
   );
 }
 
@@ -327,6 +435,8 @@ export default function Insights() {
     ? posts.filter((p) => p.category !== 'Personal')
     : posts.filter((p) => p.category === activeFilter);
 
+  const showPanes = !loading && activeFilter === 'All';
+
   return (
     <div className="min-h-screen">
       <section className="relative py-32 overflow-hidden blueprint-grid">
@@ -350,32 +460,6 @@ export default function Insights() {
               studio -- covering AI trading, agentic payments, zero-knowledge compliance,
               and market structure.
             </p>
-
-            <div className="flex items-center justify-center gap-4 flex-wrap">
-              <a
-                href="https://refi.trading/blog"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-sm font-medium transition-all hover:gap-3"
-                style={{ color: '#00D4AA' }}
-              >
-                <Rss className="w-4 h-4" />
-                ReFi.Trading Blog
-                <ArrowRight className="w-3.5 h-3.5" />
-              </a>
-              <span className="w-px h-4 bg-[var(--color-border)]" />
-              <a
-                href="https://www.p402.io/intelligence"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-sm font-medium transition-all hover:gap-3"
-                style={{ color: '#3B82F6' }}
-              >
-                <FileText className="w-4 h-4" />
-                P402 Intelligence
-                <ArrowRight className="w-3.5 h-3.5" />
-              </a>
-            </div>
           </motion.div>
 
           <motion.div
@@ -404,8 +488,33 @@ export default function Insights() {
 
       <section className="py-16 bg-[var(--color-bg-secondary)]">
         <div className="max-w-7xl mx-auto px-6">
-          {!loading && activeFilter === 'All' && (
-            <MarketWarsSeries posts={posts} />
+          {showPanes && (
+            <div className="space-y-8 mb-16">
+              <MarketWarsSeries posts={posts} />
+
+              <div className="grid lg:grid-cols-2 gap-6">
+                <SourcePane source="refi" posts={posts} delay={0.1} />
+                <SourcePane source="p402" posts={posts} delay={0.2} />
+              </div>
+
+              <PersonalPane delay={0.1} />
+            </div>
+          )}
+
+          {showPanes && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3 }}
+              className="mb-8"
+            >
+              <h2 className="text-2xl font-bold">
+                All <span className="text-gradient-static">Posts</span>
+              </h2>
+              <p className="text-sm text-[var(--color-text-muted)] mt-1">
+                Everything published across the studio
+              </p>
+            </motion.div>
           )}
 
           {loading ? (
@@ -454,8 +563,6 @@ export default function Insights() {
               </p>
             </motion.div>
           )}
-
-          {!loading && activeFilter === 'All' && <PersonalBlogCard />}
         </div>
       </section>
     </div>
