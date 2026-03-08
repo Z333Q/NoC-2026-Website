@@ -15,11 +15,11 @@ const portfolio = [
     status: 'Active',
     year: '2025',
     tagline: 'Wall-Street AI, Radically Accessible',
-    description: 'Institutional-grade AI trading with self-custodied execution. zk-VaR engine, 6-patent portfolio, and RL agents with 28% CAGR.',
-    longDescription: 'Algorithmic portfolio management platform powered by reinforcement learning agents with backtested 28% CAGR and 2.07 Sharpe ratio. Features a proprietary zk-VaR engine (zero-knowledge Value-at-Risk) for cryptographic risk verification, 6-patent portfolio (1 USPTO filed, 5 drafted), and self-custodied execution via ERC-4337. Backed by non-dilutive capital, raising institutional seed round. Co-founded with quant engineer Daniel Oosthuyzen. Targeting UAE ADGM Category 3A licensing with SOC-2 preparation.',
+    description: 'Institutional-grade AI trading with self-custodied execution. zk-VaR engine, patent portfolio (1 filed, 5 drafted), and RL agents with 28% CAGR.',
+    longDescription: 'Algorithmic portfolio management platform powered by reinforcement learning agents with backtested 28% CAGR and 2.07 Sharpe ratio. Features a proprietary zk-VaR engine (zero-knowledge Value-at-Risk) for cryptographic risk verification, patent portfolio (1 USPTO filed, 5 drafted), and self-custodied execution via ERC-4337. Backed by non-dilutive capital, raising institutional seed round. Co-founded with quant engineer Daniel Oosthuyzen. Targeting UAE ADGM Category 3A licensing with SOC-2 preparation.',
     features: [
       'zk-VaR cryptographic risk engine',
-      '6-patent portfolio (1 filed)',
+      'Patent portfolio (1 filed, 5 drafted)',
       '28% CAGR, 2.07 Sharpe (3yr)',
       'ADGM Category 3A licensing',
     ],
@@ -39,7 +39,7 @@ const portfolio = [
     year: '2024',
     tagline: 'Middleware Intelligence for the Agentic Economy',
     description: 'Routes across 300+ AI models with session budgets, AP2 mandate governance, and x402 settlement on Base.',
-    longDescription: 'P402 is a middleware intelligence layer that routes across 300+ AI models (Claude Opus 4.6, GPT-5.4, Gemini 3 Pro, DeepSeek V3, Groq) with four optimization modes (cost, quality, speed, balanced). Implements the Google A2A agent-to-agent protocol with .well-known/agent.json discovery, provides session budgets and AP2 mandate governance for autonomous spending, and settles via x402 (HTTP 402 Payment Required) using gasless USDC on Base L2 with EIP-3009. Published SDK (@p402/sdk) and CLI (@p402/cli).',
+    longDescription: 'P402 is a middleware intelligence layer that routes across 300+ AI models with provider-agnostic abstraction and four optimization modes (cost, quality, speed, balanced). Implements the Google A2A agent-to-agent protocol with .well-known/agent.json discovery, provides session budgets and AP2 mandate governance for autonomous spending, and settles via x402 (HTTP 402 Payment Required) using gasless USDC on Base L2 with EIP-3009. Published SDK (@p402/sdk) and CLI (@p402/cli).',
     features: [
       '300+ model routing (4 modes)',
       'Google A2A protocol',
@@ -62,7 +62,7 @@ const portfolio = [
     year: '2024',
     tagline: 'AI API Marketplace & Stack Builder',
     description: 'Compare 50+ AI APIs, build optimized stacks, and save up to 30% on AI infrastructure costs.',
-    longDescription: 'P402.shop is a web-based marketplace helping developers discover and evaluate 50+ AI APIs including GPT-5.4, Claude Opus 4.6, Gemini 3.1, and Llama 4. Features include side-by-side comparison tools, AI-powered recommendation wizard, cost calculators showing ROI potential, and pay-per-call pricing eliminating subscription overhead.',
+    longDescription: 'P402.shop is a web-based marketplace helping developers discover and evaluate 50+ AI APIs across all major providers. Features include side-by-side comparison tools, AI-powered recommendation wizard, cost calculators showing ROI potential, and pay-per-call pricing eliminating subscription overhead.',
     features: [
       '50+ AI APIs compared',
       '30% average savings',

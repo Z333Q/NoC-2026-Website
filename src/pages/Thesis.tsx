@@ -22,7 +22,7 @@ const pillars = [
     color: '#3B82F6',
     description: 'AI agents need native payment rails, intelligent model routing, and session-level spending governance to operate autonomously in the economy.',
     details: [
-      'Routes across 300+ models (Claude Opus 4.6, GPT-5.4, Gemini 3 Pro, DeepSeek V3, Groq)',
+      'Routes across 300+ models with provider-agnostic abstraction',
       'Four optimization modes: cost, quality, speed, balanced',
       'Settles via x402 (HTTP 402) using gasless USDC on Base L2 with EIP-3009',
       'Implements Google A2A protocol with .well-known/agent.json discovery',
@@ -345,10 +345,10 @@ export default function Thesis() {
               Why <span className="text-gradient-static">Now</span>
             </h2>
             <p className="text-lg text-[var(--color-text-secondary)] max-w-3xl leading-relaxed">
-              GPT-5.4, Claude Opus 4.6, and Gemini 3.1 are not research projects -- they are
-              autonomous economic actors that need infrastructure to transact, settle, and verify.
-              The convergence of frontier model capabilities, stablecoin regulatory clarity, and
-              zero-knowledge proof maturity creates the window for this infrastructure stack.
+              AI agents are no longer research projects -- they are autonomous economic actors
+              that need infrastructure to transact, settle, and verify. The convergence of
+              agentic capabilities, stablecoin regulatory clarity, and zero-knowledge proof
+              maturity creates the window for this infrastructure stack.
             </p>
           </AnimatedSection>
 

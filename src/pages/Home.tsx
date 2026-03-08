@@ -27,7 +27,7 @@ const pillars = [
     title: 'Algorithmic Portfolio Management',
     product: 'ReFi Trading',
     color: '#00D4AA',
-    description: 'RL agents with backtested 28% CAGR and 2.07 Sharpe. zk-VaR engine, 6-patent portfolio, self-custodied execution. Backed by non-dilutive capital.',
+    description: 'RL agents with backtested 28% CAGR and 2.07 Sharpe. zk-VaR engine, patent portfolio (1 filed, 5 drafted), self-custodied execution. Backed by non-dilutive capital.',
     url: 'https://refi.trading',
   },
   {
@@ -51,7 +51,7 @@ const ventures = [
   {
     name: 'ReFi Trading',
     category: 'AI Trading',
-    description: 'Algorithmic portfolio management with RL agents, zk-VaR compliance engine, and 6-patent portfolio. Backed by non-dilutive capital, raising institutional seed round.',
+    description: 'Algorithmic portfolio management with RL agents, zk-VaR compliance engine, and patent portfolio (1 filed, 5 drafted). Backed by non-dilutive capital, raising institutional seed round.',
     status: 'Active',
     screenshot: '/screenshot-refi.png',
     brandColor: '#00D4AA',
