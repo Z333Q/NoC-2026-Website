@@ -121,8 +121,9 @@ export default function Launchpad() {
               <span className="text-gradient">Advisory</span> Services
             </h1>
             <p className="text-xl text-[var(--color-text-secondary)] mb-8 leading-relaxed">
-              Work with operators who have built what you are building. Architecture, strategy,
-              and execution support for technical founders in open finance, AI, EdTech, and spatial computing.
+              Work with operators who have built what you are building. 20+ years across
+              payment infrastructure, institutional capital, and AI-native products.
+              Architecture, strategy, and execution support for technical founders.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link to="/contact" className="btn-primary flex items-center justify-center gap-2">
@@ -144,8 +145,8 @@ export default function Launchpad() {
               Service <span className="text-gradient-static">Offerings</span>
             </h2>
             <p className="text-[var(--color-text-secondary)] max-w-2xl mx-auto text-lg">
-              Hands-on technical advisory from operators who've built and scaled open finance infrastructure,
-              AI-native products, and education technology platforms.
+              Hands-on technical advisory from operators who've built payment infrastructure,
+              AI trading systems, and agentic commerce protocols. Not theory -- live builds.
             </p>
           </AnimatedSection>
 
@@ -229,9 +230,9 @@ export default function Launchpad() {
               <h2 className="text-4xl md:text-5xl font-bold mb-6">
                 Who We <span className="text-gradient-static">Work With</span>
               </h2>
-              <p className="text-[var(--color-text-secondary)] text-lg mb-8">
-                We partner with technical founders who value operator expertise and
-                are building ambitious infrastructure at the intersection of finance and technology.
+            <p className="text-[var(--color-text-secondary)] text-lg mb-8">
+                We partner with technical founders building infrastructure for autonomous finance,
+                agentic commerce, and AI-native products. Operator expertise, not slide decks.
               </p>
               <ul className="space-y-4">
                 {requirements.map((req) => (

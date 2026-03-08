@@ -4,42 +4,54 @@ import { Link } from 'react-router-dom';
 import {
   ArrowRight,
   Rocket,
-  Users,
   ChevronRight,
-  Globe,
+  BookOpen,
+  GraduationCap,
+  Shield,
 } from 'lucide-react';
 import ParticleField from '../components/ParticleField';
 import MolecularOrb from '../components/MolecularOrb';
 import { OpenFiIcon, AINativeIcon, EdTechIcon, SpatialIcon } from '../components/CustomIcons';
 
-const focusAreas = [
+const pillars = [
   {
     icon: OpenFiIcon,
-    title: 'Open Finance',
-    description: 'Stablecoin payment rails, tokenized assets, programmable settlement layers, and decentralized financial infrastructure.',
+    title: 'Agentic Payments & Routing',
+    product: 'P402',
+    color: '#3B82F6',
+    description: 'Middleware intelligence layer routing 300+ AI models with x402 settlement, A2A protocol, and session governance. Published SDK and CLI.',
+    url: 'https://p402.io',
   },
   {
     icon: AINativeIcon,
-    title: 'AI-Native Products',
-    description: 'Autonomous trading agents, reinforcement learning systems, and AI-powered developer tools -- shipped products, not research.',
+    title: 'Algorithmic Portfolio Management',
+    product: 'ReFi Trading',
+    color: '#00D4AA',
+    description: 'RL agents with backtested 28% CAGR and 2.07 Sharpe. zk-VaR engine, 6-patent portfolio, self-custodied execution. Backed by non-dilutive capital.',
+    url: 'https://refi.trading',
   },
   {
     icon: EdTechIcon,
-    title: 'EdTech & Applied Learning',
-    description: 'University-level curriculum in AI, blockchain, and product development. Nvidia DLI certified instruction.',
+    title: 'Applied Learning & R&D',
+    product: 'Kutaisi International University',
+    color: '#F59E0B',
+    description: 'University courses in AI and product development that function as an R&D lab. Course frameworks directly informed by live company builds.',
   },
   {
     icon: SpatialIcon,
-    title: 'Spatial & Emerging Platforms',
-    description: 'VisionOS, Meta Quest, and next-platform experiences at the intersection of spatial computing and health.',
+    title: 'Spatial Health',
+    product: 'EYEcercise',
+    color: '#06B6D4',
+    description: 'Guided eye exercises for spatial computing. VisionOS, iOS, and Meta Quest. Built at the intersection of health and next-platform experiences.',
+    url: 'https://eyecercise.com',
   },
 ];
 
 const ventures = [
   {
-    name: 'ReFi.Trading',
+    name: 'ReFi Trading',
     category: 'AI Trading',
-    description: 'Algorithmic portfolio management with RL agents, zk-VaR compliance engine, and 6-patent portfolio. 28% CAGR backtested.',
+    description: 'Algorithmic portfolio management with RL agents, zk-VaR compliance engine, and 6-patent portfolio. Backed by non-dilutive capital, raising institutional seed round.',
     status: 'Active',
     screenshot: '/screenshot-refi.png',
     brandColor: '#00D4AA',
@@ -48,7 +60,7 @@ const ventures = [
   {
     name: 'P402',
     category: 'Agent Infrastructure',
-    description: 'Middleware intelligence layer routing 300+ AI models with x402 settlement, A2A protocol, and session governance.',
+    description: 'Middleware intelligence layer routing 300+ AI models with x402 settlement, A2A protocol, and session governance. Published SDK and CLI.',
     status: 'Active',
     screenshot: '/screenshot-p402.png',
     brandColor: '#3B82F6',
@@ -124,8 +136,8 @@ export default function Home() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="section-label mb-8"
             >
-              <Globe className="w-4 h-4" />
-              Venture Studio
+              <Shield className="w-4 h-4" />
+              Infrastructure for Autonomous Finance
             </motion.div>
 
             <h1 className="hero-text-large mb-8">
@@ -153,8 +165,9 @@ export default function Home() {
               transition={{ duration: 0.8, delay: 0.7 }}
               className="body-large max-w-2xl mb-12"
             >
-              We build companies at the intersection of open finance, applied AI,
-              spatial computing, and technical education.
+              We build the infrastructure stack for autonomous finance --
+              agentic payments, algorithmic trading, and automated compliance.
+              From protocol to application, from first principles.
             </motion.p>
 
             <motion.div
@@ -163,12 +176,12 @@ export default function Home() {
               transition={{ duration: 0.8, delay: 0.9 }}
               className="flex flex-col sm:flex-row gap-4"
             >
-              <Link to="/contact" className="btn-primary flex items-center justify-center gap-3 group">
-                <span>Work With Us</span>
+              <Link to="/thesis" className="btn-primary flex items-center justify-center gap-3 group">
+                <span>Read the Builder Thesis</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
-              <Link to="/thesis" className="btn-secondary flex items-center justify-center gap-2">
-                <span>Builder Thesis</span>
+              <Link to="/studio" className="btn-secondary flex items-center justify-center gap-2">
+                <span>Explore the Studio</span>
               </Link>
             </motion.div>
           </motion.div>
@@ -203,17 +216,19 @@ export default function Home() {
         <div className="relative z-10 max-w-7xl mx-auto px-6">
           <AnimatedSection className="max-w-3xl mb-20">
             <h2 className="display-text mb-6">
-              What We <span className="text-gradient-static">Do</span>
+              The <span className="text-gradient-static">Stack</span>
             </h2>
             <p className="body-large">
-              We build companies and advise technical founders across open finance, AI-native products,
-              spatial platforms, and education technology.
+              Four interlocking pillars of infrastructure. AI agents need payment rails.
+              Traders need institutional-grade algorithms. Financial systems need compliance
+              embedded in the architecture. And courses informed by live company builds
+              keep the R&D pipeline flowing.
             </p>
           </AnimatedSection>
 
           <div className="grid md:grid-cols-2 gap-6">
-            {focusAreas.map((area, i) => (
-              <AnimatedSection key={area.title}>
+            {pillars.map((pillar, i) => (
+              <AnimatedSection key={pillar.title}>
                 <motion.div
                   initial={{ opacity: 0, y: 40 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -222,17 +237,40 @@ export default function Home() {
                   whileHover={{ y: -8 }}
                   className="glass-card-interactive rounded-2xl p-10 h-full card-spotlight"
                 >
-                  <motion.div
-                    className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[var(--color-primary)]/20 to-transparent flex items-center justify-center mb-8"
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    transition={{ type: 'spring', stiffness: 400 }}
-                  >
-                    <area.icon className="w-8 h-8 text-[var(--color-primary)]" />
-                  </motion.div>
-                  <h3 className="text-2xl font-bold mb-4">{area.title}</h3>
-                  <p className="text-[var(--color-text-secondary)] leading-relaxed">
-                    {area.description}
+                  <div className="flex items-center gap-4 mb-6">
+                    <motion.div
+                      className="w-14 h-14 rounded-2xl flex items-center justify-center"
+                      style={{ backgroundColor: `${pillar.color}20` }}
+                      whileHover={{ scale: 1.1, rotate: 5 }}
+                      transition={{ type: 'spring', stiffness: 400 }}
+                    >
+                      <pillar.icon className="w-7 h-7" style={{ color: pillar.color }} />
+                    </motion.div>
+                    <div>
+                      <span
+                        className="text-xs font-bold uppercase tracking-wider"
+                        style={{ color: pillar.color }}
+                      >
+                        {pillar.product}
+                      </span>
+                    </div>
+                  </div>
+                  <h3 className="text-2xl font-bold mb-4">{pillar.title}</h3>
+                  <p className="text-[var(--color-text-secondary)] leading-relaxed mb-4">
+                    {pillar.description}
                   </p>
+                  {pillar.url && (
+                    <a
+                      href={pillar.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-sm font-medium transition-all hover:gap-3"
+                      style={{ color: pillar.color }}
+                    >
+                      Visit {pillar.product}
+                      <ArrowRight className="w-4 h-4" />
+                    </a>
+                  )}
                 </motion.div>
               </AnimatedSection>
             ))}
@@ -252,10 +290,10 @@ export default function Home() {
             <div className="max-w-2xl">
               <div className="section-label mb-6">
                 <Rocket className="w-4 h-4" />
-                Studio
+                Studio Companies
               </div>
               <h2 className="display-text">
-                Studio <span className="text-gradient-static">Companies</span>
+                What We're <span className="text-gradient-static">Building</span>
               </h2>
             </div>
             <Link
@@ -451,8 +489,8 @@ export default function Home() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
               >
-                <Users className="w-4 h-4" />
-                Advisory
+                <GraduationCap className="w-4 h-4" />
+                Teaching & R&D
               </motion.div>
               <h2 className="display-text mb-8">
                 <motion.span
@@ -461,7 +499,7 @@ export default function Home() {
                   viewport={{ once: true }}
                   className="inline-block"
                 >
-                  From{' '}
+                  Courses{' '}
                 </motion.span>
                 <motion.span
                   initial={{ opacity: 0, y: 20 }}
@@ -470,7 +508,7 @@ export default function Home() {
                   viewport={{ once: true }}
                   className="text-gradient-static inline-block"
                 >
-                  Concept
+                  Informed
                 </motion.span>
                 <motion.span
                   initial={{ opacity: 0, y: 20 }}
@@ -479,7 +517,7 @@ export default function Home() {
                   viewport={{ once: true }}
                   className="inline-block"
                 >
-                  {' '}to{' '}
+                  {' '}by{' '}
                 </motion.span>
                 <motion.span
                   initial={{ opacity: 0, y: 20 }}
@@ -488,7 +526,7 @@ export default function Home() {
                   viewport={{ once: true }}
                   className="text-gradient-static inline-block"
                 >
-                  Production
+                  Live Builds
                 </motion.span>
               </h2>
               <motion.p
@@ -498,16 +536,17 @@ export default function Home() {
                 transition={{ delay: 0.2 }}
                 viewport={{ once: true }}
               >
-                Work with operators who have built what you are building. Architecture, strategy,
-                and execution support for technical founders.
+                The same product development methodology used to build ReFi Trading and P402
+                is taught at Kutaisi International University. The classroom is the R&D lab.
+                The products are the curriculum.
               </motion.p>
 
               <ul className="space-y-5 mb-10">
                 {[
-                  'Technical architecture review',
-                  'Go-to-market strategy',
-                  'Tokenomics design',
-                  'Network access',
+                  'AI-Powered Software Development',
+                  'Product Development for Software Engineers',
+                  'Digital Disruption, Innovation & Transformation (MBA)',
+                  'Nvidia Deep Learning Certified Instruction',
                 ].map((item, i) => (
                   <motion.li
                     key={item}
@@ -535,14 +574,13 @@ export default function Home() {
               </ul>
 
               <motion.div
-                className="flex flex-col sm:flex-row gap-4"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6 }}
                 viewport={{ once: true }}
               >
-                <Link to="/advisory" className="btn-primary flex items-center justify-center gap-3 group">
-                  <span>Explore Advisory Services</span>
+                <Link to="/about" className="btn-primary inline-flex items-center gap-3 group">
+                  <span>Meet the Team</span>
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </motion.div>
@@ -585,7 +623,7 @@ export default function Home() {
                 viewport={{ once: true }}
                 className="block"
               >
-                Ready to Build
+                See the Same
               </motion.span>
               <motion.span
                 initial={{ opacity: 0, y: 20 }}
@@ -594,7 +632,7 @@ export default function Home() {
                 viewport={{ once: true }}
                 className="text-gradient block"
               >
-                Something Extraordinary
+                Infrastructure Gap
               </motion.span>
               <motion.span
                 initial={{ opacity: 0, scale: 0.5 }}
@@ -613,8 +651,9 @@ export default function Home() {
               transition={{ delay: 0.2 }}
               viewport={{ once: true }}
             >
-              We partner with founders who think from first principles and
-              build for lasting impact.
+              Whether you are a VC, technical partner, or potential customer --
+              if autonomous finance needs infrastructure you know how to build,
+              we should talk.
             </motion.p>
             <motion.div
               className="flex flex-col sm:flex-row gap-4 justify-center"
@@ -624,11 +663,12 @@ export default function Home() {
               viewport={{ once: true }}
             >
               <Link to="/contact" className="btn-primary flex items-center justify-center gap-3 group">
-                <span>Work With Us</span>
+                <span>Get in Touch</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
-              <Link to="/contact" className="btn-secondary flex items-center justify-center">
-                Schedule a Call
+              <Link to="/thesis" className="btn-secondary flex items-center justify-center gap-2">
+                <BookOpen className="w-5 h-5" />
+                <span>Read the Thesis</span>
               </Link>
             </motion.div>
           </AnimatedSection>

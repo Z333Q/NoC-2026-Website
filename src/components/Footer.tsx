@@ -31,7 +31,7 @@ export default function Footer() {
               <span className="text-xl font-semibold">Nature of Commerce</span>
             </Link>
             <p className="text-[var(--color-text-secondary)] text-sm leading-relaxed max-w-md mb-6">
-              Venture studio building AI-native financial infrastructure. Advisory services for technical founders.
+              Building the infrastructure stack for autonomous finance: agentic payments, algorithmic trading, and automated compliance. From protocol to application, from first principles.
             </p>
             <p className="text-[var(--color-primary)] text-sm font-medium italic">
               First Principles. Lasting Impact.

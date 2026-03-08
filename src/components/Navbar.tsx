@@ -69,8 +69,8 @@ export default function Navbar() {
             <Link to="/contact" className="btn-secondary text-sm py-2 px-5">
               Contact
             </Link>
-            <Link to="/contact" className="btn-primary text-sm py-2 px-5 flex items-center gap-2">
-              <span>Work With Us</span>
+            <Link to="/thesis" className="btn-primary text-sm py-2 px-5 flex items-center gap-2">
+              <span>Builder Thesis</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
@@ -130,13 +130,13 @@ export default function Navbar() {
                   to="/contact"
                   className="block w-full text-center btn-secondary py-3"
                 >
-                  Contact Us
+                  Contact
                 </Link>
                 <Link
-                  to="/contact"
+                  to="/thesis"
                   className="block w-full text-center btn-primary py-3"
                 >
-                  <span>Work With Us</span>
+                  <span>Builder Thesis</span>
                 </Link>
               </div>
             </motion.nav>

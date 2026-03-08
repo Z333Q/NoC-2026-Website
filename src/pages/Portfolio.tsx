@@ -16,7 +16,7 @@ const portfolio = [
     year: '2025',
     tagline: 'Wall-Street AI, Radically Accessible',
     description: 'Institutional-grade AI trading with self-custodied execution. zk-VaR engine, 6-patent portfolio, and RL agents with 28% CAGR.',
-    longDescription: 'Algorithmic portfolio management platform powered by reinforcement learning agents with backtested 28% CAGR and 2.07 Sharpe ratio. Features a proprietary zk-VaR engine (zero-knowledge Value-at-Risk) for cryptographic risk verification, 6-patent portfolio (1 USPTO filed, 5 drafted), and self-custodied execution via ERC-4337. Raising $2.45M seed at $15M post-money. Targeting UAE ADGM Category 3A licensing with SOC-2 preparation.',
+    longDescription: 'Algorithmic portfolio management platform powered by reinforcement learning agents with backtested 28% CAGR and 2.07 Sharpe ratio. Features a proprietary zk-VaR engine (zero-knowledge Value-at-Risk) for cryptographic risk verification, 6-patent portfolio (1 USPTO filed, 5 drafted), and self-custodied execution via ERC-4337. Backed by non-dilutive capital, raising institutional seed round. Co-founded with quant engineer Daniel Oosthuyzen. Targeting UAE ADGM Category 3A licensing with SOC-2 preparation.',
     features: [
       'zk-VaR cryptographic risk engine',
       '6-patent portfolio (1 filed)',
@@ -456,8 +456,8 @@ export default function Portfolio() {
               animate={headerInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.4, duration: 0.6 }}
             >
-              Companies we've built and are building. From open finance infrastructure to spatial computing,
-              these are ventures created with first principles thinking.
+              The infrastructure stack for autonomous finance -- from protocol to application.
+              Every company is built from first principles by the same team.
             </motion.p>
           </motion.div>
 
