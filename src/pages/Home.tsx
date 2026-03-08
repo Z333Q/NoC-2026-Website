@@ -39,7 +39,7 @@ const ventures = [
   {
     name: 'ReFi.Trading',
     category: 'AI Trading',
-    description: 'Wall-Street AI, radically accessible. Self-custodied AI trading with zero-knowledge verified risk rails.',
+    description: 'Algorithmic portfolio management with RL agents, zk-VaR compliance engine, and 6-patent portfolio. 28% CAGR backtested.',
     status: 'Active',
     screenshot: '/screenshot-refi.png',
     brandColor: '#00D4AA',
@@ -47,8 +47,8 @@ const ventures = [
   },
   {
     name: 'P402',
-    category: 'Payments',
-    description: 'Stablecoin payment router enabling AI agents to transact autonomously. 99.99% uptime.',
+    category: 'Agent Infrastructure',
+    description: 'Middleware intelligence layer routing 300+ AI models with x402 settlement, A2A protocol, and session governance.',
     status: 'Active',
     screenshot: '/screenshot-p402.png',
     brandColor: '#3B82F6',
@@ -168,7 +168,7 @@ export default function Home() {
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link to="/thesis" className="btn-secondary flex items-center justify-center gap-2">
-                <span>Investment Thesis</span>
+                <span>Builder Thesis</span>
               </Link>
             </motion.div>
           </motion.div>

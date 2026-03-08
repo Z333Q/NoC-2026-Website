@@ -4,7 +4,7 @@ import { Linkedin, Twitter, Mail, MapPin, ArrowUpRight } from 'lucide-react';
 const footerLinks = {
   fund: [
     { label: 'Studio', path: '/studio' },
-    { label: 'Investment Thesis', path: '/thesis' },
+    { label: 'Builder Thesis', path: '/thesis' },
     { label: 'About', path: '/about' },
   ],
   founders: [

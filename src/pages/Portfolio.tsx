@@ -15,13 +15,13 @@ const portfolio = [
     status: 'Active',
     year: '2025',
     tagline: 'Wall-Street AI, Radically Accessible',
-    description: 'Institutional-grade AI trading in three clicks. Patent-pending reinforcement learning system with proven 28% CAGR.',
-    longDescription: 'ReFi.Trading makes professional algorithmic trading accessible to retail users. USPTO patent filed for non-custodial, zero-knowledge risk verification on reinforcement learning agents. Backtested performance shows 28% CAGR and 2.07 Sharpe ratio over three years, matching top quantitative hedge fund returns.',
+    description: 'Institutional-grade AI trading with self-custodied execution. zk-VaR engine, 6-patent portfolio, and RL agents with 28% CAGR.',
+    longDescription: 'Algorithmic portfolio management platform powered by reinforcement learning agents with backtested 28% CAGR and 2.07 Sharpe ratio. Features a proprietary zk-VaR engine (zero-knowledge Value-at-Risk) for cryptographic risk verification, 6-patent portfolio (1 USPTO filed, 5 drafted), and self-custodied execution via ERC-4337. Raising $2.45M seed at $15M post-money. Targeting UAE ADGM Category 3A licensing with SOC-2 preparation.',
     features: [
-      'Self-custodied execution',
-      'Zero-knowledge risk proofs',
-      'Reinforcement learning agents',
-      '28% CAGR, 2.07 Sharpe',
+      'zk-VaR cryptographic risk engine',
+      '6-patent portfolio (1 filed)',
+      '28% CAGR, 2.07 Sharpe (3yr)',
+      'ADGM Category 3A licensing',
     ],
     screenshot: '/screenshot-refi.png',
     brandColor: '#00D4AA',
@@ -37,18 +37,18 @@ const portfolio = [
     stage: 'Launched',
     status: 'Active',
     year: '2024',
-    tagline: 'Payments for AI Agents',
-    description: 'Stablecoin payment router enabling AI agents to pay for services automatically. 99.99% uptime, sub-100ms latency.',
-    longDescription: 'P402 Router enables AI agents to autonomously pay for APIs, data, and compute resources using USDC and USDT on Base. Simple API integration with built-in budget controls, spending caps, and real-time settlement. Used by AI research labs and autonomous trading systems requiring reliable micropayments at scale.',
+    tagline: 'Middleware Intelligence for the Agentic Economy',
+    description: 'Routes across 300+ AI models with session budgets, AP2 mandate governance, and x402 settlement on Base.',
+    longDescription: 'P402 is a middleware intelligence layer that routes across 300+ AI models (Claude Opus 4.6, GPT-5.4, Gemini 3 Pro, DeepSeek V3, Groq) with four optimization modes (cost, quality, speed, balanced). Implements the Google A2A agent-to-agent protocol with .well-known/agent.json discovery, provides session budgets and AP2 mandate governance for autonomous spending, and settles via x402 (HTTP 402 Payment Required) using gasless USDC on Base L2 with EIP-3009. Published SDK (@p402/sdk) and CLI (@p402/cli).',
     features: [
-      '99.99% uptime',
-      '<100ms latency',
-      '1% transaction fee',
-      'EIP-3009 compliant',
+      '300+ model routing (4 modes)',
+      'Google A2A protocol',
+      '@p402/sdk & @p402/cli',
+      'x402 gasless settlement',
     ],
     screenshot: '/screenshot-p402.png',
     brandColor: '#3B82F6',
-    tags: ['HTTP 402', 'Stablecoins', 'Base', 'Agent Payments'],
+    tags: ['x402', 'A2A Protocol', 'Base L2', 'Agent Commerce', '300+ Models'],
     website: 'https://p402.io',
     featured: true,
   },
@@ -62,7 +62,7 @@ const portfolio = [
     year: '2024',
     tagline: 'AI API Marketplace & Stack Builder',
     description: 'Compare 50+ AI APIs, build optimized stacks, and save up to 30% on AI infrastructure costs.',
-    longDescription: 'P402.shop is a web-based marketplace helping developers discover and evaluate 50+ AI APIs including GPT-5, Claude 4.5, Gemini 3, and Llama 4. Features include side-by-side comparison tools, AI-powered recommendation wizard, cost calculators showing ROI potential, and pay-per-call pricing eliminating subscription overhead.',
+    longDescription: 'P402.shop is a web-based marketplace helping developers discover and evaluate 50+ AI APIs including GPT-5.4, Claude Opus 4.6, Gemini 3.1, and Llama 4. Features include side-by-side comparison tools, AI-powered recommendation wizard, cost calculators showing ROI potential, and pay-per-call pricing eliminating subscription overhead.',
     features: [
       '50+ AI APIs compared',
       '30% average savings',
@@ -262,7 +262,7 @@ const portfolio = [
 ];
 
 function PortfolioCard({ company, index }: { company: typeof portfolio[0]; index: number }) {
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLAnchorElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-50px' });
 
   return (
