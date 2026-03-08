@@ -15,7 +15,7 @@ const team = [
   {
     name: 'Zeshan Ahmad',
     role: 'Managing Partner',
-    bio: 'Technical founder with 20+ years building financial infrastructure. Co-founded ReFi.Trading (USPTO patent for AI trading systems), deployed mobile banking to rural markets at Symstream, and led $1.2B+ in transactions at Peak Venture Partners. Professor at Kutaisi International University teaching AI, blockchain, and product development.',
+    bio: 'Technical founder with 20+ years building financial infrastructure. Founder and builder of P402.io, a payment protocol for agentic commerce. Co-founded ReFi.Trading (USPTO patent for AI trading systems), deployed mobile banking to rural markets at Symstream, and led $1.2B+ in transactions at Peak Venture Partners. Professor at Kutaisi International University teaching AI, blockchain, and product development.',
     image: '/zeshan-bio-photo-2022-square.jpg',
     additionalImages: [
       '/zeshan-degamefi.webp',
