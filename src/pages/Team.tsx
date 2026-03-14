@@ -262,7 +262,7 @@ export default function Team() {
                 <div>
                   <h3 className="text-xl font-bold text-white">Zeshan Ahmad</h3>
                   <p className="text-[var(--color-primary)] text-sm">CEO / Product</p>
-                  <p className="text-[var(--color-text-muted)] text-xs">Founder, Nature of Commerce LLC · Co-Founder, ReFi Trading Inc</p>
+                  <p className="text-[var(--color-text-muted)] text-xs">Founder, Nature of Commerce LLC · Co-Founder, ReFi Trading Inc · Builder, P402 Protocol & MathRap.com</p>
                 </div>
               </div>
               <p className="text-[var(--color-text-secondary)] text-sm leading-relaxed mb-4">
