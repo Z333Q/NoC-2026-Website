@@ -1,65 +1,86 @@
-import { motion, useInView } from 'framer-motion';
-import { useRef, useState } from 'react';
+import { motion } from 'framer-motion';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  BookOpen,
-  ArrowRight,
-  ChevronDown,
-  Layers,
-  Shield,
-  Cpu,
-  GitBranch,
-  ExternalLink,
-  Zap,
+  ArrowRight, Shield, Cpu, TrendingUp, CheckCircle, ChevronDown,
+  Layers, BookOpen, Github, ExternalLink, Lock
 } from 'lucide-react';
-import { SystemsIcon, PrinciplesIcon, BalanceIcon, FortressIcon } from '../components/CustomIcons';
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: (i = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, delay: i * 0.1, ease: [0.4, 0, 0.2, 1] },
+  }),
+};
 
 const pillars = [
   {
     number: '01',
-    title: 'Agentic Payments & Routing',
+    icon: Cpu,
+    label: 'Agentic Payments and Routing',
     product: 'P402',
-    color: '#3B82F6',
-    description: 'AI agents need native payment rails, intelligent model routing, and session-level spending governance to operate autonomously in the economy.',
-    details: [
-      'Routes across 300+ models with provider-agnostic abstraction',
-      'Four optimization modes: cost, quality, speed, balanced',
-      'Settles via x402 (HTTP 402) using gasless USDC on Base L2 with EIP-3009',
-      'Implements Google A2A protocol with .well-known/agent.json discovery',
-      'Session budgets and AP2 mandate governance for autonomous spending',
-      'Published SDK (@p402/sdk) and CLI (@p402/cli)',
+    color: 'text-[var(--color-primary)]',
+    borderColor: 'border-[var(--color-primary)]/30',
+    bgColor: 'rgba(74, 144, 217, 0.05)',
+    problem:
+      'AI agents need to pay for API calls, data feeds, compute resources, and services from other agents. Human payment infrastructure (Stripe, credit cards) was never designed for machines. $0.30 minimum fees destroy micropayment economics. There is no spending governance for autonomous actors.',
+    solution:
+      'P402 implements the x402 payment standard (HTTP 402 Payment Required). AI agents pay per request using gasless USDC on Base L2 via EIP-3009 authorization. The protocol routes across 300+ AI models with four optimization modes (cost, quality, speed, balanced). Session budgets and AP2 mandate governance enforce hard spending caps for autonomous agents. The Google A2A protocol enables agents to discover, negotiate with, and transact with other agents through standardized JSON-RPC communication.',
+    proofPoints: [
+      'Published SDK (@p402/sdk) and CLI (@p402/cli) on npm',
+      'Open-source protocol: github.com/Z333Q/p402-protocol',
+      'x402 is an open standard developed by Coinbase, supported by Cloudflare, Google, Vercel, and 60+ partners',
+      'P402 is one of the early implementers of x402 + Google A2A',
     ],
-    link: 'https://p402.io',
-    github: 'https://github.com/Z333Q/p402-protocol',
+    links: [
+      { label: 'P402.io', href: 'https://www.p402.io' },
+      { label: 'GitHub', href: 'https://github.com/Z333Q/p402-protocol', icon: Github },
+    ],
   },
   {
     number: '02',
-    title: 'Algorithmic Portfolio Management',
+    icon: TrendingUp,
+    label: 'Algorithmic Portfolio Management',
     product: 'ReFi Trading',
-    color: '#00D4AA',
-    description: 'Retail traders and small fund managers need access to institutional-grade AI-driven strategies running in a self-custodied, non-custodial architecture.',
-    details: [
-      'Reinforcement learning agents with backtested 28% CAGR, 2.07 Sharpe ratio',
-      'Zero-knowledge Value-at-Risk (zk-VaR) engine for cryptographic risk verification',
-      '6-patent portfolio (1 USPTO filed, 5 drafted)',
-      'Self-custodied execution via ERC-4337 account abstraction',
-      'Targeting UAE ADGM Category 3A licensing',
-      'Backed by non-dilutive capital, raising institutional seed round',
+    color: 'text-emerald-400',
+    borderColor: 'border-emerald-500/30',
+    bgColor: 'rgba(52, 211, 153, 0.04)',
+    badge: 'USPTO Patent Filed',
+    problem:
+      'Institutional hedge funds deploy AI-driven strategies with reinforcement learning, zero-knowledge risk verification, and self-custodied execution. Retail traders and small fund managers have no access to this infrastructure. The "AI trading" market is full of wrappers that give people chatbots connected to broker APIs -- not genuine algorithmic portfolio management.',
+    solution:
+      'ReFi Trading is a strategy-as-a-service protocol. Reinforcement learning agents (not rule-based bots, not LLM wrappers) with backtested institutional-grade performance: 28% CAGR, 2.07 Sharpe ratio. The architecture is self-custodied and non-custodial -- users maintain control of their assets at all times. Average-reward RL optimizes for long-term sustainable performance rather than short-term spikes.',
+    proofPoints: [
+      'Patent filed with USPTO: "System and Method for Non-Custodial, Zero-Knowledge-Verified Reinforcement-Learning Trading" (5 additional patents drafted)',
+      'zk-VaR (zero-knowledge Value-at-Risk) engine: every trade is cryptographically proven to comply with risk parameters before execution',
+      'Co-founded with Daniel Oosthuyzen (CTO/Quant Engineer) -- the quantitative engineering complement to Zeshan\'s product and infrastructure expertise',
+      'Targeting ADGM Category 3A licensing -- regulatory-first approach',
+      'Backed by non-dilutive capital, tracked on Crunchbase',
     ],
-    link: 'https://refi.trading',
+    links: [
+      { label: 'ReFi Trading', href: 'https://refi.trading' },
+      { label: 'Research Blog', href: 'https://refi.trading/blog' },
+    ],
   },
   {
     number: '03',
-    title: 'Automated Compliance & Verification',
-    product: 'Cross-Cutting',
-    color: '#F59E0B',
-    description: 'Financial systems need compliance embedded in the architecture itself -- not bolted on as an afterthought. Trust should be a feature, not friction.',
-    details: [
-      'zk-VaR: zero-knowledge proofs that mathematically verify risk compliance before execution',
-      'Cryptographic audit trails for every trade and transaction',
-      'Regulatory-first design: ADGM Category 3A, SOC-2 preparation, CTA compliance',
-      'No human oversight required -- the system proves its own compliance',
-      'Multi-jurisdiction licensing strategy (UAE, EU, US)',
+    icon: Shield,
+    label: 'Automated Compliance and Verification',
+    product: 'Cross-Cutting Layer',
+    color: 'text-amber-400',
+    borderColor: 'border-amber-500/30',
+    bgColor: 'rgba(245, 158, 11, 0.04)',
+    problem:
+      'Financial compliance today is "compliance by oversight" -- human compliance departments reviewing trades, filing reports, and conducting manual audits. This does not scale to autonomous agents executing thousands of transactions per second. It is also a massive cost center that excludes smaller players from regulated markets.',
+    solution:
+      'Compliance by architecture. Zero-knowledge proofs allow a system to mathematically prove it is operating within defined risk parameters without revealing the underlying data. Cryptographic audit trails provide tamper-proof records. The zk-VaR engine (used in ReFi Trading) and the x402 settlement verification (used in P402) are both instances of this principle.',
+    proofPoints: [
+      'zk-VaR: every trade proved compliant with risk parameters before execution -- no human reviewer needed',
+      'Cryptographic audit logs: tamper-proof records for every transaction',
+      'Regulatory-first design: ADGM Category 3A licensing in progress, SOC-2 preparation, CTA research',
+      'Multi-jurisdiction licensing strategy: UAE, EU, US',
       'Paradigm shift: from "trust us" to "verify cryptographically"',
     ],
   },
@@ -67,478 +88,338 @@ const pillars = [
 
 const principles = [
   {
-    icon: SystemsIcon,
+    number: '1',
     title: 'Systems-Level Thinking',
-    description: 'P402 (payment layer) feeds ReFi Trading (application layer) feeds P402.shop (developer ecosystem). Composable components that scale organically -- like natural systems.',
+    description:
+      'We build composable components that reinforce each other. P402 (payment layer) feeds ReFi Trading (application layer) feeds P402.shop (developer ecosystem). Each piece scales the others -- like natural systems.',
   },
   {
-    icon: PrinciplesIcon,
+    number: '2',
     title: 'First Principles Analysis',
-    description: 'Strip away assumptions to fundamental truths. Why do agents need payment rails? Why must compliance be automated? We rebuild from physics and economics, not convention.',
+    description:
+      'We do not adapt existing systems. We ask what the agent economy actually requires and build from that answer. x402 exists because HTTP 402 has been reserved since 1997 -- the web always intended to have a native payment layer.',
   },
   {
-    icon: BalanceIcon,
+    number: '3',
     title: 'Incentive Architecture',
-    description: 'Users keep custody of their funds. Systems prove compliance cryptographically. Token incentives align node operators, developers, and users by default. When incentives align naturally, regulation becomes a feature.',
+    description:
+      'Users keep custody. Systems prove compliance cryptographically. Token structures align long-term value creation with participation. Every design decision starts with: who benefits, and is that aligned with sustainable growth?',
   },
   {
-    icon: FortressIcon,
+    number: '4',
     title: 'Technical Moats',
-    description: '6 patents (1 filed, 5 drafted). zk-VaR engine. A2A protocol implementation. Published SDK and CLI. First-mover on agent-to-agent commerce infrastructure. Hard problems, not marketing-driven differentiation.',
-  },
-];
-
-const stackLayers = [
-  {
-    layer: 'Protocol',
-    color: '#3B82F6',
-    items: ['x402 payment standard', 'EIP-3009 authorization', 'Gasless USDC settlement on Base'],
-  },
-  {
-    layer: 'Intelligence',
-    color: '#60A5FA',
-    items: ['Multi-provider routing (300+ models)', 'Session budgets & AP2 mandates', 'A2A agent discovery'],
-  },
-  {
-    layer: 'Application',
-    color: '#00D4AA',
-    items: ['RL trading agents (28% CAGR)', 'zk-VaR risk verification', 'Self-custodied execution'],
-  },
-  {
-    layer: 'Developer',
-    color: '#22C55E',
-    items: ['@p402/sdk & @p402/cli', 'A2A protocol integration', 'API marketplace (P402.shop)'],
-  },
-  {
-    layer: 'Compliance',
-    color: '#F59E0B',
-    items: ['Zero-knowledge proofs', 'Cryptographic audit logs', 'ADGM, SOC-2, CTA licensing'],
+    description:
+      'Patent portfolio (1 USPTO filed, 5 drafted). zk-VaR engine. Published SDK/CLI. A2A protocol implementation. NVIDIA DLI certified instruction. These are not PowerPoint moats -- they are shipping code and legal protection.',
   },
 ];
 
 const faqs = [
   {
-    question: 'What is the relationship between P402 and ReFi Trading?',
-    answer: 'P402 is the protocol layer -- payment rails, model routing, and agent governance for the agentic economy. ReFi Trading is the first application proving the thesis -- an AI trading platform that uses P402\'s infrastructure for settlement and compliance. They are interlocking pieces of the same infrastructure stack.',
+    q: 'What is the relationship between P402 and ReFi Trading?',
+    a: 'P402 is the protocol layer (payment infrastructure). ReFi Trading is the first major application built on that thesis (algorithmic trading with cryptographic compliance). They are separate entities with separate cap tables. P402 is studio-operated by Nature of Commerce LLC. ReFi Trading Inc is an independent Canadian federal corporation co-founded by Zeshan Ahmad and Daniel Oosthuyzen. Together they represent a full-stack thesis: whoever builds the infrastructure layer AND proves it with a killer application controls the paradigm.',
   },
   {
-    question: 'What is the competitive moat?',
-    answer: '6 patents (1 USPTO filed, 5 drafted), a proprietary zk-VaR engine for cryptographic risk verification, first-mover implementation of the Google A2A agent-to-agent protocol, and a regulatory-first approach with ADGM Category 3A licensing in progress. The stack is vertically integrated from protocol to application.',
+    q: 'What is the competitive moat?',
+    a: 'Patent portfolio (1 filed, 5 drafted), zk-VaR engine, first-mover implementation on x402 + Google A2A protocol, regulatory-first with ADGM Category 3A licensing in progress, published open-source SDK/CLI, and 20 years of domain-specific infrastructure experience across payment hardware, sovereign financial digitization, and institutional capital.',
   },
   {
-    question: 'What is the compliance approach?',
-    answer: 'Automated compliance via cryptographic verification, not manual oversight. The zk-VaR engine uses zero-knowledge proofs to mathematically prove every trade complies with risk parameters before execution. This is paired with multi-jurisdiction licensing (UAE ADGM, SOC-2 preparation, CTA compliance) to create a regulatory-first architecture.',
+    q: 'What is the compliance approach?',
+    a: 'Automated compliance via cryptographic verification, not manual oversight. The zk-VaR engine proves every trade complies with risk parameters before execution. Cryptographic audit logs provide tamper-proof records. Pursuing ADGM Category 3A licensing and preparing for SOC-2, building compliance into the product rather than around it.',
   },
   {
-    question: 'What stage is the technology?',
-    answer: 'P402 SDK and CLI are published and live. ReFi Trading is raising a $2.45M seed at $15M post-money, with $300K+ in non-dilutive capital already secured. ADGM Category 3A licensing is in progress. The reinforcement learning agents have been backtested over three years showing 28% CAGR and 2.07 Sharpe ratio.',
+    q: 'What stage is the technology?',
+    a: 'P402 SDK and CLI are published on npm. The open-source protocol is live on GitHub. ReFi Trading is raising a seed round, backed by non-dilutive capital, with ADGM licensing in progress. The reinforcement learning agents have been backtested over three years showing 28% CAGR and 2.07 Sharpe ratio.',
   },
   {
-    question: 'How does the teaching relate to the products?',
-    answer: 'The university courses at Kutaisi International University (AI-Powered Software Development, Product Development for Software Engineers) function as an R&D lab and talent pipeline. The course frameworks are directly informed by live company builds -- the same product development methodology taught in class is applied to building ReFi Trading and P402.',
+    q: 'How does the teaching relate?',
+    a: 'The university courses at Kutaisi International University (AI-Powered Software Development, Product Development for Software Engineers, Blockchain & Cryptography) function as an R&D lab and talent pipeline. Course frameworks are directly informed by live company builds -- the same methodology taught in class is applied to building P402 and ReFi Trading.',
   },
   {
-    question: 'What does founder-market fit look like?',
-    answer: 'Zeshan Ahmad brings 20 years building financial infrastructure across payment hardware (Symstream), sovereign digital systems (Dubai Land Department), institutional capital ($1.2B+ at Peak Venture Partners), DTC e-commerce ($4M+ exit), and now autonomous AI agents. Co-founder Daniel Oosthuyzen is a quant engineer whose quantitative modeling expertise drives the RL trading algorithms and risk engine at the core of ReFi Trading. The throughline: building systems that move value at the edges of traditional finance.',
+    q: 'What does founder-market fit look like?',
+    a: '20 years building financial infrastructure. Payment hardware in rural markets (Symstream, 46 patents). Sovereign financial digitization (Dubai Land Department). Institutional capital allocation ($1.2B+ at Peak Venture Partners). E-commerce exit ($4M+). Web3 protocol design (Outlier Ventures, Chainlink Build). Now autonomous AI agent infrastructure (P402, ReFi Trading). The same through-line -- removing gatekeepers from financial systems -- using the best technology of each era.',
   },
 ];
 
-function AnimatedSection({ children, className = '' }: { children: React.ReactNode; className?: string }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
-
+function FaqItem({ q, a }: { q: string; a: string }) {
+  const [open, setOpen] = useState(false);
   return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 40 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.8 }}
-      className={className}
-    >
-      {children}
-    </motion.div>
-  );
-}
-
-function FAQItem({ faq, index }: { faq: typeof faqs[0]; index: number }) {
-  const [isOpen, setIsOpen] = useState(index === 0);
-
-  return (
-    <div className="border-b border-[var(--color-border)]">
+    <div className="glass-card rounded-xl overflow-hidden">
       <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="w-full py-6 flex items-center justify-between text-left"
+        onClick={() => setOpen(!open)}
+        className="w-full flex items-center justify-between gap-4 p-6 text-left hover:bg-white/5 transition-colors"
       >
-        <span className="text-lg font-semibold pr-8">{faq.question}</span>
-        <ChevronDown
-          className={`w-5 h-5 text-[var(--color-primary)] transition-transform shrink-0 ${
-            isOpen ? 'rotate-180' : ''
-          }`}
-        />
+        <span className="text-white font-semibold">{q}</span>
+        <ChevronDown className={`w-5 h-5 text-[var(--color-primary)] flex-shrink-0 transition-transform ${open ? 'rotate-180' : ''}`} />
       </button>
-      <motion.div
-        initial={false}
-        animate={{ height: isOpen ? 'auto' : 0, opacity: isOpen ? 1 : 0 }}
-        className="overflow-hidden"
-      >
-        <p className="pb-6 text-[var(--color-text-secondary)] leading-relaxed">
-          {faq.answer}
-        </p>
-      </motion.div>
+      {open && (
+        <div className="px-6 pb-6 text-[var(--color-text-secondary)] leading-relaxed border-t border-[var(--color-border)] pt-4">
+          {a}
+        </div>
+      )}
     </div>
-  );
-}
-
-function PillarCard({ pillar, index }: { pillar: typeof pillars[0]; index: number }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: '-50px' });
-
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 40 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ delay: index * 0.15, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-      className="glass-card rounded-2xl p-8 relative overflow-hidden"
-    >
-      <div
-        className="absolute inset-0 opacity-[0.03]"
-        style={{
-          background: `radial-gradient(circle at top right, ${pillar.color}, transparent 60%)`,
-        }}
-      />
-      <div className="relative z-10">
-        <div className="flex items-center gap-4 mb-6">
-          <span
-            className="text-4xl font-bold opacity-20"
-            style={{ color: pillar.color }}
-          >
-            {pillar.number}
-          </span>
-          <div>
-            <h3 className="text-xl font-bold">{pillar.title}</h3>
-            <span
-              className="text-xs font-bold uppercase tracking-wider"
-              style={{ color: pillar.color }}
-            >
-              {pillar.product}
-            </span>
-          </div>
-        </div>
-
-        <p className="text-[var(--color-text-secondary)] mb-6 leading-relaxed">
-          {pillar.description}
-        </p>
-
-        <ul className="space-y-3 mb-6">
-          {pillar.details.map((detail) => (
-            <li key={detail} className="flex items-start gap-3">
-              <div
-                className="w-1.5 h-1.5 rounded-full mt-2 shrink-0"
-                style={{ backgroundColor: pillar.color, boxShadow: `0 0 8px ${pillar.color}` }}
-              />
-              <span className="text-sm text-[var(--color-text-secondary)]">{detail}</span>
-            </li>
-          ))}
-        </ul>
-
-        <div className="flex items-center gap-4">
-          {pillar.link && (
-            <a
-              href={pillar.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-sm font-medium transition-all hover:gap-3"
-              style={{ color: pillar.color }}
-            >
-              <ExternalLink className="w-4 h-4" />
-              Visit {pillar.product}
-            </a>
-          )}
-          {pillar.github && (
-            <a
-              href={pillar.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-sm font-medium text-[var(--color-text-muted)] hover:text-white transition-colors"
-            >
-              <GitBranch className="w-4 h-4" />
-              GitHub
-            </a>
-          )}
-        </div>
-      </div>
-    </motion.div>
   );
 }
 
 export default function Thesis() {
   return (
-    <div className="min-h-screen">
-      <section className="relative py-32 overflow-hidden blueprint-grid">
-        <div className="glow-orb glow-orb-primary w-[600px] h-[600px] top-0 right-0 opacity-20" />
-
-        <div className="relative z-10 max-w-7xl mx-auto px-6 pt-16">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              <div className="section-label mb-6">
+    <main className="overflow-hidden">
+      <section className="relative min-h-[70vh] flex items-center blueprint-grid pt-24">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="glow-orb glow-orb-primary w-[600px] h-[600px] -top-20 -right-20 opacity-15" />
+        </div>
+        <div className="max-w-7xl mx-auto px-6 py-20 relative z-10 grid lg:grid-cols-2 gap-16 items-center">
+          <div>
+            <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0} className="mb-8">
+              <span className="section-label">
                 <BookOpen className="w-4 h-4" />
                 Builder Thesis
-              </div>
-              <h1 className="text-4xl md:text-6xl font-bold mb-6">
-                Three <span className="text-gradient">Infrastructure</span> Pillars
-              </h1>
-              <p className="text-xl text-[var(--color-text-secondary)] mb-6 leading-relaxed">
-                We are building the infrastructure stack for autonomous finance:
-                agentic payments, algorithmic portfolio management, and automated compliance.
-              </p>
-              <p className="text-[var(--color-text-secondary)] mb-8">
-                AI agents need payment rails. Traders need institutional-grade algorithms.
-                Financial systems need compliance embedded in the architecture itself.
-                These three pillars are not separate products -- they are interlocking layers
-                of the same infrastructure, built by the same team, from first principles.
-              </p>
+              </span>
+            </motion.div>
+            <motion.h1 variants={fadeUp} initial="hidden" animate="visible" custom={1} className="hero-text mb-8">
+              <span className="text-gradient">Three Pillars,</span>{' '}
+              One Infrastructure
+            </motion.h1>
+            <motion.p variants={fadeUp} initial="hidden" animate="visible" custom={2} className="body-large mb-8">
+              The next financial system will be built on autonomous agents that transact, trade, and verify
+              using cryptographic infrastructure. We are building that infrastructure.
+            </motion.p>
+            <motion.p variants={fadeUp} initial="hidden" animate="visible" custom={3} className="text-[var(--color-text-secondary)] leading-relaxed mb-10">
+              AI agents need payment rails. Traders need institutional-grade algorithms. Financial systems need
+              compliance embedded in the architecture itself. These three pillars are not separate products --
+              they are interlocking layers of the same infrastructure, built by the same team, from first principles.
+            </motion.p>
+            <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={4}>
               <Link to="/contact" className="btn-primary inline-flex items-center gap-2">
                 <span>Get in Touch</span>
                 <ArrowRight className="w-5 h-5" />
               </Link>
             </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="relative"
-            >
-              <img
-                src="/final-incredible-2-noc-blue.jpg"
-                alt="Sacred geometry representing natural order in commerce"
-                className="w-full rounded-2xl"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-bg-primary)] via-transparent to-transparent rounded-2xl" />
-              <div className="absolute bottom-8 left-8 right-8">
-                <p className="text-[var(--color-primary)] italic text-lg font-medium">
-                  "What would nature do?"
-                </p>
-                <p className="text-[var(--color-text-muted)] text-sm mt-2">
-                  Our guiding principle for sustainable infrastructure
-                </p>
-              </div>
-            </motion.div>
           </div>
-        </div>
-      </section>
-
-      <section className="py-24 bg-[var(--color-bg-secondary)] relative overflow-hidden">
-        <div className="absolute inset-0 neural-grid opacity-30" />
-        <div className="relative z-10 max-w-7xl mx-auto px-6">
-          <AnimatedSection className="mb-6">
-            <div className="section-label mb-6">
-              <Zap className="w-4 h-4" />
-              The Agent Economy
-            </div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 max-w-3xl">
-              Why <span className="text-gradient-static">Now</span>
-            </h2>
-            <p className="text-lg text-[var(--color-text-secondary)] max-w-3xl leading-relaxed">
-              AI agents are no longer research projects -- they are autonomous economic actors
-              that need infrastructure to transact, settle, and verify. The convergence of
-              agentic capabilities, stablecoin regulatory clarity, and zero-knowledge proof
-              maturity creates the window for this infrastructure stack.
-            </p>
-          </AnimatedSection>
-
-          <AnimatedSection className="mt-8">
-            <div className="glass-panel rounded-2xl p-8 relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-r from-[#3B82F6]/5 via-transparent to-[#3B82F6]/3" />
-              <div className="relative z-10">
-                <h3 className="text-lg font-bold mb-3 flex items-center gap-2">
-                  <Cpu className="w-5 h-5 text-[var(--color-primary)]" />
-                  Agent-to-Agent Protocol Layer
-                </h3>
-                <p className="text-[var(--color-text-secondary)] mb-4 leading-relaxed">
-                  The future is not just agents paying for services -- it is agents discovering,
-                  negotiating with, and transacting with other agents over standardized protocols.
-                </p>
-                <div className="grid sm:grid-cols-3 gap-4">
+          <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={2} className="relative">
+            <div className="glass-card rounded-2xl p-8 border border-[var(--color-primary)]/20">
+              <div className="flex items-center gap-3 mb-6">
+                <Lock className="w-5 h-5 text-[var(--color-primary)]" />
+                <span className="text-sm font-semibold uppercase tracking-wider text-[var(--color-primary)]">
+                  The Agent Economy Context
+                </span>
+              </div>
+              <p className="text-[var(--color-text-secondary)] leading-relaxed mb-6">
+                Financial systems are transitioning from human-operated to agent-operated. AI agents are already
+                capable of autonomous economic action -- they can research markets, execute trades, negotiate with
+                other agents, and settle payments without human intervention.
+              </p>
+              <p className="text-[var(--color-text-secondary)] leading-relaxed">
+                But these agents are forced to use infrastructure designed for humans: credit card rails with
+                $0.30 minimums, manual KYC processes, centralized custody, and compliance-by-oversight.
+                This creates the infrastructure gap. Native payment rails, cryptographic compliance, and
+                self-custodied execution are foundational requirements for the agent economy to function.
+              </p>
+              <div className="mt-6 pt-6 border-t border-[var(--color-border)]">
+                <div className="grid grid-cols-3 gap-4">
                   {[
-                    { label: 'Discovery', detail: 'Google A2A with .well-known/agent.json' },
-                    { label: 'Communication', detail: 'JSON-RPC 2.0 protocol standard' },
-                    { label: 'Settlement', detail: 'x402 gasless USDC on Base L2' },
+                    { label: 'A2A Protocol', sub: 'Google spec' },
+                    { label: 'x402 Standard', sub: 'Coinbase-led' },
+                    { label: 'zk-VaR', sub: 'ZK compliance' },
                   ].map((item) => (
-                    <div key={item.label} className="bg-white/[0.03] rounded-xl p-4 border border-white/[0.06]">
-                      <div className="text-sm font-semibold text-[var(--color-primary)] mb-1">{item.label}</div>
-                      <div className="text-xs text-[var(--color-text-muted)]">{item.detail}</div>
+                    <div key={item.label} className="text-center">
+                      <div className="text-white text-sm font-bold">{item.label}</div>
+                      <div className="text-[var(--color-text-muted)] text-xs">{item.sub}</div>
                     </div>
                   ))}
                 </div>
               </div>
             </div>
-          </AnimatedSection>
+          </motion.div>
         </div>
       </section>
 
-      <section className="py-24">
+      <section className="section-padding">
         <div className="max-w-7xl mx-auto px-6">
-          <AnimatedSection className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Infrastructure <span className="text-gradient-static">Pillars</span>
+          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-16 text-center max-w-3xl mx-auto">
+            <span className="section-label mb-6 block w-fit mx-auto">Infrastructure Pillars</span>
+            <h2 className="display-text mb-6">
+              Three Interlocking{' '}
+              <span className="text-gradient">Pieces</span>
             </h2>
-            <p className="text-[var(--color-text-secondary)] max-w-2xl mx-auto text-lg">
-              Three interlocking pieces of infrastructure -- not a payment router
-              and a separate trading platform, but a vertically integrated stack.
+            <p className="body-large">
+              Not a payment router and a separate trading platform -- a vertically integrated stack.
             </p>
-          </AnimatedSection>
+          </motion.div>
 
           <div className="space-y-8">
-            {pillars.map((pillar, i) => (
-              <PillarCard key={pillar.title} pillar={pillar} index={i} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-24 bg-[var(--color-bg-secondary)]">
-        <div className="max-w-7xl mx-auto px-6">
-          <AnimatedSection className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Core <span className="text-gradient-static">Principles</span>
-            </h2>
-            <p className="text-[var(--color-text-secondary)] max-w-2xl mx-auto text-lg">
-              The philosophical foundations that guide what we build and how we build it.
-            </p>
-          </AnimatedSection>
-
-          <div className="grid md:grid-cols-2 gap-6">
-            {principles.map((principle, i) => (
-              <AnimatedSection key={principle.title}>
+            {pillars.map((pillar, i) => {
+              const Icon = pillar.icon;
+              return (
                 <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.1 }}
+                  key={pillar.number}
+                  variants={fadeUp}
+                  initial="hidden"
+                  whileInView="visible"
                   viewport={{ once: true }}
-                  className="glass-card rounded-2xl p-8 h-full"
+                  custom={i}
+                  className={`rounded-2xl p-8 border ${pillar.borderColor}`}
+                  style={{ background: `linear-gradient(135deg, ${pillar.bgColor} 0%, rgba(10,10,16,0.9) 100%)` }}
                 >
-                  <div className="flex items-start gap-6">
-                    <div className="w-14 h-14 rounded-xl bg-[var(--color-primary)]/10 flex items-center justify-center flex-shrink-0">
-                      <principle.icon className="w-7 h-7 text-[var(--color-primary)]" />
+                  <div className="flex items-start gap-6 mb-8">
+                    <div className="flex items-center gap-4 flex-shrink-0">
+                      <span className="text-6xl font-bold text-[var(--color-text-muted)]/20 font-mono leading-none">
+                        {pillar.number}
+                      </span>
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center gap-3 mb-2">
+                        <Icon className={`w-6 h-6 ${pillar.color}`} />
+                        <span className={`text-xs font-bold uppercase tracking-widest ${pillar.color}`}>
+                          {pillar.label}
+                        </span>
+                      </div>
+                      <h3 className="text-2xl font-bold text-white mb-2">{pillar.product}</h3>
+                      {pillar.badge && (
+                        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-semibold">
+                          <Shield className="w-3 h-3" />
+                          {pillar.badge}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="grid lg:grid-cols-2 gap-8">
+                    <div>
+                      <div className="text-xs font-bold uppercase tracking-wider text-[var(--color-text-muted)] mb-3">
+                        The Problem
+                      </div>
+                      <p className="text-[var(--color-text-secondary)] leading-relaxed text-sm">
+                        {pillar.problem}
+                      </p>
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold mb-3">{principle.title}</h3>
-                      <p className="text-[var(--color-text-secondary)] leading-relaxed">
-                        {principle.description}
+                      <div className="text-xs font-bold uppercase tracking-wider text-[var(--color-text-muted)] mb-3">
+                        The Solution
+                      </div>
+                      <p className="text-[var(--color-text-secondary)] leading-relaxed text-sm">
+                        {pillar.solution}
                       </p>
                     </div>
                   </div>
-                </motion.div>
-              </AnimatedSection>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      <section className="py-24 blueprint-grid-dense">
-        <div className="max-w-7xl mx-auto px-6">
-          <AnimatedSection className="text-center mb-16">
-            <div className="section-label mx-auto mb-6">
-              <Layers className="w-4 h-4" />
-              Architecture
-            </div>
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Technology <span className="text-gradient-static">Stack</span>
-            </h2>
-            <p className="text-[var(--color-text-secondary)] max-w-2xl mx-auto">
-              Five layers of composable infrastructure. Each layer reinforces
-              the others. This is the full system we are building.
-            </p>
-          </AnimatedSection>
-
-          <div className="max-w-3xl mx-auto space-y-3">
-            {stackLayers.map((layer, i) => (
-              <AnimatedSection key={layer.layer}>
-                <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.1 }}
-                  viewport={{ once: true }}
-                  className="glass-card rounded-xl p-6 relative overflow-hidden group hover:border-[var(--color-border-hover)] transition-all"
-                >
-                  <div
-                    className="absolute left-0 top-0 bottom-0 w-1"
-                    style={{ backgroundColor: layer.color }}
-                  />
-                  <div className="flex flex-col sm:flex-row sm:items-center gap-4">
-                    <div className="sm:w-32 shrink-0">
-                      <span
-                        className="text-sm font-bold uppercase tracking-wider"
-                        style={{ color: layer.color }}
-                      >
-                        {layer.layer}
-                      </span>
+                  <div className="mt-8 pt-6 border-t border-[var(--color-border)]">
+                    <div className="text-xs font-bold uppercase tracking-wider text-[var(--color-text-muted)] mb-4">
+                      Key Proof Points
                     </div>
-                    <div className="flex flex-wrap gap-2">
-                      {layer.items.map((item) => (
-                        <span
-                          key={item}
-                          className="text-xs px-3 py-1.5 rounded-md bg-white/5 text-[var(--color-text-secondary)]"
-                        >
-                          {item}
-                        </span>
+                    <div className="grid sm:grid-cols-2 gap-3 mb-6">
+                      {pillar.proofPoints.map((point) => (
+                        <div key={point} className="flex items-start gap-2">
+                          <CheckCircle className={`w-4 h-4 ${pillar.color} flex-shrink-0 mt-0.5`} />
+                          <span className="text-sm text-[var(--color-text-secondary)]">{point}</span>
+                        </div>
                       ))}
                     </div>
+                    {pillar.links && (
+                      <div className="flex flex-wrap gap-4">
+                        {pillar.links.map((link) => (
+                          <a
+                            key={link.label}
+                            href={link.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={`inline-flex items-center gap-1.5 text-sm ${pillar.color} hover:text-white transition-colors`}
+                          >
+                            {link.icon ? <link.icon className="w-4 h-4" /> : <ExternalLink className="w-4 h-4" />}
+                            {link.label}
+                          </a>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </motion.div>
-              </AnimatedSection>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section className="section-padding bg-[var(--color-bg-secondary)] border-y border-[var(--color-border)]">
+        <div className="max-w-7xl mx-auto px-6">
+          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-16 text-center max-w-3xl mx-auto">
+            <span className="section-label mb-6 block w-fit mx-auto">Philosophy</span>
+            <h2 className="display-text mb-6">
+              Building{' '}
+              <span className="text-gradient">Principles</span>
+            </h2>
+            <p className="body-large">
+              The philosophical foundations that guide what we build and how we build it.
+            </p>
+          </motion.div>
+
+          <div className="grid sm:grid-cols-2 gap-6">
+            {principles.map((p, i) => (
+              <motion.div
+                key={p.number}
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                custom={i}
+                className="glass-card rounded-2xl p-8"
+              >
+                <div className="text-5xl font-bold text-[var(--color-primary)]/20 font-mono mb-4">
+                  {p.number}
+                </div>
+                <h3 className="text-xl font-bold text-white mb-4">{p.title}</h3>
+                <p className="text-[var(--color-text-secondary)] leading-relaxed">{p.description}</p>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      <section id="faq" className="py-24 bg-[var(--color-bg-secondary)]">
-        <div className="max-w-3xl mx-auto px-6">
-          <AnimatedSection className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Frequently Asked <span className="text-gradient-static">Questions</span>
+      <section className="section-padding" id="faq">
+        <div className="max-w-4xl mx-auto px-6">
+          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-12 text-center">
+            <span className="section-label mb-6 block w-fit mx-auto">FAQ</span>
+            <h2 className="display-text">
+              Frequently Asked{' '}
+              <span className="text-gradient">Questions</span>
             </h2>
-          </AnimatedSection>
+          </motion.div>
 
-          <AnimatedSection>
-            <div className="glass-card rounded-2xl p-8">
-              {faqs.map((faq, i) => (
-                <FAQItem key={i} faq={faq} index={i} />
-              ))}
-            </div>
-          </AnimatedSection>
+          <div className="space-y-4">
+            {faqs.map((faq, i) => (
+              <motion.div
+                key={i}
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                custom={i}
+              >
+                <FaqItem q={faq.q} a={faq.a} />
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
-      <section className="py-24 relative overflow-hidden">
-        <div className="absolute inset-0 blueprint-grid" />
-        <div className="glow-orb glow-orb-primary w-[500px] h-[500px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-20" />
-
-        <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
-          <AnimatedSection>
-            <Shield className="w-12 h-12 text-[var(--color-primary)] mx-auto mb-6" />
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Let's Build <span className="text-gradient">Together</span>
+      <section className="section-padding bg-[var(--color-bg-secondary)] border-t border-[var(--color-border)]">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+            <Layers className="w-12 h-12 text-[var(--color-primary)] mx-auto mb-6" />
+            <h2 className="display-text mb-6">
+              Let's Build{' '}
+              <span className="text-gradient">Together</span>
             </h2>
-            <p className="text-xl text-[var(--color-text-secondary)] mb-10 max-w-2xl mx-auto">
-              Whether you are a VC, technical partner, or potential customer --
-              if you see the same infrastructure gap we do, we should talk.
+            <p className="body-large mb-10 max-w-2xl mx-auto">
+              Whether you are a VC evaluating the agent economy, a technical partner building on x402,
+              or an enterprise exploring autonomous settlement -- if you see the same infrastructure gap,
+              we should talk.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/contact" className="btn-primary flex items-center justify-center gap-2">
-                <span>Work With Us</span>
-                <ArrowRight className="w-5 h-5" />
-              </Link>
-            </div>
-          </AnimatedSection>
+            <Link to="/contact" className="btn-primary inline-flex items-center gap-2">
+              <span>Get in Touch</span>
+              <ArrowRight className="w-5 h-5" />
+            </Link>
+          </motion.div>
         </div>
       </section>
-    </div>
+    </main>
   );
 }

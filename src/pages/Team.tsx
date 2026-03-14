@@ -1,285 +1,485 @@
-import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import {
-  Users,
-  Linkedin,
-  ArrowRight,
-  GraduationCap,
-  Briefcase,
-  BookOpen,
+  ArrowRight, ExternalLink, Github, BookOpen, Shield, Award,
+  Cpu, TrendingUp, Building2, GraduationCap, Zap
 } from 'lucide-react';
-import ParticleField from '../components/ParticleField';
 
-const team = [
+const fadeUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: (i = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, delay: i * 0.1, ease: [0.4, 0, 0.2, 1] },
+  }),
+};
+
+const careerPhases = [
   {
-    name: 'Zeshan Ahmad',
-    role: 'Co-Founder & Managing Partner',
-    bio: 'Technical founder with 20+ years building financial infrastructure. Co-founded ReFi Trading (USPTO patent for AI trading systems) with Daniel Oosthuyzen. Founder and builder of P402.io, a payment protocol for agentic commerce. Deployed mobile banking to rural markets at Symstream, and led $1.2B+ in transactions at Peak Venture Partners. Professor at Kutaisi International University -- courses informed by live company builds.',
-    image: '/zeshan-bio-photo-2022-square.jpg',
-    additionalImages: [
-      '/zeshan-degamefi.webp',
-      '/555681785_10161866851656408_4519368290982062114_n.jpg',
-    ],
-    linkedin: 'https://linkedin.com/in/zeshan',
-    experience: [
-      'Co-founded ReFi Trading -- backed by non-dilutive capital, raising institutional seed',
-      'Generated $1.2B+ in transactions and wealth at Peak Venture Partners (M&A, venture capital)',
-      'USPTO patent: ZK-verified AI trading system (28% CAGR, 2.07 Sharpe backtested)',
-      'Deployed mobile banking infrastructure to underserved markets (Symstream, Melbourne)',
-      'Outlier Ventures and Chainlink Build Program Alumni',
-      'Scaled e-commerce brand to $4M+ revenue before successful exit',
-      'Nvidia Deep Learning Certified Instructor',
-      'Finalist: Web Summit 2026 Impact Startup Showcase & Coindesk Consensus Pitchfest 2023',
-    ],
-    teaching: [
-      {
-        course: 'AI Powered Software Development',
-        type: 'Elective, Computer Sciences',
-        status: 'Current',
-      },
-      {
-        course: 'Product Development for Software Engineers',
-        type: 'Elective, Computer Sciences',
-        status: 'Current',
-      },
-      {
-        course: 'Digital Disruption, Innovation and Transformation',
-        type: 'Elective, MBA',
-        status: 'Current',
-      },
-      {
-        course: 'Cryptography, Blockchain and Smart Contracts Fundamentals',
-        type: 'Elective, Computer Sciences',
-        status: 'Previously',
-      },
-    ],
+    era: '2003 – 2007',
+    role: 'VP Communications & Business Development',
+    company: 'Symstream Technology Group, Melbourne',
+    competency: 'Built payment rails from scratch in emerging markets',
+    description: 'Deployed GSM-connected point-of-sale terminals enabling major banks to offer micro-banking services in remote areas without traditional banking infrastructure. Commercialized 46 patents for in-channel wireless communications. Early mobile money pioneer.',
+    icon: Cpu,
+    tags: ['46 Patents', 'Mobile Banking', 'Melbourne', 'GSM Infrastructure'],
   },
   {
-    name: 'Daniel Oosthuyzen',
-    role: 'Co-Founder & Quant Engineer, ReFi Trading',
-    bio: 'Quantitative engineer whose modeling expertise drives the reinforcement learning trading algorithms and risk engine at the core of ReFi Trading. Brings deep quantitative finance and algorithmic design capabilities that complement the product and infrastructure side of the studio.',
-    image: '',
-    linkedin: '',
-    experience: [
-      'Quantitative modeling for RL trading agents (28% CAGR, 2.07 Sharpe backtested)',
-      'Risk engine architecture for zk-VaR cryptographic verification system',
-      'Algorithmic strategy design and backtesting framework',
-    ],
+    era: '2007 – 2009',
+    role: 'Cross-Border Investment Advisory',
+    company: 'Key Capital / Dubai Land Department',
+    competency: 'Made opaque financial systems transparent and programmable',
+    description: 'Architected software for UAE primary property developer, creating the pioneering online property title transaction system for the Dubai Land Department. Digitized a sovereign financial workflow -- enabled online real estate transactions for the first time.',
+    icon: Building2,
+    tags: ['GovTech', 'FinTech', 'Dubai', 'Sovereign Systems'],
+  },
+  {
+    era: '2009 – 2015',
+    role: 'Senior Investment Officer',
+    company: 'Peak Venture Partners, New York',
+    competency: 'Understands institutional capital allocation from the inside',
+    description: '$1.2B+ in transactions. E-Trade (largest shareholders), Summit Entertainment slate financing (later acquired by Lionsgate for $412M), Aman Resorts M&A ($350M+). Led real estate and CPG portfolio across multiple sectors.',
+    icon: TrendingUp,
+    tags: ['$1.2B+ Transactions', 'Private Equity', 'M&A', 'New York'],
+  },
+  {
+    era: '2010 – 2021',
+    role: 'Founder',
+    company: 'E-Commerce & DTC',
+    competency: 'Taken a product from zero to revenue to exit',
+    description: 'CharityDreams.com celebrity auction platform -- $4M+ raised for charity. Partnerships with Fergie/Black Eyed Peas and 50 Cent (Street Kings / UN initiative). Scaled DTC bedding brand to $4M+ in sales before successful exit in 2021.',
+    icon: Zap,
+    tags: ['$4M Exit', 'E-commerce', 'DTC', 'Charity Platform'],
+  },
+  {
+    era: '2020 – 2023',
+    role: 'Protocol Architect & Builder',
+    company: 'Web3 Infrastructure',
+    competency: 'Deep tokenomics, on-chain infrastructure, and cryptographic systems',
+    description: 'Outlier Ventures Accelerator alumni. Coindesk Consensus global finalist. Chainlink Build program. Web Summit. Designed tokenomics and on-chain infrastructure. Fan City (Puck.City), HazelHearts.xyz.',
+    icon: Shield,
+    tags: ['Outlier Ventures', 'Chainlink Build', 'Coindesk', 'Web Summit'],
+  },
+  {
+    era: '2024 – Present',
+    role: 'Founder & Co-Founder',
+    company: 'P402.io + ReFi Trading Inc',
+    competency: 'Building the payment and trading infrastructure for the agent economy',
+    description: 'P402: Autonomous payment rails for AI agents implementing x402, A2A protocol, and multi-provider routing across 300+ models. Published SDK and CLI. Co-founded ReFi Trading Inc with Daniel Oosthuyzen -- RL-driven trading platform with USPTO patent and zk-VaR engine.',
+    icon: Cpu,
+    tags: ['P402.io', 'ReFi Trading', 'USPTO Patent', 'agentic Finance'],
   },
 ];
 
-function AnimatedSection({ children, className = '' }: { children: React.ReactNode; className?: string }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
-
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 60 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-      className={className}
-    >
-      {children}
-    </motion.div>
-  );
-}
+const credentials = [
+  { label: 'NVIDIA DLI Certified Instructor', icon: Award },
+  { label: 'Web Summit speaker', icon: Award },
+  { label: 'Coindesk Consensus global finalist', icon: Award },
+  { label: 'Outlier Ventures Accelerator alumni', icon: Award },
+  { label: 'Chainlink Build program', icon: Award },
+  { label: 'Web Summit 2026 Impact Startup Showcase finalist', icon: Award },
+];
 
 export default function Team() {
   return (
-    <div className="min-h-screen">
-      <section className="relative py-32 overflow-hidden">
-        <ParticleField className="opacity-40" particleCount={50} />
-        <div className="absolute inset-0 mesh-gradient" />
+    <main className="overflow-hidden">
+      <section className="relative min-h-[60vh] flex items-center blueprint-grid pt-24">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="glow-orb glow-orb-primary w-[500px] h-[500px] -top-20 right-0 opacity-15" />
+        </div>
+        <div className="max-w-7xl mx-auto px-6 py-20 relative z-10">
+          <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0} className="mb-8">
+            <span className="section-label">
+              <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-primary)] animate-pulse" />
+              About
+            </span>
+          </motion.div>
+          <motion.h1 variants={fadeUp} initial="hidden" animate="visible" custom={1} className="hero-text max-w-4xl mb-8">
+            Zeshan Ahmad
+          </motion.h1>
+          <motion.p variants={fadeUp} initial="hidden" animate="visible" custom={2} className="body-large max-w-2xl mb-4">
+            Founder, Nature of Commerce LLC. Co-Founder, ReFi Trading Inc. Professor, Kutaisi International University.
+          </motion.p>
+          <motion.p variants={fadeUp} initial="hidden" animate="visible" custom={3} className="text-[var(--color-text-muted)] max-w-2xl">
+            20 years building infrastructure that opens financial access -- from rural banking terminals to autonomous AI agents.
+          </motion.p>
+        </div>
+      </section>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-6 pt-16">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-center mb-16"
-          >
-            <div className="section-label mx-auto mb-8">
-              <Users className="w-4 h-4" />
-              Leadership
+      <section className="section-padding">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid lg:grid-cols-3 gap-12 items-start">
+            <div className="lg:col-span-1">
+              <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+                <div className="glass-card rounded-2xl p-6 mb-6">
+                  <img
+                    src="/zeshan-bio-photo-2022-square.jpg"
+                    alt="Zeshan Ahmad"
+                    className="w-full aspect-square object-cover rounded-xl mb-6"
+                  />
+                  <h2 className="text-2xl font-bold text-white mb-1">Zeshan Ahmad</h2>
+                  <p className="text-[var(--color-primary)] text-sm font-semibold mb-4">
+                    Founder, Nature of Commerce
+                  </p>
+                  <p className="text-[var(--color-text-secondary)] text-sm leading-relaxed mb-6">
+                    Technical founder with 20+ years building financial infrastructure. The same through-line --
+                    removing gatekeepers from financial systems -- in every era.
+                  </p>
+                  <div className="flex flex-wrap gap-3">
+                    <a
+                      href="https://linkedin.com/in/zeshanahmad"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-sm text-[var(--color-primary)] hover:text-white transition-colors glass-card px-3 py-2 rounded-lg"
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                      LinkedIn
+                    </a>
+                    <a
+                      href="https://github.com/Z333Q"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-sm text-[var(--color-text-muted)] hover:text-white transition-colors glass-card px-3 py-2 rounded-lg"
+                    >
+                      <Github className="w-4 h-4" />
+                      GitHub
+                    </a>
+                  </div>
+                </div>
+
+                <div className="glass-card rounded-2xl p-6">
+                  <div className="flex items-center gap-3 mb-4">
+                    <Award className="w-5 h-5 text-amber-400" />
+                    <span className="text-sm font-semibold uppercase tracking-wider text-amber-400">
+                      Recognition
+                    </span>
+                  </div>
+                  <div className="space-y-3">
+                    {credentials.map((c) => (
+                      <div key={c.label} className="flex items-start gap-2">
+                        <div className="w-1.5 h-1.5 rounded-full bg-amber-400 flex-shrink-0 mt-2" />
+                        <span className="text-[var(--color-text-secondary)] text-sm">{c.label}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
             </div>
-            <h1 className="hero-text mb-8">
-              Meet the <span className="text-gradient">Team</span>
-            </h1>
-            <p className="body-large max-w-2xl mx-auto">
-              Operators building the infrastructure stack for autonomous finance.
-              Product, quant engineering, and applied research -- from first principles.
+
+            <div className="lg:col-span-2">
+              <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-12">
+                <span className="section-label mb-6 block w-fit">Founder-Market Fit</span>
+                <h2 className="display-text mb-6">
+                  The{' '}
+                  <span className="text-gradient">Through-Line</span>
+                </h2>
+                <p className="body-large mb-4">
+                  Every era, same mission: remove the gatekeepers between participants and financial systems.
+                  The technology changes. The mission does not.
+                </p>
+                <p className="text-[var(--color-text-secondary)] leading-relaxed">
+                  P402 and ReFi Trading are not a pivot or a new direction. They are the logical continuation
+                  of 20 years of work -- now with the most capable tools (zero-knowledge proofs, RL agents,
+                  stablecoin settlement) ever available for this task.
+                </p>
+              </motion.div>
+
+              <div className="space-y-4">
+                {careerPhases.map((phase, i) => {
+                  const Icon = phase.icon;
+                  return (
+                    <motion.div
+                      key={phase.era}
+                      variants={fadeUp}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: true }}
+                      custom={i}
+                      className="glass-card rounded-xl p-6"
+                    >
+                      <div className="flex flex-col sm:flex-row sm:items-start gap-4">
+                        <div className="sm:w-36 flex-shrink-0">
+                          <div className="text-xs font-mono text-[var(--color-primary)] mb-1">{phase.era}</div>
+                          <div className="w-8 h-8 rounded-lg bg-[var(--color-primary)]/10 border border-[var(--color-primary)]/20 flex items-center justify-center">
+                            <Icon className="w-4 h-4 text-[var(--color-primary)]" />
+                          </div>
+                        </div>
+                        <div className="flex-1">
+                          <div className="text-white font-bold text-base mb-0.5">{phase.company}</div>
+                          <div className="text-[var(--color-text-muted)] text-xs mb-2">{phase.role}</div>
+                          <div className="text-[var(--color-primary)] text-sm font-semibold italic mb-3">
+                            "{phase.competency}"
+                          </div>
+                          <p className="text-[var(--color-text-secondary)] text-sm leading-relaxed mb-3">
+                            {phase.description}
+                          </p>
+                          <div className="flex flex-wrap gap-2">
+                            {phase.tags.map((tag) => (
+                              <span key={tag} className="tag text-xs">{tag}</span>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section-padding bg-[var(--color-bg-secondary)] border-y border-[var(--color-border)]">
+        <div className="max-w-7xl mx-auto px-6">
+          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-12">
+            <span className="section-label mb-6 block w-fit">Team</span>
+            <h2 className="display-text mb-4">
+              The{' '}
+              <span className="text-gradient">ReFi Trading</span> Co-Founders
+            </h2>
+            <p className="body-large max-w-2xl">
+              ReFi Trading Inc is an independent Canadian federal corporation with its own cap table.
+              The founding team is built on complementary expertise.
             </p>
+          </motion.div>
+
+          <div className="grid lg:grid-cols-2 gap-6">
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="glass-card rounded-2xl p-8 border border-[var(--color-primary)]/20"
+            >
+              <div className="flex items-start gap-4 mb-6">
+                <img
+                  src="/zeshan-bio-photo-2022-square.jpg"
+                  alt="Zeshan Ahmad"
+                  className="w-16 h-16 rounded-xl object-cover flex-shrink-0"
+                />
+                <div>
+                  <h3 className="text-xl font-bold text-white">Zeshan Ahmad</h3>
+                  <p className="text-[var(--color-primary)] text-sm">CEO / Product</p>
+                  <p className="text-[var(--color-text-muted)] text-xs">Co-Founder, ReFi Trading Inc</p>
+                </div>
+              </div>
+              <p className="text-[var(--color-text-secondary)] text-sm leading-relaxed mb-4">
+                20+ years building financial infrastructure across payment hardware (Symstream), sovereign
+                digital systems (Dubai Land Department), institutional capital ($1.2B+ at Peak Venture Partners),
+                and Web3 protocol design. Product architect and infrastructure builder for the agent economy.
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {['Product Architecture', 'Agentic Finance', 'Institutional Capital', 'Regulatory Strategy'].map((tag) => (
+                  <span key={tag} className="tag text-xs">{tag}</span>
+                ))}
+              </div>
+            </motion.div>
+
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              custom={1}
+              className="glass-card rounded-2xl p-8 border border-emerald-500/20"
+            >
+              <div className="flex items-start gap-4 mb-6">
+                <div className="w-16 h-16 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center flex-shrink-0">
+                  <TrendingUp className="w-8 h-8 text-emerald-400" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-white">Daniel Oosthuyzen</h3>
+                  <p className="text-emerald-400 text-sm">CTO / Quant Engineer</p>
+                  <p className="text-[var(--color-text-muted)] text-xs">Co-Founder, ReFi Trading Inc</p>
+                </div>
+              </div>
+              <p className="text-[var(--color-text-secondary)] text-sm leading-relaxed mb-4">
+                Quantitative engineer whose modeling expertise drives the reinforcement learning trading
+                algorithms and risk engine at the core of ReFi Trading. The quantitative engineering
+                complement to Zeshan's product and infrastructure background -- a genuinely complementary
+                founding pair.
+              </p>
+              <div className="space-y-2 mb-4">
+                {[
+                  'RL trading agent architecture (28% CAGR, 2.07 Sharpe backtested)',
+                  'zk-VaR engine design and implementation',
+                  'Algorithmic strategy design and backtesting framework',
+                ].map((item) => (
+                  <div key={item} className="flex items-start gap-2">
+                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 flex-shrink-0 mt-1.5" />
+                    <span className="text-[var(--color-text-muted)] text-xs">{item}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {['Quant Engineering', 'RL Algorithms', 'Risk Modeling', 'Backtesting'].map((tag) => (
+                  <span key={tag} className="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold">{tag}</span>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="mt-6 glass-card rounded-xl p-5 border border-amber-500/20"
+          >
+            <div className="flex items-start gap-3">
+              <Shield className="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" />
+              <p className="text-[var(--color-text-secondary)] text-sm">
+                <span className="text-amber-400 font-semibold">Entity note:</span> ReFi Trading Inc is a Canadian federal corporation with its own cap table and seed round.
+                Daniel is co-founder of ReFi Trading Inc only -- not of Nature of Commerce LLC, P402.io, RapMath, or EYEcercise.
+              </p>
+            </div>
           </motion.div>
         </div>
       </section>
 
-      <section className="section-padding bg-[var(--color-bg-secondary)]">
+      <section className="section-padding border-y border-[var(--color-border)]">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="space-y-32">
-            {team.map((member, i) => (
-              <AnimatedSection key={member.name}>
-                <div className={`grid ${member.image ? 'lg:grid-cols-2' : 'lg:grid-cols-1 max-w-3xl'} gap-16 items-start ${
-                  i % 2 === 1 ? 'lg:grid-flow-dense' : ''
-                }`}>
-                  {member.image && (
-                  <div className={i % 2 === 1 ? 'lg:col-start-2' : ''}>
-                    <motion.div
-                      className="relative"
-                      whileHover={{ scale: 1.02 }}
-                      transition={{ type: 'spring', stiffness: 300 }}
-                    >
-                      <div className="relative aspect-square max-w-lg mx-auto rounded-3xl overflow-hidden">
-                        <img
-                          src={member.image}
-                          alt={member.name}
-                          className="w-full h-full object-cover"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-bg-secondary)] via-transparent to-transparent" />
-                      </div>
-                      <div className="absolute -bottom-4 -right-4 w-full h-full rounded-3xl border border-[var(--color-primary)]/20 -z-10" />
-                    </motion.div>
-                  </div>
-                  )}
+          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-12">
+            <span className="section-label mb-6 block w-fit">Teaching & Research</span>
+            <h2 className="display-text mb-4">
+              Kutaisi International{' '}
+              <span className="text-gradient">University</span>
+            </h2>
+            <p className="body-large max-w-2xl">
+              An applied R&D lab, not a side activity. The same methodology taught in class is applied
+              to build P402 and ReFi Trading. NVIDIA DLI certified instructor.
+            </p>
+          </motion.div>
 
-                  <div>
-                    <motion.h2
-                      className="text-4xl lg:text-5xl font-bold mb-2"
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                    >
-                      {member.name}
-                    </motion.h2>
-                    <p className="text-[var(--color-primary)] text-xl font-medium mb-6">
-                      {member.role}
-                    </p>
-                    <p className="text-[var(--color-text-secondary)] text-lg leading-relaxed mb-8">
-                      {member.bio}
-                    </p>
-
-                    <div className="mb-8">
-                      <h4 className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-[var(--color-text-muted)] mb-4">
-                        <Briefcase className="w-4 h-4" />
-                        Experience
-                      </h4>
-                      <ul className="space-y-3">
-                        {member.experience.map((exp) => (
-                          <li key={exp} className="flex items-start gap-3">
-                            <div className="w-2 h-2 rounded-full bg-[var(--color-primary)] mt-2 shadow-[0_0_8px_var(--color-primary)]" />
-                            <span className="text-[var(--color-text-secondary)]">{exp}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    {member.teaching && (
-                      <div className="mb-8">
-                        <h4 className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-[var(--color-text-muted)] mb-4">
-                          <GraduationCap className="w-4 h-4" />
-                          Academic - Kutaisi International University
-                        </h4>
-                        <div className="space-y-4">
-                          {member.teaching.map((course) => (
-                            <div
-                              key={course.course}
-                              className="glass-card rounded-xl p-4"
-                            >
-                              <div className="flex items-start justify-between gap-4">
-                                <div>
-                                  <h5 className="font-semibold text-white mb-1">
-                                    {course.course}
-                                  </h5>
-                                  <p className="text-sm text-[var(--color-text-muted)]">
-                                    {course.type}
-                                  </p>
-                                </div>
-                                <span className={`tag text-xs ${
-                                  course.status === 'Current'
-                                    ? 'bg-[var(--color-success)]/20 text-[var(--color-success)] border-[var(--color-success)]/30'
-                                    : 'bg-white/5 text-[var(--color-text-muted)] border-white/10'
-                                }`}>
-                                  {course.status}
-                                </span>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-
-                    {member.linkedin && member.linkedin !== '#' && (
-                      <a
-                        href={member.linkedin}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 text-[var(--color-primary)] hover:gap-3 transition-all font-medium"
-                      >
-                        <Linkedin className="w-5 h-5" />
-                        Connect on LinkedIn
-                      </a>
-                    )}
-                  </div>
-                </div>
-
-                {member.additionalImages && member.additionalImages.length > 0 && (
-                  <AnimatedSection className="mt-16">
-                    <div className="grid grid-cols-2 gap-6">
-                      {member.additionalImages.map((img, idx) => (
-                        <motion.div
-                          key={img}
-                          initial={{ opacity: 0, scale: 0.9 }}
-                          whileInView={{ opacity: 1, scale: 1 }}
-                          viewport={{ once: true }}
-                          transition={{ delay: idx * 0.1 }}
-                          whileHover={{ scale: 1.02 }}
-                          className="relative aspect-square rounded-2xl overflow-hidden"
-                        >
-                          <img
-                            src={img}
-                            alt={`${member.name} ${idx + 2}`}
-                            className="w-full h-full object-cover"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-bg-secondary)]/60 via-transparent to-transparent" />
-                        </motion.div>
-                      ))}
-                    </div>
-                  </AnimatedSection>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+            {[
+              { title: 'AI-Powered Software Development', status: 'Current', link: 'https://github.com/ZA-KIU/AI-POWERED-SOFTWARE-DEV' },
+              { title: 'Product Development for Software Engineers', status: 'Current', link: 'https://github.com/ZA-KIU/PRODUCT-DEV-FOR-SOFTWARE-ENGINEERS' },
+              { title: 'Digital Disruption, Innovation & Transformation', status: 'Current (MBA)' },
+              { title: 'Blockchain & Cryptography Fundamentals', status: 'Previous' },
+            ].map((course, i) => (
+              <motion.div
+                key={course.title}
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                custom={i}
+                className="glass-card rounded-xl p-5"
+              >
+                <GraduationCap className="w-5 h-5 text-[var(--color-primary)] mb-3" />
+                <div className="text-white font-semibold text-sm mb-1">{course.title}</div>
+                <div className="text-[var(--color-text-muted)] text-xs mb-3">{course.status}</div>
+                {course.link && (
+                  <a
+                    href={course.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-xs text-[var(--color-primary)] hover:text-white transition-colors"
+                  >
+                    <Github className="w-3.5 h-3.5" />
+                    View repo
+                  </a>
                 )}
-              </AnimatedSection>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="section-padding relative overflow-hidden">
-        <div className="absolute inset-0 neural-grid opacity-30" />
-
-        <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
-          <AnimatedSection>
-            <div className="section-label mx-auto mb-8">
-              <BookOpen className="w-4 h-4" />
-              Join Us
-            </div>
-            <h2 className="display-text mb-8">
-              Let's Build <span className="text-gradient-static">Together</span>
-            </h2>
-            <p className="body-large mb-12">
-              Whether you are a VC, technical partner, or potential customer --
-              if you see the same infrastructure gap we do, we should talk.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/contact" className="btn-primary flex items-center justify-center gap-3 group">
+      <section className="section-padding bg-[var(--color-bg-secondary)]">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+              <span className="section-label mb-6 block w-fit">Advisory</span>
+              <h2 className="display-text mb-6">
+                Work{' '}
+                <span className="text-gradient">With Zeshan</span>
+              </h2>
+              <p className="body-large mb-6">
+                Selective advisory for early-stage founders building at the intersection of AI, fintech,
+                and Web3. Informed by 20 years of building and the same methodology taught at KIU and
+                applied to P402 and ReFi Trading.
+              </p>
+              <p className="text-[var(--color-text-secondary)] leading-relaxed mb-8">
+                Not a productized service. Not a consulting agency. If you are building in this space
+                and there is a genuine opportunity to work together, reach out.
+              </p>
+              <div className="space-y-3 mb-8">
+                {[
+                  'Technical architecture review for agentic finance products',
+                  'Product development methodology for AI-native infrastructure',
+                  'Regulatory strategy for token-based and open finance systems',
+                  'Network introductions (investors, technical talent, ecosystem partners)',
+                ].map((item) => (
+                  <div key={item} className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 rounded-full bg-[var(--color-primary)] flex-shrink-0 mt-2" />
+                    <span className="text-[var(--color-text-secondary)] text-sm">{item}</span>
+                  </div>
+                ))}
+              </div>
+              <Link to="/contact" className="btn-primary inline-flex items-center gap-2">
                 <span>Get in Touch</span>
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-5 h-5" />
               </Link>
-              <Link to="/thesis" className="btn-secondary flex items-center justify-center">
-                Read the Thesis
-              </Link>
-            </div>
-          </AnimatedSection>
+            </motion.div>
+
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              custom={1}
+              className="glass-card rounded-2xl p-8 border border-[var(--color-primary)]/20"
+            >
+              <BookOpen className="w-8 h-8 text-[var(--color-primary)] mb-6" />
+              <blockquote className="text-white text-2xl font-bold leading-tight mb-4">
+                "What would nature do?"
+              </blockquote>
+              <p className="text-[var(--color-text-secondary)] leading-relaxed mb-6">
+                The guiding principle for sustainable infrastructure. Natural systems are composable,
+                efficient, and self-reinforcing. Every design decision should trace back to first principles,
+                not convention.
+              </p>
+              <div className="pt-6 border-t border-[var(--color-border)]">
+                <div className="text-[var(--color-text-muted)] text-sm">
+                  <span className="text-white font-semibold">Zeshan Ahmad</span>
+                  <br />
+                  Founder, Nature of Commerce LLC
+                  <br />
+                  Kutaisi, Georgia
+                </div>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
-    </div>
+
+      <section className="section-padding border-t border-[var(--color-border)]">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+            <h2 className="display-text mb-6">
+              Let's Build{' '}
+              <span className="text-gradient">Together</span>
+            </h2>
+            <p className="body-large mb-10 max-w-2xl mx-auto">
+              Whether you are a VC evaluating the agent economy, a technical partner building on x402,
+              or an enterprise exploring autonomous settlement -- if you see the same infrastructure gap,
+              we should talk.
+            </p>
+            <div className="flex flex-wrap gap-4 justify-center">
+              <Link to="/contact" className="btn-primary flex items-center gap-2">
+                <span>Get in Touch</span>
+                <ArrowRight className="w-5 h-5" />
+              </Link>
+              <Link to="/thesis" className="btn-secondary flex items-center gap-2">
+                <BookOpen className="w-5 h-5" />
+                <span>Read the Thesis</span>
+              </Link>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+    </main>
   );
 }

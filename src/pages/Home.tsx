@@ -1,679 +1,429 @@
-import { motion, useInView, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
+import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import {
-  ArrowRight,
-  Rocket,
-  ChevronRight,
-  BookOpen,
-  GraduationCap,
-  Shield,
+  ArrowRight, ExternalLink, Shield, Cpu, TrendingUp, BookOpen,
+  Github, ChevronDown, CheckCircle, Layers
 } from 'lucide-react';
-import ParticleField from '../components/ParticleField';
-import MolecularOrb from '../components/MolecularOrb';
-import { OpenFiIcon, AINativeIcon, EdTechIcon, SpatialIcon } from '../components/CustomIcons';
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: (i = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, delay: i * 0.1, ease: [0.4, 0, 0.2, 1] },
+  }),
+};
+
+const trackRecord = [
+  { value: '$1.2B+', label: 'Financial transactions architected' },
+  { value: '3', label: 'Continents with deployed payment infrastructure' },
+  { value: '46', label: 'Wireless banking patents commercialized' },
+  { value: '20+', label: 'Years building financial infrastructure' },
+];
 
 const pillars = [
   {
-    icon: OpenFiIcon,
-    title: 'Agentic Payments & Routing',
-    product: 'P402',
-    color: '#3B82F6',
-    description: 'Middleware intelligence layer routing 300+ AI models with x402 settlement, A2A protocol, and session governance. Published SDK and CLI.',
-    url: 'https://p402.io',
+    number: '01',
+    label: 'Agentic Payments',
+    product: 'P402.io',
+    description:
+      'Autonomous payment infrastructure for the agent economy. Routes across 300+ AI models, settles via x402 on Base L2, implements the Google A2A protocol for agent-to-agent discovery and commerce.',
+    entity: 'Studio-Operated — Nature of Commerce LLC',
+    entityColor: 'text-[var(--color-primary)]',
+    accentColor: 'border-[var(--color-primary)]/30',
+    glowColor: 'rgba(74, 144, 217, 0.06)',
+    facts: ['Published @p402/sdk and @p402/cli on npm', '300+ models, 4 routing modes', 'Google A2A protocol', 'x402 gasless USDC settlement'],
+    link: 'https://www.p402.io',
+    githubLink: 'https://github.com/Z333Q/p402-protocol',
+    icon: Cpu,
   },
   {
-    icon: AINativeIcon,
-    title: 'Algorithmic Portfolio Management',
+    number: '02',
+    label: 'Algorithmic Portfolio Management',
     product: 'ReFi Trading',
-    color: '#00D4AA',
-    description: 'RL agents with backtested 28% CAGR and 2.07 Sharpe. zk-VaR engine, patent portfolio (1 filed, 5 drafted), self-custodied execution. Backed by non-dilutive capital.',
-    url: 'https://refi.trading',
+    description:
+      'Reinforcement learning trading agents with institutional-grade backtested performance. Self-custodied, non-custodial architecture. zk-VaR engine for zero-knowledge verified risk management. Co-founded with Daniel Oosthuyzen.',
+    entity: 'Independent Entity — Co-Founded — Raising Seed Round',
+    entityColor: 'text-emerald-400',
+    accentColor: 'border-emerald-500/30',
+    glowColor: 'rgba(52, 211, 153, 0.04)',
+    facts: ['28% CAGR, 2.07 Sharpe (3yr backtest)', 'USPTO patent filed', 'zk-VaR risk verification', 'ADGM Category 3A licensing'],
+    link: 'https://refi.trading',
+    icon: TrendingUp,
+    badge: 'USPTO Patent Filed',
   },
   {
-    icon: EdTechIcon,
-    title: 'Applied Learning & R&D',
-    product: 'Kutaisi International University',
-    color: '#F59E0B',
-    description: 'University courses in AI and product development that function as an R&D lab. Course frameworks directly informed by live company builds.',
-  },
-  {
-    icon: SpatialIcon,
-    title: 'Spatial Health',
-    product: 'EYEcercise',
-    color: '#06B6D4',
-    description: 'Guided eye exercises for spatial computing. VisionOS, iOS, and Meta Quest. Built at the intersection of health and next-platform experiences.',
-    url: 'https://eyecercise.com',
+    number: '03',
+    label: 'Automated Compliance',
+    product: 'Cross-Cutting Layer',
+    description:
+      'Compliance embedded in architecture, not bolted on after the fact. Zero-knowledge proofs allow a system to mathematically prove it is operating within risk parameters before execution. Trust should be a feature, not friction.',
+    entity: 'Shared Innovation Layer — P402 + ReFi Trading',
+    entityColor: 'text-amber-400',
+    accentColor: 'border-amber-500/30',
+    glowColor: 'rgba(245, 158, 11, 0.04)',
+    facts: ['zk-VaR: cryptographic risk proofs', 'Cryptographic audit trails', 'Regulatory-first: ADGM, SOC-2, CTA', 'No manual oversight required'],
+    icon: Shield,
   },
 ];
 
-const ventures = [
-  {
-    name: 'ReFi Trading',
-    category: 'AI Trading',
-    description: 'Algorithmic portfolio management with RL agents, zk-VaR compliance engine, and patent portfolio (1 filed, 5 drafted). Backed by non-dilutive capital, raising institutional seed round.',
-    status: 'Active',
-    screenshot: '/screenshot-refi.png',
-    brandColor: '#00D4AA',
-    url: 'https://refi.trading',
-  },
-  {
-    name: 'P402',
-    category: 'Agent Infrastructure',
-    description: 'Middleware intelligence layer routing 300+ AI models with x402 settlement, A2A protocol, and session governance. Published SDK and CLI.',
-    status: 'Active',
-    screenshot: '/screenshot-p402.png',
-    brandColor: '#3B82F6',
-    url: 'https://p402.io',
-  },
-  {
-    name: 'EYEcercise',
-    category: 'Spatial Health',
-    description: 'Guided eye exercises for spatial computing. VisionOS, iOS, and Meta Quest compatible.',
-    status: 'Building',
-    screenshot: '/screenshot-eyecercise.png',
-    brandColor: '#06B6D4',
-    url: 'https://eyecercise.com',
-  },
+const whyNow = [
+  'AI agents are autonomous economic actors -- they need native payment infrastructure, not human rails adapted for machines',
+  'Stablecoin regulatory clarity is emerging globally (MiCA, US legislation, ADGM)',
+  'Zero-knowledge proof technology has matured to production-grade',
+  'The Google A2A protocol creates an open standard for agent-to-agent commerce',
+  'The convergence of capable agents + stablecoin rails + ZK maturity = the moment for this infrastructure',
 ];
-
-function AnimatedSection({ children, className = '' }: { children: React.ReactNode; className?: string }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
-
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 60 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-      className={className}
-    >
-      {children}
-    </motion.div>
-  );
-}
 
 export default function Home() {
-  const heroRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ['start start', 'end start'],
-  });
-
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const heroScale = useTransform(scrollYProgress, [0, 0.5], [1, 0.95]);
-  const heroY = useTransform(scrollYProgress, [0, 0.5], [0, 100]);
-
   return (
-    <>
-      <section ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <ParticleField className="opacity-60" particleCount={80} connectionDistance={120} />
-
-        <div className="absolute inset-0 mesh-gradient" />
-
-        <div className="absolute top-1/4 -right-32 w-[600px] h-[600px]">
-          <MolecularOrb size={600} />
+    <main className="overflow-hidden">
+      <section className="relative min-h-screen flex items-center blueprint-grid pt-24">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="glow-orb glow-orb-primary w-[600px] h-[600px] -top-32 -right-32 opacity-20" />
+          <div
+            className="glow-orb w-[400px] h-[400px] bottom-0 left-0 opacity-10"
+            style={{ background: 'radial-gradient(circle, rgba(52,211,153,0.4) 0%, transparent 70%)' }}
+          />
         </div>
 
-        <div className="absolute bottom-1/4 -left-48 w-[400px] h-[400px] opacity-50">
-          <MolecularOrb size={400} delay={2} />
-        </div>
-
-        <motion.div
-          style={{ opacity: heroOpacity, scale: heroScale, y: heroY }}
-          className="relative z-10 max-w-7xl mx-auto px-6 pt-32 pb-20"
-        >
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-            className="max-w-5xl"
-          >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="section-label mb-8"
-            >
-              <Shield className="w-4 h-4" />
+        <div className="max-w-7xl mx-auto px-6 py-20 relative z-10">
+          <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0} className="mb-8">
+            <span className="section-label">
+              <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-primary)] animate-pulse" />
               Infrastructure for Autonomous Finance
-            </motion.div>
-
-            <h1 className="hero-text-large mb-8">
-              <motion.span
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.3 }}
-                className="block text-gradient"
-              >
-                First Principles.
-              </motion.span>
-              <motion.span
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.5 }}
-                className="block text-white"
-              >
-                Lasting Impact.
-              </motion.span>
-            </h1>
-
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.7 }}
-              className="body-large max-w-2xl mb-12"
-            >
-              We build the infrastructure stack for autonomous finance --
-              agentic payments, algorithmic trading, and automated compliance.
-              From protocol to application, from first principles.
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.9 }}
-              className="flex flex-col sm:flex-row gap-4"
-            >
-              <Link to="/thesis" className="btn-primary flex items-center justify-center gap-3 group">
-                <span>Read the Builder Thesis</span>
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Link>
-              <Link to="/studio" className="btn-secondary flex items-center justify-center gap-2">
-                <span>Explore the Studio</span>
-              </Link>
-            </motion.div>
+            </span>
           </motion.div>
-        </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5, duration: 1 }}
-          className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3"
-        >
-          <span className="text-xs uppercase tracking-[0.2em] text-[var(--color-text-muted)]">
-            Scroll
-          </span>
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-            className="w-5 h-8 border border-[var(--color-border)] rounded-full flex items-start justify-center p-1.5"
-          >
-            <motion.div
-              animate={{ opacity: [0.3, 1, 0.3], y: [0, 8, 0] }}
-              transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-              className="w-1 h-1.5 bg-[var(--color-primary)] rounded-full"
-            />
-          </motion.div>
-        </motion.div>
-      </section>
+          <motion.h1 variants={fadeUp} initial="hidden" animate="visible" custom={1} className="hero-text max-w-5xl mb-8">
+            20 Years Building{' '}
+            <span className="text-gradient">Infrastructure</span>{' '}
+            That Opens Financial Access
+          </motion.h1>
 
-      <section className="section-padding bg-[var(--color-bg-secondary)] relative overflow-hidden">
-        <div className="absolute inset-0 neural-grid opacity-50" />
+          <motion.p variants={fadeUp} initial="hidden" animate="visible" custom={2} className="body-large max-w-2xl mb-12">
+            From rural banking terminals to autonomous AI agents -- Nature of Commerce builds the
+            technology stack for the next financial system.
+          </motion.p>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-6">
-          <AnimatedSection className="max-w-3xl mb-20">
-            <h2 className="display-text mb-6">
-              The <span className="text-gradient-static">Stack</span>
-            </h2>
-            <p className="body-large">
-              Four interlocking pillars of infrastructure. AI agents need payment rails.
-              Traders need institutional-grade algorithms. Financial systems need compliance
-              embedded in the architecture. And courses informed by live company builds
-              keep the R&D pipeline flowing.
-            </p>
-          </AnimatedSection>
-
-          <div className="grid md:grid-cols-2 gap-6">
-            {pillars.map((pillar, i) => (
-              <AnimatedSection key={pillar.title}>
-                <motion.div
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.1, duration: 0.8 }}
-                  viewport={{ once: true }}
-                  whileHover={{ y: -8 }}
-                  className="glass-card-interactive rounded-2xl p-10 h-full card-spotlight"
-                >
-                  <div className="flex items-center gap-4 mb-6">
-                    <motion.div
-                      className="w-14 h-14 rounded-2xl flex items-center justify-center"
-                      style={{ backgroundColor: `${pillar.color}20` }}
-                      whileHover={{ scale: 1.1, rotate: 5 }}
-                      transition={{ type: 'spring', stiffness: 400 }}
-                    >
-                      <pillar.icon className="w-7 h-7" style={{ color: pillar.color }} />
-                    </motion.div>
-                    <div>
-                      <span
-                        className="text-xs font-bold uppercase tracking-wider"
-                        style={{ color: pillar.color }}
-                      >
-                        {pillar.product}
-                      </span>
-                    </div>
-                  </div>
-                  <h3 className="text-2xl font-bold mb-4">{pillar.title}</h3>
-                  <p className="text-[var(--color-text-secondary)] leading-relaxed mb-4">
-                    {pillar.description}
-                  </p>
-                  {pillar.url && (
-                    <a
-                      href={pillar.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-sm font-medium transition-all hover:gap-3"
-                      style={{ color: pillar.color }}
-                    >
-                      Visit {pillar.product}
-                      <ArrowRight className="w-4 h-4" />
-                    </a>
-                  )}
-                </motion.div>
-              </AnimatedSection>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section-padding relative overflow-hidden">
-        <div className="absolute inset-0 molecular-grid" />
-
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] opacity-30">
-          <MolecularOrb size={500} />
-        </div>
-
-        <div className="relative z-10 max-w-7xl mx-auto px-6">
-          <AnimatedSection className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-16 gap-8">
-            <div className="max-w-2xl">
-              <div className="section-label mb-6">
-                <Rocket className="w-4 h-4" />
-                Studio Companies
-              </div>
-              <h2 className="display-text">
-                What We're <span className="text-gradient-static">Building</span>
-              </h2>
-            </div>
-            <Link
-              to="/studio"
-              className="flex items-center gap-2 text-[var(--color-primary)] hover:gap-4 transition-all font-semibold text-lg group"
-            >
-              View All
-              <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+          <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={3} className="flex flex-wrap gap-4 items-center">
+            <Link to="/stack" className="btn-primary flex items-center gap-2">
+              <span>See the Stack</span>
+              <ArrowRight className="w-5 h-5" />
             </Link>
-          </AnimatedSection>
+            <Link to="/thesis" className="btn-secondary flex items-center gap-2">
+              <BookOpen className="w-5 h-5" />
+              <span>Read the Thesis</span>
+            </Link>
+          </motion.div>
 
-          <div className="grid lg:grid-cols-3 gap-8">
-            {ventures.map((venture, i) => (
-              <AnimatedSection key={venture.name}>
-                <motion.a
-                  href={venture.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.15, duration: 0.8 }}
-                  viewport={{ once: true }}
-                  whileHover={{ y: -12 }}
-                  className="block glass-card-interactive rounded-3xl overflow-hidden group h-full"
-                >
-                  <div className="relative h-52 overflow-hidden bg-[var(--color-bg-primary)]">
-                    <div
-                      className="absolute inset-0 opacity-20"
-                      style={{
-                        background: `radial-gradient(circle at center, ${venture.brandColor} 0%, transparent 70%)`,
-                      }}
-                    />
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <span
-                        className="text-3xl font-bold tracking-tight"
-                        style={{ color: venture.brandColor }}
-                      >
-                        {venture.name}
-                      </span>
-                    </div>
-                    <img
-                      src={venture.screenshot}
-                      alt={`${venture.name} screenshot`}
-                      className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
-                      onError={(e) => {
-                        e.currentTarget.style.display = 'none';
-                      }}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-bg-primary)] via-transparent to-transparent" />
-                    <div className="absolute top-4 left-4 flex gap-2">
-                      <span className="tag backdrop-blur-md">{venture.category}</span>
-                      <span className={`tag backdrop-blur-md ${
-                        venture.status === 'Active'
-                          ? 'bg-[var(--color-success)]/30 text-[var(--color-success)] border-[var(--color-success)]/30'
-                          : 'bg-[var(--color-warning)]/30 text-[var(--color-warning)] border-[var(--color-warning)]/30'
-                      }`}>
-                        {venture.status}
-                      </span>
-                    </div>
-                    <div
-                      className="absolute bottom-0 left-0 right-0 h-1 opacity-60 group-hover:opacity-100 transition-opacity"
-                      style={{ background: `linear-gradient(90deg, ${venture.brandColor}, transparent)` }}
-                    />
-                  </div>
-                  <div className="p-8">
-                    <h3 className="text-2xl font-bold mb-3 group-hover:text-[var(--color-primary)] transition-colors">
-                      {venture.name}
-                    </h3>
-                    <p className="text-[var(--color-text-secondary)] leading-relaxed">
-                      {venture.description}
-                    </p>
-                    <div className="mt-6 flex items-center gap-2 text-[var(--color-primary)] font-medium opacity-0 group-hover:opacity-100 transition-opacity">
-                      <span>Explore</span>
-                      <ArrowRight className="w-4 h-4" />
-                    </div>
-                  </div>
-                </motion.a>
-              </AnimatedSection>
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+            custom={5}
+            className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-[var(--color-text-muted)] text-xs"
+          >
+            <span>Scroll</span>
+            <ChevronDown className="w-4 h-4 animate-bounce" />
+          </motion.div>
+        </div>
+      </section>
+
+      <section className="py-20 border-y border-[var(--color-border)]">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+            {trackRecord.map((item, i) => (
+              <motion.div
+                key={item.label}
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                custom={i}
+                className="stat-card glass-card rounded-xl"
+              >
+                <div className="stat-value">{item.value}</div>
+                <div className="stat-label">{item.label}</div>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="section-padding bg-[var(--color-bg-secondary)] relative overflow-hidden">
-        <div className="absolute inset-0 neural-grid opacity-30" />
+      <section className="section-padding">
+        <div className="max-w-7xl mx-auto px-6">
+          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-16">
+            <span className="section-label mb-6 block w-fit">The Infrastructure Stack</span>
+            <h2 className="display-text max-w-3xl mb-6">
+              Three Pillars,{' '}
+              <span className="text-gradient">One System</span>
+            </h2>
+            <p className="body-large max-w-2xl">
+              Not separate products. Interlocking layers of the same infrastructure, built by the same team,
+              from first principles. AI agents need payment rails. Traders need institutional-grade algorithms.
+              Financial systems need compliance embedded in the architecture.
+            </p>
+          </motion.div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-20 items-center">
-            <AnimatedSection>
-              <div className="relative">
+          <div className="space-y-6">
+            {pillars.map((pillar, i) => {
+              const Icon = pillar.icon;
+              return (
                 <motion.div
-                  className="absolute -inset-3 rounded-[2rem]"
-                  style={{
-                    background: 'linear-gradient(135deg, rgba(74,144,217,0.3) 0%, transparent 40%, transparent 60%, rgba(74,144,217,0.3) 100%)',
-                  }}
-                  animate={{
-                    backgroundPosition: ['0% 0%', '100% 100%', '0% 0%'],
-                  }}
-                  transition={{
-                    duration: 8,
-                    repeat: Infinity,
-                    ease: 'linear',
-                  }}
-                />
-                <motion.div
-                  className="absolute -inset-px rounded-3xl overflow-hidden"
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
+                  key={pillar.number}
+                  variants={fadeUp}
+                  initial="hidden"
+                  whileInView="visible"
                   viewport={{ once: true }}
+                  custom={i}
+                  className={`glass-card-interactive rounded-2xl p-8 border ${pillar.accentColor}`}
+                  style={{ background: `linear-gradient(135deg, ${pillar.glowColor} 0%, rgba(10,10,16,0.8) 100%)` }}
                 >
-                  <motion.div
-                    className="absolute inset-0 rounded-3xl"
-                    style={{
-                      background: 'linear-gradient(90deg, transparent 0%, var(--color-primary) 50%, transparent 100%)',
-                      backgroundSize: '200% 100%',
-                    }}
-                    animate={{
-                      backgroundPosition: ['-100% 0%', '200% 0%'],
-                    }}
-                    transition={{
-                      duration: 3,
-                      repeat: Infinity,
-                      repeatDelay: 2,
-                      ease: 'easeInOut',
-                    }}
-                  />
-                </motion.div>
-                <motion.div
-                  className="relative z-10 rounded-3xl overflow-hidden bg-[var(--color-bg-secondary)]"
-                  whileHover={{ scale: 1.02 }}
-                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                >
-                  <img
-                    src="/first-principles.webp"
-                    alt="First Principles Design Philosophy"
-                    className="w-full rounded-3xl"
-                  />
-                  <motion.div
-                    className="absolute inset-0 pointer-events-none"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                  >
-                    <motion.div
-                      className="absolute top-0 left-0 w-16 h-16 border-t-2 border-l-2 border-[var(--color-primary)]/50 rounded-tl-3xl"
-                      initial={{ opacity: 0, x: -10, y: -10 }}
-                      whileInView={{ opacity: 1, x: 0, y: 0 }}
-                      transition={{ delay: 0.3, duration: 0.5 }}
-                      viewport={{ once: true }}
-                    />
-                    <motion.div
-                      className="absolute top-0 right-0 w-16 h-16 border-t-2 border-r-2 border-[var(--color-primary)]/50 rounded-tr-3xl"
-                      initial={{ opacity: 0, x: 10, y: -10 }}
-                      whileInView={{ opacity: 1, x: 0, y: 0 }}
-                      transition={{ delay: 0.4, duration: 0.5 }}
-                      viewport={{ once: true }}
-                    />
-                    <motion.div
-                      className="absolute bottom-0 left-0 w-16 h-16 border-b-2 border-l-2 border-[var(--color-primary)]/50 rounded-bl-3xl"
-                      initial={{ opacity: 0, x: -10, y: 10 }}
-                      whileInView={{ opacity: 1, x: 0, y: 0 }}
-                      transition={{ delay: 0.5, duration: 0.5 }}
-                      viewport={{ once: true }}
-                    />
-                    <motion.div
-                      className="absolute bottom-0 right-0 w-16 h-16 border-b-2 border-r-2 border-[var(--color-primary)]/50 rounded-br-3xl"
-                      initial={{ opacity: 0, x: 10, y: 10 }}
-                      whileInView={{ opacity: 1, x: 0, y: 0 }}
-                      transition={{ delay: 0.6, duration: 0.5 }}
-                      viewport={{ once: true }}
-                    />
-                  </motion.div>
-                </motion.div>
-                <motion.div
-                  className="absolute -bottom-6 -right-6 w-32 h-32 rounded-full bg-[var(--color-primary)]/10 blur-2xl"
-                  animate={{
-                    scale: [1, 1.2, 1],
-                    opacity: [0.3, 0.5, 0.3],
-                  }}
-                  transition={{
-                    duration: 4,
-                    repeat: Infinity,
-                    ease: 'easeInOut',
-                  }}
-                />
-              </div>
-            </AnimatedSection>
+                  <div className="flex flex-col lg:flex-row lg:items-start gap-8">
+                    <div className="flex-shrink-0 lg:w-64">
+                      <div className="flex items-center gap-4 mb-4">
+                        <span className="text-5xl font-bold text-[var(--color-text-muted)]/30 font-mono">
+                          {pillar.number}
+                        </span>
+                        <Icon className="w-8 h-8 text-[var(--color-primary)]" />
+                      </div>
+                      <div className="text-xs font-bold uppercase tracking-widest text-[var(--color-text-muted)] mb-1">
+                        {pillar.label}
+                      </div>
+                      <div className="text-2xl font-bold text-white mb-2">{pillar.product}</div>
+                      {pillar.badge && (
+                        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-semibold">
+                          <Shield className="w-3 h-3" />
+                          {pillar.badge}
+                        </div>
+                      )}
+                    </div>
 
-            <AnimatedSection>
-              <motion.div
-                className="section-label mb-8"
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-              >
-                <GraduationCap className="w-4 h-4" />
-                Teaching & R&D
-              </motion.div>
-              <h2 className="display-text mb-8">
-                <motion.span
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  className="inline-block"
-                >
-                  Courses{' '}
-                </motion.span>
-                <motion.span
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 }}
-                  viewport={{ once: true }}
-                  className="text-gradient-static inline-block"
-                >
-                  Informed
-                </motion.span>
-                <motion.span
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 }}
-                  viewport={{ once: true }}
-                  className="inline-block"
-                >
-                  {' '}by{' '}
-                </motion.span>
-                <motion.span
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3 }}
-                  viewport={{ once: true }}
-                  className="text-gradient-static inline-block"
-                >
-                  Live Builds
-                </motion.span>
+                    <div className="flex-1">
+                      <p className="text-[var(--color-text-secondary)] leading-relaxed mb-6 text-lg">
+                        {pillar.description}
+                      </p>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+                        {pillar.facts.map((fact) => (
+                          <div key={fact} className="flex items-start gap-2">
+                            <CheckCircle className="w-4 h-4 text-[var(--color-primary)] flex-shrink-0 mt-0.5" />
+                            <span className="text-sm text-[var(--color-text-secondary)]">{fact}</span>
+                          </div>
+                        ))}
+                      </div>
+                      <div className={`text-xs font-semibold uppercase tracking-wider ${pillar.entityColor} mb-4`}>
+                        {pillar.entity}
+                      </div>
+                      {(pillar.link || pillar.githubLink) && (
+                        <div className="flex flex-wrap gap-4">
+                          {pillar.link && (
+                            <a
+                              href={pillar.link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1.5 text-sm text-[var(--color-primary)] hover:text-white transition-colors"
+                            >
+                              <ExternalLink className="w-4 h-4" />
+                              Visit site
+                            </a>
+                          )}
+                          {pillar.githubLink && (
+                            <a
+                              href={pillar.githubLink}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1.5 text-sm text-[var(--color-text-muted)] hover:text-white transition-colors"
+                            >
+                              <Github className="w-4 h-4" />
+                              GitHub
+                            </a>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section className="section-padding bg-[var(--color-bg-secondary)] border-y border-[var(--color-border)]">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+              <span className="section-label mb-6 block w-fit">Teaching & R&D</span>
+              <h2 className="display-text mb-6">
+                The Classroom Is{' '}
+                <span className="text-gradient">the Lab</span>
               </h2>
-              <motion.p
-                className="body-large mb-8"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-                viewport={{ once: true }}
-              >
-                The same product development methodology used to build ReFi Trading and P402
-                is taught at Kutaisi International University. The classroom is the R&D lab.
-                The products are the curriculum.
-              </motion.p>
-
-              <ul className="space-y-5 mb-10">
+              <p className="body-large mb-8">
+                Active researcher and educator at Kutaisi International University, teaching
+                AI-Powered Software Development, Product Development, Blockchain &amp; Cryptography,
+                and Digital Disruption. NVIDIA DLI certified instructor. Courses informed by live
+                company builds -- the same frameworks applied in the classroom are used to build
+                P402 and ReFi Trading.
+              </p>
+              <div className="space-y-3 mb-8">
                 {[
                   'AI-Powered Software Development',
                   'Product Development for Software Engineers',
                   'Digital Disruption, Innovation & Transformation (MBA)',
-                  'Nvidia Deep Learning Certified Instruction',
-                ].map((item, i) => (
-                  <motion.li
-                    key={item}
-                    initial={{ opacity: 0, x: -30 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.3 + i * 0.1, duration: 0.5 }}
-                    viewport={{ once: true }}
-                    className="flex items-center gap-4 group"
-                  >
-                    <motion.div
-                      className="w-2 h-2 rounded-full bg-[var(--color-primary)]"
-                      whileInView={{
-                        boxShadow: [
-                          '0 0 0px var(--color-primary)',
-                          '0 0 15px var(--color-primary)',
-                          '0 0 8px var(--color-primary)',
-                        ],
-                      }}
-                      transition={{ delay: 0.5 + i * 0.1, duration: 0.8 }}
-                      viewport={{ once: true }}
-                    />
-                    <span className="text-[var(--color-text-secondary)] group-hover:text-white transition-colors">{item}</span>
-                  </motion.li>
+                  'Blockchain & Cryptography Fundamentals',
+                ].map((course) => (
+                  <div key={course} className="flex items-center gap-3">
+                    <div className="w-1.5 h-1.5 rounded-full bg-[var(--color-primary)]" />
+                    <span className="text-[var(--color-text-secondary)] text-sm">{course}</span>
+                  </div>
                 ))}
-              </ul>
+              </div>
+              <div className="flex flex-wrap gap-3">
+                <a
+                  href="https://github.com/ZA-KIU/AI-POWERED-SOFTWARE-DEV"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-sm text-[var(--color-text-secondary)] hover:text-white transition-colors glass-card px-4 py-2 rounded-lg"
+                >
+                  <Github className="w-4 h-4" />
+                  AI Course Repo
+                </a>
+                <a
+                  href="https://github.com/ZA-KIU/PRODUCT-DEV-FOR-SOFTWARE-ENGINEERS"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-sm text-[var(--color-text-secondary)] hover:text-white transition-colors glass-card px-4 py-2 rounded-lg"
+                >
+                  <Github className="w-4 h-4" />
+                  Product Dev Repo
+                </a>
+              </div>
+            </motion.div>
 
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6 }}
-                viewport={{ once: true }}
-              >
-                <Link to="/about" className="btn-primary inline-flex items-center gap-3 group">
-                  <span>Meet the Team</span>
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </motion.div>
-            </AnimatedSection>
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              custom={1}
+            >
+              <div className="glass-card rounded-2xl p-8 border border-[var(--color-border)]">
+                <div className="flex items-center gap-3 mb-6">
+                  <BookOpen className="w-6 h-6 text-[var(--color-primary)]" />
+                  <span className="text-sm font-semibold uppercase tracking-wider text-[var(--color-primary)]">
+                    The Loop
+                  </span>
+                </div>
+                <div className="space-y-6">
+                  {[
+                    {
+                      step: '1',
+                      title: 'Build live',
+                      desc: 'P402 and ReFi Trading are built in real time using the same product development methodology taught in class.',
+                    },
+                    {
+                      step: '2',
+                      title: 'Teach the method',
+                      desc: 'Course frameworks at KIU mirror the actual build process -- students learn on real infrastructure patterns, not hypothetical projects.',
+                    },
+                    {
+                      step: '3',
+                      title: 'Feed the pipeline',
+                      desc: 'Students become contributors. The classroom becomes a talent pipeline and R&D lab for the studio.',
+                    },
+                  ].map((item) => (
+                    <div key={item.step} className="flex gap-4">
+                      <div className="w-8 h-8 rounded-full bg-[var(--color-primary)]/10 border border-[var(--color-primary)]/20 flex items-center justify-center flex-shrink-0 text-[var(--color-primary)] text-sm font-bold">
+                        {item.step}
+                      </div>
+                      <div>
+                        <div className="text-white font-semibold mb-1">{item.title}</div>
+                        <div className="text-[var(--color-text-muted)] text-sm leading-relaxed">{item.desc}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
-      <section className="section-padding relative overflow-hidden">
-        <ParticleField className="opacity-40" particleCount={50} connectionDistance={100} />
-        <div className="absolute inset-0 mesh-gradient" />
+      <section className="section-padding">
+        <div className="max-w-7xl mx-auto px-6">
+          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="max-w-4xl mx-auto">
+            <span className="section-label mb-6 block w-fit">Market Timing</span>
+            <h2 className="display-text mb-8">
+              Why{' '}
+              <span className="text-gradient">Now</span>
+            </h2>
+            <p className="body-large mb-12">
+              AI agents are becoming autonomous economic actors capable of transacting, trading,
+              and verifying without human intervention. These agents need native payment infrastructure --
+              not human payment rails adapted for machines. The convergence has arrived.
+            </p>
+            <div className="space-y-4 mb-12">
+              {whyNow.map((point, i) => (
+                <motion.div
+                  key={i}
+                  variants={fadeUp}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  custom={i}
+                  className="flex items-start gap-4 glass-card rounded-xl p-5"
+                >
+                  <div className="w-6 h-6 rounded-full bg-[var(--color-primary)]/10 border border-[var(--color-primary)]/20 flex items-center justify-center flex-shrink-0 text-[var(--color-primary)] text-xs font-bold mt-0.5">
+                    {i + 1}
+                  </div>
+                  <p className="text-[var(--color-text-secondary)] leading-relaxed">{point}</p>
+                </motion.div>
+              ))}
+            </div>
+            <div className="glass-card rounded-2xl p-8 border border-[var(--color-primary)]/20">
+              <div className="flex items-start gap-4">
+                <Layers className="w-8 h-8 text-[var(--color-primary)] flex-shrink-0 mt-1" />
+                <div>
+                  <p className="text-white text-lg font-semibold mb-2">
+                    We are not learning on the job.
+                  </p>
+                  <p className="text-[var(--color-text-secondary)]">
+                    20 years building this exact type of infrastructure -- payment hardware, sovereign
+                    financial digitization, institutional capital, protocol design -- using the best
+                    technology of each era. The market just caught up.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
 
-        <motion.div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full"
-          style={{
-            background: 'radial-gradient(circle, rgba(74,144,217,0.15) 0%, transparent 70%)',
-          }}
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.5, 0.3],
-          }}
-          transition={{
-            duration: 6,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-        />
-
-        <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
-          <AnimatedSection>
-            <motion.h2
-              className="hero-text mb-8"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-            >
-              <motion.span
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="block"
-              >
-                See the Same
-              </motion.span>
-              <motion.span
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.15 }}
-                viewport={{ once: true }}
-                className="text-gradient block"
-              >
-                Infrastructure Gap
-              </motion.span>
-              <motion.span
-                initial={{ opacity: 0, scale: 0.5 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.3, type: 'spring', stiffness: 200 }}
-                viewport={{ once: true }}
-                className="inline-block"
-              >
-                ?
-              </motion.span>
-            </motion.h2>
-            <motion.p
-              className="body-large mb-12 max-w-2xl mx-auto"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              viewport={{ once: true }}
-            >
-              Whether you are a VC, technical partner, or potential customer --
-              if autonomous finance needs infrastructure you know how to build,
-              we should talk.
-            </motion.p>
-            <motion.div
-              className="flex flex-col sm:flex-row gap-4 justify-center"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              viewport={{ once: true }}
-            >
-              <Link to="/contact" className="btn-primary flex items-center justify-center gap-3 group">
+      <section className="section-padding bg-[var(--color-bg-secondary)] border-t border-[var(--color-border)]">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+            <h2 className="display-text mb-6">
+              See the Same{' '}
+              <span className="text-gradient">Infrastructure Gap?</span>
+            </h2>
+            <p className="body-large mb-12 max-w-2xl mx-auto">
+              Whether you are a VC evaluating the agent economy, a technical partner building on x402,
+              or an enterprise exploring autonomous settlement -- we should talk.
+            </p>
+            <div className="flex flex-wrap gap-4 justify-center">
+              <Link to="/contact" className="btn-primary flex items-center gap-2">
                 <span>Get in Touch</span>
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-5 h-5" />
               </Link>
-              <Link to="/thesis" className="btn-secondary flex items-center justify-center gap-2">
+              <Link to="/thesis" className="btn-secondary flex items-center gap-2">
                 <BookOpen className="w-5 h-5" />
                 <span>Read the Thesis</span>
               </Link>
-            </motion.div>
-          </AnimatedSection>
+            </div>
+          </motion.div>
         </div>
       </section>
-    </>
+    </main>
   );
 }

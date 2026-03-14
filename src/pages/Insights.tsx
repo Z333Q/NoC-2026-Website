@@ -1,570 +1,290 @@
-import { motion, useInView, AnimatePresence } from 'framer-motion';
-import { useRef, useState, useEffect } from 'react';
-import {
-  BookOpen,
-  ExternalLink,
-  Calendar,
-  Tag,
-  Compass,
-  Rss,
-  ArrowRight,
-  Clock,
-  Zap,
-  FileText,
-  Heart,
-  ChevronRight,
-  PawPrint,
-} from 'lucide-react';
-import { supabase } from '../lib/supabase';
-import { fallbackPosts } from '../data/insightsData';
-import type { BlogPost } from '../types/insights';
+import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { ExternalLink, Clock, ArrowRight, BookOpen } from 'lucide-react';
+import { articles, sourceConfig, type ArticleCategory, type ArticleSource } from '../data/insightsData';
 
-const categories = ['All', 'Research', 'Technology', 'Protocol', 'Case Study', 'Personal'];
-
-const SOURCE_CONFIG: Record<string, { label: string; color: string; icon: typeof Zap }> = {
-  refi: { label: 'ReFi.Trading', color: '#00D4AA', icon: Zap },
-  p402: { label: 'P402 Intelligence', color: '#3B82F6', icon: FileText },
-  personal: { label: 'Personal Blog', color: '#F59E0B', icon: Heart },
+const fadeUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: (i = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, delay: i * 0.1, ease: [0.4, 0, 0.2, 1] },
+  }),
 };
 
-function SourceBadge({ source }: { source: string }) {
-  const config = SOURCE_CONFIG[source] || SOURCE_CONFIG.refi;
-  const Icon = config.icon;
+type FilterCategory = 'All' | ArticleCategory;
+type FilterSource = 'All' | ArticleSource;
 
-  return (
-    <span
-      className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider border"
-      style={{
-        color: config.color,
-        backgroundColor: `${config.color}15`,
-        borderColor: `${config.color}30`,
-      }}
-    >
-      <Icon className="w-3 h-3" />
-      {config.label}
-    </span>
-  );
-}
+const categoryFilters: FilterCategory[] = ['All', 'Research', 'Technology', 'Protocol', 'Case Study'];
+const sourceFilters: { value: FilterSource; label: string }[] = [
+  { value: 'All', label: 'All Sources' },
+  { value: 'refi_trading', label: 'ReFi Trading' },
+  { value: 'p402_intelligence', label: 'P402 Intelligence' },
+];
 
-function PostCard({ post, index }: { post: BlogPost; index: number }) {
-  const ref = useRef<HTMLAnchorElement>(null);
-  const isInView = useInView(ref, { once: true, margin: '-50px' });
-
+function ArticleCard({ article, index }: { article: typeof articles[0]; index: number }) {
+  const src = sourceConfig[article.source];
   return (
     <motion.a
-      ref={ref}
-      href={post.source_url}
+      href={article.sourceUrl}
       target="_blank"
       rel="noopener noreferrer"
-      initial={{ opacity: 0, y: 30 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ delay: index * 0.08, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className="group glass-card-interactive rounded-2xl overflow-hidden flex flex-col"
+      variants={fadeUp}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+      custom={index % 4}
+      className={`group glass-card-interactive rounded-2xl p-6 border ${src.borderColor} flex flex-col h-full`}
+      style={{ background: 'linear-gradient(135deg, rgba(20,20,32,0.8) 0%, rgba(10,10,16,0.9) 100%)' }}
     >
-      <div className="relative aspect-[16/9]">
-        {post.image_url ? (
-          <img
-            src={post.image_url}
-            alt={post.title}
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-          />
-        ) : (
-          <div className="w-full h-full bg-gradient-to-br from-[var(--color-bg-tertiary)] to-[var(--color-bg-primary)] flex items-center justify-center">
-            <Compass className="w-12 h-12 text-[var(--color-primary)]/30" />
-          </div>
-        )}
-        <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-bg-primary)] via-[var(--color-bg-primary)]/20 to-transparent" />
-
-        <div className="absolute top-4 left-4 flex items-center gap-2">
-          <span className="tag">{post.category}</span>
-          {post.series_name && (
-            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-white/10 text-white/80 border border-white/20 backdrop-blur-sm">
-              Series
-            </span>
-          )}
-        </div>
-
-        <div className="absolute top-4 right-4">
-          <SourceBadge source={post.source || 'refi'} />
+      <div className="flex items-start justify-between gap-3 mb-4">
+        <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold ${src.bgColor} ${src.color} border ${src.borderColor}`}>
+          {src.label}
+        </span>
+        <div className="flex items-center gap-1.5 text-[var(--color-text-muted)] text-xs">
+          <Clock className="w-3 h-3" />
+          {article.readTime}
         </div>
       </div>
 
-      <div className="p-6 flex flex-col flex-1">
-        <div className="flex items-center gap-4 text-xs text-[var(--color-text-muted)] mb-3">
-          <span className="flex items-center gap-1">
-            <Calendar className="w-3 h-3" />
-            {new Date(post.published_at).toLocaleDateString('en-US', {
-              month: 'short',
-              day: 'numeric',
-              year: 'numeric',
-            })}
+      {article.series && (
+        <div className="text-xs text-[var(--color-text-muted)] mb-2">
+          {article.series} — Part {article.seriesPart}
+        </div>
+      )}
+
+      <h3 className="text-white font-bold text-base mb-3 group-hover:text-[var(--color-primary)] transition-colors flex-1">
+        {article.title}
+      </h3>
+
+      <p className="text-[var(--color-text-secondary)] text-sm leading-relaxed mb-4 line-clamp-3">
+        {article.excerpt}
+      </p>
+
+      <div className="flex flex-wrap gap-1.5 mb-4">
+        {article.tags.slice(0, 3).map((tag) => (
+          <span key={tag} className="text-xs text-[var(--color-text-muted)] bg-white/5 px-2 py-0.5 rounded">
+            {tag}
           </span>
-          {post.read_time && (
-            <span className="flex items-center gap-1">
-              <Clock className="w-3 h-3" />
-              {post.read_time}
-            </span>
-          )}
-        </div>
+        ))}
+      </div>
 
-        <h3 className="text-lg font-bold mb-2 group-hover:text-[var(--color-primary)] transition-colors line-clamp-2">
-          {post.title}
-        </h3>
-
-        <p className="text-sm text-[var(--color-text-secondary)] mb-4 line-clamp-3 flex-1">
-          {post.excerpt}
-        </p>
-
-        <div className="flex flex-wrap gap-1.5 mb-4">
-          {post.tags.slice(0, 3).map((tag) => (
-            <span
-              key={tag}
-              className="text-[11px] px-2.5 py-1 bg-white/5 text-[var(--color-text-muted)] rounded-md"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-
-        <div className="flex items-center gap-2 text-[var(--color-primary)] text-sm font-medium group-hover:gap-3 transition-all mt-auto">
-          Read More
-          <ExternalLink className="w-4 h-4" />
-        </div>
+      <div className="flex items-center gap-1.5 text-sm text-[var(--color-primary)] mt-auto group-hover:gap-3 transition-all">
+        <span>Read</span>
+        <ArrowRight className="w-4 h-4" />
       </div>
     </motion.a>
   );
 }
 
-function BagheeOreoIcon() {
-  return (
-    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.88-2.88 2.89 2.89 0 0 1 2.88-2.88c.28 0 .54.04.79.1V9.01a6.36 6.36 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.64a8.26 8.26 0 0 0 4.84 1.55V6.74a4.83 4.83 0 0 1-1.08-.05Z" />
-    </svg>
-  );
-}
+export default function Insights() {
+  const [activeCategory, setActiveCategory] = useState<FilterCategory>('All');
+  const [activeSource, setActiveSource] = useState<FilterSource>('All');
 
-function MarketWarsSeries({ posts }: { posts: BlogPost[] }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: '-50px' });
+  const marketWarsSeries = articles.filter((a) => a.series === 'Market Wars').sort((a, b) => (a.seriesPart ?? 0) - (b.seriesPart ?? 0));
 
-  const seriesPosts = posts
-    .filter((p) => p.series_name === 'Market Wars')
-    .sort((a, b) => (a.series_order || 0) - (b.series_order || 0));
-
-  if (seriesPosts.length === 0) return null;
+  const filtered = articles.filter((a) => {
+    const catMatch = activeCategory === 'All' || a.category === activeCategory;
+    const srcMatch = activeSource === 'All' || a.source === activeSource;
+    return catMatch && srcMatch;
+  });
 
   return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 30 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-    >
-      <div className="glass-panel rounded-2xl p-8 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-[#00D4AA]/5 via-transparent to-[#00D4AA]/3" />
-        <div className="relative z-10">
-          <div className="flex items-center gap-3 mb-2">
-            <span
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-wider"
-              style={{
-                color: '#00D4AA',
-                backgroundColor: 'rgba(0,212,170,0.1)',
-                border: '1px solid rgba(0,212,170,0.25)',
-              }}
-            >
-              <Zap className="w-3 h-3" />
-              Featured Series
+    <main className="overflow-hidden">
+      <section className="relative min-h-[50vh] flex items-center blueprint-grid pt-24">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="glow-orb glow-orb-primary w-[500px] h-[500px] -top-20 right-0 opacity-15" />
+        </div>
+        <div className="max-w-7xl mx-auto px-6 py-20 relative z-10">
+          <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0} className="mb-8">
+            <span className="section-label">
+              <BookOpen className="w-4 h-4" />
+              Insights & Research
             </span>
-            <span className="text-xs text-[var(--color-text-muted)]">
-              5-Part Series from ReFi.Trading
-            </span>
-          </div>
-          <h2 className="text-2xl md:text-3xl font-bold mb-2">Market Wars</h2>
-          <p className="text-[var(--color-text-secondary)] text-sm mb-6 max-w-2xl">
-            A comprehensive exploration of the battle between retail and institutional
-            traders -- from historical origins to the future of autonomous finance.
-          </p>
+          </motion.div>
+          <motion.h1 variants={fadeUp} initial="hidden" animate="visible" custom={1} className="hero-text max-w-4xl mb-8">
+            Research &{' '}
+            <span className="text-gradient">Analysis</span>
+          </motion.h1>
+          <motion.p variants={fadeUp} initial="hidden" animate="visible" custom={2} className="body-large max-w-2xl">
+            Technical papers, market research, and thought leadership from across the Nature of Commerce studio.
+            Covering AI trading, agentic payments, zero-knowledge compliance, and market structure.
+          </motion.p>
+        </div>
+      </section>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
-            {seriesPosts.map((post, i) => (
-              <a
-                key={post.id}
-                href={post.source_url}
+      <section className="section-padding bg-[var(--color-bg-secondary)] border-y border-[var(--color-border)]">
+        <div className="max-w-7xl mx-auto px-6">
+          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-10">
+            <div className="flex items-center gap-3 mb-3">
+              <div className="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-bold uppercase tracking-wider">
+                Featured Series
+              </div>
+              <span className="text-[var(--color-text-muted)] text-xs">5-Part Series from ReFi Trading</span>
+            </div>
+            <h2 className="display-text mb-3">
+              <span className="text-gradient">Market Wars</span>
+            </h2>
+            <p className="body-large max-w-2xl">
+              A comprehensive exploration of the battle between retail and institutional traders --
+              from historical origins to the future of autonomous finance.
+            </p>
+          </motion.div>
+
+          <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
+            {marketWarsSeries.map((article, i) => (
+              <motion.a
+                key={article.id}
+                href={article.sourceUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative flex flex-col gap-2 p-4 rounded-xl bg-white/[0.03] border border-white/[0.06] hover:border-[#00D4AA]/30 hover:bg-[#00D4AA]/[0.04] transition-all duration-300"
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                custom={i}
+                className="group flex-shrink-0 w-64 glass-card-interactive rounded-xl p-5 border border-emerald-500/30 flex flex-col"
+                style={{ background: 'linear-gradient(135deg, rgba(52,211,153,0.04) 0%, rgba(10,10,16,0.9) 100%)' }}
               >
-                <div className="flex items-center gap-2">
-                  <span
-                    className="flex items-center justify-center w-6 h-6 rounded-full text-[11px] font-bold shrink-0"
-                    style={{
-                      backgroundColor: 'rgba(0,212,170,0.15)',
-                      color: '#00D4AA',
-                    }}
-                  >
-                    {i + 1}
-                  </span>
-                  <span className="text-[10px] text-[var(--color-text-muted)] uppercase tracking-wider">
-                    {post.read_time}
-                  </span>
+                <div className="text-emerald-400 text-xs font-mono mb-2">Part {article.seriesPart} of 5</div>
+                <h3 className="text-white font-bold text-sm mb-2 group-hover:text-emerald-400 transition-colors flex-1 leading-snug">
+                  {article.title}
+                </h3>
+                <div className="flex items-center justify-between mt-3">
+                  <span className="text-[var(--color-text-muted)] text-xs">{article.readTime}</span>
+                  <ExternalLink className="w-3.5 h-3.5 text-emerald-400 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </div>
-                <h4 className="text-sm font-semibold leading-tight group-hover:text-[#00D4AA] transition-colors line-clamp-2">
-                  {post.title}
-                </h4>
-                <ChevronRight className="w-3.5 h-3.5 text-[var(--color-text-muted)] group-hover:text-[#00D4AA] mt-auto transition-colors" />
-              </a>
+              </motion.a>
             ))}
           </div>
         </div>
-      </div>
-    </motion.div>
-  );
-}
+      </section>
 
-function SourcePane({
-  source,
-  posts,
-  delay = 0,
-}: {
-  source: 'refi' | 'p402';
-  posts: BlogPost[];
-  delay?: number;
-}) {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: '-50px' });
-  const config = SOURCE_CONFIG[source];
-  const Icon = config.icon;
-  const sourcePosts = posts.filter((p) => p.source === source && !p.series_name).slice(0, 3);
-
-  const externalUrl = source === 'refi' ? 'https://refi.trading/blog' : 'https://www.p402.io/intelligence';
-
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 30 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ delay, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-      className="glass-panel rounded-2xl overflow-hidden relative h-full flex flex-col"
-    >
-      <div
-        className="absolute inset-0 opacity-[0.04]"
-        style={{
-          background: `radial-gradient(circle at top right, ${config.color}, transparent 60%)`,
-        }}
-      />
-
-      <div className="relative z-10 p-6 md:p-8 flex flex-col flex-1">
-        <div className="flex items-center justify-between mb-6">
-          <div className="flex items-center gap-3">
-            <div
-              className="w-10 h-10 rounded-xl flex items-center justify-center"
-              style={{ backgroundColor: `${config.color}15` }}
-            >
-              <Icon className="w-5 h-5" style={{ color: config.color }} />
-            </div>
+      <section className="section-padding">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between mb-10">
             <div>
-              <h3 className="font-bold text-lg">{config.label}</h3>
-              <p className="text-xs text-[var(--color-text-muted)]">
-                {source === 'refi' ? 'Research & Market Analysis' : 'Protocol Research & Papers'}
+              <span className="section-label mb-3 block w-fit">All Posts</span>
+              <h2 className="display-text">
+                Everything{' '}
+                <span className="text-gradient">Published</span>
+              </h2>
+            </div>
+            <div className="flex flex-col gap-3">
+              <div className="flex flex-wrap gap-2">
+                {categoryFilters.map((f) => (
+                  <button
+                    key={f}
+                    onClick={() => setActiveCategory(f)}
+                    className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all ${
+                      activeCategory === f
+                        ? 'bg-[var(--color-primary)] text-white'
+                        : 'glass-card text-[var(--color-text-muted)] hover:text-white'
+                    }`}
+                  >
+                    {f}
+                  </button>
+                ))}
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {sourceFilters.map((f) => (
+                  <button
+                    key={f.value}
+                    onClick={() => setActiveSource(f.value)}
+                    className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all ${
+                      activeSource === f.value
+                        ? 'bg-[var(--color-primary)]/20 border border-[var(--color-primary)] text-[var(--color-primary)]'
+                        : 'glass-card text-[var(--color-text-muted)] hover:text-white'
+                    }`}
+                  >
+                    {f.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filtered.map((article, i) => (
+              <ArticleCard key={article.id} article={article} index={i} />
+            ))}
+          </div>
+
+          {filtered.length === 0 && (
+            <div className="text-center py-20 text-[var(--color-text-muted)]">
+              No articles match the selected filters.
+            </div>
+          )}
+        </div>
+      </section>
+
+      <section className="section-padding bg-[var(--color-bg-secondary)] border-y border-[var(--color-border)]">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-8">
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="rounded-2xl p-8 border border-amber-500/20"
+              style={{ background: 'linear-gradient(135deg, rgba(245,158,11,0.05) 0%, rgba(10,10,16,0.9) 100%)' }}
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <span className="px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-semibold">
+                  Personal Blog
+                </span>
+              </div>
+              <h3 className="text-2xl font-bold text-white mb-3">Exploration & Discovery</h3>
+              <p className="text-[var(--color-text-secondary)] leading-relaxed mb-6">
+                Adventures and reflections from around the world with my wife Yuliia. Travel, culture,
+                food, and the occasional philosophical tangent. Building is only part of the story.
               </p>
-            </div>
-          </div>
-          <a
-            href={externalUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-xs font-medium transition-all hover:gap-2"
-            style={{ color: config.color }}
-          >
-            View All
-            <ArrowRight className="w-3.5 h-3.5" />
-          </a>
-        </div>
-
-        <div className="space-y-3 flex-1">
-          {sourcePosts.map((post) => (
-            <a
-              key={post.id}
-              href={post.source_url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex gap-4 p-4 rounded-xl bg-white/[0.02] border border-white/[0.05] hover:bg-white/[0.05] hover:border-white/[0.1] transition-all"
-            >
-              {post.image_url && (
-                <div className="w-20 h-20 rounded-lg overflow-hidden shrink-0 hidden sm:block">
-                  <img
-                    src={post.image_url}
-                    alt={post.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                </div>
-              )}
-              <div className="flex flex-col flex-1 min-w-0">
-                <div className="flex items-center gap-3 text-[10px] text-[var(--color-text-muted)] mb-1.5">
-                  <span>{post.category}</span>
-                  <span>{post.read_time}</span>
-                </div>
-                <h4 className="text-sm font-semibold leading-snug group-hover:text-white transition-colors line-clamp-2 mb-1">
-                  {post.title}
-                </h4>
-                <p className="text-xs text-[var(--color-text-muted)] line-clamp-1 mt-auto">
-                  {post.excerpt}
-                </p>
-              </div>
-            </a>
-          ))}
-        </div>
-      </div>
-    </motion.div>
-  );
-}
-
-function PersonalPane({ delay = 0 }: { delay?: number }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: '-50px' });
-
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 30 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ delay, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-      className="glass-panel rounded-2xl overflow-hidden relative"
-    >
-      <div className="absolute inset-0 bg-gradient-to-br from-[#F59E0B]/[0.04] via-transparent to-transparent" />
-
-      <div className="relative z-10 p-6 md:p-8">
-        <div className="grid md:grid-cols-2 gap-8">
-          <div>
-            <div className="flex items-center gap-3 mb-4">
-              <div
-                className="w-10 h-10 rounded-xl flex items-center justify-center"
-                style={{ backgroundColor: 'rgba(245,158,11,0.1)' }}
+              <a
+                href="https://weexploreanddiscover.tumblr.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-amber-400 hover:text-white transition-colors font-semibold"
               >
-                <Heart className="w-5 h-5 text-[#F59E0B]" />
-              </div>
-              <div>
-                <h3 className="font-bold text-lg">Exploration & Discovery</h3>
-                <p className="text-xs text-[var(--color-text-muted)]">Life Beyond the Terminal</p>
-              </div>
-            </div>
-            <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed mb-5">
-              Adventures and reflections from around the world with my wife Yuliia.
-              Travel, culture, food, and the occasional philosophical tangent.
-            </p>
-            <a
-              href="https://weexploreanddiscover.tumblr.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all hover:gap-3"
-              style={{
-                backgroundColor: 'rgba(245,158,11,0.1)',
-                color: '#F59E0B',
-                border: '1px solid rgba(245,158,11,0.25)',
-              }}
-            >
-              <Rss className="w-4 h-4" />
-              Read the Blog
-              <ArrowRight className="w-4 h-4" />
-            </a>
-          </div>
+                <ExternalLink className="w-4 h-4" />
+                Read the Blog
+              </a>
+            </motion.div>
 
-          <div className="flex flex-col justify-center">
-            <div className="p-5 rounded-xl bg-white/[0.03] border border-white/[0.06]">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center">
-                  <PawPrint className="w-4 h-4 text-[var(--color-text-muted)]" />
-                </div>
-                <div>
-                  <h4 className="text-sm font-semibold">Bagheera & Oreo</h4>
-                  <p className="text-[10px] text-[var(--color-text-muted)]">The real stars of the show</p>
-                </div>
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              custom={1}
+              className="rounded-2xl p-8 border border-amber-500/20"
+              style={{ background: 'linear-gradient(135deg, rgba(245,158,11,0.05) 0%, rgba(10,10,16,0.9) 100%)' }}
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <span className="px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-semibold">
+                  TikTok
+                </span>
               </div>
-              <p className="text-xs text-[var(--color-text-secondary)] mb-4 leading-relaxed">
-                Two dogs, zero understanding of financial infrastructure,
-                maximum chaos. Follow their adventures on TikTok.
+              <h3 className="text-2xl font-bold text-white mb-3">Bagheera & Oreo</h3>
+              <p className="text-[var(--color-text-secondary)] leading-relaxed mb-3">
+                The real stars of the show.
+              </p>
+              <p className="text-[var(--color-text-secondary)] leading-relaxed mb-6">
+                Two dogs, zero understanding of financial infrastructure, maximum chaos. Bagheera and Oreo
+                somehow have a bigger following than either of us. Follow their adventures on TikTok.
               </p>
               <a
                 href="https://tiktok.com/@bagheeandoreo"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-sm font-medium text-[var(--color-text-secondary)] hover:text-white transition-colors"
+                className="inline-flex items-center gap-2 text-amber-400 hover:text-white transition-colors font-semibold"
               >
-                <BagheeOreoIcon />
+                <ExternalLink className="w-4 h-4" />
                 @bagheeandoreo on TikTok
-                <ExternalLink className="w-3.5 h-3.5" />
               </a>
-            </div>
+            </motion.div>
           </div>
         </div>
-      </div>
-    </motion.div>
-  );
-}
-
-export default function Insights() {
-  const [activeFilter, setActiveFilter] = useState('All');
-  const [posts, setPosts] = useState<BlogPost[]>(fallbackPosts);
-  const [loading, setLoading] = useState(true);
-  const headerRef = useRef<HTMLDivElement>(null);
-  const headerInView = useInView(headerRef, { once: true });
-
-  useEffect(() => {
-    async function fetchPosts() {
-      try {
-        const { data, error } = await supabase
-          .from('blog_posts')
-          .select('*')
-          .order('published_at', { ascending: false });
-
-        if (error) throw error;
-        if (data && data.length > 0) {
-          setPosts(data);
-        }
-      } catch {
-        console.log('Using fallback posts');
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    fetchPosts();
-  }, []);
-
-  const filteredPosts = activeFilter === 'All'
-    ? posts.filter((p) => p.category !== 'Personal')
-    : posts.filter((p) => p.category === activeFilter);
-
-  const showPanes = !loading && activeFilter === 'All';
-
-  return (
-    <div className="min-h-screen">
-      <section className="relative py-32 overflow-hidden blueprint-grid">
-        <div className="glow-orb glow-orb-primary w-[600px] h-[600px] -top-48 right-0 opacity-20" />
-
-        <div ref={headerRef} className="relative z-10 max-w-7xl mx-auto px-6 pt-16">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={headerInView ? { opacity: 1, y: 0 } : {}}
-            className="text-center mb-12"
-          >
-            <div className="section-label mx-auto mb-6">
-              <BookOpen className="w-4 h-4" />
-              Insights & Research
-            </div>
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              <span className="text-gradient">Ideas</span> & Analysis
-            </h1>
-            <p className="text-xl text-[var(--color-text-secondary)] max-w-3xl mx-auto mb-8">
-              Research, analysis, and technical papers from across the Nature of Commerce
-              studio -- covering AI trading, agentic payments, zero-knowledge compliance,
-              and market structure.
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={headerInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.2 }}
-            className="flex items-center justify-center gap-2 flex-wrap"
-          >
-            <Tag className="w-4 h-4 text-[var(--color-text-muted)] mr-2" />
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setActiveFilter(cat)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                  activeFilter === cat
-                    ? 'bg-[var(--color-primary)] text-white shadow-[0_0_20px_rgba(74,144,217,0.3)]'
-                    : 'bg-white/5 text-[var(--color-text-secondary)] hover:bg-white/10 hover:text-white'
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
-          </motion.div>
-        </div>
       </section>
-
-      <section className="py-16 bg-[var(--color-bg-secondary)]">
-        <div className="max-w-7xl mx-auto px-6">
-          {showPanes && (
-            <div className="space-y-8 mb-16">
-              <MarketWarsSeries posts={posts} />
-
-              <div className="grid lg:grid-cols-2 gap-6">
-                <SourcePane source="refi" posts={posts} delay={0.1} />
-                <SourcePane source="p402" posts={posts} delay={0.2} />
-              </div>
-
-              <PersonalPane delay={0.1} />
-            </div>
-          )}
-
-          {showPanes && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.3 }}
-              className="mb-8"
-            >
-              <h2 className="text-2xl font-bold">
-                All <span className="text-gradient-static">Posts</span>
-              </h2>
-              <p className="text-sm text-[var(--color-text-muted)] mt-1">
-                Everything published across the studio
-              </p>
-            </motion.div>
-          )}
-
-          {loading ? (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[...Array(6)].map((_, i) => (
-                <div key={i} className="glass-card rounded-2xl overflow-hidden animate-pulse">
-                  <div className="aspect-[16/9] bg-[var(--color-bg-tertiary)]" />
-                  <div className="p-6 space-y-3">
-                    <div className="h-4 bg-[var(--color-bg-tertiary)] rounded w-1/4" />
-                    <div className="h-6 bg-[var(--color-bg-tertiary)] rounded w-3/4" />
-                    <div className="h-4 bg-[var(--color-bg-tertiary)] rounded w-full" />
-                    <div className="h-4 bg-[var(--color-bg-tertiary)] rounded w-2/3" />
-                  </div>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeFilter}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.3 }}
-                className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
-              >
-                {filteredPosts.map((post, index) => (
-                  <PostCard key={post.id} post={post} index={index} />
-                ))}
-              </motion.div>
-            </AnimatePresence>
-          )}
-
-          {!loading && filteredPosts.length === 0 && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="text-center py-16"
-            >
-              <Compass className="w-16 h-16 text-[var(--color-primary)]/30 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold text-[var(--color-text-secondary)] mb-2">
-                No posts found
-              </h3>
-              <p className="text-[var(--color-text-muted)]">
-                Try selecting a different category
-              </p>
-            </motion.div>
-          )}
-        </div>
-      </section>
-    </div>
+    </main>
   );
 }
