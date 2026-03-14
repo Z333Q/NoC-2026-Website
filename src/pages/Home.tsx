@@ -58,7 +58,7 @@ const pillars = [
     product: 'Cross-Cutting Layer',
     description:
       'Compliance embedded in architecture, not bolted on after the fact. Zero-knowledge proofs allow a system to mathematically prove it is operating within risk parameters before execution. Trust should be a feature, not friction.',
-    entity: 'Shared Innovation Layer — P402 + ReFi Trading',
+    entity: 'Architecture — Embedded in P402 Protocol',
     entityColor: 'text-amber-400',
     accentColor: 'border-amber-500/30',
     glowColor: 'rgba(245, 158, 11, 0.04)',
