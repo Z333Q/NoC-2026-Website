@@ -284,9 +284,11 @@ export default function Team() {
               className="glass-card rounded-2xl p-8 border border-emerald-500/20"
             >
               <div className="flex items-start gap-4 mb-6">
-                <div className="w-16 h-16 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center flex-shrink-0">
-                  <TrendingUp className="w-8 h-8 text-emerald-400" />
-                </div>
+                <img
+                  src="/dan-refi-trading.jpg"
+                  alt="Daniel Oosthuyzen"
+                  className="w-16 h-16 rounded-xl object-cover flex-shrink-0"
+                />
                 <div>
                   <h3 className="text-xl font-bold text-white">Daniel Oosthuyzen</h3>
                   <p className="text-emerald-400 text-sm">CTO / Quant Engineer</p>
@@ -327,9 +329,11 @@ export default function Team() {
               className="glass-card rounded-2xl p-8 border border-teal-500/20"
             >
               <div className="flex items-start gap-4 mb-6">
-                <div className="w-16 h-16 rounded-xl bg-teal-500/10 border border-teal-500/20 flex items-center justify-center flex-shrink-0">
-                  <Zap className="w-8 h-8 text-teal-400" />
-                </div>
+                <img
+                  src="/DrYuliiav2.jpeg"
+                  alt="Yuliia Barbashova-Ahmad"
+                  className="w-16 h-16 rounded-xl object-cover flex-shrink-0"
+                />
                 <div>
                   <h3 className="text-xl font-bold text-white">Yuliia Barbashova-Ahmad</h3>
                   <p className="text-teal-400 text-sm">Co-Founder</p>
