@@ -11,6 +11,10 @@ export interface Article {
   sourceUrl: string;
   readTime: string;
   tags: string[];
+  publishedDate: string;
+  author: string;
+  image: string;
+  imageAlt: string;
   series?: string;
   seriesPart?: number;
   featured?: boolean;
@@ -27,6 +31,10 @@ export const articles: Article[] = [
     sourceUrl: 'https://refi.trading/blog/market-wars-two-armies-finance',
     readTime: '8 min',
     tags: ['Market Wars', 'Retail vs Institutional', 'Trading', 'Finance'],
+    publishedDate: '2024-10-01',
+    author: 'Zeshan Ahmad',
+    image: 'https://images.pexels.com/photos/6771985/pexels-photo-6771985.jpeg?auto=compress&cs=tinysrgb&w=800',
+    imageAlt: 'Stock market trading floor with screens showing financial data',
     series: 'Market Wars',
     seriesPart: 1,
     featured: true,
@@ -41,6 +49,10 @@ export const articles: Article[] = [
     sourceUrl: 'https://refi.trading/blog/from-wall-street-to-your-pocket',
     readTime: '9 min',
     tags: ['Democratization', 'FinTech History', 'Retail Trading', 'ETFs'],
+    publishedDate: '2024-10-08',
+    author: 'Zeshan Ahmad',
+    image: 'https://images.pexels.com/photos/534216/pexels-photo-534216.jpeg?auto=compress&cs=tinysrgb&w=800',
+    imageAlt: 'Person using smartphone for mobile banking and investing',
     series: 'Market Wars',
     seriesPart: 2,
     featured: true,
@@ -55,6 +67,10 @@ export const articles: Article[] = [
     sourceUrl: 'https://refi.trading/blog/the-new-town-square',
     readTime: '10 min',
     tags: ['Social Media', 'Market Influence', 'Retail Trading', 'GameStop'],
+    publishedDate: '2024-10-15',
+    author: 'Zeshan Ahmad',
+    image: 'https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=800',
+    imageAlt: 'Crowd gathered in a public square representing collective action',
     series: 'Market Wars',
     seriesPart: 3,
     featured: true,
@@ -69,6 +85,10 @@ export const articles: Article[] = [
     sourceUrl: 'https://refi.trading/blog/tale-of-two-markets',
     readTime: '9 min',
     tags: ['Global Markets', 'Market Structure', 'Investing', 'Volatility'],
+    publishedDate: '2024-10-22',
+    author: 'Zeshan Ahmad',
+    image: 'https://images.pexels.com/photos/3182781/pexels-photo-3182781.jpeg?auto=compress&cs=tinysrgb&w=800',
+    imageAlt: 'Global business map showing international financial connections',
     series: 'Market Wars',
     seriesPart: 4,
     featured: true,
@@ -83,6 +103,10 @@ export const articles: Article[] = [
     sourceUrl: 'https://refi.trading/blog/future-of-trading-safer-financial-world',
     readTime: '11 min',
     tags: ['AI Trading', 'Risk Management', 'DePIN', 'Self-Custody'],
+    publishedDate: '2024-10-29',
+    author: 'Zeshan Ahmad',
+    image: 'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800',
+    imageAlt: 'Futuristic AI neural network visualization representing advanced trading systems',
     series: 'Market Wars',
     seriesPart: 5,
     featured: true,
@@ -97,6 +121,10 @@ export const articles: Article[] = [
     sourceUrl: 'https://refi.trading/blog/open-hackable-provable',
     readTime: '8 min',
     tags: ['Open Source', 'Transparency', 'Cryptographic Proofs', 'Trust'],
+    publishedDate: '2024-11-05',
+    author: 'Zeshan Ahmad',
+    image: 'https://images.pexels.com/photos/60504/security-protection-anti-virus-software-60504.jpeg?auto=compress&cs=tinysrgb&w=800',
+    imageAlt: 'Digital lock and security code representing cryptographic verification',
   },
   {
     id: 'rt-7',
@@ -108,6 +136,10 @@ export const articles: Article[] = [
     sourceUrl: 'https://refi.trading/blog/wall-street-ai-for-all',
     readTime: '8 min',
     tags: ['AI', 'Reinforcement Learning', 'Hedge Funds', 'Accessibility'],
+    publishedDate: '2024-11-12',
+    author: 'Zeshan Ahmad',
+    image: 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=800',
+    imageAlt: 'Data scientist analyzing machine learning model outputs on multiple screens',
   },
   {
     id: 'rt-8',
@@ -119,6 +151,10 @@ export const articles: Article[] = [
     sourceUrl: 'https://refi.trading/blog/fueling-machine-token-incentivized-infrastructure',
     readTime: '9 min',
     tags: ['Token Economics', 'DePIN', 'Infrastructure', 'Decentralization'],
+    publishedDate: '2024-11-19',
+    author: 'Zeshan Ahmad',
+    image: 'https://images.pexels.com/photos/730547/pexels-photo-730547.jpeg?auto=compress&cs=tinysrgb&w=800',
+    imageAlt: 'Network of connected nodes representing decentralized infrastructure',
   },
   {
     id: 'rt-9',
@@ -130,6 +166,10 @@ export const articles: Article[] = [
     sourceUrl: 'https://refi.trading/blog/you-keep-keys-erc-4337-self-custodied-trading',
     readTime: '8 min',
     tags: ['ERC-4337', 'Account Abstraction', 'Self-Custody', 'Smart Wallets'],
+    publishedDate: '2024-11-26',
+    author: 'Zeshan Ahmad',
+    image: 'https://images.pexels.com/photos/1591060/pexels-photo-1591060.jpeg?auto=compress&cs=tinysrgb&w=800',
+    imageAlt: 'Physical key representing digital self-custody and ownership',
   },
   {
     id: 'rt-10',
@@ -141,6 +181,10 @@ export const articles: Article[] = [
     sourceUrl: 'https://refi.trading/blog/beyond-trust-zk-var-provable-compliance',
     readTime: '8 min',
     tags: ['Zero-Knowledge Proofs', 'zk-VaR', 'Compliance', 'Risk Management'],
+    publishedDate: '2024-12-03',
+    author: 'Zeshan Ahmad',
+    image: 'https://images.pexels.com/photos/6801648/pexels-photo-6801648.jpeg?auto=compress&cs=tinysrgb&w=800',
+    imageAlt: 'Mathematical formulas and data analysis representing risk modeling',
   },
   {
     id: 'rt-11',
@@ -152,6 +196,10 @@ export const articles: Article[] = [
     sourceUrl: 'https://refi.trading/blog/marathon-not-sprint-average-reward-rl',
     readTime: '7 min',
     tags: ['Reinforcement Learning', 'Average-Reward RL', 'Long-Term Performance', 'AI'],
+    publishedDate: '2024-12-10',
+    author: 'Zeshan Ahmad',
+    image: 'https://images.pexels.com/photos/1552242/pexels-photo-1552242.jpeg?auto=compress&cs=tinysrgb&w=800',
+    imageAlt: 'Marathon runner on a long road representing long-term performance and endurance',
   },
   {
     id: 'p402-1',
@@ -163,6 +211,10 @@ export const articles: Article[] = [
     sourceUrl: 'https://www.p402.io/intelligence',
     readTime: '7 min',
     tags: ['x402', 'HTTP 402', 'Payment Standard', 'Settlement'],
+    publishedDate: '2024-12-17',
+    author: 'Zeshan Ahmad',
+    image: 'https://images.pexels.com/photos/4164418/pexels-photo-4164418.jpeg?auto=compress&cs=tinysrgb&w=800',
+    imageAlt: 'Code on a screen representing HTTP protocol and web standards',
   },
   {
     id: 'p402-2',
@@ -174,6 +226,10 @@ export const articles: Article[] = [
     sourceUrl: 'https://www.p402.io/intelligence',
     readTime: '6 min',
     tags: ['AP2', 'Zero-Trust', 'Governance', 'Agent Policy'],
+    publishedDate: '2024-12-24',
+    author: 'Zeshan Ahmad',
+    image: 'https://images.pexels.com/photos/5935791/pexels-photo-5935791.jpeg?auto=compress&cs=tinysrgb&w=800',
+    imageAlt: 'Digital governance and policy enforcement represented by secure server infrastructure',
   },
   {
     id: 'p402-3',
@@ -185,6 +241,10 @@ export const articles: Article[] = [
     sourceUrl: 'https://www.p402.io/intelligence',
     readTime: '6 min',
     tags: ['Latency', 'QoS Pricing', 'Routing', 'Market Design'],
+    publishedDate: '2025-01-07',
+    author: 'Zeshan Ahmad',
+    image: 'https://images.pexels.com/photos/1181316/pexels-photo-1181316.jpeg?auto=compress&cs=tinysrgb&w=800',
+    imageAlt: 'High-speed fiber optic cables representing data transmission and network latency',
   },
   {
     id: 'p402-4',
@@ -196,6 +256,10 @@ export const articles: Article[] = [
     sourceUrl: 'https://www.p402.io/intelligence',
     readTime: '7 min',
     tags: ['Circuit Breakers', 'Anomaly Detection', 'Safety', 'Settlement'],
+    publishedDate: '2025-01-14',
+    author: 'Zeshan Ahmad',
+    image: 'https://images.pexels.com/photos/6802042/pexels-photo-6802042.jpeg?auto=compress&cs=tinysrgb&w=800',
+    imageAlt: 'Stock chart showing sudden market volatility representing flash crash scenarios',
   },
   {
     id: 'p402-5',
@@ -207,6 +271,10 @@ export const articles: Article[] = [
     sourceUrl: 'https://www.p402.io/intelligence',
     readTime: '8 min',
     tags: ['Verifiable Compute', 'Cryptography', 'Proofs', 'Trust'],
+    publishedDate: '2025-01-21',
+    author: 'Zeshan Ahmad',
+    image: 'https://images.pexels.com/photos/2582937/pexels-photo-2582937.jpeg?auto=compress&cs=tinysrgb&w=800',
+    imageAlt: 'Server room with glowing hardware representing compute infrastructure and verification',
   },
   {
     id: 'p402-cs-1',
@@ -218,6 +286,10 @@ export const articles: Article[] = [
     sourceUrl: 'https://www.p402.io/intelligence',
     readTime: '6 min',
     tags: ['Agent Swarms', 'E-Commerce', 'Scale', 'Stress Testing'],
+    publishedDate: '2025-01-28',
+    author: 'Zeshan Ahmad',
+    image: 'https://images.pexels.com/photos/5632401/pexels-photo-5632401.jpeg?auto=compress&cs=tinysrgb&w=800',
+    imageAlt: 'Crowded shopping environment representing high-volume consumer activity and scale',
   },
   {
     id: 'p402-cs-2',
@@ -229,6 +301,10 @@ export const articles: Article[] = [
     sourceUrl: 'https://www.p402.io/intelligence',
     readTime: '7 min',
     tags: ['Security', 'Healthcare', 'Data Privacy', 'Agent Safety'],
+    publishedDate: '2025-02-04',
+    author: 'Zeshan Ahmad',
+    image: 'https://images.pexels.com/photos/4386467/pexels-photo-4386467.jpeg?auto=compress&cs=tinysrgb&w=800',
+    imageAlt: 'Medical data on a screen representing healthcare privacy and secure information exchange',
   },
   {
     id: 'p402-cs-3',
@@ -240,6 +316,10 @@ export const articles: Article[] = [
     sourceUrl: 'https://www.p402.io/intelligence',
     readTime: '8 min',
     tags: ['Supply Chain', 'Orchestration', 'Logistics', 'Multi-Agent'],
+    publishedDate: '2025-02-11',
+    author: 'Zeshan Ahmad',
+    image: 'https://images.pexels.com/photos/1427541/pexels-photo-1427541.jpeg?auto=compress&cs=tinysrgb&w=800',
+    imageAlt: 'Container ship at port representing global supply chain logistics and coordination',
   },
 ];
 

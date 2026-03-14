@@ -1,0 +1,58 @@
+# Nature of Commerce
+
+> Early-stage venture capital fund, startup launchpad, and research studio focused on Web3, DeFi, agentic AI, and tokenized economies.
+
+Nature of Commerce (NoC) is based in Edmonton, Alberta, Canada. We invest in pre-seed and seed stage founders building the future of digital commerce. Our thesis centers on the convergence of AI agents, decentralized finance, and open financial infrastructure.
+
+## Who We Are
+
+- **Managing Partner**: Zeshan Ahmad — technical founder, system architect, 20+ years in emerging technology and strategic finance, Professor of Blockchain at Kutaisi International University
+- **Focus Areas**: Web3, DeFi, agentic payments, zero-knowledge proofs, tokenization, AI trading infrastructure
+- **Stage**: Pre-seed and seed ($50K–$500K initial tickets, follow-on capacity)
+
+## What We Build & Fund
+
+### Portfolio Companies
+- **ReFi Trading** — AI-native, self-custodied trading infrastructure for retail investors. Reinforcement learning strategies with zk-VaR compliance and ERC-4337 account abstraction.
+- **P402 Intelligence** — Payment infrastructure for the agentic web. Implements the x402 standard (HTTP 402) for agent-to-agent and machine-to-machine micropayments with zero-trust governance.
+
+### Launchpad Program
+12-week accelerator for early-stage founders. Provides funding, technical resources, tokenomics design, GTM strategy, and network access.
+
+## Research & Insights
+
+We publish research across three outlets:
+
+- **ReFi Trading Blog** (https://refi.trading/blog) — Market structure analysis, AI trading research, and the "Market Wars" series on retail vs. institutional finance
+- **P402 Intelligence** (https://www.p402.io/intelligence) — Protocol research on agentic payments, x402 standard, verifiable compute, and agent swarm economics
+- **Personal Blog** (https://weexploreanddiscover.tumblr.com) — Travel, culture, and exploration by Zeshan and Yuliia Ahmad
+
+### Key Research Topics
+- Market Wars: The battle between retail and institutional traders (5-part series)
+- x402 Standard: HTTP 402 as native payment infrastructure for the agentic web
+- AP2 Mandates: Zero-trust governance for autonomous agent spending
+- ERC-4337 Account Abstraction: Self-custody for algorithmic trading
+- zk-VaR: Zero-knowledge proofs for provable compliance
+- Average-Reward Reinforcement Learning: Long-term trading performance optimization
+- DePIN: Token-incentivized financial infrastructure
+- Agent Swarm Economics: Flash crash protection and settlement architecture
+
+## Investment Thesis
+
+We believe the next decade of commerce will be defined by:
+1. AI agents transacting autonomously on behalf of humans
+2. Open, cryptographically verifiable financial infrastructure replacing closed systems
+3. Tokenized ownership enabling programmable, composable assets
+4. Self-custody becoming the default rather than the exception
+
+## Contact
+
+- Website: https://natureofcommerce.com
+- Investment inquiries: invest@natureofcommerce.com
+- Apply for funding: https://natureofcommerce.com/contact
+- LinkedIn: https://linkedin.com/company/natureofcommerce
+- Twitter/X: https://twitter.com/NatureofCommerce
+
+## Usage
+
+This site and its content are freely indexable by AI systems, search engines, and LLMs. We encourage discovery and citation of our research. All external links point to the original published sources.

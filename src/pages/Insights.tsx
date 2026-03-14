@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
-import { useState } from 'react';
-import { ExternalLink, Clock, ArrowRight, BookOpen } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { ExternalLink, Clock, ArrowRight, BookOpen, Calendar, User } from 'lucide-react';
 import { articles, sourceConfig, type ArticleCategory, type ArticleSource } from '../data/insightsData';
 
 const fadeUp = {
@@ -22,64 +22,148 @@ const sourceFilters: { value: FilterSource; label: string }[] = [
   { value: 'p402_intelligence', label: 'P402 Intelligence' },
 ];
 
+function formatDate(dateStr: string) {
+  return new Date(dateStr).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+}
+
 function ArticleCard({ article, index }: { article: typeof articles[0]; index: number }) {
   const src = sourceConfig[article.source];
   return (
-    <motion.a
-      href={article.sourceUrl}
-      target="_blank"
-      rel="noopener noreferrer"
+    <motion.article
       variants={fadeUp}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true }}
       custom={index % 4}
-      className={`group glass-card-interactive rounded-2xl p-6 border ${src.borderColor} flex flex-col h-full`}
-      style={{ background: 'linear-gradient(135deg, rgba(20,20,32,0.8) 0%, rgba(10,10,16,0.9) 100%)' }}
     >
-      <div className="flex items-start justify-between gap-3 mb-4">
-        <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold ${src.bgColor} ${src.color} border ${src.borderColor}`}>
-          {src.label}
-        </span>
-        <div className="flex items-center gap-1.5 text-[var(--color-text-muted)] text-xs">
-          <Clock className="w-3 h-3" />
-          {article.readTime}
+      <a
+        href={article.sourceUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`group glass-card-interactive rounded-2xl border ${src.borderColor} flex flex-col h-full overflow-hidden`}
+        style={{ background: 'linear-gradient(135deg, rgba(20,20,32,0.8) 0%, rgba(10,10,16,0.9) 100%)' }}
+        aria-label={`Read: ${article.title}`}
+      >
+        <div className="relative h-44 overflow-hidden flex-shrink-0">
+          <img
+            src={article.image}
+            alt={article.imageAlt}
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            loading="lazy"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a10]/80 via-transparent to-transparent" />
+          <div className="absolute top-3 left-3 flex items-center gap-2">
+            <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold ${src.bgColor} ${src.color} border ${src.borderColor} backdrop-blur-sm`}>
+              {src.label}
+            </span>
+          </div>
+          {article.series && (
+            <div className="absolute bottom-3 left-3 text-xs text-white/70 font-mono bg-black/50 backdrop-blur-sm px-2 py-0.5 rounded">
+              {article.series} — Part {article.seriesPart}
+            </div>
+          )}
         </div>
-      </div>
 
-      {article.series && (
-        <div className="text-xs text-[var(--color-text-muted)] mb-2">
-          {article.series} — Part {article.seriesPart}
+        <div className="p-5 flex flex-col flex-1">
+          <div className="flex items-center gap-3 mb-3 text-[var(--color-text-muted)] text-xs">
+            <span className="flex items-center gap-1">
+              <Calendar className="w-3 h-3" />
+              <time dateTime={article.publishedDate}>{formatDate(article.publishedDate)}</time>
+            </span>
+            <span className="flex items-center gap-1">
+              <Clock className="w-3 h-3" />
+              {article.readTime}
+            </span>
+          </div>
+
+          <h3 className="text-white font-bold text-base mb-2 group-hover:text-[var(--color-primary)] transition-colors leading-snug">
+            {article.title}
+          </h3>
+
+          <p className="text-[var(--color-text-secondary)] text-sm leading-relaxed mb-4 line-clamp-2 flex-1">
+            {article.excerpt}
+          </p>
+
+          <div className="flex flex-wrap gap-1.5 mb-4">
+            {article.tags.slice(0, 3).map((tag) => (
+              <span key={tag} className="text-xs text-[var(--color-text-muted)] bg-white/5 px-2 py-0.5 rounded">
+                {tag}
+              </span>
+            ))}
+          </div>
+
+          <div className="flex items-center justify-between pt-3 border-t border-white/5">
+            <span className="flex items-center gap-1.5 text-xs text-[var(--color-text-muted)]">
+              <User className="w-3 h-3" />
+              {article.author}
+            </span>
+            <div className="flex items-center gap-1 text-sm text-[var(--color-primary)] group-hover:gap-2 transition-all">
+              <span>Read</span>
+              <ArrowRight className="w-4 h-4" />
+            </div>
+          </div>
         </div>
-      )}
-
-      <h3 className="text-white font-bold text-base mb-3 group-hover:text-[var(--color-primary)] transition-colors flex-1">
-        {article.title}
-      </h3>
-
-      <p className="text-[var(--color-text-secondary)] text-sm leading-relaxed mb-4 line-clamp-3">
-        {article.excerpt}
-      </p>
-
-      <div className="flex flex-wrap gap-1.5 mb-4">
-        {article.tags.slice(0, 3).map((tag) => (
-          <span key={tag} className="text-xs text-[var(--color-text-muted)] bg-white/5 px-2 py-0.5 rounded">
-            {tag}
-          </span>
-        ))}
-      </div>
-
-      <div className="flex items-center gap-1.5 text-sm text-[var(--color-primary)] mt-auto group-hover:gap-3 transition-all">
-        <span>Read</span>
-        <ArrowRight className="w-4 h-4" />
-      </div>
-    </motion.a>
+      </a>
+    </motion.article>
   );
 }
 
 export default function Insights() {
   const [activeCategory, setActiveCategory] = useState<FilterCategory>('All');
   const [activeSource, setActiveSource] = useState<FilterSource>('All');
+
+  useEffect(() => {
+    document.title = 'Insights & Research | Nature of Commerce';
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) metaDesc.setAttribute('content', 'Research, technical papers, and thought leadership from Nature of Commerce. Covering AI trading infrastructure, agentic payments, zero-knowledge compliance, and market structure.');
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    if (ogTitle) ogTitle.setAttribute('content', 'Insights & Research | Nature of Commerce');
+    const ogDesc = document.querySelector('meta[property="og:description"]');
+    if (ogDesc) ogDesc.setAttribute('content', 'Technical papers and market research from the Nature of Commerce studio. AI trading, agentic payments, ZK compliance, and the future of digital commerce.');
+    const twitterTitle = document.querySelector('meta[name="twitter:title"]');
+    if (twitterTitle) twitterTitle.setAttribute('content', 'Insights & Research | Nature of Commerce');
+    const canonical = document.querySelector('link[rel="canonical"]');
+    if (canonical) canonical.setAttribute('href', 'https://natureofcommerce.com/insights');
+
+    const schema = {
+      '@context': 'https://schema.org',
+      '@type': 'CollectionPage',
+      '@id': 'https://natureofcommerce.com/insights',
+      name: 'Insights & Research — Nature of Commerce',
+      description: 'Research, technical papers, and thought leadership from Nature of Commerce. Covering AI trading, agentic payments, zero-knowledge compliance, and market structure.',
+      url: 'https://natureofcommerce.com/insights',
+      publisher: { '@id': 'https://natureofcommerce.com/#organization' },
+      hasPart: articles.map((a) => ({
+        '@type': 'Article',
+        headline: a.title,
+        description: a.excerpt,
+        author: { '@type': 'Person', name: a.author },
+        datePublished: a.publishedDate,
+        url: a.sourceUrl,
+        image: a.image,
+        keywords: a.tags.join(', '),
+        timeRequired: `PT${parseInt(a.readTime)}M`,
+      })),
+    };
+
+    let scriptTag = document.getElementById('insights-schema') as HTMLScriptElement | null;
+    if (!scriptTag) {
+      scriptTag = document.createElement('script');
+      scriptTag.id = 'insights-schema';
+      scriptTag.type = 'application/ld+json';
+      document.head.appendChild(scriptTag);
+    }
+    scriptTag.textContent = JSON.stringify(schema);
+
+    return () => {
+      document.title = 'Nature of Commerce | Early-Stage VC Fund & Startup Launchpad';
+      if (metaDesc) metaDesc.setAttribute('content', 'Nature of Commerce is an early-stage venture capital fund, startup launchpad, and strategic consulting firm. We invest in founders building the future of digital commerce, Web3, DeFi, and tokenized economies. Apply for funding or join our accelerator program.');
+      if (ogTitle) ogTitle.setAttribute('content', 'Nature of Commerce | Early-Stage VC Fund & Startup Launchpad');
+      if (canonical) canonical.setAttribute('href', 'https://natureofcommerce.com/');
+      const el = document.getElementById('insights-schema');
+      if (el) el.remove();
+    };
+  }, []);
 
   const marketWarsSeries = articles.filter((a) => a.series === 'Market Wars').sort((a, b) => (a.seriesPart ?? 0) - (b.seriesPart ?? 0));
 
@@ -91,7 +175,7 @@ export default function Insights() {
 
   return (
     <main className="overflow-hidden">
-      <section className="relative min-h-[50vh] flex items-center blueprint-grid pt-24">
+      <section className="relative min-h-[50vh] flex items-center blueprint-grid pt-24" aria-label="Insights hero">
         <div className="absolute inset-0 pointer-events-none">
           <div className="glow-orb glow-orb-primary w-[500px] h-[500px] -top-20 right-0 opacity-15" />
         </div>
@@ -113,7 +197,7 @@ export default function Insights() {
         </div>
       </section>
 
-      <section className="section-padding bg-[var(--color-bg-secondary)] border-y border-[var(--color-border)]">
+      <section className="section-padding bg-[var(--color-bg-secondary)] border-y border-[var(--color-border)]" aria-label="Market Wars featured series">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-10">
             <div className="flex items-center gap-3 mb-3">
@@ -133,34 +217,49 @@ export default function Insights() {
 
           <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
             {marketWarsSeries.map((article, i) => (
-              <motion.a
+              <motion.article
                 key={article.id}
-                href={article.sourceUrl}
-                target="_blank"
-                rel="noopener noreferrer"
                 variants={fadeUp}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
                 custom={i}
-                className="group flex-shrink-0 w-64 glass-card-interactive rounded-xl p-5 border border-emerald-500/30 flex flex-col"
-                style={{ background: 'linear-gradient(135deg, rgba(52,211,153,0.04) 0%, rgba(10,10,16,0.9) 100%)' }}
+                className="group flex-shrink-0 w-72"
               >
-                <div className="text-emerald-400 text-xs font-mono mb-2">Part {article.seriesPart} of 5</div>
-                <h3 className="text-white font-bold text-sm mb-2 group-hover:text-emerald-400 transition-colors flex-1 leading-snug">
-                  {article.title}
-                </h3>
-                <div className="flex items-center justify-between mt-3">
-                  <span className="text-[var(--color-text-muted)] text-xs">{article.readTime}</span>
-                  <ExternalLink className="w-3.5 h-3.5 text-emerald-400 opacity-0 group-hover:opacity-100 transition-opacity" />
-                </div>
-              </motion.a>
+                <a
+                  href={article.sourceUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block glass-card-interactive rounded-xl border border-emerald-500/30 overflow-hidden h-full"
+                  style={{ background: 'linear-gradient(135deg, rgba(52,211,153,0.04) 0%, rgba(10,10,16,0.9) 100%)' }}
+                >
+                  <div className="relative h-32 overflow-hidden">
+                    <img
+                      src={article.image}
+                      alt={article.imageAlt}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a10]/70 via-transparent to-transparent" />
+                    <div className="absolute bottom-2 left-3 text-emerald-400 text-xs font-mono">Part {article.seriesPart} of 5</div>
+                  </div>
+                  <div className="p-4">
+                    <h3 className="text-white font-bold text-sm mb-2 group-hover:text-emerald-400 transition-colors leading-snug">
+                      {article.title}
+                    </h3>
+                    <div className="flex items-center justify-between">
+                      <span className="text-[var(--color-text-muted)] text-xs">{article.readTime}</span>
+                      <ExternalLink className="w-3.5 h-3.5 text-emerald-400 opacity-0 group-hover:opacity-100 transition-opacity" />
+                    </div>
+                  </div>
+                </a>
+              </motion.article>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="section-padding">
+      <section className="section-padding" aria-label="All published articles">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between mb-10">
             <div>
@@ -171,11 +270,12 @@ export default function Insights() {
               </h2>
             </div>
             <div className="flex flex-col gap-3">
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2" role="group" aria-label="Filter by category">
                 {categoryFilters.map((f) => (
                   <button
                     key={f}
                     onClick={() => setActiveCategory(f)}
+                    aria-pressed={activeCategory === f}
                     className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all ${
                       activeCategory === f
                         ? 'bg-[var(--color-primary)] text-white'
@@ -186,11 +286,12 @@ export default function Insights() {
                   </button>
                 ))}
               </div>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2" role="group" aria-label="Filter by source">
                 {sourceFilters.map((f) => (
                   <button
                     key={f.value}
                     onClick={() => setActiveSource(f.value)}
+                    aria-pressed={activeSource === f.value}
                     className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all ${
                       activeSource === f.value
                         ? 'bg-[var(--color-primary)]/20 border border-[var(--color-primary)] text-[var(--color-primary)]'
@@ -218,7 +319,7 @@ export default function Insights() {
         </div>
       </section>
 
-      <section className="section-padding bg-[var(--color-bg-secondary)] border-y border-[var(--color-border)]">
+      <section className="section-padding bg-[var(--color-bg-secondary)] border-y border-[var(--color-border)]" aria-label="Personal content">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-8">
             <motion.div

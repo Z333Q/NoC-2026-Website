@@ -5,6 +5,7 @@ import {
   CheckCircle, AlertCircle, Calendar, ArrowRight
 } from 'lucide-react';
 import { supabase } from '../lib/supabase';
+import { useSeoMeta } from '../hooks/useSeoMeta';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -26,6 +27,14 @@ const topics = [
 ];
 
 export default function Contact() {
+  useSeoMeta({
+    title: 'Contact | Nature of Commerce',
+    description: 'Get in touch with Nature of Commerce. Apply for funding, inquire about the Launchpad program, or reach out to discuss investment opportunities in Web3, DeFi, and agentic commerce.',
+    ogTitle: 'Contact Nature of Commerce',
+    ogDescription: 'Apply for funding or reach out to the Nature of Commerce team. We invest $50K–$500K in pre-seed and seed Web3, DeFi, and agentic AI startups.',
+    canonical: 'https://natureofcommerce.com/contact',
+  });
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',

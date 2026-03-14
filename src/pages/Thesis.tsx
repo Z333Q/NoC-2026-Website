@@ -5,6 +5,7 @@ import {
   ArrowRight, Shield, Cpu, TrendingUp, CheckCircle, ChevronDown,
   Layers, BookOpen, Github, ExternalLink, Lock
 } from 'lucide-react';
+import { useSeoMeta } from '../hooks/useSeoMeta';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -161,6 +162,13 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 }
 
 export default function Thesis() {
+  useSeoMeta({
+    title: 'Investment Thesis | Nature of Commerce',
+    description: 'Our investment thesis: the next wave of commerce is agent-native, cryptographically verifiable, and self-custodied. We back founders building this open financial infrastructure.',
+    ogTitle: 'Investment Thesis | Nature of Commerce',
+    ogDescription: 'Nature of Commerce invests in the convergence of AI agents, decentralized finance, and open financial infrastructure. Pre-seed and seed stage Web3 and DeFi startups.',
+    canonical: 'https://natureofcommerce.com/thesis',
+  });
   return (
     <main className="overflow-hidden">
       <section className="relative min-h-[70vh] flex items-center blueprint-grid pt-24">

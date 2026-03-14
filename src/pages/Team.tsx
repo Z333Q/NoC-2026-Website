@@ -4,6 +4,7 @@ import {
   ArrowRight, ExternalLink, Github, BookOpen, Award,
   Cpu, TrendingUp, Building2, GraduationCap, Zap
 } from 'lucide-react';
+import { useSeoMeta } from '../hooks/useSeoMeta';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -81,6 +82,13 @@ const credentials = [
 ];
 
 export default function Team() {
+  useSeoMeta({
+    title: 'Team | Nature of Commerce',
+    description: 'Meet the team behind Nature of Commerce. Zeshan Ahmad, Managing Partner — technical founder and Professor of Blockchain with 20+ years in emerging technology and strategic finance.',
+    ogTitle: 'Team | Nature of Commerce',
+    ogDescription: 'Meet Zeshan Ahmad and the Nature of Commerce team. Technical founders investing in the future of Web3, DeFi, and agentic commerce.',
+    canonical: 'https://natureofcommerce.com/about',
+  });
   return (
     <main className="overflow-hidden">
       <section className="relative min-h-[60vh] flex items-center blueprint-grid pt-24">

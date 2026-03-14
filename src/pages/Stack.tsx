@@ -4,6 +4,7 @@ import {
   ArrowRight, ExternalLink, Github, Shield, Cpu, TrendingUp,
   CheckCircle, Music, Eye, Layers, BookOpen, Building2
 } from 'lucide-react';
+import { useSeoMeta } from '../hooks/useSeoMeta';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -174,6 +175,13 @@ const trackRecord = [
 ];
 
 export default function Stack() {
+  useSeoMeta({
+    title: 'Tech Stack | Nature of Commerce',
+    description: 'The technology stack powering the Nature of Commerce portfolio. ReFi Trading and P402 Intelligence built on ERC-4337, zero-knowledge proofs, reinforcement learning, and the x402 payment standard.',
+    ogTitle: 'Tech Stack | Nature of Commerce',
+    ogDescription: 'Explore the open, verifiable technology stack behind Nature of Commerce portfolio companies: AI trading, ZK proofs, account abstraction, and agentic payment infrastructure.',
+    canonical: 'https://natureofcommerce.com/stack',
+  });
   return (
     <main className="overflow-hidden">
       <section className="relative min-h-[60vh] flex items-center blueprint-grid pt-24">
