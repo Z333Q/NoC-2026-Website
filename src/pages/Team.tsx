@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import {
-  ArrowRight, ExternalLink, Github, BookOpen, Shield, Award,
+  ArrowRight, ExternalLink, Github, BookOpen, Award,
   Cpu, TrendingUp, Building2, GraduationCap, Zap
 } from 'lucide-react';
 
@@ -260,7 +260,7 @@ export default function Team() {
                 <div>
                   <h3 className="text-xl font-bold text-white">Zeshan Ahmad</h3>
                   <p className="text-[var(--color-primary)] text-sm">CEO / Product</p>
-                  <p className="text-[var(--color-text-muted)] text-xs">Co-Founder, ReFi Trading Inc</p>
+                  <p className="text-[var(--color-text-muted)] text-xs">Founder, Nature of Commerce LLC · Co-Founder, ReFi Trading Inc</p>
                 </div>
               </div>
               <p className="text-[var(--color-text-secondary)] text-sm leading-relaxed mb-4">
@@ -281,51 +281,6 @@ export default function Team() {
               whileInView="visible"
               viewport={{ once: true }}
               custom={1}
-              className="glass-card rounded-2xl p-8 border border-emerald-500/20"
-            >
-              <div className="flex items-start gap-4 mb-6">
-                <img
-                  src="/dan-refi-trading.jpg"
-                  alt="Daniel Oosthuyzen"
-                  className="w-16 h-16 rounded-xl object-cover flex-shrink-0"
-                />
-                <div>
-                  <h3 className="text-xl font-bold text-white">Daniel Oosthuyzen</h3>
-                  <p className="text-emerald-400 text-sm">CTO / Quant Engineer</p>
-                  <p className="text-[var(--color-text-muted)] text-xs">Co-Founder, ReFi Trading Inc</p>
-                </div>
-              </div>
-              <p className="text-[var(--color-text-secondary)] text-sm leading-relaxed mb-4">
-                Quantitative engineer whose modeling expertise drives the reinforcement learning trading
-                algorithms and risk engine at the core of ReFi Trading. The quantitative engineering
-                complement to Zeshan's product and infrastructure background -- a genuinely complementary
-                founding pair.
-              </p>
-              <div className="space-y-2 mb-4">
-                {[
-                  'RL trading agent architecture (28% CAGR, 2.07 Sharpe backtested)',
-                  'zk-VaR engine design and implementation',
-                  'Algorithmic strategy design and backtesting framework',
-                ].map((item) => (
-                  <div key={item} className="flex items-start gap-2">
-                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 flex-shrink-0 mt-1.5" />
-                    <span className="text-[var(--color-text-muted)] text-xs">{item}</span>
-                  </div>
-                ))}
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {['Quant Engineering', 'RL Algorithms', 'Risk Modeling', 'Backtesting'].map((tag) => (
-                  <span key={tag} className="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold">{tag}</span>
-                ))}
-              </div>
-            </motion.div>
-
-            <motion.div
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              custom={2}
               className="glass-card rounded-2xl p-8 border border-teal-500/20"
             >
               <div className="flex items-start gap-4 mb-6">
@@ -372,23 +327,52 @@ export default function Team() {
                 LinkedIn
               </a>
             </motion.div>
-          </div>
 
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="mt-6 glass-card rounded-xl p-5 border border-amber-500/20"
-          >
-            <div className="flex items-start gap-3">
-              <Shield className="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" />
-              <p className="text-[var(--color-text-secondary)] text-sm">
-                <span className="text-amber-400 font-semibold">Entity note:</span> Daniel is co-founder of ReFi Trading Inc only -- not of Nature of Commerce LLC, P402.io, RapMath, EYEcercise, or Wholesome Linen.
-                Yuliia is co-founder of Wholesome Linen LLC only -- not of Nature of Commerce LLC or any other venture.
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              custom={2}
+              className="glass-card rounded-2xl p-8 border border-emerald-500/20"
+            >
+              <div className="flex items-start gap-4 mb-6">
+                <img
+                  src="/dan-refi-trading.jpg"
+                  alt="Daniel Oosthuyzen"
+                  className="w-16 h-16 rounded-xl object-cover flex-shrink-0"
+                />
+                <div>
+                  <h3 className="text-xl font-bold text-white">Daniel Oosthuyzen</h3>
+                  <p className="text-emerald-400 text-sm">CTO / Quant Engineer</p>
+                  <p className="text-[var(--color-text-muted)] text-xs">Co-Founder, ReFi Trading Inc</p>
+                </div>
+              </div>
+              <p className="text-[var(--color-text-secondary)] text-sm leading-relaxed mb-4">
+                Quantitative engineer whose modeling expertise drives the reinforcement learning trading
+                algorithms and risk engine at the core of ReFi Trading. The quantitative engineering
+                complement to Zeshan's product and infrastructure background -- a genuinely complementary
+                founding pair.
               </p>
-            </div>
-          </motion.div>
+              <div className="space-y-2 mb-4">
+                {[
+                  'RL trading agent architecture (28% CAGR, 2.07 Sharpe backtested)',
+                  'zk-VaR engine design and implementation',
+                  'Algorithmic strategy design and backtesting framework',
+                ].map((item) => (
+                  <div key={item} className="flex items-start gap-2">
+                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 flex-shrink-0 mt-1.5" />
+                    <span className="text-[var(--color-text-muted)] text-xs">{item}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {['Quant Engineering', 'RL Algorithms', 'Risk Modeling', 'Backtesting'].map((tag) => (
+                  <span key={tag} className="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold">{tag}</span>
+                ))}
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
