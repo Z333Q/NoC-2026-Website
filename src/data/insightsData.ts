@@ -213,8 +213,8 @@ export const articles: Article[] = [
     tags: ['x402', 'HTTP 402', 'Payment Standard', 'Settlement'],
     publishedDate: '2024-12-17',
     author: 'Zeshan Ahmad',
-    image: 'https://images.pexels.com/photos/4164418/pexels-photo-4164418.jpeg?auto=compress&cs=tinysrgb&w=800',
-    imageAlt: 'Code on a screen representing HTTP protocol and web standards',
+    image: 'https://refi.trading/blog-images/decentralized-brain.png',
+    imageAlt: 'Decentralized AI brain representing the x402 payment standard and agentic web infrastructure',
   },
   {
     id: 'p402-2',
@@ -228,8 +228,8 @@ export const articles: Article[] = [
     tags: ['AP2', 'Zero-Trust', 'Governance', 'Agent Policy'],
     publishedDate: '2024-12-24',
     author: 'Zeshan Ahmad',
-    image: 'https://images.pexels.com/photos/5935791/pexels-photo-5935791.jpeg?auto=compress&cs=tinysrgb&w=800',
-    imageAlt: 'Digital governance and policy enforcement represented by secure server infrastructure',
+    image: 'https://refi.trading/blog-images/keys.png',
+    imageAlt: 'Keys representing zero-trust governance and AP2 mandate enforcement for autonomous agents',
   },
   {
     id: 'p402-3',
@@ -243,8 +243,8 @@ export const articles: Article[] = [
     tags: ['Latency', 'QoS Pricing', 'Routing', 'Market Design'],
     publishedDate: '2025-01-07',
     author: 'Zeshan Ahmad',
-    image: 'https://images.pexels.com/photos/1181316/pexels-photo-1181316.jpeg?auto=compress&cs=tinysrgb&w=800',
-    imageAlt: 'High-speed fiber optic cables representing data transmission and network latency',
+    image: 'https://refi.trading/blog-images/velocity-coins.png',
+    imageAlt: 'Velocity and momentum representing the economics of latency in agent-to-agent commerce',
   },
   {
     id: 'p402-4',
@@ -258,8 +258,8 @@ export const articles: Article[] = [
     tags: ['Circuit Breakers', 'Anomaly Detection', 'Safety', 'Settlement'],
     publishedDate: '2025-01-14',
     author: 'Zeshan Ahmad',
-    image: 'https://images.pexels.com/photos/6802042/pexels-photo-6802042.jpeg?auto=compress&cs=tinysrgb&w=800',
-    imageAlt: 'Stock chart showing sudden market volatility representing flash crash scenarios',
+    image: 'https://refi.trading/blog-images/brain.png',
+    imageAlt: 'AI brain representing intelligent circuit-breaker safety systems for flash crash protection',
   },
   {
     id: 'p402-5',
@@ -273,8 +273,8 @@ export const articles: Article[] = [
     tags: ['Verifiable Compute', 'Cryptography', 'Proofs', 'Trust'],
     publishedDate: '2025-01-21',
     author: 'Zeshan Ahmad',
-    image: 'https://images.pexels.com/photos/2582937/pexels-photo-2582937.jpeg?auto=compress&cs=tinysrgb&w=800',
-    imageAlt: 'Server room with glowing hardware representing compute infrastructure and verification',
+    image: 'https://refi.trading/blog-images/cylander.png',
+    imageAlt: 'Cylinder representing verifiable compute infrastructure and cryptographic proof of execution',
   },
   {
     id: 'p402-cs-1',
@@ -288,8 +288,8 @@ export const articles: Article[] = [
     tags: ['Agent Swarms', 'E-Commerce', 'Scale', 'Stress Testing'],
     publishedDate: '2025-01-28',
     author: 'Zeshan Ahmad',
-    image: 'https://images.pexels.com/photos/5632401/pexels-photo-5632401.jpeg?auto=compress&cs=tinysrgb&w=800',
-    imageAlt: 'Crowded shopping environment representing high-volume consumer activity and scale',
+    image: 'https://refi.trading/blog-images/global-nodes.png',
+    imageAlt: 'Global network nodes representing agent swarms transacting at scale during peak load',
   },
   {
     id: 'p402-cs-2',
@@ -303,8 +303,8 @@ export const articles: Article[] = [
     tags: ['Security', 'Healthcare', 'Data Privacy', 'Agent Safety'],
     publishedDate: '2025-02-04',
     author: 'Zeshan Ahmad',
-    image: 'https://images.pexels.com/photos/4386467/pexels-photo-4386467.jpeg?auto=compress&cs=tinysrgb&w=800',
-    imageAlt: 'Medical data on a screen representing healthcare privacy and secure information exchange',
+    image: 'https://refi.trading/blog-images/keys.png',
+    imageAlt: 'Keys representing secure data access control and privacy-by-architecture in healthcare agent systems',
   },
   {
     id: 'p402-cs-3',
@@ -318,8 +318,8 @@ export const articles: Article[] = [
     tags: ['Supply Chain', 'Orchestration', 'Logistics', 'Multi-Agent'],
     publishedDate: '2025-02-11',
     author: 'Zeshan Ahmad',
-    image: 'https://images.pexels.com/photos/1427541/pexels-photo-1427541.jpeg?auto=compress&cs=tinysrgb&w=800',
-    imageAlt: 'Container ship at port representing global supply chain logistics and coordination',
+    image: 'https://refi.trading/blog-images/automation.png',
+    imageAlt: 'Automation representing multi-agent orchestration across a global supply chain',
   },
 ];
 
