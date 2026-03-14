@@ -100,7 +100,7 @@ export default function Footer() {
             <h4 className="text-sm font-semibold uppercase tracking-wider text-[var(--color-primary)] mb-4">
               Ventures
             </h4>
-            <ul className="space-y-3">
+            <ul className="space-y-3 mb-8">
               {footerLinks.ventures.map((link) => (
                 <li key={link.href}>
                   <a
@@ -109,6 +109,30 @@ export default function Footer() {
                     rel="noopener noreferrer"
                     className="text-[var(--color-text-secondary)] hover:text-white text-sm transition-colors flex items-center gap-1 group"
                   >
+                    {link.label}
+                    <ArrowUpRight className="w-3 h-3 opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" />
+                  </a>
+                </li>
+              ))}
+            </ul>
+
+            <h4 className="text-sm font-semibold uppercase tracking-wider text-[var(--color-primary)] mb-4">
+              GitHub
+            </h4>
+            <ul className="space-y-3">
+              {[
+                { label: 'Personal', href: 'https://github.com/Z333Q' },
+                { label: 'P402 Protocol', href: 'https://github.com/Z333Q/p402-protocol' },
+                { label: 'Course Materials', href: 'https://github.com/orgs/ZA-KIU-Classroom' },
+              ].map((link) => (
+                <li key={link.href}>
+                  <a
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[var(--color-text-secondary)] hover:text-white text-sm transition-colors flex items-center gap-1 group"
+                  >
+                    <Github className="w-3.5 h-3.5 flex-shrink-0 text-[var(--color-text-muted)]" />
                     {link.label}
                     <ArrowUpRight className="w-3 h-3 opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" />
                   </a>

@@ -74,6 +74,7 @@ const activeVentures = [
     facts: ['28% CAGR, 2.07 Sharpe (3yr backtest)', '1 USPTO patent filed, 5 drafted', 'zk-VaR engine', 'ADGM Category 3A licensing'],
     tags: ['AI Trading', 'Zero-Knowledge', 'ERC-4337', 'USPTO Patent'],
     link: 'https://refi.trading',
+    dataRoom: 'Data room available on request',
     year: '2024',
     status: 'Raising Seed',
     statusColor: 'bg-amber-500/10 text-amber-400 border-amber-500/20',
@@ -321,6 +322,9 @@ export default function Stack() {
                       </a>
                     )}
                   </div>
+                  {venture.dataRoom && (
+                    <p className="text-xs text-[var(--color-text-muted)] italic mt-3">{venture.dataRoom}</p>
+                  )}
                 </motion.div>
               );
             })}
@@ -381,10 +385,20 @@ export default function Stack() {
               Kutaisi International{' '}
               <span className="text-gradient">University</span>
             </h2>
-            <p className="body-large max-w-2xl mb-8">
+            <p className="body-large max-w-2xl mb-4">
               Not a separate activity -- an applied R&D lab and talent pipeline. Courses are directly
               informed by live company builds.
             </p>
+            <a
+              href="https://github.com/orgs/ZA-KIU-Classroom"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-sm text-[var(--color-primary)] hover:text-white transition-colors mb-8"
+            >
+              <Github className="w-4 h-4" />
+              github.com/orgs/ZA-KIU-Classroom
+              <ArrowRight className="w-4 h-4" />
+            </a>
           </motion.div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
