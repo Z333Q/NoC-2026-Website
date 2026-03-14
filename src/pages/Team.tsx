@@ -105,12 +105,6 @@ export default function Team() {
           <motion.h1 variants={fadeUp} initial="hidden" animate="visible" custom={1} className="hero-text max-w-4xl mb-8">
             Zeshan Ahmad
           </motion.h1>
-          <motion.p variants={fadeUp} initial="hidden" animate="visible" custom={2} className="body-large max-w-2xl mb-4">
-            Founder, Nature of Commerce LLC. Co-Founder, ReFi Trading Inc. Professor, Kutaisi International University.
-          </motion.p>
-          <motion.p variants={fadeUp} initial="hidden" animate="visible" custom={3} className="text-[var(--color-text-muted)] max-w-2xl">
-            20 years building infrastructure that opens financial access -- from rural banking terminals to autonomous AI agents.
-          </motion.p>
         </div>
       </section>
 
