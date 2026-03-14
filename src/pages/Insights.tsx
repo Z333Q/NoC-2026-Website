@@ -277,8 +277,8 @@ export default function Insights() {
                 The real stars of the show.
               </p>
               <p className="text-[var(--color-text-secondary)] leading-relaxed mb-6">
-                Two dogs, zero understanding of financial infrastructure, maximum chaos. Bagheera and Oreo
-                somehow have a bigger following than either of us. Follow their adventures on TikTok.
+                Two dogs, zero understanding of financial infrastructure, maximum chaos. Bagheera handles
+                security (barking at leaves). Oreo handles product (eating things that are not food).
               </p>
               <a
                 href="https://tiktok.com/@bagheeandoreo"
