@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import {
   ArrowRight, ExternalLink, Github, BookOpen, Award,
-  Cpu, TrendingUp, Building2, GraduationCap, Zap
+  Cpu, TrendingUp, Building2, GraduationCap, Zap, Shield
 } from 'lucide-react';
 import { useSeoMeta } from '../hooks/useSeoMeta';
 
