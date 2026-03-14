@@ -48,9 +48,9 @@ const careerPhases = [
     role: 'Founder',
     company: 'E-Commerce & DTC',
     competency: 'Taken a product from zero to revenue to exit',
-    description: 'CharityDreams.com celebrity auction platform -- $4M+ raised for charity. Partnerships with Fergie/Black Eyed Peas and 50 Cent (Street Kings / UN initiative). Scaled DTC bedding brand to $4M+ in sales before successful exit in 2021.',
+    description: 'CharityDreams.com celebrity auction platform -- $4M+ raised for charity. Partnerships with Fergie/Black Eyed Peas, Justin Bieber, and 50 Cent (Street Kings / UN initiative). Scaled DTC bedding brand to $4M+ in sales.',
     icon: Zap,
-    tags: ['$4M Exit', 'E-commerce', 'DTC', 'Charity Platform'],
+    tags: ['E-commerce', 'DTC', 'Charity Platform', 'Celebrity Partnerships'],
   },
   {
     era: '2020 – 2023',
