@@ -103,7 +103,7 @@ export default function Team() {
             </span>
           </motion.div>
           <motion.h1 variants={fadeUp} initial="hidden" animate="visible" custom={1} className="hero-text max-w-4xl mb-8">
-            Zeshan Ahmad
+            The Founder
           </motion.h1>
         </div>
       </section>
