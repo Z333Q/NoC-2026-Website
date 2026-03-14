@@ -294,19 +294,20 @@ export default function Team() {
                 <div>
                   <h3 className="text-xl font-bold text-white">Yuliia Barbashova-Ahmad</h3>
                   <p className="text-teal-400 text-sm">Co-Founder</p>
-                  <p className="text-[var(--color-text-muted)] text-xs">Co-Founder, Wholesome Linen LLC</p>
+                  <p className="text-[var(--color-text-muted)] text-xs">MBBS (MD Candidate) · Neonatology & SIDS Research · Infant Sleep Environment & Safety Advocate · Founder @ Wholesome Linen</p>
                 </div>
               </div>
               <p className="text-[var(--color-text-secondary)] text-sm leading-relaxed mb-4">
-                Co-founder of Wholesome Linen -- a 10-year DTC e-commerce brand specializing in certified
-                organic baby and toddler bedding made from European flax linen. OEKO-TEX Standard 100
-                certified. Built and scaled the brand from the ground up, shipping globally.
+                MD candidate with a focus on neonatology and SIDS research. Her clinical background in infant
+                sleep environment and safety directly informs Wholesome Linen -- a 10-year DTC brand
+                specializing in OEKO-TEX certified organic baby and toddler bedding from European flax linen.
+                Built and scaled from the ground up, shipping globally.
               </p>
               <div className="space-y-2 mb-4">
                 {[
-                  'Brand building and DTC operations (10 years)',
-                  'Organic product sourcing from Eastern European farms',
-                  'Global e-commerce and customer experience',
+                  'MBBS · Neonatology & SIDS research focus',
+                  'Infant sleep environment & safety advocate',
+                  'DTC brand building & operations (10 years)',
                 ].map((item) => (
                   <div key={item} className="flex items-start gap-2">
                     <div className="w-1.5 h-1.5 rounded-full bg-teal-400 flex-shrink-0 mt-1.5" />
@@ -315,7 +316,7 @@ export default function Team() {
                 ))}
               </div>
               <div className="flex flex-wrap gap-2 mb-4">
-                {['DTC E-commerce', 'Brand Operations', 'Organic Products', 'Global Logistics'].map((tag) => (
+                {['Neonatology', 'SIDS Research', 'Infant Safety', 'DTC E-commerce'].map((tag) => (
                   <span key={tag} className="px-3 py-1 rounded-full bg-teal-500/10 border border-teal-500/20 text-teal-400 text-xs font-semibold">{tag}</span>
                 ))}
               </div>
