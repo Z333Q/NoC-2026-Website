@@ -143,7 +143,7 @@ export default function Footer() {
             <div className="mt-6 pt-6 border-t border-[var(--color-border)]">
               <div className="flex items-start gap-2 text-[var(--color-text-muted)] text-xs">
                 <MapPin className="w-4 h-4 flex-shrink-0 mt-0.5" />
-                <span>Kutaisi, Georgia</span>
+                <span>Global</span>
               </div>
             </div>
           </div>
