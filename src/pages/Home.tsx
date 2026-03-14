@@ -91,19 +91,18 @@ export default function Home() {
           <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0} className="mb-8">
             <span className="section-label">
               <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-primary)] animate-pulse" />
-              Infrastructure for Autonomous Finance
+              Builder Studio
             </span>
           </motion.div>
 
           <motion.h1 variants={fadeUp} initial="hidden" animate="visible" custom={1} className="hero-text max-w-5xl mb-8">
-            20 Years Building{' '}
-            <span className="text-gradient">Infrastructure</span>{' '}
-            That Opens Financial Access
+            Technology That Creates{' '}
+            <span className="text-gradient">Access</span>
           </motion.h1>
 
           <motion.p variants={fadeUp} initial="hidden" animate="visible" custom={2} className="body-large max-w-2xl mb-12">
-            From rural banking terminals to autonomous AI agents -- Nature of Commerce builds the
-            technology stack for the next financial system.
+            For 20 years, across payments, trading, education, and commerce. Currently building the
+            infrastructure stack for the autonomous agent economy.
           </motion.p>
 
           <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={3} className="flex flex-wrap gap-4 items-center">

@@ -235,11 +235,11 @@ export default function Team() {
             <span className="section-label mb-6 block w-fit">Team</span>
             <h2 className="display-text mb-4">
               The{' '}
-              <span className="text-gradient">ReFi Trading</span> Co-Founders
+              <span className="text-gradient">Co-Founders</span>
             </h2>
             <p className="body-large max-w-2xl">
-              ReFi Trading Inc is an independent Canadian federal corporation with its own cap table.
-              The founding team is built on complementary expertise.
+              Independent ventures, each with its own co-founder. Complementary expertise across finance,
+              engineering, and commerce.
             </p>
           </motion.div>
 
@@ -317,6 +317,57 @@ export default function Team() {
                 ))}
               </div>
             </motion.div>
+
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              custom={2}
+              className="glass-card rounded-2xl p-8 border border-teal-500/20"
+            >
+              <div className="flex items-start gap-4 mb-6">
+                <div className="w-16 h-16 rounded-xl bg-teal-500/10 border border-teal-500/20 flex items-center justify-center flex-shrink-0">
+                  <Zap className="w-8 h-8 text-teal-400" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-white">Yuliia Barbashova-Ahmad</h3>
+                  <p className="text-teal-400 text-sm">Co-Founder</p>
+                  <p className="text-[var(--color-text-muted)] text-xs">Co-Founder, Wholesome Linen LLC</p>
+                </div>
+              </div>
+              <p className="text-[var(--color-text-secondary)] text-sm leading-relaxed mb-4">
+                Co-founder of Wholesome Linen -- a 10-year DTC e-commerce brand specializing in certified
+                organic baby and toddler bedding made from European flax linen. OEKO-TEX Standard 100
+                certified. Built and scaled the brand from the ground up, shipping globally.
+              </p>
+              <div className="space-y-2 mb-4">
+                {[
+                  'Brand building and DTC operations (10 years)',
+                  'Organic product sourcing from Eastern European farms',
+                  'Global e-commerce and customer experience',
+                ].map((item) => (
+                  <div key={item} className="flex items-start gap-2">
+                    <div className="w-1.5 h-1.5 rounded-full bg-teal-400 flex-shrink-0 mt-1.5" />
+                    <span className="text-[var(--color-text-muted)] text-xs">{item}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="flex flex-wrap gap-2 mb-4">
+                {['DTC E-commerce', 'Brand Operations', 'Organic Products', 'Global Logistics'].map((tag) => (
+                  <span key={tag} className="px-3 py-1 rounded-full bg-teal-500/10 border border-teal-500/20 text-teal-400 text-xs font-semibold">{tag}</span>
+                ))}
+              </div>
+              <a
+                href="https://linkedin.com/in/yulkin"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-sm text-teal-400 hover:text-white transition-colors glass-card px-3 py-2 rounded-lg"
+              >
+                <ExternalLink className="w-4 h-4" />
+                LinkedIn
+              </a>
+            </motion.div>
           </div>
 
           <motion.div
@@ -329,8 +380,8 @@ export default function Team() {
             <div className="flex items-start gap-3">
               <Shield className="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" />
               <p className="text-[var(--color-text-secondary)] text-sm">
-                <span className="text-amber-400 font-semibold">Entity note:</span> ReFi Trading Inc is a Canadian federal corporation with its own cap table and seed round.
-                Daniel is co-founder of ReFi Trading Inc only -- not of Nature of Commerce LLC, P402.io, RapMath, or EYEcercise.
+                <span className="text-amber-400 font-semibold">Entity note:</span> Daniel is co-founder of ReFi Trading Inc only -- not of Nature of Commerce LLC, P402.io, RapMath, EYEcercise, or Wholesome Linen.
+                Yuliia is co-founder of Wholesome Linen LLC only -- not of Nature of Commerce LLC or any other venture.
               </p>
             </div>
           </motion.div>
