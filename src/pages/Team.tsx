@@ -102,9 +102,6 @@ export default function Team() {
               About
             </span>
           </motion.div>
-          <motion.h1 variants={fadeUp} initial="hidden" animate="visible" custom={1} className="hero-text max-w-4xl mb-8">
-            The Founder
-          </motion.h1>
         </div>
       </section>
 
@@ -124,7 +121,7 @@ export default function Team() {
                     Founder, Nature of Commerce
                   </p>
                   <p className="text-[var(--color-text-secondary)] text-sm leading-relaxed mb-6">
-                    Technical founder with 20+ years building financial infrastructure. The same through-line --
+                    Professor and technical founder with 20+ years building financial infrastructure. The same through-line --
                     removing gatekeepers from financial systems -- in every era.
                   </p>
                   <div className="flex flex-wrap gap-3">
