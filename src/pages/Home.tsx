@@ -121,7 +121,7 @@ export default function Home() {
               20 years of creating access to global markets.
             </p>
             <p className="text-[var(--color-text-secondary)] text-base mt-3 tracking-widest font-medium uppercase text-sm">
-              Payments.&nbsp;&nbsp; Trading.&nbsp;&nbsp; Education.&nbsp;&nbsp; Commerce.
+              Payments.&nbsp;&nbsp; Trading.&nbsp;&nbsp; Education.&nbsp;&nbsp; Ownership.
             </p>
           </motion.div>
 
