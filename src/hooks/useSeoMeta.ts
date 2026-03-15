@@ -8,8 +8,8 @@ interface SeoMeta {
   canonical: string;
 }
 
-const defaultTitle = 'Nature of Commerce | Early-Stage VC Fund & Startup Launchpad';
-const defaultDescription = 'Nature of Commerce is an early-stage venture capital fund, startup launchpad, and strategic consulting firm. We invest in founders building the future of digital commerce, Web3, DeFi, and tokenized economies. Apply for funding or join our accelerator program.';
+const defaultTitle = 'Nature of Commerce | Zeshan Ahmad — Builder, Researcher & Web3 Infrastructure Architect';
+const defaultDescription = 'Zeshan Ahmad is a technical founder, researcher, and educator building the infrastructure layer for the autonomous agent economy. Creator of P402 (x402 agentic payments), co-founder of ReFi Trading (algorithmic portfolio management), and professor of Blockchain & AI at Kutaisi International University.';
 const defaultCanonical = 'https://natureofcommerce.com/';
 
 export function useSeoMeta({ title, description, ogTitle, ogDescription, canonical }: SeoMeta) {
@@ -34,9 +34,9 @@ export function useSeoMeta({ title, description, ogTitle, ogDescription, canonic
       document.title = defaultTitle;
       setMeta('meta[name="description"]', 'content', defaultDescription);
       setMeta('meta[property="og:title"]', 'content', defaultTitle);
-      setMeta('meta[property="og:description"]', 'content', 'Early-stage venture capital fund investing in founders building the future of digital commerce, Web3, and tokenized economies. Apply for funding today.');
-      setMeta('meta[name="twitter:title"]', 'content', 'Nature of Commerce | Early-Stage VC Fund');
-      setMeta('meta[name="twitter:description"]', 'content', 'Early-stage VC fund and startup launchpad for Web3, DeFi, and digital commerce founders.');
+      setMeta('meta[property="og:description"]', 'content', 'Technical founder building P402 agentic payment infrastructure and ReFi Trading algorithmic strategies. NVIDIA DLI certified educator and researcher at Kutaisi International University.');
+      setMeta('meta[name="twitter:title"]', 'content', 'Nature of Commerce | Zeshan Ahmad — Builder & Web3 Infrastructure Architect');
+      setMeta('meta[name="twitter:description"]', 'content', 'Technical founder building P402 agentic payments (x402), ReFi Trading algorithmic strategies, and ZK compliance infrastructure. Educator, researcher, 20+ years in financial systems.');
       setMeta('meta[property="og:url"]', 'content', defaultCanonical);
       setMeta('meta[name="twitter:url"]', 'content', defaultCanonical);
       setMeta('link[rel="canonical"]', 'href', defaultCanonical);

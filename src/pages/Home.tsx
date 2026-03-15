@@ -80,10 +80,10 @@ const whyNow = [
 
 export default function Home() {
   useSeoMeta({
-    title: 'Nature of Commerce | Agentic Payments, Algorithmic Trading & Web3 Infrastructure',
-    description: 'Nature of Commerce builds and funds the infrastructure stack for the autonomous agent economy. P402 agentic payments (x402 protocol), ReFi Trading algorithmic portfolio management, and ZK compliance architecture. 20+ years of financial infrastructure experience.',
-    ogTitle: 'Nature of Commerce | Builder Studio for the Agent Economy',
-    ogDescription: 'Building P402 agentic payment infrastructure, ReFi Trading algorithmic strategies, and ZK compliance architecture. Pre-seed and seed investment in Web3, DeFi, and agentic commerce founders.',
+    title: 'Nature of Commerce | Zeshan Ahmad — Builder, Researcher & Web3 Infrastructure Architect',
+    description: 'Zeshan Ahmad is a technical founder, researcher, and educator building the infrastructure layer for the autonomous agent economy. Creator of P402 (x402 agentic payments), co-founder of ReFi Trading (algorithmic portfolio management), and professor of Blockchain & AI at Kutaisi International University.',
+    ogTitle: 'Nature of Commerce | Zeshan Ahmad — Builder & Web3 Infrastructure Architect',
+    ogDescription: 'Technical founder building P402 agentic payment infrastructure and ReFi Trading algorithmic strategies. NVIDIA DLI certified educator and researcher at Kutaisi International University. 20+ years architecting financial infrastructure across 3 continents.',
     canonical: 'https://natureofcommerce.com/',
   });
 
