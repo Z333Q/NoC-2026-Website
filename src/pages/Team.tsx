@@ -91,21 +91,7 @@ export default function Team() {
   });
   return (
     <main className="overflow-hidden">
-      <section className="relative min-h-[60vh] flex items-center blueprint-grid pt-24">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="glow-orb glow-orb-primary w-[500px] h-[500px] -top-20 right-0 opacity-15" />
-        </div>
-        <div className="max-w-7xl mx-auto px-6 py-20 relative z-10">
-          <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0} className="mb-8">
-            <span className="section-label">
-              <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-primary)] animate-pulse" />
-              About
-            </span>
-          </motion.div>
-        </div>
-      </section>
-
-      <section className="section-padding">
+      <section className="section-padding pt-32">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-3 gap-12 items-start">
             <div className="lg:col-span-1">
