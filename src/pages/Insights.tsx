@@ -167,11 +167,13 @@ export default function Insights() {
 
   const marketWarsSeries = articles.filter((a) => a.series === 'Market Wars').sort((a, b) => (a.seriesPart ?? 0) - (b.seriesPart ?? 0));
 
-  const filtered = articles.filter((a) => {
-    const catMatch = activeCategory === 'All' || a.category === activeCategory;
-    const srcMatch = activeSource === 'All' || a.source === activeSource;
-    return catMatch && srcMatch;
-  });
+  const filtered = articles
+    .filter((a) => {
+      const catMatch = activeCategory === 'All' || a.category === activeCategory;
+      const srcMatch = activeSource === 'All' || a.source === activeSource;
+      return catMatch && srcMatch;
+    })
+    .sort((a, b) => new Date(b.publishedDate).getTime() - new Date(a.publishedDate).getTime());
 
   return (
     <main className="overflow-hidden">
