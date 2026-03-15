@@ -408,6 +408,82 @@ export default function Thesis() {
         </div>
       </section>
 
+      <section className="section-padding border-t border-[var(--color-border)]">
+        <div className="max-w-7xl mx-auto px-6">
+          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-16 text-center max-w-3xl mx-auto">
+            <span className="section-label mb-6 block w-fit mx-auto">Our Heritage</span>
+            <h2 className="display-text mb-6">
+              Bridging Ancient Wisdom{' '}
+              <span className="text-gradient">with Modern Innovation</span>
+            </h2>
+            <p className="body-large">
+              Nature of Commerce is a long thread of thought which ties back to 1730.
+            </p>
+          </motion.div>
+
+          <div className="grid lg:grid-cols-2 gap-16 items-start">
+            <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={0} className="flex flex-col items-center">
+              <div className="relative group">
+                <div className="absolute -inset-1 rounded-2xl bg-gradient-to-b from-[var(--color-primary)]/30 to-transparent blur-sm opacity-60 group-hover:opacity-100 transition-opacity" />
+                <img
+                  src="/natureofcommerce-book.jpeg"
+                  alt="Essai Sur La Nature Du Commerce En General — La Nature De Commerce Generale 1st Edition (1755)"
+                  className="relative rounded-2xl w-full max-w-sm mx-auto shadow-2xl border border-[var(--color-border)]"
+                />
+              </div>
+              <div className="mt-6 text-center">
+                <p className="text-white font-semibold text-sm">Essai Sur La Nature Du Commerce En General</p>
+                <p className="text-[var(--color-text-muted)] text-xs mt-1">La Nature De Commerce Generale — 1st Edition (1755)</p>
+              </div>
+            </motion.div>
+
+            <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={1} className="space-y-6">
+              <div className="glass-card rounded-2xl p-8">
+                <p className="text-[var(--color-text-secondary)] leading-relaxed mb-6">
+                  In 1730,{' '}
+                  <a
+                    href="https://en.wikipedia.org/wiki/Richard_Cantillon"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[var(--color-primary)] hover:text-white transition-colors underline underline-offset-2"
+                  >
+                    Richard Cantillon
+                  </a>{' '}
+                  wrote a revolutionary essay titled <em>The Nature of Commerce</em> — "la Nature du Commerce en Général." This pioneering exploration of economic science and theory heralded groundbreaking concepts like entrepreneurs as risk bearers and artisans as value creators, providing novel insights into monetary theory and the establishment of a productive population.
+                </p>
+                <p className="text-[var(--color-text-secondary)] leading-relaxed mb-6">
+                  This treatise is widely credited as the first to describe in detail the science and theory of economics. The novel ideas put forth in his writings include the entrepreneur as the risk bearer, artisans as the value creators, while clearly defining monetary theory, spatial economics, theory of population growth, and cause and effect methodology.
+                </p>
+                <p className="text-[var(--color-text-secondary)] leading-relaxed">
+                  Inspired by this rich legacy, at Nature of Commerce we endeavour to emulate Cantillon's pioneering spirit — adapting age-old wisdom to create modern solutions and driving value in this digital economy.
+                </p>
+              </div>
+
+              <div className="flex flex-wrap gap-4">
+                <a
+                  href="https://en.wikipedia.org/wiki/Richard_Cantillon"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-sm text-[var(--color-primary)] hover:text-white transition-colors"
+                >
+                  <ExternalLink className="w-4 h-4" />
+                  Richard Cantillon — Wikipedia
+                </a>
+                <a
+                  href="https://cdn.mises.org/An%20Essay%20on%20Economic%20Theory_2.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-sm text-[var(--color-primary)] hover:text-white transition-colors"
+                >
+                  <BookOpen className="w-4 h-4" />
+                  Read the Essay (PDF)
+                </a>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       <section className="section-padding bg-[var(--color-bg-secondary)] border-t border-[var(--color-border)]">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
