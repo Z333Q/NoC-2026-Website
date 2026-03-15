@@ -5,6 +5,7 @@ import {
   Github, ChevronDown, CheckCircle, Layers
 } from 'lucide-react';
 import { useSeoMeta } from '../hooks/useSeoMeta';
+import MolecularOrb from '../components/MolecularOrb';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -88,12 +89,17 @@ export default function Home() {
 
   return (
     <main className="overflow-hidden">
-      <section className="relative min-h-screen flex items-center blueprint-grid pt-24">
+      <section className="relative min-h-screen flex items-center blueprint-grid pt-24 overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
-          <div className="glow-orb glow-orb-primary w-[600px] h-[600px] -top-32 -right-32 opacity-20" />
+          <div className="absolute -top-20 -right-20 opacity-60">
+            <MolecularOrb size={520} delay={0} />
+          </div>
+          <div className="absolute -bottom-40 -left-40 opacity-30">
+            <MolecularOrb size={380} delay={1.5} />
+          </div>
           <div
-            className="glow-orb w-[400px] h-[400px] bottom-0 left-0 opacity-10"
-            style={{ background: 'radial-gradient(circle, rgba(52,211,153,0.4) 0%, transparent 70%)' }}
+            className="glow-orb w-[500px] h-[500px] top-1/2 -translate-y-1/2 right-0 opacity-15"
+            style={{ background: 'radial-gradient(circle, rgba(74,144,217,0.35) 0%, transparent 70%)' }}
           />
         </div>
 
@@ -106,16 +112,24 @@ export default function Home() {
           </motion.div>
 
           <motion.h1 variants={fadeUp} initial="hidden" animate="visible" custom={1} className="hero-text max-w-5xl mb-8">
-            Technology That Creates{' '}
-            <span className="text-gradient">Access</span>
+            Build Technology That Creates{' '}
+            <span className="text-gradient">Opportunity</span>
           </motion.h1>
 
-          <motion.p variants={fadeUp} initial="hidden" animate="visible" custom={2} className="body-large max-w-2xl mb-12">
-            For 20 years, across payments, trading, education, and commerce. Currently building the
-            infrastructure stack for the autonomous agent economy.
+          <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={2} className="max-w-2xl mb-4">
+            <p className="body-large">
+              20 years of creating access to global markets.
+            </p>
+            <p className="text-[var(--color-text-muted)] text-base mt-2 tracking-wide">
+              Payments.&nbsp; Trading.&nbsp; Education.&nbsp; Commerce.
+            </p>
+          </motion.div>
+
+          <motion.p variants={fadeUp} initial="hidden" animate="visible" custom={3} className="text-sm text-[var(--color-text-muted)] max-w-xl mb-12 leading-relaxed italic">
+            The mechanics of participation.&nbsp; The nature of commerce.
           </motion.p>
 
-          <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={3} className="flex flex-wrap gap-4 items-center">
+          <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={4} className="flex flex-wrap gap-4 items-center">
             <Link to="/stack" className="btn-primary flex items-center gap-2">
               <span>See the Stack</span>
               <ArrowRight className="w-5 h-5" />
@@ -130,7 +144,7 @@ export default function Home() {
             variants={fadeUp}
             initial="hidden"
             animate="visible"
-            custom={5}
+            custom={6}
             className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-[var(--color-text-muted)] text-xs"
           >
             <span>Scroll</span>
