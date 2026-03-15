@@ -380,7 +380,7 @@ export default function Team() {
             {[
               { title: 'AI-Powered Software Development', status: 'Current', link: 'https://github.com/ZA-KIU/AI-POWERED-SOFTWARE-DEV' },
               { title: 'Product Development for Software Engineers', status: 'Current', link: 'https://github.com/ZA-KIU/PRODUCT-DEV-FOR-SOFTWARE-ENGINEERS' },
-              { title: 'Digital Disruption, Innovation & Transformation', status: 'Current (MBA)' },
+              { title: 'Digital Disruption, Innovation & Transformation', status: 'Current (MBA)', link: 'https://github.com/ZA-KIU-Classroom/DDIT-S26' },
               { title: 'Blockchain & Cryptography Fundamentals', status: 'Previous' },
             ].map((course, i) => (
               <motion.div
