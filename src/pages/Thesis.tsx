@@ -381,33 +381,6 @@ export default function Thesis() {
         </div>
       </section>
 
-      <section className="section-padding" id="faq">
-        <div className="max-w-4xl mx-auto px-6">
-          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-12 text-center">
-            <span className="section-label mb-6 block w-fit mx-auto">FAQ</span>
-            <h2 className="display-text">
-              Frequently Asked{' '}
-              <span className="text-gradient">Questions</span>
-            </h2>
-          </motion.div>
-
-          <div className="space-y-4">
-            {faqs.map((faq, i) => (
-              <motion.div
-                key={i}
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                custom={i}
-              >
-                <FaqItem q={faq.q} a={faq.a} />
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section className="section-padding border-t border-[var(--color-border)]">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-16 text-center max-w-3xl mx-auto">
@@ -480,6 +453,33 @@ export default function Thesis() {
                 </a>
               </div>
             </motion.div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section-padding" id="faq">
+        <div className="max-w-4xl mx-auto px-6">
+          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-12 text-center">
+            <span className="section-label mb-6 block w-fit mx-auto">FAQ</span>
+            <h2 className="display-text">
+              Frequently Asked{' '}
+              <span className="text-gradient">Questions</span>
+            </h2>
+          </motion.div>
+
+          <div className="space-y-4">
+            {faqs.map((faq, i) => (
+              <motion.div
+                key={i}
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                custom={i}
+              >
+                <FaqItem q={faq.q} a={faq.a} />
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
