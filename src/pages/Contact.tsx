@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import {
-  Send, Mail, MapPin, Github, Linkedin, Twitter,
+  Send, Mail, Github, Linkedin, Twitter,
   CheckCircle, AlertCircle, Calendar, ArrowRight
 } from 'lucide-react';
 import { supabase } from '../lib/supabase';
@@ -254,10 +254,6 @@ export default function Contact() {
                     <Mail className="w-5 h-5 text-[var(--color-primary)] flex-shrink-0" />
                     <span className="text-sm">zeshan@natureofcommerce.com</span>
                   </a>
-                  <div className="flex items-center gap-3 text-[var(--color-text-secondary)]">
-                    <MapPin className="w-5 h-5 text-[var(--color-primary)] flex-shrink-0" />
-                    <span className="text-sm">Kutaisi, Georgia</span>
-                  </div>
                 </div>
               </motion.div>
 
