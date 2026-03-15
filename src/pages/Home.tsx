@@ -341,6 +341,15 @@ export default function Home() {
                   <Github className="w-4 h-4" />
                   Product Dev Repo
                 </a>
+                <a
+                  href="https://github.com/ZA-KIU-Classroom/DDIT-S26"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-sm text-[var(--color-text-secondary)] hover:text-white transition-colors glass-card px-4 py-2 rounded-lg"
+                >
+                  <Github className="w-4 h-4" />
+                  DDIT Repo
+                </a>
               </div>
             </motion.div>
 
