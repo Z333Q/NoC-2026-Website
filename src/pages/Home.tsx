@@ -4,6 +4,7 @@ import {
   ArrowRight, ExternalLink, Shield, Cpu, TrendingUp, BookOpen,
   Github, ChevronDown, CheckCircle, Layers
 } from 'lucide-react';
+import { useSeoMeta } from '../hooks/useSeoMeta';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -77,6 +78,14 @@ const whyNow = [
 ];
 
 export default function Home() {
+  useSeoMeta({
+    title: 'Nature of Commerce | Agentic Payments, Algorithmic Trading & Web3 Infrastructure',
+    description: 'Nature of Commerce builds and funds the infrastructure stack for the autonomous agent economy. P402 agentic payments (x402 protocol), ReFi Trading algorithmic portfolio management, and ZK compliance architecture. 20+ years of financial infrastructure experience.',
+    ogTitle: 'Nature of Commerce | Builder Studio for the Agent Economy',
+    ogDescription: 'Building P402 agentic payment infrastructure, ReFi Trading algorithmic strategies, and ZK compliance architecture. Pre-seed and seed investment in Web3, DeFi, and agentic commerce founders.',
+    canonical: 'https://natureofcommerce.com/',
+  });
+
   return (
     <main className="overflow-hidden">
       <section className="relative min-h-screen flex items-center blueprint-grid pt-24">

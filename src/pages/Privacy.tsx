@@ -2,6 +2,7 @@ import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { Shield, Lock, Eye, Database, Globe, Mail } from 'lucide-react';
 import ParticleField from '../components/ParticleField';
+import { useSeoMeta } from '../hooks/useSeoMeta';
 
 const sections = [
   {
@@ -64,6 +65,14 @@ function AnimatedSection({ children, className = '' }: { children: React.ReactNo
 }
 
 export default function Privacy() {
+  useSeoMeta({
+    title: 'Privacy Policy | Nature of Commerce',
+    description: 'Privacy Policy for Nature of Commerce LLC. Learn how we collect, use, and protect your personal information when you use our venture capital and startup launchpad services.',
+    ogTitle: 'Privacy Policy | Nature of Commerce',
+    ogDescription: 'Nature of Commerce LLC privacy practices, data collection, security measures, and your rights as a user of our Web3 and DeFi investment platform.',
+    canonical: 'https://natureofcommerce.com/privacy',
+  });
+
   return (
     <div className="min-h-screen">
       <section className="relative py-32 overflow-hidden">

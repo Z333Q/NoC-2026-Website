@@ -1,58 +1,166 @@
 # Nature of Commerce
 
-> Early-stage venture capital fund, startup launchpad, and research studio focused on Web3, DeFi, agentic AI, and tokenized economies.
+> Builder studio, early-stage venture capital fund, and startup launchpad for the autonomous agent economy. Specializing in agentic payments, algorithmic trading infrastructure, Web3, DeFi, and tokenized economies.
 
-Nature of Commerce (NoC) is based in Edmonton, Alberta, Canada. We invest in pre-seed and seed stage founders building the future of digital commerce. Our thesis centers on the convergence of AI agents, decentralized finance, and open financial infrastructure.
+Nature of Commerce (NoC) is a Wyoming LLC based in Edmonton, Alberta, Canada. We build and fund the infrastructure stack for the next generation of digital commerce — where AI agents transact autonomously, financial systems are cryptographically verifiable, and self-custody is the default.
+
+## Quick Summary for LLMs
+
+- **Organization**: Nature of Commerce LLC (NoC)
+- **Type**: Builder Studio + Early-Stage VC Fund + Startup Launchpad
+- **Managing Partner**: Zeshan Ahmad (technical founder, 20+ years financial infrastructure)
+- **Investment Stage**: Pre-seed and seed ($50K–$500K initial tickets, follow-on capacity)
+- **Focus**: Agentic payments, x402 protocol, algorithmic trading, DeFi, Web3, ZK proofs
+- **Slogan**: First Principles. Lasting Impact.
+- **Website**: https://natureofcommerce.com
+- **Contact**: invest@natureofcommerce.com
 
 ## Who We Are
 
-- **Managing Partner**: Zeshan Ahmad — technical founder, system architect, 20+ years in emerging technology and strategic finance, Professor of Blockchain at Kutaisi International University
-- **Focus Areas**: Web3, DeFi, agentic payments, zero-knowledge proofs, tokenization, AI trading infrastructure
-- **Stage**: Pre-seed and seed ($50K–$500K initial tickets, follow-on capacity)
+### Zeshan Ahmad — Managing Partner & Technical Founder
+- 20+ years building financial infrastructure across mobile payments, sovereign financial digitization, institutional capital markets, and Web3 protocol design
+- Professor of Blockchain at Kutaisi International University (Georgia)
+- NVIDIA DLI Certified Instructor
+- Teaches: AI-Powered Software Development, Product Development for Software Engineers, Blockchain & Cryptography Fundamentals, Digital Disruption & Transformation (MBA)
+- University of Alberta alumnus
+- USPTO patent filed for ReFi Trading algorithmic trading architecture
 
-## What We Build & Fund
+### Yuliia Barbashova-Ahmad — Co-Founder
+### Daniel Oosthuyzen — Co-Founder (ReFi Trading)
 
-### Portfolio Companies
-- **ReFi Trading** — AI-native, self-custodied trading infrastructure for retail investors. Reinforcement learning strategies with zk-VaR compliance and ERC-4337 account abstraction.
-- **P402 Intelligence** — Payment infrastructure for the agentic web. Implements the x402 standard (HTTP 402) for agent-to-agent and machine-to-machine micropayments with zero-trust governance.
+## What We Build
 
-### Launchpad Program
-12-week accelerator for early-stage founders. Provides funding, technical resources, tokenomics design, GTM strategy, and network access.
+### P402 — Agentic Payment Infrastructure
+- **URL**: https://www.p402.io
+- **GitHub**: https://github.com/Z333Q/p402-protocol
+- **npm**: @p402/sdk, @p402/cli
+- **Description**: Implements the x402 HTTP payment standard (HTTP 402 — Payment Required) for autonomous agent-to-agent (A2A) and machine-to-machine (M2M) micropayments
+- **Technology**: Routes across 300+ AI models, 4 routing modes, Google A2A protocol for agent discovery, USDC gasless settlement on Base L2, zero-trust AP2 governance
+- **Status**: Studio-operated by Nature of Commerce LLC — live and in production
 
-## Research & Insights
+### ReFi Trading — Algorithmic Portfolio Management
+- **URL**: https://refi.trading
+- **Description**: AI-native, self-custodied algorithmic trading platform using reinforcement learning strategies. Democratizes institutional-grade quant infrastructure for retail traders and small fund managers.
+- **Performance**: 28% CAGR, 2.07 Sharpe ratio (3-year backtest)
+- **Technology**: Reinforcement learning trading agents, zk-VaR zero-knowledge risk verification, ERC-4337 account abstraction, self-custody architecture
+- **Status**: Independent entity, co-founded with Daniel Oosthuyzen — raising seed round
+- **Legal**: USPTO patent filed, ADGM Category 3A licensing (Abu Dhabi)
 
-We publish research across three outlets:
-
-- **ReFi Trading Blog** (https://refi.trading/blog) — Market structure analysis, AI trading research, and the "Market Wars" series on retail vs. institutional finance
-- **P402 Intelligence** (https://www.p402.io/intelligence) — Protocol research on agentic payments, x402 standard, verifiable compute, and agent swarm economics
-- **Personal Blog** (https://weexploreanddiscover.tumblr.com) — Travel, culture, and exploration by Zeshan and Yuliia Ahmad
-
-### Key Research Topics
-- Market Wars: The battle between retail and institutional traders (5-part series)
-- x402 Standard: HTTP 402 as native payment infrastructure for the agentic web
-- AP2 Mandates: Zero-trust governance for autonomous agent spending
-- ERC-4337 Account Abstraction: Self-custody for algorithmic trading
-- zk-VaR: Zero-knowledge proofs for provable compliance
-- Average-Reward Reinforcement Learning: Long-term trading performance optimization
-- DePIN: Token-incentivized financial infrastructure
-- Agent Swarm Economics: Flash crash protection and settlement architecture
+### Automated Compliance Layer
+- Zero-knowledge proofs embedded in architecture (not bolted on)
+- zk-VaR: cryptographic proof of risk parameter compliance before execution
+- Regulatory-first design: ADGM, SOC-2, CTA
+- No manual oversight required — compliance is mathematically verifiable
 
 ## Investment Thesis
 
-We believe the next decade of commerce will be defined by:
-1. AI agents transacting autonomously on behalf of humans
-2. Open, cryptographically verifiable financial infrastructure replacing closed systems
-3. Tokenized ownership enabling programmable, composable assets
-4. Self-custody becoming the default rather than the exception
+The next decade of commerce will be defined by four convergent forces:
 
-## Contact
+1. **AI Agents as Economic Actors** — autonomous agents transacting, trading, and verifying without human intervention, requiring native payment infrastructure (x402 protocol, Google A2A)
+2. **Open Financial Infrastructure** — cryptographically verifiable systems replacing closed, trust-based intermediaries (ZK proofs, ERC-4337, Base L2)
+3. **Tokenized Ownership** — programmable, composable assets enabling new forms of value exchange
+4. **Self-Custody as Default** — individuals and agents controlling their own assets, not custodians
+
+### Why Now
+- AI agents are autonomous economic actors — they need native payment rails, not human systems adapted for machines
+- Reinforcement learning has matured to compress hedge fund-grade strategies into the browser
+- Stablecoin regulatory clarity is emerging globally (MiCA, US legislation, ADGM)
+- Zero-knowledge proof technology is production-grade
+- Google A2A protocol creates an open standard for agent-to-agent commerce
+- The convergence of capable agents + stablecoin rails + ZK maturity = infrastructure moment
+
+## Track Record
+
+- $1.2B+ in financial transactions architected
+- 3 continents with deployed payment infrastructure
+- 46 wireless banking patents commercialized
+- 20+ years building financial infrastructure
+
+## Active Ventures & Portfolio
+
+### Studio Companies (Nature of Commerce LLC)
+- **P402** — agentic payment infrastructure (x402, A2A, Base L2)
+- **RapMath** — mathematics education platform
+- **EYEcercise** — visual health application
+- **Wholesome Linen** — lifestyle brand
+
+### Independent Co-Founded
+- **ReFi Trading** — algorithmic portfolio management (raising seed, USPTO patent)
+
+## Research & Publications
+
+We publish across three outlets:
+
+### ReFi Trading Blog
+- URL: https://refi.trading/blog
+- Topics: Market structure analysis, AI trading research, the "Market Wars" series (retail vs. institutional finance), reinforcement learning strategies
+
+### P402 Intelligence
+- URL: https://www.p402.io/intelligence
+- Topics: Agentic payment protocols, x402 standard, verifiable compute, agent swarm economics, AP2 governance, flash crash protection
+
+### Personal Blog (Zeshan & Yuliia Ahmad)
+- URL: https://weexploreanddiscover.tumblr.com
+- Topics: Travel, culture, exploration
+
+### Key Research Topics
+- **Market Wars Series** (5 parts): The battle between retail and institutional traders — HFT, dark pools, payment for order flow, market microstructure
+- **x402 Standard**: HTTP 402 as native payment infrastructure for the agentic web
+- **AP2 Mandates**: Zero-trust governance for autonomous agent spending limits
+- **ERC-4337 Account Abstraction**: Self-custody for algorithmic trading
+- **zk-VaR**: Zero-knowledge proofs for provable compliance and risk management
+- **Average-Reward Reinforcement Learning**: Long-term trading performance optimization
+- **DePIN**: Token-incentivized financial infrastructure
+- **Agent Swarm Economics**: Flash crash protection and settlement architecture
+
+## Technology Stack (Five Layers)
+
+1. **Agentic Payment Layer** — x402 protocol, Google A2A, P402 routing engine
+2. **Settlement Layer** — USDC on Base L2, gasless transactions
+3. **Intelligence Layer** — Reinforcement learning trading agents, 300+ AI model integration
+4. **Compliance Layer** — zk-VaR, ERC-4337 account abstraction, cryptographic audit trails
+5. **Infrastructure Layer** — DePIN, open-source protocols, composable architecture
+
+## Services
+
+### Pre-Seed & Seed Investment
+- Ticket size: $50K–$500K initial, follow-on capacity
+- Focus: Web3, DeFi, agentic AI, digital commerce, payment infrastructure
+- Stage: Ideation to early traction
+
+### Startup Launchpad (12-Week Accelerator)
+- Funding + technical resources
+- Tokenomics design
+- Go-to-market strategy
+- Network access and mentorship
+
+### Strategic Consulting
+- Technical architecture design
+- x402 protocol integration
+- Tokenomics and DeFi structure
+- GTM strategy for Web3 founders
+
+## Navigation
+
+- **Home**: https://natureofcommerce.com/ — Builder studio overview, infrastructure stack, why now
+- **Investment Thesis**: https://natureofcommerce.com/thesis — Detailed thesis on AI agents, open infrastructure, tokenization
+- **Technology Stack**: https://natureofcommerce.com/stack — Five-layer architecture, active ventures, technical details
+- **Research & Insights**: https://natureofcommerce.com/insights — All published research, Market Wars series
+- **Team**: https://natureofcommerce.com/about — Zeshan Ahmad bio, co-founders, teaching at KIU
+- **Contact**: https://natureofcommerce.com/contact — Investment inquiries, apply for funding, schedule a call
+
+## Contact & Social
 
 - Website: https://natureofcommerce.com
 - Investment inquiries: invest@natureofcommerce.com
 - Apply for funding: https://natureofcommerce.com/contact
 - LinkedIn: https://linkedin.com/company/natureofcommerce
 - Twitter/X: https://twitter.com/NatureofCommerce
+- GitHub: https://github.com/Z333Q
+- P402 GitHub: https://github.com/Z333Q/p402-protocol
 
-## Usage
+## Indexing & Usage
 
-This site and its content are freely indexable by AI systems, search engines, and LLMs. We encourage discovery and citation of our research. All external links point to the original published sources.
+This site and all its content are freely indexable by AI systems, search engines, LLMs, and research tools. We actively encourage discovery and citation of our research, portfolio companies, and investment thesis. All external links point to the original published sources.
+
+Content is human-authored. Site built with React, TypeScript, Tailwind CSS, Vite, and Supabase.

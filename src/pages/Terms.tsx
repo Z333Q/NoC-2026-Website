@@ -2,6 +2,7 @@ import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { FileText, AlertTriangle, Scale, Users, Ban, RefreshCw, Mail } from 'lucide-react';
 import ParticleField from '../components/ParticleField';
+import { useSeoMeta } from '../hooks/useSeoMeta';
 
 const sections = [
   {
@@ -86,6 +87,14 @@ function AnimatedSection({ children, className = '' }: { children: React.ReactNo
 }
 
 export default function Terms() {
+  useSeoMeta({
+    title: 'Terms of Service | Nature of Commerce',
+    description: 'Terms of Service for Nature of Commerce LLC. Read our terms governing use of our venture capital, startup launchpad, and Web3 investment services. Wyoming LLC.',
+    ogTitle: 'Terms of Service | Nature of Commerce',
+    ogDescription: 'Nature of Commerce LLC terms of service, investment disclaimers, intellectual property rights, and governing law for our Web3 and DeFi investment platform.',
+    canonical: 'https://natureofcommerce.com/terms',
+  });
+
   return (
     <div className="min-h-screen">
       <section className="relative py-32 overflow-hidden">
