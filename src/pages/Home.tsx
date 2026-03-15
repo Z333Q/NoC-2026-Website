@@ -116,16 +116,16 @@ export default function Home() {
             <span className="text-gradient">Opportunity</span>
           </motion.h1>
 
-          <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={2} className="max-w-2xl mb-4">
+          <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={2} className="max-w-2xl mb-6">
             <p className="body-large">
               20 years of creating access to global markets.
             </p>
-            <p className="text-[var(--color-text-muted)] text-base mt-2 tracking-wide">
-              Payments.&nbsp; Trading.&nbsp; Education.&nbsp; Commerce.
+            <p className="text-[var(--color-text-secondary)] text-base mt-3 tracking-widest font-medium uppercase text-sm">
+              Payments.&nbsp;&nbsp; Trading.&nbsp;&nbsp; Education.&nbsp;&nbsp; Commerce.
             </p>
           </motion.div>
 
-          <motion.p variants={fadeUp} initial="hidden" animate="visible" custom={3} className="text-sm text-[var(--color-text-muted)] max-w-xl mb-12 leading-relaxed italic">
+          <motion.p variants={fadeUp} initial="hidden" animate="visible" custom={3} className="text-base text-[var(--color-primary-light)] max-w-xl mb-12 leading-relaxed font-medium tracking-wide">
             The mechanics of participation.&nbsp; The nature of commerce.
           </motion.p>
 
