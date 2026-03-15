@@ -169,9 +169,9 @@ export default function Home() {
             />
             <p className="text-[var(--color-text-muted)] text-sm leading-snug">
               <span className="text-[var(--color-text-secondary)]">Zeshan Ahmad</span>
-              {' '}— Professor and technical founder with 20+ years building financial infrastructure across mobile payments, sovereign systems, institutional capital, and Web3 protocol design.{' '}
+              {' '}— Professor and technical founder with 20+ years building financial infrastructure across mobile payments, sovereign systems, institutional capital, cryptographic compliance, and autonomous commerce.{' '}
               <Link to="/about" className="text-[var(--color-primary)]/70 hover:text-[var(--color-primary)] transition-colors underline underline-offset-2 decoration-dotted">
-                Full bio
+                full bio
               </Link>
             </p>
           </motion.div>
