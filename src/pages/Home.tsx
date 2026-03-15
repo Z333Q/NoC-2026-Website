@@ -131,6 +131,26 @@ export default function Home() {
 
       <section className="py-20 border-y border-[var(--color-border)]">
         <div className="max-w-7xl mx-auto px-6">
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="flex items-center gap-4 mb-10"
+          >
+            <img
+              src="/zeshan-bio-photo-2022-square.jpg"
+              alt="Zeshan Ahmad"
+              className="w-9 h-9 rounded-full object-cover opacity-80 flex-shrink-0"
+            />
+            <p className="text-[var(--color-text-muted)] text-sm leading-snug">
+              <span className="text-[var(--color-text-secondary)]">Zeshan Ahmad</span>
+              {' '}— technical founder, 20+ years building financial infrastructure across mobile payments, sovereign systems, institutional capital, and Web3 protocol design.{' '}
+              <Link to="/about" className="text-[var(--color-primary)]/70 hover:text-[var(--color-primary)] transition-colors underline underline-offset-2 decoration-dotted">
+                Full bio
+              </Link>
+            </p>
+          </motion.div>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {trackRecord.map((item, i) => (
               <motion.div
