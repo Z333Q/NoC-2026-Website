@@ -12,7 +12,7 @@ const fadeUp = {
   visible: (i = 0) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.7, delay: i * 0.1, ease: [0.4, 0, 0.2, 1] },
+    transition: { duration: 0.7, delay: i * 0.1, ease: [0.4, 0, 0.2, 1] as [number, number, number, number] },
   }),
 };
 
@@ -36,7 +36,7 @@ const pillars = [
       'P402 is one of the early implementers of x402 + Google A2A',
     ],
     links: [
-      { label: 'P402.io', href: 'https://www.p402.io' },
+      { label: 'P402.io', href: 'https://www.p402.io', icon: undefined },
       { label: 'GitHub', href: 'https://github.com/Z333Q/p402-protocol', icon: Github },
     ],
   },
@@ -61,8 +61,8 @@ const pillars = [
       'Backed by non-dilutive capital, tracked on Crunchbase',
     ],
     links: [
-      { label: 'ReFi Trading', href: 'https://refi.trading' },
-      { label: 'Research Blog', href: 'https://refi.trading/blog' },
+      { label: 'ReFi Trading', href: 'https://refi.trading', icon: undefined },
+      { label: 'Research Blog', href: 'https://refi.trading/blog', icon: undefined },
     ],
   },
   {
