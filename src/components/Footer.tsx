@@ -36,7 +36,7 @@ export default function Footer() {
               Nature of Commerce LLC, Wyoming. Studio vehicle for P402.io and adjacent ventures.
             </p>
             <p className="text-[var(--color-primary)] text-sm font-medium italic mb-8">
-              First Principles. Lasting Impact.
+              The mechanics of participation. The nature of commerce.
             </p>
 
             <div className="flex items-center gap-4">
