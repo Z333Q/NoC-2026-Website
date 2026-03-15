@@ -217,6 +217,11 @@ export default function Thesis() {
                 other agents, and settle payments without human intervention.
               </p>
               <p className="text-[var(--color-text-secondary)] leading-relaxed">
+                These agents are further accelerated by reinforcement learning and machine learning systems
+                that continuously improve their decision-making through experience -- optimizing strategies,
+                adapting to market conditions, and coordinating with other agents in real time.
+              </p>
+              <p className="text-[var(--color-text-secondary)] leading-relaxed">
                 But these agents are forced to use infrastructure designed for humans: credit card rails with
                 $0.30 minimums, manual KYC processes, centralized custody, and compliance-by-oversight.
                 This creates the infrastructure gap. Native payment rails, cryptographic compliance, and
