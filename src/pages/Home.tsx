@@ -69,6 +69,7 @@ const pillars = [
 
 const whyNow = [
   'AI agents are autonomous economic actors -- they need native payment infrastructure, not human rails adapted for machines',
+  'Reinforcement learning and machine learning have matured to the point where hedge fund-grade algorithmic trading strategies can be compressed into the browser -- ReFi Trading is democratising institutional quant infrastructure that was previously inaccessible to retail traders and small fund managers',
   'Stablecoin regulatory clarity is emerging globally (MiCA, US legislation, ADGM)',
   'Zero-knowledge proof technology has matured to production-grade',
   'The Google A2A protocol creates an open standard for agent-to-agent commerce',
