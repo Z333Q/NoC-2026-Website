@@ -1,8 +1,9 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { useState, useEffect } from 'react';
 import { ExternalLink, Clock, ArrowRight, BookOpen, Calendar, User } from 'lucide-react';
 import { articles, sourceConfig, type ArticleCategory, type ArticleSource } from '../data/insightsData';
-import { fadeUp, fadeIn, slideFromLeft, slideFromRight, staggerContainer, staggerItem, clipReveal } from '../lib/motion';
+import { useSeoMeta } from '../hooks/useSeoMeta';
+import { fadeUp } from '../lib/motion';
 
 type FilterCategory = 'All' | ArticleCategory;
 type FilterSource = 'All' | ArticleSource;
@@ -18,36 +19,33 @@ function formatDate(dateStr: string) {
   return new Date(dateStr).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
 }
 
-function ArticleCard({ article, index }: { article: typeof articles[0]; index: number }) {
+function ArticleCard({ article }: { article: typeof articles[0] }) {
   const src = sourceConfig[article.source];
   return (
-    <motion.article
-      variants={staggerItem}
-    >
+    <article>
       <a
         href={article.sourceUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className={`group glass-card-interactive rounded-2xl border ${src.borderColor} flex flex-col h-full overflow-hidden`}
-        style={{ background: 'linear-gradient(135deg, rgba(20,20,32,0.8) 0%, rgba(10,10,16,0.9) 100%)' }}
+        className="group surface-card flex flex-col h-full overflow-hidden"
         aria-label={`Read: ${article.title}`}
       >
         <div className="relative h-44 overflow-hidden flex-shrink-0">
           <img
             src={article.image}
             alt={article.imageAlt}
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
             loading="lazy"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a10]/80 via-transparent to-transparent" />
-          <div className="absolute top-3 left-3 flex items-center gap-2">
-            <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold ${src.bgColor} ${src.color} border ${src.borderColor} backdrop-blur-sm`}>
+          <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-bg-primary)]/70 via-transparent to-transparent" />
+          <div className="absolute top-3 left-3">
+            <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold ${src.bgColor} ${src.color} border ${src.borderColor}`}>
               {src.label}
             </span>
           </div>
           {article.series && (
-            <div className="absolute bottom-3 left-3 text-xs text-white/70 font-mono bg-black/50 backdrop-blur-sm px-2 py-0.5 rounded">
-              {article.series} — Part {article.seriesPart}
+            <div className="absolute bottom-3 left-3 text-xs text-white/70 font-mono bg-black/50 px-2 py-0.5 rounded">
+              {article.series} -- Part {article.seriesPart}
             </div>
           )}
         </div>
@@ -80,19 +78,18 @@ function ArticleCard({ article, index }: { article: typeof articles[0]; index: n
             ))}
           </div>
 
-          <div className="flex items-center justify-between pt-3 border-t border-white/5">
+          <div className="flex items-center justify-between pt-3 border-t border-[var(--color-border)]">
             <span className="flex items-center gap-1.5 text-xs text-[var(--color-text-muted)]">
               <User className="w-3 h-3" />
               {article.author}
             </span>
-            <div className="flex items-center gap-1 text-sm text-[var(--color-primary)] group-hover:gap-2 transition-all">
-              <span>Read</span>
-              <ArrowRight className="w-4 h-4" />
+            <div className="flex items-center gap-1 text-sm text-[var(--color-primary)]">
+              Read <ArrowRight className="w-4 h-4" />
             </div>
           </div>
         </div>
       </a>
-    </motion.article>
+    </article>
   );
 }
 
@@ -100,60 +97,17 @@ export default function Insights() {
   const [activeCategory, setActiveCategory] = useState<FilterCategory>('All');
   const [activeSource, setActiveSource] = useState<FilterSource>('All');
 
-  useEffect(() => {
-    document.title = 'Insights & Research | Nature of Commerce';
-    const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) metaDesc.setAttribute('content', 'Research, technical papers, and thought leadership from Nature of Commerce. Covering AI trading infrastructure, agentic payments, zero-knowledge compliance, and market structure.');
-    const ogTitle = document.querySelector('meta[property="og:title"]');
-    if (ogTitle) ogTitle.setAttribute('content', 'Insights & Research | Nature of Commerce');
-    const ogDesc = document.querySelector('meta[property="og:description"]');
-    if (ogDesc) ogDesc.setAttribute('content', 'Technical papers and market research from the Nature of Commerce studio. AI trading, agentic payments, ZK compliance, and the future of digital commerce.');
-    const twitterTitle = document.querySelector('meta[name="twitter:title"]');
-    if (twitterTitle) twitterTitle.setAttribute('content', 'Insights & Research | Nature of Commerce');
-    const canonical = document.querySelector('link[rel="canonical"]');
-    if (canonical) canonical.setAttribute('href', 'https://natureofcommerce.com/insights');
+  useSeoMeta({
+    title: 'Insights & Research | Nature of Commerce',
+    description: 'Research, technical papers, and thought leadership from Nature of Commerce. Covering AI trading infrastructure, agentic payments, zero-knowledge compliance, and market structure.',
+    ogTitle: 'Insights & Research | Nature of Commerce',
+    ogDescription: 'Technical papers and market research from the Nature of Commerce studio.',
+    canonical: 'https://natureofcommerce.com/insights',
+  });
 
-    const schema = {
-      '@context': 'https://schema.org',
-      '@type': 'CollectionPage',
-      '@id': 'https://natureofcommerce.com/insights',
-      name: 'Insights & Research — Nature of Commerce',
-      description: 'Research, technical papers, and thought leadership from Nature of Commerce. Covering AI trading, agentic payments, zero-knowledge compliance, and market structure.',
-      url: 'https://natureofcommerce.com/insights',
-      publisher: { '@id': 'https://natureofcommerce.com/#organization' },
-      hasPart: articles.map((a) => ({
-        '@type': 'Article',
-        headline: a.title,
-        description: a.excerpt,
-        author: { '@type': 'Person', name: a.author },
-        datePublished: a.publishedDate,
-        url: a.sourceUrl,
-        image: a.image,
-        keywords: a.tags.join(', '),
-        timeRequired: `PT${parseInt(a.readTime)}M`,
-      })),
-    };
-
-    let scriptTag = document.getElementById('insights-schema') as HTMLScriptElement | null;
-    if (!scriptTag) {
-      scriptTag = document.createElement('script');
-      scriptTag.id = 'insights-schema';
-      scriptTag.type = 'application/ld+json';
-      document.head.appendChild(scriptTag);
-    }
-    scriptTag.textContent = JSON.stringify(schema);
-
-    return () => {
-      document.title = 'Nature of Commerce | Early-Stage VC Fund & Startup Launchpad';
-      if (metaDesc) metaDesc.setAttribute('content', 'Nature of Commerce is an early-stage venture capital fund, startup launchpad, and strategic consulting firm. We invest in founders building the future of digital commerce, Web3, DeFi, and tokenized economies. Apply for funding or join our accelerator program.');
-      if (ogTitle) ogTitle.setAttribute('content', 'Nature of Commerce | Early-Stage VC Fund & Startup Launchpad');
-      if (canonical) canonical.setAttribute('href', 'https://natureofcommerce.com/');
-      const el = document.getElementById('insights-schema');
-      if (el) el.remove();
-    };
-  }, []);
-
-  const marketWarsSeries = articles.filter((a) => a.series === 'Market Wars').sort((a, b) => (a.seriesPart ?? 0) - (b.seriesPart ?? 0));
+  const marketWarsSeries = articles
+    .filter((a) => a.series === 'Market Wars')
+    .sort((a, b) => (a.seriesPart ?? 0) - (b.seriesPart ?? 0));
 
   const filtered = articles
     .filter((a) => {
@@ -164,96 +118,83 @@ export default function Insights() {
     .sort((a, b) => new Date(b.publishedDate).getTime() - new Date(a.publishedDate).getTime());
 
   return (
-    <main className="overflow-hidden">
-      <section className="relative min-h-[50vh] flex items-center blueprint-grid pt-24" aria-label="Insights hero">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="glow-orb glow-orb-primary w-[500px] h-[500px] -top-20 right-0 opacity-15" />
-        </div>
-        <div className="max-w-7xl mx-auto px-6 py-20 relative z-10">
-          <motion.div variants={fadeIn} initial="hidden" animate="visible" custom={0} className="mb-8">
-            <span className="section-label-minimal">
+    <main>
+      {/* Hero */}
+      <section className="relative pt-32 pb-20 blueprint-grid">
+        <div className="max-w-7xl mx-auto px-6">
+          <motion.div variants={fadeUp} initial="hidden" animate="visible">
+            <span className="section-label-minimal mb-8 block">
               <BookOpen className="w-4 h-4" />
               Insights & Research
             </span>
+            <h1 className="hero-text max-w-4xl mb-8">Research & Analysis</h1>
+            <p className="body-large max-w-2xl">
+              Technical papers, market research, and thought leadership from across the Nature of Commerce studio.
+            </p>
           </motion.div>
-          <motion.h1 variants={clipReveal} initial="hidden" animate="visible" custom={1} className="hero-text max-w-4xl mb-8">
-            Research &{' '}
-            <span className="text-gradient">Analysis</span>
-          </motion.h1>
-          <motion.p variants={fadeUp} initial="hidden" animate="visible" custom={2} className="body-large max-w-2xl">
-            Technical papers, market research, and thought leadership from across the Nature of Commerce studio.
-            Covering AI trading, agentic payments, zero-knowledge compliance, and market structure.
-          </motion.p>
         </div>
       </section>
 
-      <section className="section-padding bg-[var(--color-bg-secondary)] border-y border-[var(--color-border)]" aria-label="Market Wars featured series">
+      {/* Market Wars Series */}
+      <section className="section-padding bg-[var(--color-bg-secondary)] border-y border-[var(--color-border)]">
         <div className="max-w-7xl mx-auto px-6">
-          <motion.div variants={slideFromLeft} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-10">
+          <div className="mb-10">
             <div className="flex items-center gap-3 mb-3">
-              <div className="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-bold uppercase tracking-wider">
-                Featured Series
-              </div>
+              <span className="text-xs font-bold uppercase tracking-wider text-[var(--color-primary)]">Featured Series</span>
               <span className="text-[var(--color-text-muted)] text-xs">5-Part Series from ReFi Trading</span>
             </div>
-            <h2 className="display-text mb-3">
-              <span className="text-gradient">Market Wars</span>
-            </h2>
+            <h2 className="display-text mb-3">Market Wars</h2>
             <p className="body-large max-w-2xl">
               A comprehensive exploration of the battle between retail and institutional traders --
               from historical origins to the future of autonomous finance.
             </p>
-          </motion.div>
+          </div>
 
-          <motion.div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide" variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-            {marketWarsSeries.map((article, i) => (
-              <motion.article
-                key={article.id}
-                variants={staggerItem}
-                className="group flex-shrink-0 w-72"
-              >
-                <a
-                  href={article.sourceUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block glass-card-interactive rounded-xl border border-emerald-500/30 overflow-hidden h-full"
-                  style={{ background: 'linear-gradient(135deg, rgba(52,211,153,0.04) 0%, rgba(10,10,16,0.9) 100%)' }}
-                >
-                  <div className="relative h-32 overflow-hidden">
-                    <img
-                      src={article.image}
-                      alt={article.imageAlt}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      loading="lazy"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a10]/70 via-transparent to-transparent" />
-                    <div className="absolute bottom-2 left-3 text-emerald-400 text-xs font-mono">Part {article.seriesPart} of 5</div>
-                  </div>
-                  <div className="p-4">
-                    <h3 className="text-white font-bold text-sm mb-2 group-hover:text-emerald-400 transition-colors leading-snug">
-                      {article.title}
-                    </h3>
-                    <div className="flex items-center justify-between">
-                      <span className="text-[var(--color-text-muted)] text-xs">{article.readTime}</span>
-                      <ExternalLink className="w-3.5 h-3.5 text-emerald-400 opacity-0 group-hover:opacity-100 transition-opacity" />
+          <div className="flex gap-4 overflow-x-auto pb-4">
+            {marketWarsSeries.map((article) => {
+              const src = sourceConfig[article.source];
+              return (
+                <article key={article.id} className="flex-shrink-0 w-72">
+                  <a
+                    href={article.sourceUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group block surface-card overflow-hidden h-full"
+                  >
+                    <div className="relative h-32 overflow-hidden">
+                      <img
+                        src={article.image}
+                        alt={article.imageAlt}
+                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-bg-primary)]/70 via-transparent to-transparent" />
+                      <div className="absolute bottom-2 left-3 text-[var(--color-primary)] text-xs font-mono">Part {article.seriesPart} of 5</div>
                     </div>
-                  </div>
-                </a>
-              </motion.article>
-            ))}
-          </motion.div>
+                    <div className="p-4">
+                      <h3 className="text-white font-bold text-sm mb-2 group-hover:text-[var(--color-primary)] transition-colors leading-snug">
+                        {article.title}
+                      </h3>
+                      <div className="flex items-center justify-between">
+                        <span className="text-[var(--color-text-muted)] text-xs">{article.readTime}</span>
+                        <ExternalLink className="w-3.5 h-3.5 text-[var(--color-primary)] opacity-0 group-hover:opacity-100 transition-opacity" />
+                      </div>
+                    </div>
+                  </a>
+                </article>
+              );
+            })}
+          </div>
         </div>
       </section>
 
-      <section className="section-padding" aria-label="All published articles">
+      {/* All Articles */}
+      <section className="section-padding">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between mb-10">
             <div>
-              <motion.span variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="section-label-minimal mb-3 block w-fit">All Posts</motion.span>
-              <h2 className="display-text">
-                Everything{' '}
-                <span className="text-gradient">Published</span>
-              </h2>
+              <span className="section-label-minimal mb-3 block">All Posts</span>
+              <h2 className="display-text">Everything published</h2>
             </div>
             <div className="flex flex-col gap-3">
               <div className="flex flex-wrap gap-2" role="group" aria-label="Filter by category">
@@ -262,10 +203,10 @@ export default function Insights() {
                     key={f}
                     onClick={() => setActiveCategory(f)}
                     aria-pressed={activeCategory === f}
-                    className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all ${
+                    className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-colors ${
                       activeCategory === f
                         ? 'bg-[var(--color-primary)] text-white'
-                        : 'glass-card text-[var(--color-text-muted)] hover:text-white'
+                        : 'border border-[var(--color-border)] text-[var(--color-text-muted)] hover:text-white'
                     }`}
                   >
                     {f}
@@ -278,10 +219,10 @@ export default function Insights() {
                     key={f.value}
                     onClick={() => setActiveSource(f.value)}
                     aria-pressed={activeSource === f.value}
-                    className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all ${
+                    className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-colors ${
                       activeSource === f.value
                         ? 'bg-[var(--color-primary)]/20 border border-[var(--color-primary)] text-[var(--color-primary)]'
-                        : 'glass-card text-[var(--color-text-muted)] hover:text-white'
+                        : 'border border-[var(--color-border)] text-[var(--color-text-muted)] hover:text-white'
                     }`}
                   >
                     {f.label}
@@ -291,11 +232,11 @@ export default function Insights() {
             </div>
           </div>
 
-          <motion.div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-            {filtered.map((article, i) => (
-              <ArticleCard key={article.id} article={article} index={i} />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filtered.map((article) => (
+              <ArticleCard key={article.id} article={article} />
             ))}
-          </motion.div>
+          </div>
 
           {filtered.length === 0 && (
             <div className="text-center py-20 text-[var(--color-text-muted)]">
@@ -305,60 +246,43 @@ export default function Insights() {
         </div>
       </section>
 
-      <section className="section-padding bg-[var(--color-bg-secondary)] border-y border-[var(--color-border)]" aria-label="Personal content">
+      {/* Personal content */}
+      <section className="section-padding bg-[var(--color-bg-secondary)] border-y border-[var(--color-border)]">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-8">
-            <motion.div
-              variants={slideFromLeft}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              className="rounded-2xl p-8 border border-amber-500/20"
-              style={{ background: 'linear-gradient(135deg, rgba(245,158,11,0.05) 0%, rgba(10,10,16,0.9) 100%)' }}
-            >
-              <div className="flex items-center gap-3 mb-4">
-                <span className="px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-semibold">
-                  Personal Blog
-                </span>
-              </div>
-              <h3 className="text-2xl font-bold text-white mb-3">Exploration & Discovery</h3>
+          <div className="grid lg:grid-cols-2 gap-6">
+            <div className="surface-card p-8">
+              <span className="text-xs font-bold uppercase tracking-wider text-[var(--color-text-muted)] mb-4 block">
+                Personal Blog
+              </span>
+              <h3 className="text-xl font-bold text-white mb-3">Exploration & Discovery</h3>
               <p className="text-[var(--color-text-secondary)] leading-relaxed mb-6">
                 Adventures and reflections from around the world with my wife{' '}
                 <a
                   href="https://linkedin.com/in/yulkin"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-amber-400 hover:text-white transition-colors underline underline-offset-2"
+                  className="text-[var(--color-primary)] hover:text-white transition-colors underline underline-offset-2"
                 >
                   Yuliia
                 </a>
-                . Travel, culture, food, and the occasional philosophical tangent. Building is only part of the story.
+                . Travel, culture, food, and the occasional philosophical tangent.
               </p>
               <a
                 href="https://weexploreanddiscover.tumblr.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-amber-400 hover:text-white transition-colors font-semibold"
+                className="inline-flex items-center gap-2 text-[var(--color-primary)] hover:text-white transition-colors text-sm font-semibold"
               >
                 <ExternalLink className="w-4 h-4" />
                 Read the Blog
               </a>
-            </motion.div>
+            </div>
 
-            <motion.div
-              variants={slideFromRight}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              className="rounded-2xl p-8 border border-amber-500/20"
-              style={{ background: 'linear-gradient(135deg, rgba(245,158,11,0.05) 0%, rgba(10,10,16,0.9) 100%)' }}
-            >
-              <div className="flex items-center gap-3 mb-4">
-                <span className="px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-semibold">
-                  TikTok
-                </span>
-              </div>
-              <h3 className="text-2xl font-bold text-white mb-3">Bagheera & Oreo</h3>
+            <div className="surface-card p-8">
+              <span className="text-xs font-bold uppercase tracking-wider text-[var(--color-text-muted)] mb-4 block">
+                TikTok
+              </span>
+              <h3 className="text-xl font-bold text-white mb-3">Bagheera & Oreo</h3>
               <p className="text-[var(--color-text-secondary)] leading-relaxed mb-3">
                 The real stars of the show.
               </p>
@@ -370,12 +294,12 @@ export default function Insights() {
                 href="https://tiktok.com/@bagheeandoreo"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-amber-400 hover:text-white transition-colors font-semibold"
+                className="inline-flex items-center gap-2 text-[var(--color-primary)] hover:text-white transition-colors text-sm font-semibold"
               >
                 <ExternalLink className="w-4 h-4" />
                 @bagheeandoreo on TikTok
               </a>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
