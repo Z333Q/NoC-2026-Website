@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ArrowRight } from 'lucide-react';
+import { staggerContainer, staggerItem } from '../lib/motion';
 
 const navLinks = [
   { path: '/', label: 'Home' },
@@ -17,9 +18,7 @@ export default function Navbar() {
   const location = useLocation();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -28,35 +27,48 @@ export default function Navbar() {
     setIsOpen(false);
   }, [location]);
 
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [isOpen]);
+
   return (
     <>
       <motion.header
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled ? 'glass-card py-3' : 'py-5'
+        transition={{ duration: 0.5, ease: [0.25, 1, 0.5, 1] }}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+          scrolled
+            ? 'py-2 bg-[var(--color-bg-primary)]/80 backdrop-blur-xl border-b border-[var(--color-border)]'
+            : 'py-5'
         }`}
       >
         <nav className="max-w-7xl mx-auto px-6 flex items-center justify-between" aria-label="Main navigation">
           <Link to="/" className="flex items-center gap-3 group" aria-label="Nature of Commerce Home">
-            <img
+            <motion.img
               src="/artboard_1.png"
               alt="Nature of Commerce Logo"
-              className="w-10 h-10 transition-transform group-hover:scale-110"
+              className="h-9 w-9"
+              whileHover={{ rotate: 8 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 15 }}
             />
             <div className="hidden sm:block">
-              <span className="text-lg font-semibold tracking-tight">Nature of Commerce</span>
+              <span className={`font-semibold tracking-tight transition-all duration-500 ${scrolled ? 'text-sm' : 'text-base'}`}>
+                Nature of Commerce
+              </span>
             </div>
           </Link>
 
-          <div className="hidden lg:flex items-center gap-8">
+          <div className="hidden lg:flex items-center gap-1">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
-                className={`nav-link text-sm font-medium ${
-                  location.pathname === link.path ? 'active text-white' : ''
+                className={`nav-link text-sm font-medium px-4 py-2 rounded-lg transition-colors ${
+                  location.pathname === link.path
+                    ? 'active text-white bg-white/[0.04]'
+                    : 'hover:bg-white/[0.03]'
                 }`}
               >
                 {link.label}
@@ -64,11 +76,11 @@ export default function Navbar() {
             ))}
           </div>
 
-          <div className="hidden lg:flex items-center gap-4">
-            <Link to="/contact" className="btn-secondary text-sm py-2 px-5">
+          <div className="hidden lg:flex items-center gap-3">
+            <Link to="/contact" className="text-sm font-medium text-[var(--color-text-secondary)] hover:text-white transition-colors px-4 py-2">
               Contact
             </Link>
-            <Link to="/thesis" className="btn-primary text-sm py-2 px-5 flex items-center gap-2">
+            <Link to="/thesis" className="btn-primary text-sm py-2.5 px-5 flex items-center gap-2">
               <span>Builder Thesis</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
@@ -91,54 +103,57 @@ export default function Navbar() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
             className="fixed inset-0 z-40 lg:hidden"
           >
-            <div className="absolute inset-0 bg-[var(--color-bg-primary)]/95 backdrop-blur-xl" />
-            <motion.nav
-              initial={{ x: '100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ type: 'tween', duration: 0.3 }}
-              className="absolute right-0 top-0 bottom-0 w-full max-w-sm bg-[var(--color-bg-secondary)] border-l border-[var(--color-border)] pt-24 px-8"
-              aria-label="Mobile navigation"
-            >
-              <div className="flex flex-col gap-6">
-                {navLinks.map((link, i) => (
-                  <motion.div
-                    key={link.path}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.1 }}
-                  >
+            <div className="absolute inset-0 bg-[var(--color-bg-primary)]/98 backdrop-blur-2xl" />
+            <div className="relative h-full flex flex-col justify-center px-8">
+              <motion.nav
+                variants={staggerContainer}
+                initial="hidden"
+                animate="visible"
+                className="space-y-2"
+                aria-label="Mobile navigation"
+              >
+                {navLinks.map((link) => (
+                  <motion.div key={link.path} variants={staggerItem}>
                     <Link
                       to={link.path}
-                      className={`text-2xl font-semibold transition-colors ${
+                      className={`block text-4xl font-bold py-3 transition-colors ${
                         location.pathname === link.path
                           ? 'text-[var(--color-primary)]'
-                          : 'text-white hover:text-[var(--color-primary)]'
+                          : 'text-white/60 hover:text-white'
                       }`}
                     >
                       {link.label}
                     </Link>
                   </motion.div>
                 ))}
-              </div>
+                <motion.div variants={staggerItem}>
+                  <Link
+                    to="/contact"
+                    className="block text-4xl font-bold py-3 text-white/60 hover:text-white transition-colors"
+                  >
+                    Contact
+                  </Link>
+                </motion.div>
+              </motion.nav>
 
-              <div className="mt-12 pt-8 border-t border-[var(--color-border)] space-y-4">
-                <Link
-                  to="/contact"
-                  className="block w-full text-center btn-secondary py-3"
-                >
-                  Contact
-                </Link>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.4 }}
+                className="mt-16 pt-8 border-t border-[var(--color-border)]"
+              >
                 <Link
                   to="/thesis"
-                  className="block w-full text-center btn-primary py-3"
+                  className="btn-primary inline-flex items-center gap-2 text-base"
                 >
                   <span>Builder Thesis</span>
+                  <ArrowRight className="w-5 h-5" />
                 </Link>
-              </div>
-            </motion.nav>
+              </motion.div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

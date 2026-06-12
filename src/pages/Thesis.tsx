@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
@@ -6,15 +6,7 @@ import {
   Layers, BookOpen, Github, ExternalLink, Lock
 } from 'lucide-react';
 import { useSeoMeta } from '../hooks/useSeoMeta';
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 40 },
-  visible: (i = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7, delay: i * 0.1, ease: [0.4, 0, 0.2, 1] as [number, number, number, number] },
-  }),
-};
+import { fadeUp, fadeIn, slideFromLeft, slideFromRight, clipReveal, staggerContainer, staggerItem } from '../lib/motion';
 
 const pillars = [
   {
@@ -152,11 +144,19 @@ function FaqItem({ q, a }: { q: string; a: string }) {
         <span className="text-white font-semibold">{q}</span>
         <ChevronDown className={`w-5 h-5 text-[var(--color-primary)] flex-shrink-0 transition-transform ${open ? 'rotate-180' : ''}`} />
       </button>
-      {open && (
-        <div className="px-6 pb-6 text-[var(--color-text-secondary)] leading-relaxed border-t border-[var(--color-border)] pt-4">
-          {a}
-        </div>
-      )}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+            className="px-6 pb-6 text-[var(--color-text-secondary)] leading-relaxed border-t border-[var(--color-border)] pt-4"
+          >
+            {a}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
@@ -177,34 +177,34 @@ export default function Thesis() {
         </div>
         <div className="max-w-7xl mx-auto px-6 py-20 relative z-10 grid lg:grid-cols-2 gap-16 items-center">
           <div>
-            <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0} className="mb-8">
+            <motion.div variants={fadeIn} initial="hidden" animate="visible" custom={0} className="mb-8">
               <span className="section-label">
                 <BookOpen className="w-4 h-4" />
                 Builder Thesis
               </span>
             </motion.div>
-            <motion.h1 variants={fadeUp} initial="hidden" animate="visible" custom={1} className="hero-text mb-8">
+            <motion.h1 variants={slideFromLeft} initial="hidden" animate="visible" custom={1} className="hero-text mb-8">
               <span className="text-gradient">Three Pillars,</span>{' '}
               One Infrastructure
             </motion.h1>
-            <motion.p variants={fadeUp} initial="hidden" animate="visible" custom={2} className="body-large mb-8">
+            <motion.p variants={slideFromLeft} initial="hidden" animate="visible" custom={2} className="body-large mb-8">
               The next financial system will be built on autonomous agents that transact, trade, and verify
               using cryptographic infrastructure. We are building that infrastructure.
             </motion.p>
-            <motion.p variants={fadeUp} initial="hidden" animate="visible" custom={3} className="text-[var(--color-text-secondary)] leading-relaxed mb-10">
+            <motion.p variants={slideFromLeft} initial="hidden" animate="visible" custom={3} className="text-[var(--color-text-secondary)] leading-relaxed mb-10">
               AI agents need payment rails. Traders need institutional-grade algorithms. Financial systems need
               compliance embedded in the architecture itself. These three pillars are not separate products --
               they are interlocking layers of the same infrastructure, built by the same team, from first principles.
             </motion.p>
-            <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={4}>
-              <Link to="/contact" className="btn-primary inline-flex items-center gap-2">
+            <motion.div variants={slideFromLeft} initial="hidden" animate="visible" custom={4}>
+              <Link to="/contact" className="btn-primary group inline-flex items-center gap-2">
                 <span>Get in Touch</span>
-                <ArrowRight className="w-5 h-5" />
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
             </motion.div>
           </div>
-          <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={2} className="relative">
-            <div className="glass-card rounded-2xl p-8 border border-[var(--color-primary)]/20">
+          <motion.div variants={slideFromRight} initial="hidden" animate="visible" custom={2} className="relative">
+            <div className="glass-card card-accent-left rounded-2xl p-8 border border-[var(--color-primary)]/20">
               <div className="flex items-center gap-3 mb-6">
                 <Lock className="w-5 h-5 text-[var(--color-primary)]" />
                 <span className="text-sm font-semibold uppercase tracking-wider text-[var(--color-primary)]">
@@ -248,8 +248,8 @@ export default function Thesis() {
 
       <section className="section-padding">
         <div className="max-w-7xl mx-auto px-6">
-          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-16 text-center max-w-3xl mx-auto">
-            <span className="section-label mb-6 block w-fit mx-auto">Infrastructure Pillars</span>
+          <motion.div variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-16 text-center max-w-3xl mx-auto">
+            <span className="section-label-minimal mb-6 block w-fit mx-auto">Infrastructure Pillars</span>
             <h2 className="display-text mb-6">
               Three Interlocking{' '}
               <span className="text-gradient">Pieces</span>
@@ -262,10 +262,11 @@ export default function Thesis() {
           <div className="space-y-8">
             {pillars.map((pillar, i) => {
               const Icon = pillar.icon;
+              const isOdd = i % 2 === 0;
               return (
                 <motion.div
                   key={pillar.number}
-                  variants={fadeUp}
+                  variants={isOdd ? slideFromLeft : slideFromRight}
                   initial="hidden"
                   whileInView="visible"
                   viewport={{ once: true }}
@@ -353,8 +354,8 @@ export default function Thesis() {
 
       <section className="section-padding bg-[var(--color-bg-secondary)] border-y border-[var(--color-border)]">
         <div className="max-w-7xl mx-auto px-6">
-          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-16 text-center max-w-3xl mx-auto">
-            <span className="section-label mb-6 block w-fit mx-auto">Philosophy</span>
+          <motion.div variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-16 text-center max-w-3xl mx-auto">
+            <span className="section-label-minimal mb-6 block w-fit mx-auto">Philosophy</span>
             <h2 className="display-text mb-6">
               Building{' '}
               <span className="text-gradient">Principles</span>
@@ -364,15 +365,11 @@ export default function Thesis() {
             </p>
           </motion.div>
 
-          <div className="grid sm:grid-cols-2 gap-6">
+          <motion.div className="grid sm:grid-cols-2 gap-6" variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }}>
             {principles.map((p, i) => (
               <motion.div
                 key={p.number}
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                custom={i}
+                variants={staggerItem}
                 className="glass-card rounded-2xl p-8"
               >
                 <div className="text-5xl font-bold text-[var(--color-primary)]/20 font-mono mb-4">
@@ -382,14 +379,14 @@ export default function Thesis() {
                 <p className="text-[var(--color-text-secondary)] leading-relaxed">{p.description}</p>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       <section className="section-padding border-t border-[var(--color-border)]">
         <div className="max-w-7xl mx-auto px-6">
-          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-16 text-center max-w-3xl mx-auto">
-            <span className="section-label mb-6 block w-fit mx-auto">Our Heritage</span>
+          <motion.div variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-16 text-center max-w-3xl mx-auto">
+            <span className="section-label-minimal mb-6 block w-fit mx-auto">Our Heritage</span>
             <h2 className="display-text mb-6">
               Bridging Ancient Wisdom{' '}
               <span className="text-gradient">with Modern Innovation</span>
@@ -400,7 +397,7 @@ export default function Thesis() {
           </motion.div>
 
           <div className="grid lg:grid-cols-2 gap-16 items-start">
-            <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={0} className="flex flex-col items-center">
+            <motion.div variants={slideFromLeft} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={0} className="flex flex-col items-center">
               <div className="relative group">
                 <div className="absolute -inset-1 rounded-2xl bg-gradient-to-b from-[var(--color-primary)]/30 to-transparent blur-sm opacity-60 group-hover:opacity-100 transition-opacity" />
                 <img
@@ -415,8 +412,8 @@ export default function Thesis() {
               </div>
             </motion.div>
 
-            <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={1} className="space-y-6">
-              <div className="glass-card rounded-2xl p-8">
+            <motion.div variants={slideFromRight} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={1} className="space-y-6">
+              <div className="glass-card card-accent-left rounded-2xl p-8">
                 <p className="text-[var(--color-text-secondary)] leading-relaxed mb-6">
                   In 1730,{' '}
                   <a
@@ -464,7 +461,7 @@ export default function Thesis() {
 
       <section className="section-padding" id="faq">
         <div className="max-w-4xl mx-auto px-6">
-          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-12 text-center">
+          <motion.div variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-12 text-center">
             <span className="section-label mb-6 block w-fit mx-auto">FAQ</span>
             <h2 className="display-text">
               Frequently Asked{' '}
@@ -472,26 +469,22 @@ export default function Thesis() {
             </h2>
           </motion.div>
 
-          <div className="space-y-4">
+          <motion.div className="space-y-4" variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }}>
             {faqs.map((faq, i) => (
               <motion.div
                 key={i}
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                custom={i}
+                variants={staggerItem}
               >
                 <FaqItem q={faq.q} a={faq.a} />
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       <section className="section-padding bg-[var(--color-bg-secondary)] border-t border-[var(--color-border)]">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+          <motion.div variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }}>
             <Layers className="w-12 h-12 text-[var(--color-primary)] mx-auto mb-6" />
             <h2 className="display-text mb-6">
               Let's Build{' '}
@@ -502,9 +495,9 @@ export default function Thesis() {
               or an enterprise exploring autonomous settlement -- if you see the same infrastructure gap,
               we should talk.
             </p>
-            <Link to="/contact" className="btn-primary inline-flex items-center gap-2">
+            <Link to="/contact" className="btn-primary group inline-flex items-center gap-2">
               <span>Get in Touch</span>
-              <ArrowRight className="w-5 h-5" />
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
           </motion.div>
         </div>

@@ -2,15 +2,7 @@ import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { ExternalLink, Clock, ArrowRight, BookOpen, Calendar, User } from 'lucide-react';
 import { articles, sourceConfig, type ArticleCategory, type ArticleSource } from '../data/insightsData';
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 40 },
-  visible: (i = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7, delay: i * 0.1, ease: [0.4, 0, 0.2, 1] as [number, number, number, number] },
-  }),
-};
+import { fadeUp, fadeIn, slideFromLeft, slideFromRight, staggerContainer, staggerItem, clipReveal } from '../lib/motion';
 
 type FilterCategory = 'All' | ArticleCategory;
 type FilterSource = 'All' | ArticleSource;
@@ -30,11 +22,7 @@ function ArticleCard({ article, index }: { article: typeof articles[0]; index: n
   const src = sourceConfig[article.source];
   return (
     <motion.article
-      variants={fadeUp}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true }}
-      custom={index % 4}
+      variants={staggerItem}
     >
       <a
         href={article.sourceUrl}
@@ -182,13 +170,13 @@ export default function Insights() {
           <div className="glow-orb glow-orb-primary w-[500px] h-[500px] -top-20 right-0 opacity-15" />
         </div>
         <div className="max-w-7xl mx-auto px-6 py-20 relative z-10">
-          <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0} className="mb-8">
-            <span className="section-label">
+          <motion.div variants={fadeIn} initial="hidden" animate="visible" custom={0} className="mb-8">
+            <span className="section-label-minimal">
               <BookOpen className="w-4 h-4" />
               Insights & Research
             </span>
           </motion.div>
-          <motion.h1 variants={fadeUp} initial="hidden" animate="visible" custom={1} className="hero-text max-w-4xl mb-8">
+          <motion.h1 variants={clipReveal} initial="hidden" animate="visible" custom={1} className="hero-text max-w-4xl mb-8">
             Research &{' '}
             <span className="text-gradient">Analysis</span>
           </motion.h1>
@@ -201,7 +189,7 @@ export default function Insights() {
 
       <section className="section-padding bg-[var(--color-bg-secondary)] border-y border-[var(--color-border)]" aria-label="Market Wars featured series">
         <div className="max-w-7xl mx-auto px-6">
-          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-10">
+          <motion.div variants={slideFromLeft} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-10">
             <div className="flex items-center gap-3 mb-3">
               <div className="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-bold uppercase tracking-wider">
                 Featured Series
@@ -217,15 +205,11 @@ export default function Insights() {
             </p>
           </motion.div>
 
-          <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
+          <motion.div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide" variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }}>
             {marketWarsSeries.map((article, i) => (
               <motion.article
                 key={article.id}
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                custom={i}
+                variants={staggerItem}
                 className="group flex-shrink-0 w-72"
               >
                 <a
@@ -257,7 +241,7 @@ export default function Insights() {
                 </a>
               </motion.article>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -265,7 +249,7 @@ export default function Insights() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between mb-10">
             <div>
-              <span className="section-label mb-3 block w-fit">All Posts</span>
+              <motion.span variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="section-label-minimal mb-3 block w-fit">All Posts</motion.span>
               <h2 className="display-text">
                 Everything{' '}
                 <span className="text-gradient">Published</span>
@@ -307,11 +291,11 @@ export default function Insights() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <motion.div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }}>
             {filtered.map((article, i) => (
               <ArticleCard key={article.id} article={article} index={i} />
             ))}
-          </div>
+          </motion.div>
 
           {filtered.length === 0 && (
             <div className="text-center py-20 text-[var(--color-text-muted)]">
@@ -325,7 +309,7 @@ export default function Insights() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-8">
             <motion.div
-              variants={fadeUp}
+              variants={slideFromLeft}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
@@ -362,11 +346,10 @@ export default function Insights() {
             </motion.div>
 
             <motion.div
-              variants={fadeUp}
+              variants={slideFromRight}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
-              custom={1}
               className="rounded-2xl p-8 border border-amber-500/20"
               style={{ background: 'linear-gradient(135deg, rgba(245,158,11,0.05) 0%, rgba(10,10,16,0.9) 100%)' }}
             >

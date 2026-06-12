@@ -89,7 +89,7 @@ export default function Footer() {
                     className="text-[var(--color-text-secondary)] hover:text-white text-sm transition-colors flex items-center gap-1 group"
                   >
                     {link.label}
-                    <ArrowUpRight className="w-3 h-3 opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" />
+                    <ArrowUpRight className="w-3 h-3 opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0.5 transition-all" />
                   </Link>
                 </li>
               ))}
@@ -110,7 +110,7 @@ export default function Footer() {
                     className="text-[var(--color-text-secondary)] hover:text-white text-sm transition-colors flex items-center gap-1 group"
                   >
                     {link.label}
-                    <ArrowUpRight className="w-3 h-3 opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" />
+                    <ArrowUpRight className="w-3 h-3 opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0.5 transition-all" />
                   </a>
                 </li>
               ))}
@@ -134,7 +134,7 @@ export default function Footer() {
                   >
                     <Github className="w-3.5 h-3.5 flex-shrink-0 text-[var(--color-text-muted)]" />
                     {link.label}
-                    <ArrowUpRight className="w-3 h-3 opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" />
+                    <ArrowUpRight className="w-3 h-3 opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0.5 transition-all" />
                   </a>
                 </li>
               ))}

@@ -5,15 +5,7 @@ import {
   CheckCircle, Music, Eye, Layers, BookOpen, Building2
 } from 'lucide-react';
 import { useSeoMeta } from '../hooks/useSeoMeta';
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 40 },
-  visible: (i = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7, delay: i * 0.1, ease: [0.4, 0, 0.2, 1] as [number, number, number, number] },
-  }),
-};
+import { fadeUp, fadeIn, slideFromLeft, slideFromRight, staggerContainer, staggerItem, clipReveal } from '../lib/motion';
 
 const stackLayers = [
   {
@@ -189,13 +181,13 @@ export default function Stack() {
           <div className="glow-orb glow-orb-primary w-[500px] h-[500px] -top-20 right-0 opacity-15" />
         </div>
         <div className="max-w-7xl mx-auto px-6 py-20 relative z-10">
-          <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0} className="mb-8">
+          <motion.div variants={fadeIn} initial="hidden" animate="visible" custom={0} className="mb-8">
             <span className="section-label">
               <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-primary)] animate-pulse" />
               What We Are Building
             </span>
           </motion.div>
-          <motion.h1 variants={fadeUp} initial="hidden" animate="visible" custom={1} className="hero-text max-w-4xl mb-8">
+          <motion.h1 variants={clipReveal} initial="hidden" animate="visible" custom={1} className="hero-text max-w-4xl mb-8">
             The Technology{' '}
             <span className="text-gradient">Stack</span>
           </motion.h1>
@@ -208,26 +200,22 @@ export default function Stack() {
 
       <section className="section-padding border-y border-[var(--color-border)] bg-[var(--color-bg-secondary)]">
         <div className="max-w-7xl mx-auto px-6">
-          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-12">
-            <span className="section-label mb-6 block w-fit">Architecture</span>
-            <h2 className="display-text mb-4">
+          <motion.div variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-12">
+            <span className="section-label-minimal mb-6 block w-fit">Architecture</span>
+            <motion.h2 variants={slideFromLeft} initial="hidden" whileInView="visible" viewport={{ once: true }} className="display-text mb-4">
               Five Layers,{' '}
               <span className="text-gradient">One Infrastructure</span>
-            </h2>
+            </motion.h2>
             <p className="body-large max-w-2xl">
               Each layer reinforces the others. This is the full system being built.
             </p>
           </motion.div>
 
-          <div className="space-y-3">
+          <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="space-y-3">
             {stackLayers.map((layer, i) => (
               <motion.div
                 key={layer.number}
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                custom={i}
+                variants={staggerItem}
                 className="glass-card rounded-xl p-6 flex flex-col sm:flex-row sm:items-center gap-6"
               >
                 <div className="flex items-center gap-4 sm:w-48 flex-shrink-0">
@@ -247,31 +235,27 @@ export default function Stack() {
                 </div>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       <section className="section-padding">
         <div className="max-w-7xl mx-auto px-6">
-          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-16">
+          <motion.div variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-16">
             <span className="section-label mb-6 block w-fit">Active Ventures</span>
-            <h2 className="display-text mb-4">
+            <motion.h2 variants={slideFromRight} initial="hidden" whileInView="visible" viewport={{ once: true }} className="display-text mb-4">
               What Is Being{' '}
               <span className="text-gradient">Built Now</span>
-            </h2>
+            </motion.h2>
           </motion.div>
 
-          <div className="grid lg:grid-cols-2 gap-6">
+          <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="grid lg:grid-cols-2 gap-6">
             {activeVentures.map((venture, i) => {
               const Icon = venture.icon;
               return (
                 <motion.div
                   key={venture.name}
-                  variants={fadeUp}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true }}
-                  custom={i}
+                  variants={staggerItem}
                   className={`glass-card-interactive rounded-2xl p-8 border ${venture.accentColor} flex flex-col`}
                   style={{ background: `linear-gradient(135deg, ${venture.glowColor} 0%, rgba(10,10,16,0.8) 100%)` }}
                 >
@@ -354,33 +338,29 @@ export default function Stack() {
                 </motion.div>
               );
             })}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       <section className="section-padding bg-[var(--color-bg-secondary)] border-y border-[var(--color-border)]">
         <div className="max-w-7xl mx-auto px-6">
-          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-16">
-            <span className="section-label mb-6 block w-fit">Track Record</span>
-            <h2 className="display-text mb-4">
+          <motion.div variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-16">
+            <span className="section-label-minimal mb-6 block w-fit">Track Record</span>
+            <motion.h2 variants={slideFromLeft} initial="hidden" whileInView="visible" viewport={{ once: true }} className="display-text mb-4">
               20 Years of{' '}
               <span className="text-gradient">Financial Infrastructure</span>
-            </h2>
+            </motion.h2>
             <p className="body-large max-w-2xl">
               The through-line: removing gatekeepers from financial systems using the best technology of each era.
             </p>
           </motion.div>
 
-          <div className="space-y-4">
+          <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="space-y-4">
             {trackRecord.map((item, i) => (
               <motion.div
                 key={item.name}
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                custom={i}
-                className="glass-card rounded-xl p-6 flex flex-col sm:flex-row gap-6"
+                variants={staggerItem}
+                className="card-accent-left glass-card rounded-xl p-6 flex flex-col sm:flex-row gap-6"
               >
                 <div className="sm:w-48 flex-shrink-0">
                   <div className="text-xs font-mono text-[var(--color-primary)] mb-1">{item.era}</div>
@@ -399,18 +379,18 @@ export default function Stack() {
                 </div>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       <section className="section-padding">
         <div className="max-w-7xl mx-auto px-6">
-          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-12">
+          <motion.div variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-12">
             <span className="section-label mb-6 block w-fit">Teaching & R&D</span>
-            <h2 className="display-text mb-4">
+            <motion.h2 variants={slideFromRight} initial="hidden" whileInView="visible" viewport={{ once: true }} className="display-text mb-4">
               Kutaisi International{' '}
               <span className="text-gradient">University</span>
-            </h2>
+            </motion.h2>
             <p className="body-large max-w-2xl mb-4">
               Not a separate activity -- an applied R&D lab and talent pipeline. Courses are directly
               informed by live company builds.
@@ -419,15 +399,15 @@ export default function Stack() {
               href="https://github.com/orgs/ZA-KIU-Classroom"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-sm text-[var(--color-primary)] hover:text-white transition-colors mb-8"
+              className="group inline-flex items-center gap-2 text-sm text-[var(--color-primary)] hover:text-white transition-colors mb-8"
             >
               <Github className="w-4 h-4" />
               github.com/orgs/ZA-KIU-Classroom
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </a>
           </motion.div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {[
               { title: 'AI-Powered Software Development', type: 'Elective, CS', link: 'https://github.com/ZA-KIU/AI-POWERED-SOFTWARE-DEV' },
               { title: 'Product Development for Software Engineers', type: 'Elective, CS', link: 'https://github.com/ZA-KIU/PRODUCT-DEV-FOR-SOFTWARE-ENGINEERS' },
@@ -436,11 +416,7 @@ export default function Stack() {
             ].map((course, i) => (
               <motion.div
                 key={course.title}
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                custom={i}
+                variants={staggerItem}
                 className="glass-card rounded-xl p-5 flex flex-col"
               >
                 <BookOpen className="w-5 h-5 text-[var(--color-primary)] mb-3" />
@@ -459,13 +435,13 @@ export default function Stack() {
                 )}
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       <section className="section-padding bg-[var(--color-bg-secondary)] border-t border-[var(--color-border)]">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+          <motion.div variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }}>
             <Layers className="w-12 h-12 text-[var(--color-primary)] mx-auto mb-6" />
             <h2 className="display-text mb-6">
               See the{' '}
@@ -475,11 +451,11 @@ export default function Stack() {
               Why these three infrastructure pillars form an interlocking system -- and why the market timing is right.
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
-              <Link to="/thesis" className="btn-primary flex items-center gap-2">
+              <Link to="/thesis" className="group btn-primary flex items-center gap-2">
                 <span>Read the Thesis</span>
-                <ArrowRight className="w-5 h-5" />
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
-              <Link to="/contact" className="btn-secondary flex items-center gap-2">
+              <Link to="/contact" className="group btn-secondary flex items-center gap-2">
                 <Building2 className="w-5 h-5" />
                 <span>Get in Touch</span>
               </Link>

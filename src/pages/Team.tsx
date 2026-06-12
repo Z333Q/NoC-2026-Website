@@ -5,15 +5,7 @@ import {
   Cpu, TrendingUp, Building2, GraduationCap, Zap, Shield
 } from 'lucide-react';
 import { useSeoMeta } from '../hooks/useSeoMeta';
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 40 },
-  visible: (i = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7, delay: i * 0.1, ease: [0.4, 0, 0.2, 1] as [number, number, number, number] },
-  }),
-};
+import { fadeUp, fadeIn, slideFromLeft, slideFromRight, staggerContainer, staggerItem } from '../lib/motion';
 
 const careerPhases = [
   {
@@ -95,7 +87,7 @@ export default function Team() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-3 gap-12 items-start">
             <div className="lg:col-span-1">
-              <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+              <motion.div variants={slideFromLeft} initial="hidden" whileInView="visible" viewport={{ once: true }}>
                 <div className="glass-card rounded-2xl p-6 mb-6">
                   <img
                     src="/zeshan-bio-photo-2022-square.jpg"
@@ -152,7 +144,7 @@ export default function Team() {
             </div>
 
             <div className="lg:col-span-2">
-              <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-12">
+              <motion.div variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-12">
                 <span className="section-label mb-6 block w-fit">Founder-Market Fit</span>
                 <h2 className="display-text mb-6">
                   The{' '}
@@ -169,17 +161,13 @@ export default function Team() {
                 </p>
               </motion.div>
 
-              <div className="space-y-4">
+              <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="space-y-4">
                 {careerPhases.map((phase, i) => {
                   const Icon = phase.icon;
                   return (
                     <motion.div
                       key={phase.era}
-                      variants={fadeUp}
-                      initial="hidden"
-                      whileInView="visible"
-                      viewport={{ once: true }}
-                      custom={i}
+                      variants={staggerItem}
                       className="glass-card rounded-xl p-6"
                     >
                       <div className="flex flex-col sm:flex-row sm:items-start gap-4">
@@ -208,7 +196,7 @@ export default function Team() {
                     </motion.div>
                   );
                 })}
-              </div>
+              </motion.div>
             </div>
           </div>
         </div>
@@ -216,8 +204,8 @@ export default function Team() {
 
       <section className="section-padding bg-[var(--color-bg-secondary)] border-y border-[var(--color-border)]">
         <div className="max-w-7xl mx-auto px-6">
-          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-12">
-            <span className="section-label mb-6 block w-fit">Team</span>
+          <motion.div variants={slideFromLeft} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-12">
+            <span className="section-label-minimal mb-6 block w-fit">Team</span>
             <h2 className="display-text mb-4">
               The{' '}
               <span className="text-gradient">Co-Founders</span>
@@ -230,7 +218,7 @@ export default function Team() {
 
           <div className="grid lg:grid-cols-2 gap-6">
             <motion.div
-              variants={fadeUp}
+              variants={slideFromLeft}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
@@ -261,11 +249,10 @@ export default function Team() {
             </motion.div>
 
             <motion.div
-              variants={fadeUp}
+              variants={slideFromRight}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
-              custom={1}
               className="glass-card rounded-2xl p-8 border border-teal-500/20"
             >
               <div className="flex items-start gap-4 mb-6">
@@ -315,11 +302,10 @@ export default function Team() {
             </motion.div>
 
             <motion.div
-              variants={fadeUp}
+              variants={slideFromLeft}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
-              custom={2}
               className="glass-card rounded-2xl p-8 border border-emerald-500/20"
             >
               <div className="flex items-start gap-4 mb-6">
@@ -364,8 +350,8 @@ export default function Team() {
 
       <section className="section-padding border-y border-[var(--color-border)]">
         <div className="max-w-7xl mx-auto px-6">
-          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-12">
-            <span className="section-label mb-6 block w-fit">Teaching & Research</span>
+          <motion.div variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-12">
+            <span className="section-label-minimal mb-6 block w-fit">Teaching & Research</span>
             <h2 className="display-text mb-4">
               Kutaisi International{' '}
               <span className="text-gradient">University</span>
@@ -376,7 +362,7 @@ export default function Team() {
             </p>
           </motion.div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
             {[
               { title: 'AI-Powered Software Development', status: 'Current', link: 'https://github.com/ZA-KIU/AI-POWERED-SOFTWARE-DEV' },
               { title: 'Product Development for Software Engineers', status: 'Current', link: 'https://github.com/ZA-KIU/PRODUCT-DEV-FOR-SOFTWARE-ENGINEERS' },
@@ -385,11 +371,7 @@ export default function Team() {
             ].map((course, i) => (
               <motion.div
                 key={course.title}
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                custom={i}
+                variants={staggerItem}
                 className="glass-card rounded-xl p-5"
               >
                 <GraduationCap className="w-5 h-5 text-[var(--color-primary)] mb-3" />
@@ -408,15 +390,15 @@ export default function Team() {
                 )}
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       <section className="section-padding bg-[var(--color-bg-secondary)]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-              <span className="section-label mb-6 block w-fit">Advisory</span>
+            <motion.div variants={slideFromLeft} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+              <span className="section-label-minimal mb-6 block w-fit">Advisory</span>
               <h2 className="display-text mb-6">
                 Work{' '}
                 <span className="text-gradient">With Zeshan</span>
@@ -443,19 +425,18 @@ export default function Team() {
                   </div>
                 ))}
               </div>
-              <Link to="/contact" className="btn-primary inline-flex items-center gap-2">
+              <Link to="/contact" className="btn-primary group inline-flex items-center gap-2">
                 <span>Get in Touch</span>
-                <ArrowRight className="w-5 h-5" />
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
             </motion.div>
 
             <motion.div
-              variants={fadeUp}
+              variants={slideFromRight}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
-              custom={1}
-              className="glass-card rounded-2xl p-8 border border-[var(--color-primary)]/20"
+              className="glass-card card-accent-left rounded-2xl p-8 border border-[var(--color-primary)]/20"
             >
               <BookOpen className="w-8 h-8 text-[var(--color-primary)] mb-6" />
               <blockquote className="text-white text-2xl font-bold leading-tight mb-4">
@@ -482,7 +463,7 @@ export default function Team() {
 
       <section className="section-padding border-t border-[var(--color-border)]">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+          <motion.div variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }}>
             <h2 className="display-text mb-6">
               Let's Build{' '}
               <span className="text-gradient">Together</span>
@@ -493,9 +474,9 @@ export default function Team() {
               we should talk.
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
-              <Link to="/contact" className="btn-primary flex items-center gap-2">
+              <Link to="/contact" className="btn-primary group flex items-center gap-2">
                 <span>Get in Touch</span>
-                <ArrowRight className="w-5 h-5" />
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link to="/thesis" className="btn-secondary flex items-center gap-2">
                 <BookOpen className="w-5 h-5" />

@@ -6,15 +6,7 @@ import {
 } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { useSeoMeta } from '../hooks/useSeoMeta';
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 40 },
-  visible: (i = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7, delay: i * 0.1, ease: [0.4, 0, 0.2, 1] as [number, number, number, number] },
-  }),
-};
+import { fadeUp, fadeIn, slideFromLeft, slideFromRight } from '../lib/motion';
 
 const topics = [
   'Investment Inquiry',
@@ -74,17 +66,17 @@ export default function Contact() {
           <div className="glow-orb glow-orb-primary w-[400px] h-[400px] -top-20 right-0 opacity-15" />
         </div>
         <div className="max-w-7xl mx-auto px-6 py-20 relative z-10">
-          <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0} className="mb-8">
-            <span className="section-label">
+          <motion.div variants={fadeIn} initial="hidden" animate="visible" custom={0} className="mb-8">
+            <span className="section-label-minimal">
               <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-primary)] animate-pulse" />
               Get in Touch
             </span>
           </motion.div>
-          <motion.h1 variants={fadeUp} initial="hidden" animate="visible" custom={1} className="hero-text max-w-3xl mb-8">
+          <motion.h1 variants={slideFromLeft} initial="hidden" animate="visible" custom={1} className="hero-text max-w-3xl mb-8">
             Let's{' '}
             <span className="text-gradient">Connect</span>
           </motion.h1>
-          <motion.p variants={fadeUp} initial="hidden" animate="visible" custom={2} className="body-large max-w-2xl">
+          <motion.p variants={slideFromLeft} initial="hidden" animate="visible" custom={2} className="body-large max-w-2xl">
             Whether you are a VC evaluating the agent economy, a technical partner building on x402,
             or an enterprise exploring autonomous settlement -- we should talk.
           </motion.p>
@@ -95,7 +87,7 @@ export default function Contact() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-3 gap-12">
             <div className="lg:col-span-2">
-              <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+              <motion.div variants={slideFromLeft} initial="hidden" whileInView="visible" viewport={{ once: true }}>
                 <div className="glass-card rounded-2xl p-8">
                   <h2 className="text-2xl font-bold text-white mb-8">Send a Message</h2>
 
@@ -214,11 +206,11 @@ export default function Contact() {
 
             <div className="space-y-6">
               <motion.div
-                variants={fadeUp}
+                variants={slideFromRight}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
-                className="glass-card rounded-2xl p-6"
+                className="glass-card rounded-2xl p-6 card-accent-left"
               >
                 <h3 className="text-lg font-bold text-white mb-4">Schedule a Call</h3>
                 <p className="text-[var(--color-text-secondary)] text-sm leading-relaxed mb-4">
@@ -238,7 +230,7 @@ export default function Contact() {
               </motion.div>
 
               <motion.div
-                variants={fadeUp}
+                variants={slideFromRight}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
@@ -258,7 +250,7 @@ export default function Contact() {
               </motion.div>
 
               <motion.div
-                variants={fadeUp}
+                variants={slideFromRight}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
@@ -298,7 +290,7 @@ export default function Contact() {
               </motion.div>
 
               <motion.div
-                variants={fadeUp}
+                variants={slideFromRight}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
