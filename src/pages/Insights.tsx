@@ -1,199 +1,401 @@
-import { useState } from 'react';
 import { motion } from 'framer-motion';
-import MolecularOrb from '../components/MolecularOrb';
+import { useState, useEffect } from 'react';
+import { ExternalLink, Clock, ArrowRight, BookOpen, Calendar, User } from 'lucide-react';
+import { articles, sourceConfig, type ArticleCategory, type ArticleSource } from '../data/insightsData';
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: (i = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, delay: i * 0.1, ease: [0.4, 0, 0.2, 1] as [number, number, number, number] },
+  }),
+};
+
+type FilterCategory = 'All' | ArticleCategory;
+type FilterSource = 'All' | ArticleSource;
+
+const categoryFilters: FilterCategory[] = ['All', 'Research', 'Technology', 'Protocol', 'Case Study'];
+const sourceFilters: { value: FilterSource; label: string }[] = [
+  { value: 'All', label: 'All Sources' },
+  { value: 'refi_trading', label: 'ReFi Trading' },
+  { value: 'p402_intelligence', label: 'P402 Intelligence' },
+];
+
+function formatDate(dateStr: string) {
+  return new Date(dateStr).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+}
+
+function ArticleCard({ article, index }: { article: typeof articles[0]; index: number }) {
+  const src = sourceConfig[article.source];
+  return (
+    <motion.article
+      variants={fadeUp}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+      custom={index % 4}
+    >
+      <a
+        href={article.sourceUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`group glass-card-interactive rounded-2xl border ${src.borderColor} flex flex-col h-full overflow-hidden`}
+        style={{ background: 'linear-gradient(135deg, rgba(20,20,32,0.8) 0%, rgba(10,10,16,0.9) 100%)' }}
+        aria-label={`Read: ${article.title}`}
+      >
+        <div className="relative h-44 overflow-hidden flex-shrink-0">
+          <img
+            src={article.image}
+            alt={article.imageAlt}
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            loading="lazy"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a10]/80 via-transparent to-transparent" />
+          <div className="absolute top-3 left-3 flex items-center gap-2">
+            <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold ${src.bgColor} ${src.color} border ${src.borderColor} backdrop-blur-sm`}>
+              {src.label}
+            </span>
+          </div>
+          {article.series && (
+            <div className="absolute bottom-3 left-3 text-xs text-white/70 font-mono bg-black/50 backdrop-blur-sm px-2 py-0.5 rounded">
+              {article.series} — Part {article.seriesPart}
+            </div>
+          )}
+        </div>
+
+        <div className="p-5 flex flex-col flex-1">
+          <div className="flex items-center gap-3 mb-3 text-[var(--color-text-muted)] text-xs">
+            <span className="flex items-center gap-1">
+              <Calendar className="w-3 h-3" />
+              <time dateTime={article.publishedDate}>{formatDate(article.publishedDate)}</time>
+            </span>
+            <span className="flex items-center gap-1">
+              <Clock className="w-3 h-3" />
+              {article.readTime}
+            </span>
+          </div>
+
+          <h3 className="text-white font-bold text-base mb-2 group-hover:text-[var(--color-primary)] transition-colors leading-snug">
+            {article.title}
+          </h3>
+
+          <p className="text-[var(--color-text-secondary)] text-sm leading-relaxed mb-4 line-clamp-2 flex-1">
+            {article.excerpt}
+          </p>
+
+          <div className="flex flex-wrap gap-1.5 mb-4">
+            {article.tags.slice(0, 3).map((tag) => (
+              <span key={tag} className="text-xs text-[var(--color-text-muted)] bg-white/5 px-2 py-0.5 rounded">
+                {tag}
+              </span>
+            ))}
+          </div>
+
+          <div className="flex items-center justify-between pt-3 border-t border-white/5">
+            <span className="flex items-center gap-1.5 text-xs text-[var(--color-text-muted)]">
+              <User className="w-3 h-3" />
+              {article.author}
+            </span>
+            <div className="flex items-center gap-1 text-sm text-[var(--color-primary)] group-hover:gap-2 transition-all">
+              <span>Read</span>
+              <ArrowRight className="w-4 h-4" />
+            </div>
+          </div>
+        </div>
+      </a>
+    </motion.article>
+  );
+}
 
 export default function Insights() {
-  const [activeFilter, setActiveFilter] = useState('all');
+  const [activeCategory, setActiveCategory] = useState<FilterCategory>('All');
+  const [activeSource, setActiveSource] = useState<FilterSource>('All');
 
-  const articles = [
-    {
-      id: 1,
-      title: 'The Future of AI-Powered Development',
-      excerpt: 'Exploring how AI is reshaping the way we build software and design systems.',
-      date: '2024-12-15',
-      tags: ['AI', 'Development'],
-      featured: true,
-      series: 'AI Futures'
-    },
-    {
-      id: 2,
-      title: 'Building Scalable Infrastructure',
-      excerpt: 'Best practices for designing infrastructure that grows with your application.',
-      date: '2024-11-20',
-      tags: ['Infrastructure', 'Scale'],
-      featured: false,
-      series: 'Engineering'
-    },
-    {
-      id: 3,
-      title: 'React Performance Optimization',
-      excerpt: 'Deep dive into optimizing React applications for production performance.',
-      date: '2024-10-10',
-      tags: ['React', 'Performance'],
-      featured: false,
-      series: 'Web Tech'
-    },
-    {
-      id: 4,
-      title: 'AI Agents: Architecture and Design',
-      excerpt: 'Understanding the architecture behind modern AI agent systems.',
-      date: '2024-09-05',
-      tags: ['AI', 'Architecture'],
-      featured: true,
-      series: 'AI Futures'
+  useEffect(() => {
+    document.title = 'Insights & Research | Nature of Commerce';
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) metaDesc.setAttribute('content', 'Research, technical papers, and thought leadership from Nature of Commerce. Covering AI trading infrastructure, agentic payments, zero-knowledge compliance, and market structure.');
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    if (ogTitle) ogTitle.setAttribute('content', 'Insights & Research | Nature of Commerce');
+    const ogDesc = document.querySelector('meta[property="og:description"]');
+    if (ogDesc) ogDesc.setAttribute('content', 'Technical papers and market research from the Nature of Commerce studio. AI trading, agentic payments, ZK compliance, and the future of digital commerce.');
+    const twitterTitle = document.querySelector('meta[name="twitter:title"]');
+    if (twitterTitle) twitterTitle.setAttribute('content', 'Insights & Research | Nature of Commerce');
+    const canonical = document.querySelector('link[rel="canonical"]');
+    if (canonical) canonical.setAttribute('href', 'https://natureofcommerce.com/insights');
+
+    const schema = {
+      '@context': 'https://schema.org',
+      '@type': 'CollectionPage',
+      '@id': 'https://natureofcommerce.com/insights',
+      name: 'Insights & Research — Nature of Commerce',
+      description: 'Research, technical papers, and thought leadership from Nature of Commerce. Covering AI trading, agentic payments, zero-knowledge compliance, and market structure.',
+      url: 'https://natureofcommerce.com/insights',
+      publisher: { '@id': 'https://natureofcommerce.com/#organization' },
+      hasPart: articles.map((a) => ({
+        '@type': 'Article',
+        headline: a.title,
+        description: a.excerpt,
+        author: { '@type': 'Person', name: a.author },
+        datePublished: a.publishedDate,
+        url: a.sourceUrl,
+        image: a.image,
+        keywords: a.tags.join(', '),
+        timeRequired: `PT${parseInt(a.readTime)}M`,
+      })),
+    };
+
+    let scriptTag = document.getElementById('insights-schema') as HTMLScriptElement | null;
+    if (!scriptTag) {
+      scriptTag = document.createElement('script');
+      scriptTag.id = 'insights-schema';
+      scriptTag.type = 'application/ld+json';
+      document.head.appendChild(scriptTag);
     }
-  ];
+    scriptTag.textContent = JSON.stringify(schema);
 
-  const topics = ['AI', 'Development', 'Infrastructure', 'React', 'Performance', 'Architecture'];
+    return () => {
+      document.title = 'Nature of Commerce | Early-Stage VC Fund & Startup Launchpad';
+      if (metaDesc) metaDesc.setAttribute('content', 'Nature of Commerce is an early-stage venture capital fund, startup launchpad, and strategic consulting firm. We invest in founders building the future of digital commerce, Web3, DeFi, and tokenized economies. Apply for funding or join our accelerator program.');
+      if (ogTitle) ogTitle.setAttribute('content', 'Nature of Commerce | Early-Stage VC Fund & Startup Launchpad');
+      if (canonical) canonical.setAttribute('href', 'https://natureofcommerce.com/');
+      const el = document.getElementById('insights-schema');
+      if (el) el.remove();
+    };
+  }, []);
 
-  const personalContent = [
-    {
-      platform: 'Blog',
-      title: 'Technical Deep Dives',
-      description: 'In-depth articles exploring cutting-edge technologies and practices',
-      link: '#'
-    },
-    {
-      platform: 'TikTok',
-      title: 'Tech Tips & Tricks',
-      description: 'Quick insights and demonstrations of powerful development techniques',
-      link: '#'
-    }
-  ];
+  const marketWarsSeries = articles.filter((a) => a.series === 'Market Wars').sort((a, b) => (a.seriesPart ?? 0) - (b.seriesPart ?? 0));
 
-  const filteredArticles = activeFilter === 'all'
-    ? articles
-    : articles.filter(a => a.tags.includes(activeFilter));
+  const filtered = articles
+    .filter((a) => {
+      const catMatch = activeCategory === 'All' || a.category === activeCategory;
+      const srcMatch = activeSource === 'All' || a.source === activeSource;
+      return catMatch && srcMatch;
+    })
+    .sort((a, b) => new Date(b.publishedDate).getTime() - new Date(a.publishedDate).getTime());
 
   return (
-    <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative min-h-[500px] flex items-center justify-center overflow-hidden bg-gradient-to-b from-[var(--color-bg-primary)] to-[var(--color-bg-secondary)]">
-        <MolecularOrb />
-        <div className="relative z-10 text-center px-4">
-          <h1 className="text-5xl md:text-6xl font-bold mb-4">Insights & Articles</h1>
-          <p className="text-xl text-[var(--color-text-secondary)] max-w-2xl mx-auto">
-            Thoughts on technology, AI, and the future of development
-          </p>
+    <main className="overflow-hidden">
+      <section className="relative min-h-[50vh] flex items-center blueprint-grid pt-24" aria-label="Insights hero">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="glow-orb glow-orb-primary w-[500px] h-[500px] -top-20 right-0 opacity-15" />
+        </div>
+        <div className="max-w-7xl mx-auto px-6 py-20 relative z-10">
+          <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0} className="mb-8">
+            <span className="section-label">
+              <BookOpen className="w-4 h-4" />
+              Insights & Research
+            </span>
+          </motion.div>
+          <motion.h1 variants={fadeUp} initial="hidden" animate="visible" custom={1} className="hero-text max-w-4xl mb-8">
+            Research &{' '}
+            <span className="text-gradient">Analysis</span>
+          </motion.h1>
+          <motion.p variants={fadeUp} initial="hidden" animate="visible" custom={2} className="body-large max-w-2xl">
+            Technical papers, market research, and thought leadership from across the Nature of Commerce studio.
+            Covering AI trading, agentic payments, zero-knowledge compliance, and market structure.
+          </motion.p>
         </div>
       </section>
 
-      {/* Featured Series */}
-      <section className="py-20 px-4 max-w-6xl mx-auto">
-        <div className="mb-12">
-          <h2 className="mono-label !text-[var(--color-primary)] mb-6">Featured Series</h2>
-          <div className="grid md:grid-cols-2 gap-8">
-            {articles.filter(a => a.featured).map((article) => (
+      <section className="section-padding bg-[var(--color-bg-secondary)] border-y border-[var(--color-border)]" aria-label="Market Wars featured series">
+        <div className="max-w-7xl mx-auto px-6">
+          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-10">
+            <div className="flex items-center gap-3 mb-3">
+              <div className="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-bold uppercase tracking-wider">
+                Featured Series
+              </div>
+              <span className="text-[var(--color-text-muted)] text-xs">5-Part Series from ReFi Trading</span>
+            </div>
+            <h2 className="display-text mb-3">
+              <span className="text-gradient">Market Wars</span>
+            </h2>
+            <p className="body-large max-w-2xl">
+              A comprehensive exploration of the battle between retail and institutional traders --
+              from historical origins to the future of autonomous finance.
+            </p>
+          </motion.div>
+
+          <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
+            {marketWarsSeries.map((article, i) => (
               <motion.article
                 key={article.id}
-                className="p-8 rounded-lg bg-[var(--color-bg-secondary)] border border-[var(--color-border)]"
-                whileHover={{ y: -4 }}
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                custom={i}
+                className="group flex-shrink-0 w-72"
               >
-                <span className="inline-block mono-label text-[var(--color-primary)] mb-4">{article.series}</span>
-                <h3 className="text-2xl font-bold mb-3">{article.title}</h3>
-                <p className="text-[var(--color-text-secondary)] mb-4">{article.excerpt}</p>
-                <div className="flex gap-2 flex-wrap">
-                  {article.tags.map((tag) => (
-                    <span key={tag} className="tag text-xs">{tag}</span>
-                  ))}
-                </div>
+                <a
+                  href={article.sourceUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block glass-card-interactive rounded-xl border border-emerald-500/30 overflow-hidden h-full"
+                  style={{ background: 'linear-gradient(135deg, rgba(52,211,153,0.04) 0%, rgba(10,10,16,0.9) 100%)' }}
+                >
+                  <div className="relative h-32 overflow-hidden">
+                    <img
+                      src={article.image}
+                      alt={article.imageAlt}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a10]/70 via-transparent to-transparent" />
+                    <div className="absolute bottom-2 left-3 text-emerald-400 text-xs font-mono">Part {article.seriesPart} of 5</div>
+                  </div>
+                  <div className="p-4">
+                    <h3 className="text-white font-bold text-sm mb-2 group-hover:text-emerald-400 transition-colors leading-snug">
+                      {article.title}
+                    </h3>
+                    <div className="flex items-center justify-between">
+                      <span className="text-[var(--color-text-muted)] text-xs">{article.readTime}</span>
+                      <ExternalLink className="w-3.5 h-3.5 text-emerald-400 opacity-0 group-hover:opacity-100 transition-opacity" />
+                    </div>
+                  </div>
+                </a>
               </motion.article>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Filter Section */}
-      <section className="py-12 px-4 max-w-6xl mx-auto">
-        <div className="flex flex-wrap gap-3 mb-12">
-          <button
-            onClick={() => setActiveFilter('all')}
-            className={`px-4 py-2 rounded-lg transition hover:border-[var(--color-border-strong)] ${
-              activeFilter === 'all'
-                ? 'bg-[var(--color-primary)] text-white'
-                : 'border border-[var(--color-border)] text-[var(--color-text-secondary)]'
-            }`}
-          >
-            All Articles
-          </button>
-          {topics.map((topic) => (
-            <button
-              key={topic}
-              onClick={() => setActiveFilter(topic)}
-              className={`px-4 py-2 rounded-lg transition hover:border-[var(--color-border-strong)] ${
-                activeFilter === topic
-                  ? 'bg-[var(--color-primary)] text-white'
-                  : 'border border-[var(--color-border)] text-[var(--color-text-secondary)]'
-              }`}
-            >
-              {topic}
-            </button>
-          ))}
-        </div>
-      </section>
-
-      {/* Articles Grid */}
-      <section className="py-12 px-4 max-w-6xl mx-auto">
-        <div className="grid md:grid-cols-2 gap-8">
-          {filteredArticles.map((article) => (
-            <motion.article
-              key={article.id}
-              className="p-6 rounded-lg bg-[var(--color-bg-secondary)] border border-[var(--color-border)]"
-              whileHover={{ y: -4 }}
-            >
-              <span className="text-sm text-[var(--color-text-secondary)]">{article.date}</span>
-              <h3 className="text-xl font-bold mt-2 mb-3">{article.title}</h3>
-              <p className="text-[var(--color-text-secondary)] mb-4">{article.excerpt}</p>
-              <div className="flex gap-2 flex-wrap">
-                {article.tags.map((tag) => (
-                  <span key={tag} className="tag text-xs">{tag}</span>
+      <section className="section-padding" aria-label="All published articles">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between mb-10">
+            <div>
+              <span className="section-label mb-3 block w-fit">All Posts</span>
+              <h2 className="display-text">
+                Everything{' '}
+                <span className="text-gradient">Published</span>
+              </h2>
+            </div>
+            <div className="flex flex-col gap-3">
+              <div className="flex flex-wrap gap-2" role="group" aria-label="Filter by category">
+                {categoryFilters.map((f) => (
+                  <button
+                    key={f}
+                    onClick={() => setActiveCategory(f)}
+                    aria-pressed={activeCategory === f}
+                    className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all ${
+                      activeCategory === f
+                        ? 'bg-[var(--color-primary)] text-white'
+                        : 'glass-card text-[var(--color-text-muted)] hover:text-white'
+                    }`}
+                  >
+                    {f}
+                  </button>
                 ))}
               </div>
-            </motion.article>
-          ))}
+              <div className="flex flex-wrap gap-2" role="group" aria-label="Filter by source">
+                {sourceFilters.map((f) => (
+                  <button
+                    key={f.value}
+                    onClick={() => setActiveSource(f.value)}
+                    aria-pressed={activeSource === f.value}
+                    className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all ${
+                      activeSource === f.value
+                        ? 'bg-[var(--color-primary)]/20 border border-[var(--color-primary)] text-[var(--color-primary)]'
+                        : 'glass-card text-[var(--color-text-muted)] hover:text-white'
+                    }`}
+                  >
+                    {f.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filtered.map((article, i) => (
+              <ArticleCard key={article.id} article={article} index={i} />
+            ))}
+          </div>
+
+          {filtered.length === 0 && (
+            <div className="text-center py-20 text-[var(--color-text-muted)]">
+              No articles match the selected filters.
+            </div>
+          )}
         </div>
       </section>
 
-      {/* Personal Content Section */}
-      <section className="py-20 px-4 max-w-6xl mx-auto">
-        <div className="mb-12">
-          <h2 className="mono-label mb-8">Personal Content</h2>
-          <div className="grid md:grid-cols-2 gap-8">
-            {personalContent.map((content, idx) => (
-              <motion.div
-                key={idx}
-                className="p-8 rounded-lg bg-[var(--color-bg-secondary)] border border-[var(--color-border)]"
-                whileHover={{ y: -4 }}
-              >
-                <h3 className="text-2xl font-bold mb-2">{content.platform}</h3>
-                <p className="text-[var(--color-primary)] font-semibold mb-3">{content.title}</p>
-                <p className="text-[var(--color-text-secondary)] mb-6">{content.description}</p>
-                <a href={content.link} className="link-underline text-[var(--color-primary)]">
-                  Explore →
+      <section className="section-padding bg-[var(--color-bg-secondary)] border-y border-[var(--color-border)]" aria-label="Personal content">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-8">
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="rounded-2xl p-8 border border-amber-500/20"
+              style={{ background: 'linear-gradient(135deg, rgba(245,158,11,0.05) 0%, rgba(10,10,16,0.9) 100%)' }}
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <span className="px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-semibold">
+                  Personal Blog
+                </span>
+              </div>
+              <h3 className="text-2xl font-bold text-white mb-3">Exploration & Discovery</h3>
+              <p className="text-[var(--color-text-secondary)] leading-relaxed mb-6">
+                Adventures and reflections from around the world with my wife{' '}
+                <a
+                  href="https://linkedin.com/in/yulkin"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-amber-400 hover:text-white transition-colors underline underline-offset-2"
+                >
+                  Yuliia
                 </a>
-              </motion.div>
-            ))}
+                . Travel, culture, food, and the occasional philosophical tangent. Building is only part of the story.
+              </p>
+              <a
+                href="https://weexploreanddiscover.tumblr.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-amber-400 hover:text-white transition-colors font-semibold"
+              >
+                <ExternalLink className="w-4 h-4" />
+                Read the Blog
+              </a>
+            </motion.div>
+
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              custom={1}
+              className="rounded-2xl p-8 border border-amber-500/20"
+              style={{ background: 'linear-gradient(135deg, rgba(245,158,11,0.05) 0%, rgba(10,10,16,0.9) 100%)' }}
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <span className="px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-semibold">
+                  TikTok
+                </span>
+              </div>
+              <h3 className="text-2xl font-bold text-white mb-3">Bagheera & Oreo</h3>
+              <p className="text-[var(--color-text-secondary)] leading-relaxed mb-3">
+                The real stars of the show.
+              </p>
+              <p className="text-[var(--color-text-secondary)] leading-relaxed mb-6">
+                Two dogs, zero understanding of financial infrastructure, maximum chaos. Bagheera handles
+                security (barking at leaves). Oreo handles product (eating things that are not food).
+              </p>
+              <a
+                href="https://tiktok.com/@bagheeandoreo"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-amber-400 hover:text-white transition-colors font-semibold"
+              >
+                <ExternalLink className="w-4 h-4" />
+                @bagheeandoreo on TikTok
+              </a>
+            </motion.div>
           </div>
         </div>
       </section>
-
-      {/* Newsletter Section */}
-      <section className="py-20 px-4 max-w-2xl mx-auto text-center">
-        <h2 className="text-4xl font-bold mb-4">Stay Updated</h2>
-        <p className="text-lg text-[var(--color-text-secondary)] mb-8">
-          Subscribe to get the latest insights and articles delivered to your inbox
-        </p>
-        <div className="flex gap-2">
-          <input
-            type="email"
-            placeholder="Enter your email"
-            className="flex-1 px-4 py-3 rounded-lg bg-[var(--color-bg-secondary)] border border-[var(--color-border)] focus:outline-none focus:border-[var(--color-primary)]"
-          />
-          <button className="px-8 py-3 bg-[var(--color-primary)] text-white rounded-lg font-semibold hover:opacity-90 transition">
-            Subscribe
-          </button>
-        </div>
-      </section>
-    </div>
+    </main>
   );
 }

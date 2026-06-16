@@ -1,5 +1,7 @@
-import { Link } from 'react-router-dom';
+import { motion, useInView } from 'framer-motion';
+import { useRef } from 'react';
 import { FileText, AlertTriangle, Scale, Users, Ban, RefreshCw, Mail } from 'lucide-react';
+import ParticleField from '../components/ParticleField';
 import { useSeoMeta } from '../hooks/useSeoMeta';
 
 const sections = [
@@ -67,119 +69,191 @@ const sections = [
   },
 ];
 
+function AnimatedSection({ children, className = '' }: { children: React.ReactNode; className?: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: '-100px' });
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 40 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
 export default function Terms() {
   useSeoMeta({
     title: 'Terms of Service | Nature of Commerce',
-    description: 'Terms of Service for Nature of Commerce LLC. Read our terms governing use of our venture studio and investment services.',
+    description: 'Terms of Service for Nature of Commerce LLC. Read our terms governing use of our venture capital, startup launchpad, and Web3 investment services. Wyoming LLC.',
     ogTitle: 'Terms of Service | Nature of Commerce',
-    ogDescription: 'Nature of Commerce LLC terms of service, investment disclaimers, intellectual property rights, and governing law.',
+    ogDescription: 'Nature of Commerce LLC terms of service, investment disclaimers, intellectual property rights, and governing law for our Web3 and DeFi investment platform.',
     canonical: 'https://natureofcommerce.com/terms',
   });
 
   return (
-    <main>
-      <section className="pt-32 pb-20">
-        <div className="max-w-3xl mx-auto px-6 text-center">
-          <span className="section-label-minimal mb-8 block mx-auto w-fit">
-            <FileText className="w-4 h-4" />
-            Legal
-          </span>
-          <h1 className="hero-text mb-8">Terms of Service</h1>
-          <p className="body-large max-w-2xl mx-auto">
-            Please read these terms carefully before using our services.
-            By accessing our website, you agree to be bound by these terms.
-          </p>
-          <p className="text-[var(--color-text-muted)] text-sm mt-4">
-            Last updated: January 2026
-          </p>
+    <div className="min-h-screen">
+      <section className="relative py-32 overflow-hidden">
+        <ParticleField className="opacity-30" particleCount={40} />
+        <div className="absolute inset-0 mesh-gradient" />
+
+        <div className="relative z-10 max-w-4xl mx-auto px-6 pt-16">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-center mb-16"
+          >
+            <div className="section-label mx-auto mb-8">
+              <FileText className="w-4 h-4" />
+              Legal
+            </div>
+            <h1 className="hero-text mb-8">
+              Terms of <span className="text-gradient">Service</span>
+            </h1>
+            <p className="body-large max-w-2xl mx-auto">
+              Please read these terms carefully before using our services.
+              By accessing our website, you agree to be bound by these terms.
+            </p>
+            <p className="text-[var(--color-text-muted)] mt-4">
+              Last updated: January 2026
+            </p>
+          </motion.div>
         </div>
       </section>
 
-      <section className="section-padding bg-[var(--color-bg-secondary)] border-t border-[var(--color-border)]">
-        <div className="max-w-3xl mx-auto px-6 space-y-8">
-          <div className="surface-card p-8">
-            <h2 className="text-xl font-bold mb-4">Agreement to Terms</h2>
-            <p className="text-[var(--color-text-secondary)] text-sm leading-relaxed">
-              These Terms of Service govern your access to and use of the website and services
-              provided by Nature of Commerce LLC, a Wyoming limited liability company. By
-              accessing or using our services, you agree to be bound by these Terms.
-            </p>
-          </div>
+      <section className="section-padding bg-[var(--color-bg-secondary)]">
+        <div className="max-w-4xl mx-auto px-6">
+          <AnimatedSection className="mb-12">
+            <div className="glass-card rounded-2xl p-8">
+              <h2 className="text-2xl font-bold mb-4">Agreement to Terms</h2>
+              <p className="text-[var(--color-text-secondary)] leading-relaxed">
+                These Terms of Service ("Terms") govern your access to and use of the website
+                and services provided by Nature of Commerce LLC ("Company," "we," "our," or "us"),
+                a Wyoming limited liability company. By accessing or using our services, you agree
+                to be bound by these Terms. If you do not agree to these Terms, you may not access
+                or use our services. These Terms apply to all visitors, users, and others who
+                access or use our services.
+              </p>
+            </div>
+          </AnimatedSection>
 
-          <div className="surface-card p-8 border-l-2 border-l-[var(--color-warning)]">
-            <div className="flex items-start gap-4">
-              <AlertTriangle className="w-6 h-6 text-[var(--color-warning)] flex-shrink-0 mt-0.5" />
-              <div>
-                <h2 className="text-lg font-bold mb-2">Investment Disclaimer</h2>
-                <p className="text-[var(--color-text-secondary)] text-sm leading-relaxed">
-                  Nothing on this website constitutes an offer to sell or a solicitation of an
-                  offer to buy any securities. Venture capital investments involve substantial
-                  risk, including possible loss of principal. Past performance is not indicative
-                  of future results.
-                </p>
+          <AnimatedSection className="mb-12">
+            <div className="glass-card rounded-2xl p-8 border-l-4 border-[var(--color-warning)]">
+              <div className="flex items-start gap-4">
+                <AlertTriangle className="w-8 h-8 text-[var(--color-warning)] flex-shrink-0 mt-1" />
+                <div>
+                  <h2 className="text-xl font-bold mb-2">Investment Disclaimer</h2>
+                  <p className="text-[var(--color-text-secondary)] leading-relaxed">
+                    Nothing on this website constitutes an offer to sell or a solicitation of an
+                    offer to buy any securities. Any investment decisions should be made only after
+                    thorough review of official offering documents and consultation with qualified
+                    legal, tax, and financial advisors. Venture capital investments involve substantial
+                    risk, including possible loss of principal. Past performance is not indicative
+                    of future results.
+                  </p>
+                </div>
               </div>
             </div>
+          </AnimatedSection>
+
+          <div className="space-y-8">
+            {sections.map((section, i) => (
+              <AnimatedSection key={section.title}>
+                <motion.div
+                  className="glass-card rounded-2xl p-8"
+                  initial={{ opacity: 0, x: i % 2 === 0 ? -20 : 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.1 }}
+                >
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="w-12 h-12 rounded-xl bg-[var(--color-primary)]/10 flex items-center justify-center">
+                      <section.icon className="w-6 h-6 text-[var(--color-primary)]" />
+                    </div>
+                    <h2 className="text-2xl font-bold">{section.title}</h2>
+                  </div>
+                  <ul className="space-y-4">
+                    {section.content.map((item) => (
+                      <li key={item} className="flex items-start gap-3">
+                        <div className="w-2 h-2 rounded-full bg-[var(--color-primary)] mt-2 flex-shrink-0" />
+                        <span className="text-[var(--color-text-secondary)]">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </motion.div>
+              </AnimatedSection>
+            ))}
           </div>
 
-          {sections.map((section) => {
-            const Icon = section.icon;
-            return (
-              <div key={section.title} className="surface-card p-8">
-                <div className="flex items-center gap-3 mb-4">
-                  <Icon className="w-5 h-5 text-[var(--color-primary)]" />
-                  <h2 className="text-xl font-bold">{section.title}</h2>
-                </div>
-                <ul className="space-y-3">
-                  {section.content.map((item) => (
-                    <li key={item} className="flex items-start gap-3">
-                      <div className="w-1 h-1 rounded-full bg-[var(--color-primary)] mt-2 flex-shrink-0" />
-                      <span className="text-[var(--color-text-secondary)] text-sm">{item}</span>
-                    </li>
-                  ))}
-                </ul>
+          <AnimatedSection className="mt-12">
+            <div className="glass-card rounded-2xl p-8">
+              <h2 className="text-2xl font-bold mb-4">Indemnification</h2>
+              <p className="text-[var(--color-text-secondary)] leading-relaxed">
+                You agree to defend, indemnify, and hold harmless Nature of Commerce LLC and its
+                officers, directors, employees, agents, and affiliates from and against any claims,
+                damages, obligations, losses, liabilities, costs, or debt arising from your use of
+                our services, your violation of these Terms, or your violation of any rights of a
+                third party.
+              </p>
+            </div>
+          </AnimatedSection>
+
+          <AnimatedSection className="mt-12">
+            <div className="glass-card rounded-2xl p-8">
+              <h2 className="text-2xl font-bold mb-4">Governing Law</h2>
+              <p className="text-[var(--color-text-secondary)] leading-relaxed mb-4">
+                These Terms shall be governed by and construed in accordance with the laws of
+                the State of Wyoming, United States, without regard to its conflict of law
+                provisions. Any disputes arising under these Terms shall be subject to the
+                exclusive jurisdiction of the state and federal courts located in Wyoming.
+              </p>
+              <p className="text-[var(--color-text-secondary)] leading-relaxed">
+                If any provision of these Terms is held to be invalid or unenforceable, the
+                remaining provisions shall continue in full force and effect. Our failure to
+                enforce any right or provision of these Terms shall not be deemed a waiver
+                of such right or provision.
+              </p>
+            </div>
+          </AnimatedSection>
+
+          <AnimatedSection className="mt-12">
+            <div className="glass-card rounded-2xl p-8">
+              <h2 className="text-2xl font-bold mb-4">Entire Agreement</h2>
+              <p className="text-[var(--color-text-secondary)] leading-relaxed">
+                These Terms, together with our Privacy Policy, constitute the entire agreement
+                between you and Nature of Commerce LLC regarding your use of our services and
+                supersede all prior agreements and understandings, whether written or oral.
+                Any ambiguities in the interpretation of these Terms shall not be construed
+                against the drafting party.
+              </p>
+            </div>
+          </AnimatedSection>
+
+          <AnimatedSection className="mt-12">
+            <div className="glass-card rounded-2xl p-8 text-center">
+              <Mail className="w-12 h-12 text-[var(--color-primary)] mx-auto mb-4" />
+              <h2 className="text-2xl font-bold mb-4">Questions?</h2>
+              <p className="text-[var(--color-text-secondary)] leading-relaxed mb-6">
+                If you have any questions about these Terms of Service, please contact us.
+              </p>
+              <div className="text-[var(--color-text-muted)]">
+                <p>Nature of Commerce LLC</p>
+                <p>Wyoming, United States</p>
+                <a
+                  href="/contact"
+                  className="inline-block mt-4 text-[var(--color-primary)] hover:underline"
+                >
+                  Contact Form
+                </a>
               </div>
-            );
-          })}
-
-          <div className="surface-card p-8">
-            <h2 className="text-xl font-bold mb-4">Indemnification</h2>
-            <p className="text-[var(--color-text-secondary)] text-sm leading-relaxed">
-              You agree to defend, indemnify, and hold harmless Nature of Commerce LLC and its
-              officers, directors, employees, and agents from any claims, damages, or losses
-              arising from your use of our services or violation of these Terms.
-            </p>
-          </div>
-
-          <div className="surface-card p-8">
-            <h2 className="text-xl font-bold mb-4">Governing Law</h2>
-            <p className="text-[var(--color-text-secondary)] text-sm leading-relaxed">
-              These Terms shall be governed by the laws of the State of Wyoming, United States.
-              Any disputes shall be subject to the exclusive jurisdiction of the state and
-              federal courts located in Wyoming.
-            </p>
-          </div>
-
-          <div className="surface-card p-8">
-            <h2 className="text-xl font-bold mb-4">Entire Agreement</h2>
-            <p className="text-[var(--color-text-secondary)] text-sm leading-relaxed">
-              These Terms, together with our Privacy Policy, constitute the entire agreement
-              between you and Nature of Commerce LLC regarding your use of our services.
-            </p>
-          </div>
-
-          <div className="surface-card p-8 text-center">
-            <Mail className="w-8 h-8 text-[var(--color-primary)] mx-auto mb-4" />
-            <h2 className="text-xl font-bold mb-4">Questions?</h2>
-            <p className="text-[var(--color-text-secondary)] text-sm leading-relaxed mb-4">
-              If you have questions about these Terms of Service, please contact us.
-            </p>
-            <p className="text-[var(--color-text-muted)] text-sm mb-2">Nature of Commerce LLC | Wyoming, United States</p>
-            <Link to="/contact" className="text-[var(--color-primary)] hover:text-white transition-colors text-sm">
-              Contact Form
-            </Link>
-          </div>
+            </div>
+          </AnimatedSection>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

@@ -42,7 +42,7 @@ export const articles: Article[] = [
   {
     id: 'mw-2',
     title: 'From Wall Street to Your Pocket',
-    excerpt: 'How decades of democratization, from mutual funds to robo-advisors, set the stage for AI-driven trading accessible to everyone.',
+    excerpt: 'How decades of democratization -- from mutual funds to robo-advisors -- set the stage for AI-driven trading accessible to everyone.',
     category: 'Research',
     source: 'refi_trading',
     sourceLabel: 'ReFi Trading',
@@ -96,7 +96,7 @@ export const articles: Article[] = [
   {
     id: 'mw-5',
     title: "The Future of Trading Isn't Just Smarter AI",
-    excerpt: 'The finale. Smarter AI is necessary but not sufficient. The future requires safer financial infrastructure: self-custody, ZK compliance, and agent-native architecture.',
+    excerpt: 'The finale. Smarter AI is necessary but not sufficient. The future requires safer financial infrastructure -- self-custody, ZK compliance, and agent-native architecture.',
     category: 'Research',
     source: 'refi_trading',
     sourceLabel: 'ReFi Trading',
@@ -114,7 +114,7 @@ export const articles: Article[] = [
   {
     id: 'rt-6',
     title: 'Open, Hackable, Provable',
-    excerpt: 'Why transparency in financial systems is not just ethical, it is a competitive moat. Cryptographic proofs turn "trust us" into "verify it."',
+    excerpt: 'Why transparency in financial systems is not just ethical -- it is a competitive moat. Cryptographic proofs turn "trust us" into "verify it."',
     category: 'Technology',
     source: 'refi_trading',
     sourceLabel: 'ReFi Trading',
@@ -144,7 +144,7 @@ export const articles: Article[] = [
   {
     id: 'rt-8',
     title: 'Fueling the Machine: Token-Incentivized Infrastructure',
-    excerpt: 'Token incentives are not speculation vehicles. They are coordination mechanisms. DePIN applied to financial infrastructure.',
+    excerpt: 'Token incentives are not speculation vehicles -- they are coordination mechanisms. DePIN applied to financial infrastructure.',
     category: 'Technology',
     source: 'refi_trading',
     sourceLabel: 'ReFi Trading',
@@ -189,7 +189,7 @@ export const articles: Article[] = [
   {
     id: 'rt-11',
     title: 'Marathon, Not Sprint: Average-Reward RL',
-    excerpt: 'Most RL trading systems optimize for episodic reward: short-term peaks. Average-reward RL builds for sustained long-term performance.',
+    excerpt: 'Most RL trading systems optimize for episodic reward -- short-term peaks. Average-reward RL builds for sustained long-term performance.',
     category: 'Research',
     source: 'refi_trading',
     sourceLabel: 'ReFi Trading',
@@ -234,7 +234,7 @@ export const articles: Article[] = [
   {
     id: 'p402-3',
     title: 'Economics of Latency',
-    excerpt: 'In agent-to-agent commerce, latency is not just a UX problem, it is a pricing variable. How QoS-aware routing changes the economics of AI infrastructure.',
+    excerpt: 'In agent-to-agent commerce, latency is not just a UX problem -- it is a pricing variable. How QoS-aware routing changes the economics of AI infrastructure.',
     category: 'Protocol',
     source: 'p402_intelligence',
     sourceLabel: 'P402 Intelligence',

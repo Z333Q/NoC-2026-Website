@@ -2,18 +2,29 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  ArrowRight, ChevronDown,
-  BookOpen, Github, ExternalLink
+  ArrowRight, Shield, Cpu, TrendingUp, CheckCircle, ChevronDown,
+  Layers, BookOpen, Github, ExternalLink, Lock
 } from 'lucide-react';
 import { useSeoMeta } from '../hooks/useSeoMeta';
-import MolecularOrb from '../components/MolecularOrb';
-import { fadeUp } from '../lib/motion';
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: (i = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, delay: i * 0.1, ease: [0.4, 0, 0.2, 1] as [number, number, number, number] },
+  }),
+};
 
 const pillars = [
   {
     number: '01',
+    icon: Cpu,
     label: 'Agentic Payments and Routing',
     product: 'P402',
+    color: 'text-[var(--color-primary)]',
+    borderColor: 'border-[var(--color-primary)]/30',
+    bgColor: 'rgba(74, 144, 217, 0.05)',
     problem:
       'AI agents need to pay for API calls, data feeds, compute resources, and services from other agents. Human payment infrastructure (Stripe, credit cards) was never designed for machines. $0.30 minimum fees destroy micropayment economics. There is no spending governance for autonomous actors.',
     solution:
@@ -25,41 +36,49 @@ const pillars = [
       'P402 is one of the early implementers of x402 + Google A2A',
     ],
     links: [
-      { label: 'P402.io', href: 'https://www.p402.io' },
+      { label: 'P402.io', href: 'https://www.p402.io', icon: undefined },
       { label: 'GitHub', href: 'https://github.com/Z333Q/p402-protocol', icon: Github },
     ],
   },
   {
     number: '02',
+    icon: TrendingUp,
     label: 'Algorithmic Portfolio Management',
     product: 'ReFi Trading',
+    color: 'text-emerald-400',
+    borderColor: 'border-emerald-500/30',
+    bgColor: 'rgba(52, 211, 153, 0.04)',
     badge: 'USPTO Patent Filed',
     problem:
-      'Institutional hedge funds deploy AI-driven strategies with reinforcement learning, zero-knowledge risk verification, and self-custodied execution. Retail traders and small fund managers have no access to this infrastructure. The "AI trading" market is full of wrappers that give people chatbots connected to broker APIs, not genuine algorithmic portfolio management.',
+      'Institutional hedge funds deploy AI-driven strategies with reinforcement learning, zero-knowledge risk verification, and self-custodied execution. Retail traders and small fund managers have no access to this infrastructure. The "AI trading" market is full of wrappers that give people chatbots connected to broker APIs -- not genuine algorithmic portfolio management.',
     solution:
-      'ReFi Trading is a strategy-as-a-service protocol. Reinforcement learning agents (not rule-based bots, not LLM wrappers) with backtested institutional-grade performance: 28% CAGR, 2.07 Sharpe ratio. The architecture is self-custodied and non-custodial. Users maintain control of their assets at all times. Average-reward RL optimizes for long-term sustainable performance rather than short-term spikes.',
+      'ReFi Trading is a strategy-as-a-service protocol. Reinforcement learning agents (not rule-based bots, not LLM wrappers) with backtested institutional-grade performance: 28% CAGR, 2.07 Sharpe ratio. The architecture is self-custodied and non-custodial -- users maintain control of their assets at all times. Average-reward RL optimizes for long-term sustainable performance rather than short-term spikes.',
     proofPoints: [
       'Patent filed with USPTO: "System and Method for Non-Custodial, Zero-Knowledge-Verified Reinforcement-Learning Trading" (5 additional patents drafted)',
       'zk-VaR (zero-knowledge Value-at-Risk) engine: every trade is cryptographically proven to comply with risk parameters before execution',
-      'Co-founded with Daniel Oosthuyzen (CTO/Quant Engineer)',
-      'Targeting ADGM Category 3A licensing, regulatory-first approach',
+      'Co-founded with Daniel Oosthuyzen (CTO/Quant Engineer) -- the quantitative engineering complement to Zeshan\'s product and infrastructure expertise',
+      'Targeting ADGM Category 3A licensing -- regulatory-first approach',
       'Backed by non-dilutive capital, tracked on Crunchbase',
     ],
     links: [
-      { label: 'ReFi Trading', href: 'https://refi.trading' },
-      { label: 'Research Blog', href: 'https://refi.trading/blog' },
+      { label: 'ReFi Trading', href: 'https://refi.trading', icon: undefined },
+      { label: 'Research Blog', href: 'https://refi.trading/blog', icon: undefined },
     ],
   },
   {
     number: '03',
+    icon: Shield,
     label: 'Automated Compliance and Verification',
     product: 'Cross-Cutting Layer',
+    color: 'text-amber-400',
+    borderColor: 'border-amber-500/30',
+    bgColor: 'rgba(245, 158, 11, 0.04)',
     problem:
-      'Financial compliance today is "compliance by oversight": human compliance departments reviewing trades, filing reports, and conducting manual audits. This does not scale to autonomous agents executing thousands of transactions per second. It is also a massive cost center that excludes smaller players from regulated markets.',
+      'Financial compliance today is "compliance by oversight" -- human compliance departments reviewing trades, filing reports, and conducting manual audits. This does not scale to autonomous agents executing thousands of transactions per second. It is also a massive cost center that excludes smaller players from regulated markets.',
     solution:
       'Compliance by architecture. Zero-knowledge proofs allow a system to mathematically prove it is operating within defined risk parameters without revealing the underlying data. Cryptographic audit trails provide tamper-proof records. The zk-VaR engine (used in ReFi Trading) and the x402 settlement verification (used in P402) are both instances of this principle.',
     proofPoints: [
-      'zk-VaR: every trade proved compliant with risk parameters before execution, no human reviewer needed',
+      'zk-VaR: every trade proved compliant with risk parameters before execution -- no human reviewer needed',
       'Cryptographic audit logs: tamper-proof records for every transaction',
       'Regulatory-first design: ADGM Category 3A licensing in progress, SOC-2 preparation, CTA research',
       'Multi-jurisdiction licensing strategy: UAE, EU, US',
@@ -73,13 +92,13 @@ const principles = [
     number: '1',
     title: 'Systems-Level Thinking',
     description:
-      'We build composable components that reinforce each other. P402 (payment layer) feeds ReFi Trading (application layer) feeds P402.shop (developer ecosystem). Each piece scales the others, like natural systems.',
+      'We build composable components that reinforce each other. P402 (payment layer) feeds ReFi Trading (application layer) feeds P402.shop (developer ecosystem). Each piece scales the others -- like natural systems.',
   },
   {
     number: '2',
     title: 'First Principles Analysis',
     description:
-      'We do not adapt existing systems. We ask what the agent economy actually requires and build from that answer. x402 exists because HTTP 402 has been reserved since 1997. The web always intended to have a native payment layer.',
+      'We do not adapt existing systems. We ask what the agent economy actually requires and build from that answer. x402 exists because HTTP 402 has been reserved since 1997 -- the web always intended to have a native payment layer.',
   },
   {
     number: '3',
@@ -91,7 +110,7 @@ const principles = [
     number: '4',
     title: 'Technical Moats',
     description:
-      'Patent portfolio (1 USPTO filed, 5 drafted). zk-VaR engine. Published SDK/CLI. A2A protocol implementation. NVIDIA DLI certified instruction. These are not PowerPoint moats. They are shipping code and legal protection.',
+      'Patent portfolio (1 USPTO filed, 5 drafted). zk-VaR engine. Published SDK/CLI. A2A protocol implementation. NVIDIA DLI certified instruction. These are not PowerPoint moats -- they are shipping code and legal protection.',
   },
 ];
 
@@ -114,27 +133,27 @@ const faqs = [
   },
   {
     q: 'How does the teaching relate?',
-    a: 'The university courses at Kutaisi International University (AI-Powered Software Development, Product Development for Software Engineers, Blockchain & Cryptography) function as an R&D lab and talent pipeline. Course frameworks are directly informed by live company builds. The same methodology taught in class is applied to building P402 and ReFi Trading.',
+    a: 'The university courses at Kutaisi International University (AI-Powered Software Development, Product Development for Software Engineers, Blockchain & Cryptography) function as an R&D lab and talent pipeline. Course frameworks are directly informed by live company builds -- the same methodology taught in class is applied to building P402 and ReFi Trading.',
   },
   {
     q: 'What does founder-market fit look like?',
-    a: '20 years building financial infrastructure. Payment hardware in rural markets (Symstream, 46 patents). Sovereign financial digitization (Dubai Land Department). Institutional capital allocation ($1.2B+ at Peak Venture Partners). E-commerce exit ($4M+). Web3 protocol design (Outlier Ventures, Chainlink Build). Now autonomous AI agent infrastructure (P402, ReFi Trading). The same through-line: removing gatekeepers from financial systems using the best technology of each era.',
+    a: '20 years building financial infrastructure. Payment hardware in rural markets (Symstream, 46 patents). Sovereign financial digitization (Dubai Land Department). Institutional capital allocation ($1.2B+ at Peak Venture Partners). E-commerce exit ($4M+). Web3 protocol design (Outlier Ventures, Chainlink Build). Now autonomous AI agent infrastructure (P402, ReFi Trading). The same through-line -- removing gatekeepers from financial systems -- using the best technology of each era.',
   },
 ];
 
 function FaqItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false);
   return (
-    <div className="border-b border-[var(--color-border)] last:border-b-0">
+    <div className="glass-card rounded-xl overflow-hidden">
       <button
         onClick={() => setOpen(!open)}
-        className="w-full flex items-center justify-between gap-4 py-5 text-left hover:bg-[var(--color-bg-tertiary)] transition-colors -mx-2 px-2"
+        className="w-full flex items-center justify-between gap-4 p-6 text-left hover:bg-white/5 transition-colors"
       >
-        <span className="text-white font-semibold text-sm">{q}</span>
-        <ChevronDown className={`w-4 h-4 text-[var(--color-text-muted)] flex-shrink-0 transition-transform duration-200 ${open ? 'rotate-180' : ''}`} />
+        <span className="text-white font-semibold">{q}</span>
+        <ChevronDown className={`w-5 h-5 text-[var(--color-primary)] flex-shrink-0 transition-transform ${open ? 'rotate-180' : ''}`} />
       </button>
       {open && (
-        <div className="pb-5 text-[var(--color-text-secondary)] text-sm leading-relaxed">
+        <div className="px-6 pb-6 text-[var(--color-text-secondary)] leading-relaxed border-t border-[var(--color-border)] pt-4">
           {a}
         </div>
       )}
@@ -144,55 +163,63 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 
 export default function Thesis() {
   useSeoMeta({
-    title: 'Builder Thesis | Nature of Commerce',
-    description: 'Three interlocking infrastructure pillars for the agent economy: agentic payments (P402), algorithmic trading (ReFi Trading), and automated compliance via zero-knowledge proofs.',
-    ogTitle: 'Builder Thesis | Nature of Commerce',
-    ogDescription: 'The thesis behind Nature of Commerce: autonomous payment infrastructure, reinforcement learning trading, and cryptographic compliance. Built by the same team from first principles.',
+    title: 'Investment Thesis | Nature of Commerce',
+    description: 'Our investment thesis: the next wave of commerce is agent-native, cryptographically verifiable, and self-custodied. We back founders building this open financial infrastructure.',
+    ogTitle: 'Investment Thesis | Nature of Commerce',
+    ogDescription: 'Nature of Commerce invests in the convergence of AI agents, decentralized finance, and open financial infrastructure. Pre-seed and seed stage Web3 and DeFi startups.',
     canonical: 'https://natureofcommerce.com/thesis',
   });
-
   return (
-    <main>
-      {/* Hero */}
-      <section className="relative pt-32 pb-20 blueprint-grid overflow-hidden">
-        <div className="absolute top-8 right-0 opacity-30 pointer-events-none hidden lg:block">
-          <MolecularOrb size={320} delay={0} />
+    <main className="overflow-hidden">
+      <section className="relative min-h-[70vh] flex items-center blueprint-grid pt-24">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="glow-orb glow-orb-primary w-[600px] h-[600px] -top-20 -right-20 opacity-15" />
         </div>
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <motion.div variants={fadeUp} initial="hidden" animate="visible">
-            <span className="section-label-minimal mb-8 block">Builder Thesis</span>
-            <h1 className="hero-text max-w-3xl mb-8">
-              Three Pillars, One Infrastructure
-            </h1>
-            <p className="body-large max-w-2xl mb-6">
+        <div className="max-w-7xl mx-auto px-6 py-20 relative z-10 grid lg:grid-cols-2 gap-16 items-center">
+          <div>
+            <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0} className="mb-8">
+              <span className="section-label">
+                <BookOpen className="w-4 h-4" />
+                Builder Thesis
+              </span>
+            </motion.div>
+            <motion.h1 variants={fadeUp} initial="hidden" animate="visible" custom={1} className="hero-text mb-8">
+              <span className="text-gradient">Three Pillars,</span>{' '}
+              One Infrastructure
+            </motion.h1>
+            <motion.p variants={fadeUp} initial="hidden" animate="visible" custom={2} className="body-large mb-8">
               The next financial system will be built on autonomous agents that transact, trade, and verify
               using cryptographic infrastructure. We are building that infrastructure.
-            </p>
-            <p className="text-[var(--color-text-secondary)] max-w-2xl leading-relaxed mb-10">
+            </motion.p>
+            <motion.p variants={fadeUp} initial="hidden" animate="visible" custom={3} className="text-[var(--color-text-secondary)] leading-relaxed mb-10">
               AI agents need payment rails. Traders need institutional-grade algorithms. Financial systems need
               compliance embedded in the architecture itself. These three pillars are not separate products --
               they are interlocking layers of the same infrastructure, built by the same team, from first principles.
-            </p>
-            <Link to="/contact" className="btn-primary">
-              Get in Touch <ArrowRight className="w-4 h-4" />
-            </Link>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Context card */}
-      <section className="border-y border-[var(--color-border)]">
-        <div className="max-w-7xl mx-auto px-6 py-12">
-          <div className="surface-card p-8 border-l-2 border-l-[var(--color-primary)]">
-            <p className="mono-label !text-[var(--color-primary)] mb-6">
-              The Agent Economy Context
-            </p>
-            <div className="grid lg:grid-cols-2 gap-8 mb-8">
-              <p className="text-[var(--color-text-secondary)] leading-relaxed">
+            </motion.p>
+            <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={4}>
+              <Link to="/contact" className="btn-primary inline-flex items-center gap-2">
+                <span>Get in Touch</span>
+                <ArrowRight className="w-5 h-5" />
+              </Link>
+            </motion.div>
+          </div>
+          <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={2} className="relative">
+            <div className="glass-card rounded-2xl p-8 border border-[var(--color-primary)]/20">
+              <div className="flex items-center gap-3 mb-6">
+                <Lock className="w-5 h-5 text-[var(--color-primary)]" />
+                <span className="text-sm font-semibold uppercase tracking-wider text-[var(--color-primary)]">
+                  The Agent Economy Context
+                </span>
+              </div>
+              <p className="text-[var(--color-text-secondary)] leading-relaxed mb-6">
                 Financial systems are transitioning from human-operated to agent-operated. AI agents are already
-                capable of autonomous economic action. They can research markets, execute trades, negotiate with
-                other agents, and settle payments without human intervention. These agents are further accelerated
-                by reinforcement learning systems that continuously improve their decision-making.
+                capable of autonomous economic action -- they can research markets, execute trades, negotiate with
+                other agents, and settle payments without human intervention.
+              </p>
+              <p className="text-[var(--color-text-secondary)] leading-relaxed">
+                These agents are further accelerated by reinforcement learning and machine learning systems
+                that continuously improve their decision-making through experience -- optimizing strategies,
+                adapting to market conditions, and coordinating with other agents in real time.
               </p>
               <p className="text-[var(--color-text-secondary)] leading-relaxed">
                 But these agents are forced to use infrastructure designed for humans: credit card rails with
@@ -200,167 +227,197 @@ export default function Thesis() {
                 This creates the infrastructure gap. Native payment rails, cryptographic compliance, and
                 self-custodied execution are foundational requirements for the agent economy to function.
               </p>
-            </div>
-            <div className="grid grid-cols-3 gap-4 pt-6 border-t border-[var(--color-border)]">
-              {[
-                { label: 'A2A Protocol', sub: 'Google spec' },
-                { label: 'x402 Standard', sub: 'Coinbase-led' },
-                { label: 'zk-VaR', sub: 'ZK compliance' },
-              ].map((item) => (
-                <div key={item.label} className="text-center">
-                  <div className="text-white text-sm font-bold">{item.label}</div>
-                  <div className="text-[var(--color-text-muted)] text-xs">{item.sub}</div>
+              <div className="mt-6 pt-6 border-t border-[var(--color-border)]">
+                <div className="grid grid-cols-3 gap-4">
+                  {[
+                    { label: 'A2A Protocol', sub: 'Google spec' },
+                    { label: 'x402 Standard', sub: 'Coinbase-led' },
+                    { label: 'zk-VaR', sub: 'ZK compliance' },
+                  ].map((item) => (
+                    <div key={item.label} className="text-center">
+                      <div className="text-white text-sm font-bold">{item.label}</div>
+                      <div className="text-[var(--color-text-muted)] text-xs">{item.sub}</div>
+                    </div>
+                  ))}
                 </div>
-              ))}
+              </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Infrastructure Pillars */}
       <section className="section-padding">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="max-w-3xl mb-16">
-            <span className="section-label-minimal mb-6 block">Infrastructure Pillars</span>
-            <h2 className="display-text mb-6">Three interlocking pieces</h2>
+          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-16 text-center max-w-3xl mx-auto">
+            <span className="section-label mb-6 block w-fit mx-auto">Infrastructure Pillars</span>
+            <h2 className="display-text mb-6">
+              Three Interlocking{' '}
+              <span className="text-gradient">Pieces</span>
+            </h2>
             <p className="body-large">
-              Not a payment router and a separate trading platform. A vertically integrated stack.
+              Not a payment router and a separate trading platform -- a vertically integrated stack.
             </p>
-          </div>
+          </motion.div>
 
-          <div>
+          <div className="space-y-8">
             {pillars.map((pillar, i) => {
-              const isLast = i === pillars.length - 1;
+              const Icon = pillar.icon;
               return (
-                <div key={pillar.number} className="row-hover flex gap-5 sm:gap-6 -mx-3 px-3 sm:-mx-4 sm:px-4">
-                  <div className="flex-shrink-0 w-9 flex flex-col items-center pt-1">
-                    <div className="w-9 h-9 rounded-full border border-[var(--color-border-strong)] bg-[var(--color-bg-primary)] flex items-center justify-center font-mono text-sm text-[var(--color-primary)] flex-shrink-0">
-                      {pillar.number.replace(/^0/, '')}
+                <motion.div
+                  key={pillar.number}
+                  variants={fadeUp}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  custom={i}
+                  className={`rounded-2xl p-8 border ${pillar.borderColor}`}
+                  style={{ background: `linear-gradient(135deg, ${pillar.bgColor} 0%, rgba(10,10,16,0.9) 100%)` }}
+                >
+                  <div className="flex items-start gap-6 mb-8">
+                    <div className="flex items-center gap-4 flex-shrink-0">
+                      <span className="text-6xl font-bold text-[var(--color-text-muted)]/20 font-mono leading-none">
+                        {pillar.number}
+                      </span>
                     </div>
-                    {!isLast && <div className="flex-1 w-px bg-[var(--color-border)] my-2" />}
-                  </div>
-                  <div className={`flex-1 pt-1 ${isLast ? 'pb-2' : 'pb-12'}`}>
-                    <div className="flex flex-col lg:flex-row lg:items-start gap-8 mb-8">
-                      <div className="flex-shrink-0 lg:w-56">
-                        <div className="font-bold text-white text-2xl">{pillar.product}</div>
-                        <div className="mono-label mt-1">{pillar.label}</div>
-                        {pillar.badge && (
-                          <span className="inline-block mt-3 text-xs font-semibold text-[var(--color-primary-light)] border border-[var(--color-border-strong)] rounded px-2 py-0.5">
-                            {pillar.badge}
-                          </span>
-                        )}
+                    <div className="flex-1">
+                      <div className="flex items-center gap-3 mb-2">
+                        <Icon className={`w-6 h-6 ${pillar.color}`} />
+                        <span className={`text-xs font-bold uppercase tracking-widest ${pillar.color}`}>
+                          {pillar.label}
+                        </span>
                       </div>
-                      <div className="flex-1">
-                        <div className="grid lg:grid-cols-2 gap-8 mb-6">
-                          <div>
-                            <div className="mono-label mb-3">
-                              The Problem
-                            </div>
-                            <p className="text-[var(--color-text-secondary)] leading-relaxed text-sm">
-                              {pillar.problem}
-                            </p>
-                          </div>
-                          <div>
-                            <div className="mono-label mb-3">
-                              The Solution
-                            </div>
-                            <p className="text-[var(--color-text-secondary)] leading-relaxed text-sm">
-                              {pillar.solution}
-                            </p>
-                          </div>
+                      <h3 className="text-2xl font-bold text-white mb-2">{pillar.product}</h3>
+                      {pillar.badge && (
+                        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-semibold">
+                          <Shield className="w-3 h-3" />
+                          {pillar.badge}
                         </div>
+                      )}
+                    </div>
+                  </div>
 
-                        <div className="pt-6 border-t border-[var(--color-border)]">
-                          <div className="mono-label mb-4">
-                            Key Proof Points
-                          </div>
-                          <div className="grid sm:grid-cols-2 gap-3 mb-6">
-                            {pillar.proofPoints.map((point) => (
-                              <div key={point} className="flex items-start gap-2">
-                                <span className="text-[var(--color-primary)] font-mono text-xs mt-0.5">+</span>
-                                <span className="text-sm text-[var(--color-text-secondary)]">{point}</span>
-                              </div>
-                            ))}
-                          </div>
-                          {pillar.links && (
-                            <div className="flex flex-wrap gap-4">
-                              {pillar.links.map((link) => (
-                                <a
-                                  key={link.label}
-                                  href={link.href}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="inline-flex items-center gap-1.5 text-sm text-[var(--color-primary)] link-underline"
-                                >
-                                  {'icon' in link && link.icon ? <Github className="w-4 h-4" /> : <ExternalLink className="w-4 h-4" />}
-                                  {link.label}
-                                </a>
-                              ))}
-                            </div>
-                          )}
-                        </div>
+                  <div className="grid lg:grid-cols-2 gap-8">
+                    <div>
+                      <div className="text-xs font-bold uppercase tracking-wider text-[var(--color-text-muted)] mb-3">
+                        The Problem
                       </div>
+                      <p className="text-[var(--color-text-secondary)] leading-relaxed text-sm">
+                        {pillar.problem}
+                      </p>
+                    </div>
+                    <div>
+                      <div className="text-xs font-bold uppercase tracking-wider text-[var(--color-text-muted)] mb-3">
+                        The Solution
+                      </div>
+                      <p className="text-[var(--color-text-secondary)] leading-relaxed text-sm">
+                        {pillar.solution}
+                      </p>
                     </div>
                   </div>
-                </div>
+
+                  <div className="mt-8 pt-6 border-t border-[var(--color-border)]">
+                    <div className="text-xs font-bold uppercase tracking-wider text-[var(--color-text-muted)] mb-4">
+                      Key Proof Points
+                    </div>
+                    <div className="grid sm:grid-cols-2 gap-3 mb-6">
+                      {pillar.proofPoints.map((point) => (
+                        <div key={point} className="flex items-start gap-2">
+                          <CheckCircle className={`w-4 h-4 ${pillar.color} flex-shrink-0 mt-0.5`} />
+                          <span className="text-sm text-[var(--color-text-secondary)]">{point}</span>
+                        </div>
+                      ))}
+                    </div>
+                    {pillar.links && (
+                      <div className="flex flex-wrap gap-4">
+                        {pillar.links.map((link) => (
+                          <a
+                            key={link.label}
+                            href={link.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={`inline-flex items-center gap-1.5 text-sm ${pillar.color} hover:text-white transition-colors`}
+                          >
+                            {link.icon ? <link.icon className="w-4 h-4" /> : <ExternalLink className="w-4 h-4" />}
+                            {link.label}
+                          </a>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </motion.div>
               );
             })}
           </div>
         </div>
       </section>
 
-      {/* Principles */}
       <section className="section-padding bg-[var(--color-bg-secondary)] border-y border-[var(--color-border)]">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="max-w-3xl mb-16">
-            <span className="section-label-minimal mb-6 block">Philosophy</span>
-            <h2 className="display-text mb-6">Building principles</h2>
+          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-16 text-center max-w-3xl mx-auto">
+            <span className="section-label mb-6 block w-fit mx-auto">Philosophy</span>
+            <h2 className="display-text mb-6">
+              Building{' '}
+              <span className="text-gradient">Principles</span>
+            </h2>
             <p className="body-large">
               The philosophical foundations that guide what we build and how we build it.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="grid sm:grid-cols-2 gap-px bg-[var(--color-border)] border border-[var(--color-border)] rounded-xl overflow-hidden">
-            {principles.map((p) => (
-              <div key={p.number} className="bg-[var(--color-bg-secondary)] hover:bg-[var(--color-bg-tertiary)] transition-colors p-8">
-                <div className="text-4xl font-bold text-[var(--color-primary)]/20 font-mono mb-4">
+          <div className="grid sm:grid-cols-2 gap-6">
+            {principles.map((p, i) => (
+              <motion.div
+                key={p.number}
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                custom={i}
+                className="glass-card rounded-2xl p-8"
+              >
+                <div className="text-5xl font-bold text-[var(--color-primary)]/20 font-mono mb-4">
                   {p.number}
                 </div>
-                <h3 className="text-lg font-bold text-white mb-4">{p.title}</h3>
-                <p className="text-[var(--color-text-secondary)] text-sm leading-relaxed">{p.description}</p>
-              </div>
+                <h3 className="text-xl font-bold text-white mb-4">{p.title}</h3>
+                <p className="text-[var(--color-text-secondary)] leading-relaxed">{p.description}</p>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Heritage */}
-      <section className="section-padding">
+      <section className="section-padding border-t border-[var(--color-border)]">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="max-w-3xl mb-16">
-            <span className="section-label-minimal mb-6 block">Our Heritage</span>
-            <h2 className="display-text mb-6">Bridging ancient wisdom with modern innovation</h2>
+          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-16 text-center max-w-3xl mx-auto">
+            <span className="section-label mb-6 block w-fit mx-auto">Our Heritage</span>
+            <h2 className="display-text mb-6">
+              Bridging Ancient Wisdom{' '}
+              <span className="text-gradient">with Modern Innovation</span>
+            </h2>
             <p className="body-large">
               Nature of Commerce is a long thread of thought which ties back to 1730.
             </p>
-          </div>
+          </motion.div>
 
           <div className="grid lg:grid-cols-2 gap-16 items-start">
-            <div className="flex flex-col items-center">
-              <img
-                src="/natureofcommerce-book.jpeg"
-                alt="Essai Sur La Nature Du Commerce En General, 1st Edition (1755)"
-                className="rounded-xl w-full max-w-sm mx-auto border border-[var(--color-border)]"
-              />
+            <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={0} className="flex flex-col items-center">
+              <div className="relative group">
+                <div className="absolute -inset-1 rounded-2xl bg-gradient-to-b from-[var(--color-primary)]/30 to-transparent blur-sm opacity-60 group-hover:opacity-100 transition-opacity" />
+                <img
+                  src="/natureofcommerce-book.jpeg"
+                  alt="Essai Sur La Nature Du Commerce En General — La Nature De Commerce Generale 1st Edition (1755)"
+                  className="relative rounded-2xl w-full max-w-sm mx-auto shadow-2xl border border-[var(--color-border)]"
+                />
+              </div>
               <div className="mt-6 text-center">
                 <p className="text-white font-semibold text-sm">Essai Sur La Nature Du Commerce En General</p>
-                <p className="text-[var(--color-text-muted)] text-xs mt-1">La Nature De Commerce Generale, 1st Edition (1755)</p>
+                <p className="text-[var(--color-text-muted)] text-xs mt-1">La Nature De Commerce Generale — 1st Edition (1755)</p>
               </div>
-            </div>
+            </motion.div>
 
-            <div>
-              <div className="space-y-6 mb-8">
-                <p className="text-[var(--color-text-secondary)] leading-relaxed">
+            <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={1} className="space-y-6">
+              <div className="glass-card rounded-2xl p-8">
+                <p className="text-[var(--color-text-secondary)] leading-relaxed mb-6">
                   In 1730,{' '}
                   <a
                     href="https://en.wikipedia.org/wiki/Richard_Cantillon"
@@ -370,72 +427,86 @@ export default function Thesis() {
                   >
                     Richard Cantillon
                   </a>{' '}
-                  wrote a revolutionary essay titled <em>The Nature of Commerce</em>, "la Nature du Commerce en General." This pioneering exploration of economic science and theory heralded groundbreaking concepts like entrepreneurs as risk bearers and artisans as value creators, providing novel insights into monetary theory and the establishment of a productive population.
+                  wrote a revolutionary essay titled <em>The Nature of Commerce</em> — "la Nature du Commerce en Général." This pioneering exploration of economic science and theory heralded groundbreaking concepts like entrepreneurs as risk bearers and artisans as value creators, providing novel insights into monetary theory and the establishment of a productive population.
                 </p>
-                <p className="text-[var(--color-text-secondary)] leading-relaxed">
+                <p className="text-[var(--color-text-secondary)] leading-relaxed mb-6">
                   This treatise is widely credited as the first to describe in detail the science and theory of economics. The novel ideas put forth in his writings include the entrepreneur as the risk bearer, artisans as the value creators, while clearly defining monetary theory, spatial economics, theory of population growth, and cause and effect methodology.
                 </p>
                 <p className="text-[var(--color-text-secondary)] leading-relaxed">
-                  Inspired by this rich legacy, at Nature of Commerce we endeavour to emulate Cantillon's pioneering spirit, adapting age-old wisdom to create modern solutions and driving value in this digital economy.
+                  Inspired by this rich legacy, at Nature of Commerce we endeavour to emulate Cantillon's pioneering spirit — adapting age-old wisdom to create modern solutions and driving value in this digital economy.
                 </p>
               </div>
+
               <div className="flex flex-wrap gap-4">
                 <a
                   href="https://en.wikipedia.org/wiki/Richard_Cantillon"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-sm text-[var(--color-primary)] link-underline"
+                  className="inline-flex items-center gap-1.5 text-sm text-[var(--color-primary)] hover:text-white transition-colors"
                 >
                   <ExternalLink className="w-4 h-4" />
-                  Richard Cantillon (Wikipedia)
+                  Richard Cantillon — Wikipedia
                 </a>
                 <a
                   href="https://cdn.mises.org/An%20Essay%20on%20Economic%20Theory_2.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-sm text-[var(--color-primary)] link-underline"
+                  className="inline-flex items-center gap-1.5 text-sm text-[var(--color-primary)] hover:text-white transition-colors"
                 >
                   <BookOpen className="w-4 h-4" />
                   Read the Essay (PDF)
                 </a>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="section-padding bg-[var(--color-bg-secondary)] border-y border-[var(--color-border)]" id="faq">
-        <div className="max-w-3xl mx-auto px-6">
-          <div className="mb-12">
-            <span className="section-label-minimal mb-6 block">FAQ</span>
-            <h2 className="display-text">Frequently asked questions</h2>
-          </div>
+      <section className="section-padding" id="faq">
+        <div className="max-w-4xl mx-auto px-6">
+          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-12 text-center">
+            <span className="section-label mb-6 block w-fit mx-auto">FAQ</span>
+            <h2 className="display-text">
+              Frequently Asked{' '}
+              <span className="text-gradient">Questions</span>
+            </h2>
+          </motion.div>
 
-          <div className="surface-card p-6 sm:p-8">
+          <div className="space-y-4">
             {faqs.map((faq, i) => (
-              <FaqItem key={i} q={faq.q} a={faq.a} />
+              <motion.div
+                key={i}
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                custom={i}
+              >
+                <FaqItem q={faq.q} a={faq.a} />
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="bg-[var(--color-primary)]">
-        <div className="max-w-2xl mx-auto px-6 text-center section-padding-tight">
-          <h2 className="display-text text-white mb-6">See the same infrastructure gap?</h2>
-          <p className="text-white/85 text-lg leading-relaxed mb-10 max-w-xl mx-auto">
-            Whether you are a VC evaluating the agent economy, a technical partner building on x402,
-            or an enterprise exploring autonomous settlement, we should talk.
-          </p>
-          <div className="flex flex-wrap gap-3 justify-center">
-            <Link to="/contact" className="btn-on-blue">
-              Get in Touch <ArrowRight className="w-4 h-4" />
+      <section className="section-padding bg-[var(--color-bg-secondary)] border-t border-[var(--color-border)]">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+            <Layers className="w-12 h-12 text-[var(--color-primary)] mx-auto mb-6" />
+            <h2 className="display-text mb-6">
+              Let's Build{' '}
+              <span className="text-gradient">Together</span>
+            </h2>
+            <p className="body-large mb-10 max-w-2xl mx-auto">
+              Whether you are a VC evaluating the agent economy, a technical partner building on x402,
+              or an enterprise exploring autonomous settlement -- if you see the same infrastructure gap,
+              we should talk.
+            </p>
+            <Link to="/contact" className="btn-primary inline-flex items-center gap-2">
+              <span>Get in Touch</span>
+              <ArrowRight className="w-5 h-5" />
             </Link>
-            <Link to="/stack" className="btn-on-blue-ghost">
-              See the Stack
-            </Link>
-          </div>
+          </motion.div>
         </div>
       </section>
     </main>

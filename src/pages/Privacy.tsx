@@ -1,5 +1,7 @@
-import { Link } from 'react-router-dom';
+import { motion, useInView } from 'framer-motion';
+import { useRef } from 'react';
 import { Shield, Lock, Eye, Database, Globe, Mail } from 'lucide-react';
+import ParticleField from '../components/ParticleField';
 import { useSeoMeta } from '../hooks/useSeoMeta';
 
 const sections = [
@@ -45,128 +47,191 @@ const sections = [
   },
 ];
 
+function AnimatedSection({ children, className = '' }: { children: React.ReactNode; className?: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: '-100px' });
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 40 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
 export default function Privacy() {
   useSeoMeta({
     title: 'Privacy Policy | Nature of Commerce',
-    description: 'Privacy Policy for Nature of Commerce LLC. Learn how we collect, use, and protect your personal information.',
+    description: 'Privacy Policy for Nature of Commerce LLC. Learn how we collect, use, and protect your personal information when you use our venture capital and startup launchpad services.',
     ogTitle: 'Privacy Policy | Nature of Commerce',
-    ogDescription: 'Nature of Commerce LLC privacy practices, data collection, security measures, and your rights.',
+    ogDescription: 'Nature of Commerce LLC privacy practices, data collection, security measures, and your rights as a user of our Web3 and DeFi investment platform.',
     canonical: 'https://natureofcommerce.com/privacy',
   });
 
   return (
-    <main>
-      <section className="pt-32 pb-20">
-        <div className="max-w-3xl mx-auto px-6 text-center">
-          <span className="section-label-minimal mb-8 block mx-auto w-fit">
-            <Shield className="w-4 h-4" />
-            Legal
-          </span>
-          <h1 className="hero-text mb-8">Privacy Policy</h1>
-          <p className="body-large max-w-2xl mx-auto">
-            Your privacy matters. This policy explains how Nature of Commerce LLC
-            collects, uses, and protects your information.
-          </p>
-          <p className="text-[var(--color-text-muted)] text-sm mt-4">
-            Last updated: January 2026
-          </p>
-        </div>
-      </section>
+    <div className="min-h-screen">
+      <section className="relative py-32 overflow-hidden">
+        <ParticleField className="opacity-30" particleCount={40} />
+        <div className="absolute inset-0 mesh-gradient" />
 
-      <section className="section-padding bg-[var(--color-bg-secondary)] border-t border-[var(--color-border)]">
-        <div className="max-w-3xl mx-auto px-6 space-y-8">
-          <div className="surface-card p-8">
-            <h2 className="text-xl font-bold mb-4">Overview</h2>
-            <p className="text-[var(--color-text-secondary)] leading-relaxed">
-              Nature of Commerce LLC ("we," "our," or "us") is a Wyoming limited liability
-              company operating as a venture studio and early-stage investment firm. This
-              Privacy Policy describes how we collect, use, and share information when you
-              visit our website or interact with our services.
-            </p>
-          </div>
-
-          {sections.map((section) => {
-            const Icon = section.icon;
-            return (
-              <div key={section.title} className="surface-card p-8">
-                <div className="flex items-center gap-3 mb-4">
-                  <Icon className="w-5 h-5 text-[var(--color-primary)]" />
-                  <h2 className="text-xl font-bold">{section.title}</h2>
-                </div>
-                <ul className="space-y-3">
-                  {section.content.map((item) => (
-                    <li key={item} className="flex items-start gap-3">
-                      <div className="w-1 h-1 rounded-full bg-[var(--color-primary)] mt-2 flex-shrink-0" />
-                      <span className="text-[var(--color-text-secondary)] text-sm">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            );
-          })}
-
-          <div className="surface-card p-8">
-            <h2 className="text-xl font-bold mb-4">Your Rights</h2>
-            <p className="text-[var(--color-text-secondary)] leading-relaxed mb-6">
-              Depending on your location, you may have certain rights regarding your personal information:
-            </p>
-            <div className="grid sm:grid-cols-2 gap-3">
-              {[
-                'Right to access your personal data',
-                'Right to correct inaccurate data',
-                'Right to request deletion',
-                'Right to data portability',
-                'Right to opt out of marketing',
-                'Right to withdraw consent',
-              ].map((right) => (
-                <div key={right} className="flex items-center gap-3 text-sm text-[var(--color-text-secondary)]">
-                  <div className="w-1 h-1 rounded-full bg-[var(--color-success)] flex-shrink-0" />
-                  {right}
-                </div>
-              ))}
+        <div className="relative z-10 max-w-4xl mx-auto px-6 pt-16">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-center mb-16"
+          >
+            <div className="section-label mx-auto mb-8">
+              <Shield className="w-4 h-4" />
+              Legal
             </div>
-          </div>
-
-          <div className="surface-card p-8">
-            <h2 className="text-xl font-bold mb-4">Cookies & Tracking</h2>
-            <p className="text-[var(--color-text-secondary)] text-sm leading-relaxed">
-              We use cookies and similar tracking technologies to analyze website traffic
-              and improve your experience. You can control cookie preferences through your
-              browser settings.
+            <h1 className="hero-text mb-8">
+              Privacy <span className="text-gradient">Policy</span>
+            </h1>
+            <p className="body-large max-w-2xl mx-auto">
+              Your privacy matters. This policy explains how Nature of Commerce LLC
+              collects, uses, and protects your information.
             </p>
-          </div>
-
-          <div className="surface-card p-8">
-            <h2 className="text-xl font-bold mb-4">Data Retention</h2>
-            <p className="text-[var(--color-text-secondary)] text-sm leading-relaxed">
-              We retain your personal information only for as long as necessary to fulfill
-              the purposes outlined in this policy, unless a longer retention period is
-              required by law.
+            <p className="text-[var(--color-text-muted)] mt-4">
+              Last updated: January 2026
             </p>
-          </div>
-
-          <div className="surface-card p-8">
-            <h2 className="text-xl font-bold mb-4">Changes to This Policy</h2>
-            <p className="text-[var(--color-text-secondary)] text-sm leading-relaxed">
-              We may update this Privacy Policy from time to time. We will notify you of
-              material changes by posting the updated policy on this page with a new "Last
-              updated" date.
-            </p>
-          </div>
-
-          <div className="surface-card p-8 text-center">
-            <Mail className="w-8 h-8 text-[var(--color-primary)] mx-auto mb-4" />
-            <h2 className="text-xl font-bold mb-4">Contact Us</h2>
-            <p className="text-[var(--color-text-secondary)] text-sm leading-relaxed mb-4">
-              If you have questions about this Privacy Policy, please contact us.
-            </p>
-            <p className="text-[var(--color-text-muted)] text-sm mb-2">Nature of Commerce LLC | Wyoming, United States</p>
-            <Link to="/contact" className="text-[var(--color-primary)] hover:text-white transition-colors text-sm">
-              Contact Form
-            </Link>
-          </div>
+          </motion.div>
         </div>
       </section>
-    </main>
+
+      <section className="section-padding bg-[var(--color-bg-secondary)]">
+        <div className="max-w-4xl mx-auto px-6">
+          <AnimatedSection className="mb-12">
+            <div className="glass-card rounded-2xl p-8">
+              <h2 className="text-2xl font-bold mb-4">Overview</h2>
+              <p className="text-[var(--color-text-secondary)] leading-relaxed">
+                Nature of Commerce LLC ("we," "our," or "us") is a Wyoming limited liability
+                company operating as a venture studio and early-stage investment firm. This
+                Privacy Policy describes how we collect, use, and share information when you
+                visit our website or interact with our services. By using our services, you
+                agree to the collection and use of information in accordance with this policy.
+              </p>
+            </div>
+          </AnimatedSection>
+
+          <div className="space-y-8">
+            {sections.map((section, i) => (
+              <AnimatedSection key={section.title}>
+                <motion.div
+                  className="glass-card rounded-2xl p-8"
+                  initial={{ opacity: 0, x: i % 2 === 0 ? -20 : 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.1 }}
+                >
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="w-12 h-12 rounded-xl bg-[var(--color-primary)]/10 flex items-center justify-center">
+                      <section.icon className="w-6 h-6 text-[var(--color-primary)]" />
+                    </div>
+                    <h2 className="text-2xl font-bold">{section.title}</h2>
+                  </div>
+                  <ul className="space-y-4">
+                    {section.content.map((item) => (
+                      <li key={item} className="flex items-start gap-3">
+                        <div className="w-2 h-2 rounded-full bg-[var(--color-primary)] mt-2 flex-shrink-0" />
+                        <span className="text-[var(--color-text-secondary)]">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </motion.div>
+              </AnimatedSection>
+            ))}
+          </div>
+
+          <AnimatedSection className="mt-12">
+            <div className="glass-card rounded-2xl p-8">
+              <h2 className="text-2xl font-bold mb-4">Your Rights</h2>
+              <p className="text-[var(--color-text-secondary)] leading-relaxed mb-6">
+                Depending on your location, you may have certain rights regarding your personal
+                information, including:
+              </p>
+              <div className="grid sm:grid-cols-2 gap-4">
+                {[
+                  'Right to access your personal data',
+                  'Right to correct inaccurate data',
+                  'Right to request deletion',
+                  'Right to data portability',
+                  'Right to opt out of marketing',
+                  'Right to withdraw consent',
+                ].map((right) => (
+                  <div key={right} className="flex items-center gap-3 p-3 bg-white/5 rounded-lg">
+                    <div className="w-2 h-2 rounded-full bg-[var(--color-success)]" />
+                    <span className="text-sm text-[var(--color-text-secondary)]">{right}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </AnimatedSection>
+
+          <AnimatedSection className="mt-12">
+            <div className="glass-card rounded-2xl p-8">
+              <h2 className="text-2xl font-bold mb-4">Cookies & Tracking</h2>
+              <p className="text-[var(--color-text-secondary)] leading-relaxed">
+                We use cookies and similar tracking technologies to analyze website traffic
+                and improve your experience. These include essential cookies required for
+                site functionality and analytics cookies that help us understand how visitors
+                interact with our website. You can control cookie preferences through your
+                browser settings. Note that disabling certain cookies may affect site functionality.
+              </p>
+            </div>
+          </AnimatedSection>
+
+          <AnimatedSection className="mt-12">
+            <div className="glass-card rounded-2xl p-8">
+              <h2 className="text-2xl font-bold mb-4">Data Retention</h2>
+              <p className="text-[var(--color-text-secondary)] leading-relaxed">
+                We retain your personal information only for as long as necessary to fulfill
+                the purposes outlined in this policy, unless a longer retention period is
+                required by law. When we no longer need your information, we will securely
+                delete or anonymize it in accordance with our data retention procedures.
+              </p>
+            </div>
+          </AnimatedSection>
+
+          <AnimatedSection className="mt-12">
+            <div className="glass-card rounded-2xl p-8">
+              <h2 className="text-2xl font-bold mb-4">Changes to This Policy</h2>
+              <p className="text-[var(--color-text-secondary)] leading-relaxed mb-6">
+                We may update this Privacy Policy from time to time to reflect changes in
+                our practices or legal requirements. We will notify you of any material
+                changes by posting the updated policy on this page with a new "Last updated"
+                date. Your continued use of our services after any changes indicates your
+                acceptance of the updated policy.
+              </p>
+            </div>
+          </AnimatedSection>
+
+          <AnimatedSection className="mt-12">
+            <div className="glass-card rounded-2xl p-8 text-center">
+              <Mail className="w-12 h-12 text-[var(--color-primary)] mx-auto mb-4" />
+              <h2 className="text-2xl font-bold mb-4">Contact Us</h2>
+              <p className="text-[var(--color-text-secondary)] leading-relaxed mb-6">
+                If you have any questions about this Privacy Policy or our data practices,
+                please contact us.
+              </p>
+              <div className="text-[var(--color-text-muted)]">
+                <p>Nature of Commerce LLC</p>
+                <p>Wyoming, United States</p>
+                <a
+                  href="/contact"
+                  className="inline-block mt-4 text-[var(--color-primary)] hover:underline"
+                >
+                  Contact Form
+                </a>
+              </div>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+    </div>
   );
 }
