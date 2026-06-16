@@ -173,7 +173,7 @@ export default function Terms() {
             <p className="text-[var(--color-text-secondary)] text-sm leading-relaxed mb-4">
               If you have questions about these Terms of Service, please contact us.
             </p>
-            <p className="text-[var(--color-text-muted)] text-sm mb-2">Nature of Commerce LLC -- Wyoming, United States</p>
+            <p className="text-[var(--color-text-muted)] text-sm mb-2">Nature of Commerce LLC | Wyoming, United States</p>
             <Link to="/contact" className="text-[var(--color-primary)] hover:text-white transition-colors text-sm">
               Contact Form
             </Link>

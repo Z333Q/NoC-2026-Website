@@ -35,14 +35,14 @@ const pillars = [
     product: 'ReFi Trading',
     badge: 'USPTO Patent Filed',
     problem:
-      'Institutional hedge funds deploy AI-driven strategies with reinforcement learning, zero-knowledge risk verification, and self-custodied execution. Retail traders and small fund managers have no access to this infrastructure. The "AI trading" market is full of wrappers that give people chatbots connected to broker APIs -- not genuine algorithmic portfolio management.',
+      'Institutional hedge funds deploy AI-driven strategies with reinforcement learning, zero-knowledge risk verification, and self-custodied execution. Retail traders and small fund managers have no access to this infrastructure. The "AI trading" market is full of wrappers that give people chatbots connected to broker APIs, not genuine algorithmic portfolio management.',
     solution:
-      'ReFi Trading is a strategy-as-a-service protocol. Reinforcement learning agents (not rule-based bots, not LLM wrappers) with backtested institutional-grade performance: 28% CAGR, 2.07 Sharpe ratio. The architecture is self-custodied and non-custodial -- users maintain control of their assets at all times. Average-reward RL optimizes for long-term sustainable performance rather than short-term spikes.',
+      'ReFi Trading is a strategy-as-a-service protocol. Reinforcement learning agents (not rule-based bots, not LLM wrappers) with backtested institutional-grade performance: 28% CAGR, 2.07 Sharpe ratio. The architecture is self-custodied and non-custodial. Users maintain control of their assets at all times. Average-reward RL optimizes for long-term sustainable performance rather than short-term spikes.',
     proofPoints: [
       'Patent filed with USPTO: "System and Method for Non-Custodial, Zero-Knowledge-Verified Reinforcement-Learning Trading" (5 additional patents drafted)',
       'zk-VaR (zero-knowledge Value-at-Risk) engine: every trade is cryptographically proven to comply with risk parameters before execution',
       'Co-founded with Daniel Oosthuyzen (CTO/Quant Engineer)',
-      'Targeting ADGM Category 3A licensing -- regulatory-first approach',
+      'Targeting ADGM Category 3A licensing, regulatory-first approach',
       'Backed by non-dilutive capital, tracked on Crunchbase',
     ],
     links: [
@@ -55,11 +55,11 @@ const pillars = [
     label: 'Automated Compliance and Verification',
     product: 'Cross-Cutting Layer',
     problem:
-      'Financial compliance today is "compliance by oversight" -- human compliance departments reviewing trades, filing reports, and conducting manual audits. This does not scale to autonomous agents executing thousands of transactions per second. It is also a massive cost center that excludes smaller players from regulated markets.',
+      'Financial compliance today is "compliance by oversight": human compliance departments reviewing trades, filing reports, and conducting manual audits. This does not scale to autonomous agents executing thousands of transactions per second. It is also a massive cost center that excludes smaller players from regulated markets.',
     solution:
       'Compliance by architecture. Zero-knowledge proofs allow a system to mathematically prove it is operating within defined risk parameters without revealing the underlying data. Cryptographic audit trails provide tamper-proof records. The zk-VaR engine (used in ReFi Trading) and the x402 settlement verification (used in P402) are both instances of this principle.',
     proofPoints: [
-      'zk-VaR: every trade proved compliant with risk parameters before execution -- no human reviewer needed',
+      'zk-VaR: every trade proved compliant with risk parameters before execution, no human reviewer needed',
       'Cryptographic audit logs: tamper-proof records for every transaction',
       'Regulatory-first design: ADGM Category 3A licensing in progress, SOC-2 preparation, CTA research',
       'Multi-jurisdiction licensing strategy: UAE, EU, US',
@@ -73,13 +73,13 @@ const principles = [
     number: '1',
     title: 'Systems-Level Thinking',
     description:
-      'We build composable components that reinforce each other. P402 (payment layer) feeds ReFi Trading (application layer) feeds P402.shop (developer ecosystem). Each piece scales the others -- like natural systems.',
+      'We build composable components that reinforce each other. P402 (payment layer) feeds ReFi Trading (application layer) feeds P402.shop (developer ecosystem). Each piece scales the others, like natural systems.',
   },
   {
     number: '2',
     title: 'First Principles Analysis',
     description:
-      'We do not adapt existing systems. We ask what the agent economy actually requires and build from that answer. x402 exists because HTTP 402 has been reserved since 1997 -- the web always intended to have a native payment layer.',
+      'We do not adapt existing systems. We ask what the agent economy actually requires and build from that answer. x402 exists because HTTP 402 has been reserved since 1997. The web always intended to have a native payment layer.',
   },
   {
     number: '3',
@@ -91,7 +91,7 @@ const principles = [
     number: '4',
     title: 'Technical Moats',
     description:
-      'Patent portfolio (1 USPTO filed, 5 drafted). zk-VaR engine. Published SDK/CLI. A2A protocol implementation. NVIDIA DLI certified instruction. These are not PowerPoint moats -- they are shipping code and legal protection.',
+      'Patent portfolio (1 USPTO filed, 5 drafted). zk-VaR engine. Published SDK/CLI. A2A protocol implementation. NVIDIA DLI certified instruction. These are not PowerPoint moats. They are shipping code and legal protection.',
   },
 ];
 
@@ -114,11 +114,11 @@ const faqs = [
   },
   {
     q: 'How does the teaching relate?',
-    a: 'The university courses at Kutaisi International University (AI-Powered Software Development, Product Development for Software Engineers, Blockchain & Cryptography) function as an R&D lab and talent pipeline. Course frameworks are directly informed by live company builds -- the same methodology taught in class is applied to building P402 and ReFi Trading.',
+    a: 'The university courses at Kutaisi International University (AI-Powered Software Development, Product Development for Software Engineers, Blockchain & Cryptography) function as an R&D lab and talent pipeline. Course frameworks are directly informed by live company builds. The same methodology taught in class is applied to building P402 and ReFi Trading.',
   },
   {
     q: 'What does founder-market fit look like?',
-    a: '20 years building financial infrastructure. Payment hardware in rural markets (Symstream, 46 patents). Sovereign financial digitization (Dubai Land Department). Institutional capital allocation ($1.2B+ at Peak Venture Partners). E-commerce exit ($4M+). Web3 protocol design (Outlier Ventures, Chainlink Build). Now autonomous AI agent infrastructure (P402, ReFi Trading). The same through-line -- removing gatekeepers from financial systems -- using the best technology of each era.',
+    a: '20 years building financial infrastructure. Payment hardware in rural markets (Symstream, 46 patents). Sovereign financial digitization (Dubai Land Department). Institutional capital allocation ($1.2B+ at Peak Venture Partners). E-commerce exit ($4M+). Web3 protocol design (Outlier Ventures, Chainlink Build). Now autonomous AI agent infrastructure (P402, ReFi Trading). The same through-line: removing gatekeepers from financial systems using the best technology of each era.',
   },
 ];
 
@@ -147,7 +147,7 @@ export default function Thesis() {
     title: 'Builder Thesis | Nature of Commerce',
     description: 'Three interlocking infrastructure pillars for the agent economy: agentic payments (P402), algorithmic trading (ReFi Trading), and automated compliance via zero-knowledge proofs.',
     ogTitle: 'Builder Thesis | Nature of Commerce',
-    ogDescription: 'The thesis behind Nature of Commerce: autonomous payment infrastructure, reinforcement learning trading, and cryptographic compliance -- built by the same team from first principles.',
+    ogDescription: 'The thesis behind Nature of Commerce: autonomous payment infrastructure, reinforcement learning trading, and cryptographic compliance. Built by the same team from first principles.',
     canonical: 'https://natureofcommerce.com/thesis',
   });
 
@@ -190,7 +190,7 @@ export default function Thesis() {
             <div className="grid lg:grid-cols-2 gap-8 mb-8">
               <p className="text-[var(--color-text-secondary)] leading-relaxed">
                 Financial systems are transitioning from human-operated to agent-operated. AI agents are already
-                capable of autonomous economic action -- they can research markets, execute trades, negotiate with
+                capable of autonomous economic action. They can research markets, execute trades, negotiate with
                 other agents, and settle payments without human intervention. These agents are further accelerated
                 by reinforcement learning systems that continuously improve their decision-making.
               </p>
@@ -224,7 +224,7 @@ export default function Thesis() {
             <span className="section-label-minimal mb-6 block">Infrastructure Pillars</span>
             <h2 className="display-text mb-6">Three interlocking pieces</h2>
             <p className="body-large">
-              Not a payment router and a separate trading platform -- a vertically integrated stack.
+              Not a payment router and a separate trading platform. A vertically integrated stack.
             </p>
           </div>
 
@@ -349,12 +349,12 @@ export default function Thesis() {
             <div className="flex flex-col items-center">
               <img
                 src="/natureofcommerce-book.jpeg"
-                alt="Essai Sur La Nature Du Commerce En General -- 1st Edition (1755)"
+                alt="Essai Sur La Nature Du Commerce En General, 1st Edition (1755)"
                 className="rounded-xl w-full max-w-sm mx-auto border border-[var(--color-border)]"
               />
               <div className="mt-6 text-center">
                 <p className="text-white font-semibold text-sm">Essai Sur La Nature Du Commerce En General</p>
-                <p className="text-[var(--color-text-muted)] text-xs mt-1">La Nature De Commerce Generale -- 1st Edition (1755)</p>
+                <p className="text-[var(--color-text-muted)] text-xs mt-1">La Nature De Commerce Generale, 1st Edition (1755)</p>
               </div>
             </div>
 
@@ -370,13 +370,13 @@ export default function Thesis() {
                   >
                     Richard Cantillon
                   </a>{' '}
-                  wrote a revolutionary essay titled <em>The Nature of Commerce</em> -- "la Nature du Commerce en General." This pioneering exploration of economic science and theory heralded groundbreaking concepts like entrepreneurs as risk bearers and artisans as value creators, providing novel insights into monetary theory and the establishment of a productive population.
+                  wrote a revolutionary essay titled <em>The Nature of Commerce</em>, "la Nature du Commerce en General." This pioneering exploration of economic science and theory heralded groundbreaking concepts like entrepreneurs as risk bearers and artisans as value creators, providing novel insights into monetary theory and the establishment of a productive population.
                 </p>
                 <p className="text-[var(--color-text-secondary)] leading-relaxed">
                   This treatise is widely credited as the first to describe in detail the science and theory of economics. The novel ideas put forth in his writings include the entrepreneur as the risk bearer, artisans as the value creators, while clearly defining monetary theory, spatial economics, theory of population growth, and cause and effect methodology.
                 </p>
                 <p className="text-[var(--color-text-secondary)] leading-relaxed">
-                  Inspired by this rich legacy, at Nature of Commerce we endeavour to emulate Cantillon's pioneering spirit -- adapting age-old wisdom to create modern solutions and driving value in this digital economy.
+                  Inspired by this rich legacy, at Nature of Commerce we endeavour to emulate Cantillon's pioneering spirit, adapting age-old wisdom to create modern solutions and driving value in this digital economy.
                 </p>
               </div>
               <div className="flex flex-wrap gap-4">
@@ -387,7 +387,7 @@ export default function Thesis() {
                   className="inline-flex items-center gap-1.5 text-sm text-[var(--color-primary)] link-underline"
                 >
                   <ExternalLink className="w-4 h-4" />
-                  Richard Cantillon -- Wikipedia
+                  Richard Cantillon (Wikipedia)
                 </a>
                 <a
                   href="https://cdn.mises.org/An%20Essay%20on%20Economic%20Theory_2.pdf"
@@ -426,7 +426,7 @@ export default function Thesis() {
           <h2 className="display-text text-white mb-6">See the same infrastructure gap?</h2>
           <p className="text-white/85 text-lg leading-relaxed mb-10 max-w-xl mx-auto">
             Whether you are a VC evaluating the agent economy, a technical partner building on x402,
-            or an enterprise exploring autonomous settlement -- we should talk.
+            or an enterprise exploring autonomous settlement, we should talk.
           </p>
           <div className="flex flex-wrap gap-3 justify-center">
             <Link to="/contact" className="btn-on-blue">

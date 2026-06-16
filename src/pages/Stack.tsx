@@ -12,17 +12,17 @@ const stackLayers = [
   {
     number: '5',
     label: 'Developer Ecosystem',
-    items: ['P402.shop -- AI API marketplace', '@p402/sdk & @p402/cli on npm', 'Agent stack builder tool'],
+    items: ['P402.shop: AI API marketplace', '@p402/sdk & @p402/cli on npm', 'Agent stack builder tool'],
   },
   {
     number: '4',
     label: 'Application',
-    items: ['ReFi Trading -- RL trading agents, self-custodied execution', 'Third-party builders on P402 infrastructure'],
+    items: ['ReFi Trading: RL trading agents, self-custodied execution', 'Third-party builders on P402 infrastructure'],
   },
   {
     number: '3',
     label: 'Compliance',
-    items: ['zk-VaR engine -- zero-knowledge Value-at-Risk', 'Cryptographic audit logs', 'ADGM Category 3A, SOC-2, CTA'],
+    items: ['zk-VaR engine: zero-knowledge Value-at-Risk', 'Cryptographic audit logs', 'ADGM Category 3A, SOC-2, CTA'],
   },
   {
     number: '2',
@@ -42,7 +42,7 @@ const activeVentures = [
     oneLiner: 'AI payment router. Route across 300+ models, pay per request in USDC on Base.',
     description:
       'Middleware intelligence layer between AI applications and LLM providers. Handles intelligent multi-provider routing (cost/quality/speed/balanced), on-chain micropayment settlement via x402, and spending guardrails for autonomous agents. Implements Google A2A spec for agent-to-agent discovery and commerce.',
-    entity: 'Studio-Operated -- Nature of Commerce LLC',
+    entity: 'Studio-Operated | Nature of Commerce LLC',
     facts: ['Published SDK & CLI on npm', '300+ models supported', '4 routing modes', 'Session budget enforcement'],
     tags: ['x402', 'A2A Protocol', 'Base L2', 'Agent Commerce'],
     link: 'https://www.p402.io',
@@ -55,7 +55,7 @@ const activeVentures = [
     oneLiner: 'Wall-Street AI, radically accessible. Self-custodied AI trading with zero-knowledge risk proofs.',
     description:
       'Strategy-as-a-service protocol. Reinforcement learning agents (not rule-based bots, not LLM wrappers) with backtested institutional-grade performance: 28% CAGR, 2.07 Sharpe ratio. Self-custodied, non-custodial architecture. zk-VaR engine provides cryptographic proof that every trade complies with risk parameters before execution.',
-    entity: 'Independent Entity -- ReFi Trading Inc (Canada Federal) -- Co-Founded',
+    entity: 'Independent Entity | ReFi Trading Inc (Canada Federal) | Co-Founded',
     facts: ['28% CAGR, 2.07 Sharpe (3yr backtest)', '1 USPTO patent filed, 5 drafted', 'zk-VaR engine', 'ADGM Category 3A licensing'],
     tags: ['AI Trading', 'Zero-Knowledge', 'ERC-4337', 'USPTO Patent'],
     link: 'https://refi.trading',
@@ -69,8 +69,8 @@ const activeVentures = [
     name: 'RapMath',
     oneLiner: 'Master multiplication through music. Hip hop meets math education.',
     description:
-      '"The Hip Hop Times Tables" -- an educational music project that teaches children multiplication through hip hop beats and positive lyrics. Available on Spotify and major streaming platforms.',
-    entity: 'Studio-Operated -- Nature of Commerce LLC',
+      '"The Hip Hop Times Tables," an educational music project that teaches children multiplication through hip hop beats and positive lyrics. Available on Spotify and major streaming platforms.',
+    entity: 'Studio-Operated | Nature of Commerce LLC',
     facts: ['Available on Spotify', 'Hip Hop Times Tables (Melbourne origin)', 'Math education through music', 'Streaming platforms'],
     tags: ['EdTech', 'Music', 'Education'],
     link: 'https://www.rapmath.com',
@@ -82,7 +82,7 @@ const activeVentures = [
     oneLiner: 'Vision training RPG for Apple Vision Pro.',
     description:
       'Spatial computing health app built for visionOS. 9 AR exercises, AI coaching, RPG progression system, and structured training programs.',
-    entity: 'Studio-Operated -- Nature of Commerce LLC',
+    entity: 'Studio-Operated | Nature of Commerce LLC',
     facts: ['visionOS native', 'Meta Quest support', 'iOS & web apps', 'RPG progression system'],
     tags: ['VisionOS', 'HealthTech', 'Spatial Computing'],
     link: 'https://eyecercise.com',
@@ -94,7 +94,7 @@ const activeVentures = [
     oneLiner: 'Organic baby and toddler bedding essentials from 100% European flax linen.',
     description:
       'DTC e-commerce brand specializing in handmade organic baby mattresses, bedding, and sleep essentials. OEKO-TEX Standard 100 certified. European flax sourced from farms in Eastern Europe. Ships globally.',
-    entity: 'Independent Entity -- Wholesome Linen LLC (Denver, CO) -- Co-Founded',
+    entity: 'Independent Entity | Wholesome Linen LLC (Denver, CO) | Co-Founded',
     facts: ['OEKO-TEX Standard 100 certified', 'European flax linen', 'Ships globally', '10 years running'],
     tags: ['DTC', 'E-commerce', 'Organic'],
     link: 'https://wholesomelinen.com',
@@ -106,35 +106,35 @@ const activeVentures = [
 
 const trackRecord = [
   {
-    era: '2009 -- 2015',
+    era: '2009\u20132015',
     name: 'Peak Venture Partners',
     role: 'Senior Investment Officer',
     description: '$1.2B+ in transactions across institutional capital. E-Trade (major shareholders), Summit Entertainment slate financing (later acquired by Lionsgate, $412M), Aman Resorts M&A ($350M+), real estate and CPG portfolio.',
     tags: ['Private Equity', 'M&A', '$1.2B+'],
   },
   {
-    era: '2007 -- 2009',
+    era: '2007\u20132009',
     name: 'Key Capital / Dubai Land Department',
     role: 'Cross-Border Investment Advisory',
     description: 'Architected the pioneering online property title transaction system for the Dubai Land Department. Digitized a sovereign financial workflow.',
     tags: ['GovTech', 'FinTech', 'Dubai'],
   },
   {
-    era: '2003 -- 2007',
+    era: '2003\u20132007',
     name: 'Symstream Technology Group',
     role: 'VP Communications & Business Development',
     description: 'Melbourne-based fintech infrastructure. Deployed GSM-connected point-of-sale terminals enabling major banks to offer micro-banking services in remote areas. Commercialized 46 patents for in-channel wireless communications.',
     tags: ['FinTech', '46 Patents', 'Mobile Banking'],
   },
   {
-    era: '2010 -- 2021',
+    era: '2010\u20132021',
     name: 'E-commerce & DTC',
     role: 'Founder',
     description: 'CharityDreams.com celebrity auction platform ($4M+ raised for charity). Scaled DTC bedding brand to $4M+ in sales. Successful exit 2021.',
     tags: ['E-commerce', 'DTC', '$4M Exit'],
   },
   {
-    era: '2020 -- 2023',
+    era: '2020\u20132023',
     name: 'Web3 Protocol Design',
     role: 'Builder & Protocol Architect',
     description: 'Outlier Ventures Accelerator alumni. Coindesk Consensus global finalist. Chainlink Build program. Fan City (Puck.City), HazelHearts.xyz.',
@@ -327,7 +327,7 @@ export default function Stack() {
             <span className="section-label-minimal mb-6 block">Teaching & R&D</span>
             <h2 className="display-text mb-4">Kutaisi International University</h2>
             <p className="body-large max-w-2xl mb-4">
-              Not a separate activity -- an applied R&D lab and talent pipeline. Courses are directly
+              Not a separate activity. An applied R&D lab and talent pipeline. Courses are directly
               informed by live company builds.
             </p>
             <a
@@ -369,7 +369,7 @@ export default function Stack() {
         <div className="max-w-2xl mx-auto px-6 text-center section-padding-tight">
           <h2 className="display-text text-white mb-6">Read the full thesis</h2>
           <p className="text-white/85 text-lg leading-relaxed mb-10 max-w-xl mx-auto">
-            Why these three infrastructure pillars form an interlocking system -- and why the market timing is right.
+            Why these three infrastructure pillars form an interlocking system, and why the market timing is right.
           </p>
           <div className="flex flex-wrap gap-3 justify-center">
             <Link to="/thesis" className="btn-on-blue">
