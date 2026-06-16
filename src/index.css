@@ -17,7 +17,8 @@
   --color-text-secondary: #94A3B8;
   --color-text-muted: #64748B;
 
-  --color-border: rgba(255, 255, 255, 0.08);
+  --color-border: rgba(74, 144, 217, 0.16);
+  --color-border-strong: rgba(74, 144, 217, 0.35);
 
   --color-success: #22C55E;
   --color-warning: #F59E0B;
@@ -30,18 +31,25 @@
 
   --font-display: 'Space Grotesk', system-ui, sans-serif;
   --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', 'Cascadia Mono', 'JetBrains Mono', Menlo, monospace;
 
   --space-section: clamp(80px, 12vw, 160px);
+  --space-section-tight: clamp(48px, 7vw, 96px);
 }
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: rgba(255,255,255,0.15) var(--color-bg-primary);
+  scrollbar-color: rgba(74, 144, 217, 0.3) var(--color-bg-primary);
 }
 
 *::-webkit-scrollbar { width: 6px; }
 *::-webkit-scrollbar-track { background: var(--color-bg-primary); }
-*::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 3px; }
+*::-webkit-scrollbar-thumb { background: rgba(74, 144, 217, 0.3); border-radius: 3px; }
+
+::selection {
+  background: var(--color-primary);
+  color: #fff;
+}
 
 html { scroll-behavior: smooth; }
 
@@ -65,13 +73,11 @@ h1 { font-weight: 700; }
 h2 { font-weight: 700; }
 h3 { font-weight: 600; }
 
-/* ===== TYPOGRAPHY ===== */
-
 .hero-text {
-  font-size: clamp(2.75rem, 7vw, 5rem);
+  font-size: clamp(3rem, 9vw, 7.5rem);
   font-weight: 700;
-  line-height: 1.05;
-  letter-spacing: -0.04em;
+  line-height: 0.95;
+  letter-spacing: -0.045em;
 }
 
 .display-text {
@@ -87,7 +93,23 @@ h3 { font-weight: 600; }
   color: var(--color-text-secondary);
 }
 
-/* ===== LABELS ===== */
+.pull-quote {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--color-text-primary);
+}
+
+.mono-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
 
 .section-label-minimal {
   display: inline-flex;
@@ -108,8 +130,6 @@ h3 { font-weight: 600; }
   flex-shrink: 0;
 }
 
-/* ===== SURFACES ===== */
-
 .surface-card {
   background: var(--color-bg-secondary);
   border: 1px solid var(--color-border);
@@ -122,7 +142,38 @@ h3 { font-weight: 600; }
   border-radius: var(--radius-lg);
 }
 
-/* ===== BUTTONS ===== */
+.frame {
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.frame-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--color-border);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--color-text-muted);
+}
+
+.frame-bar::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  flex-shrink: 0;
+}
+
+.frame img {
+  display: block;
+  width: 100%;
+}
 
 .btn-primary {
   display: inline-flex;
@@ -161,10 +212,48 @@ h3 { font-weight: 600; }
 
 .btn-secondary:hover {
   color: var(--color-text-primary);
-  border-color: rgba(255,255,255,0.2);
+  border-color: var(--color-border-strong);
 }
 
-/* ===== NAV ===== */
+.btn-on-blue {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  color: var(--color-primary-dark);
+  font-weight: 600;
+  padding: 12px 24px;
+  border-radius: var(--radius-md);
+  transition: transform 150ms ease, box-shadow 150ms ease;
+  font-size: 0.9375rem;
+}
+
+.btn-on-blue:hover {
+  transform: translateY(-1px);
+}
+
+.btn-on-blue:active {
+  transform: scale(0.98);
+}
+
+.btn-on-blue-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: #fff;
+  font-weight: 600;
+  padding: 12px 24px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  transition: border-color 150ms ease, background 150ms ease;
+  font-size: 0.9375rem;
+}
+
+.btn-on-blue-ghost:hover {
+  border-color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+}
 
 .nav-link {
   color: var(--color-text-muted);
@@ -177,7 +266,26 @@ h3 { font-weight: 600; }
   color: var(--color-text-primary);
 }
 
-/* ===== FORM ===== */
+.link-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 200ms ease;
+  padding-bottom: 2px;
+}
+
+.link-underline:hover {
+  background-size: 100% 1px;
+}
+
+.row-hover {
+  transition: background-color 200ms ease;
+}
+
+.row-hover:hover {
+  background-color: var(--color-bg-secondary);
+}
 
 .input-field {
   width: 100%;
@@ -207,8 +315,6 @@ h3 { font-weight: 600; }
   margin-bottom: 6px;
 }
 
-/* ===== TAGS ===== */
-
 .tag {
   display: inline-flex;
   align-items: center;
@@ -222,57 +328,52 @@ h3 { font-weight: 600; }
   border-radius: var(--radius-full);
 }
 
-/* ===== DIVIDERS ===== */
-
 .divider {
   height: 1px;
   background: var(--color-border);
 }
 
-/* ===== STATS ===== */
-
 .stat-value {
   font-family: var(--font-display);
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: clamp(2.5rem, 5.5vw, 4.25rem);
   font-weight: 700;
-  color: var(--color-primary);
+  color: var(--color-text-primary);
   line-height: 1;
+  letter-spacing: -0.03em;
 }
 
 .stat-label {
-  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
   color: var(--color-text-muted);
-  margin-top: 8px;
+  margin-top: 10px;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   font-weight: 500;
 }
-
-/* ===== LAYOUT ===== */
 
 .section-padding {
   padding-top: var(--space-section);
   padding-bottom: var(--space-section);
 }
 
-/* ===== GRID BACKGROUND (hero only) ===== */
+.section-padding-tight {
+  padding-top: var(--space-section-tight);
+  padding-bottom: var(--space-section-tight);
+}
 
 .blueprint-grid {
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    linear-gradient(rgba(74, 144, 217, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(74, 144, 217, 0.05) 1px, transparent 1px);
   background-size: 60px 60px;
 }
-
-/* ===== FOCUS ===== */
 
 a:focus-visible,
 button:focus-visible {
   outline: 2px solid var(--color-primary);
   outline-offset: 3px;
 }
-
-/* ===== REDUCED MOTION ===== */
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

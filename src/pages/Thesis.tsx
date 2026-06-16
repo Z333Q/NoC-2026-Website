@@ -2,10 +2,11 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  ArrowRight, CheckCircle, ChevronDown,
+  ArrowRight, ChevronDown,
   BookOpen, Github, ExternalLink
 } from 'lucide-react';
 import { useSeoMeta } from '../hooks/useSeoMeta';
+import MolecularOrb from '../components/MolecularOrb';
 import { fadeUp } from '../lib/motion';
 
 const pillars = [
@@ -127,7 +128,7 @@ function FaqItem({ q, a }: { q: string; a: string }) {
     <div className="border-b border-[var(--color-border)] last:border-b-0">
       <button
         onClick={() => setOpen(!open)}
-        className="w-full flex items-center justify-between gap-4 py-5 text-left"
+        className="w-full flex items-center justify-between gap-4 py-5 text-left hover:bg-[var(--color-bg-tertiary)] transition-colors -mx-2 px-2"
       >
         <span className="text-white font-semibold text-sm">{q}</span>
         <ChevronDown className={`w-4 h-4 text-[var(--color-text-muted)] flex-shrink-0 transition-transform duration-200 ${open ? 'rotate-180' : ''}`} />
@@ -153,8 +154,11 @@ export default function Thesis() {
   return (
     <main>
       {/* Hero */}
-      <section className="relative pt-32 pb-20 blueprint-grid">
-        <div className="max-w-7xl mx-auto px-6">
+      <section className="relative pt-32 pb-20 blueprint-grid overflow-hidden">
+        <div className="absolute top-8 right-0 opacity-30 pointer-events-none hidden lg:block">
+          <MolecularOrb size={320} delay={0} />
+        </div>
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
           <motion.div variants={fadeUp} initial="hidden" animate="visible">
             <span className="section-label-minimal mb-8 block">Builder Thesis</span>
             <h1 className="hero-text max-w-3xl mb-8">
@@ -180,7 +184,7 @@ export default function Thesis() {
       <section className="border-y border-[var(--color-border)]">
         <div className="max-w-7xl mx-auto px-6 py-12">
           <div className="surface-card p-8 border-l-2 border-l-[var(--color-primary)]">
-            <p className="text-xs font-bold uppercase tracking-wider text-[var(--color-primary)] mb-6">
+            <p className="mono-label !text-[var(--color-primary)] mb-6">
               The Agent Economy Context
             </p>
             <div className="grid lg:grid-cols-2 gap-8 mb-8">
@@ -224,73 +228,83 @@ export default function Thesis() {
             </p>
           </div>
 
-          <div className="divide-y divide-[var(--color-border)] border-y border-[var(--color-border)]">
-            {pillars.map((pillar) => (
-              <div key={pillar.number} className="py-10">
-                <div className="flex flex-col lg:flex-row lg:items-start gap-8 mb-8">
-                  <div className="flex-shrink-0 lg:w-56">
-                    <span className="text-[var(--color-text-muted)] text-xs font-mono">{pillar.number}</span>
-                    <div className="font-bold text-white text-2xl mt-1">{pillar.product}</div>
-                    <div className="text-xs text-[var(--color-text-muted)] uppercase tracking-wider mt-1">{pillar.label}</div>
-                    {pillar.badge && (
-                      <span className="inline-block mt-3 text-xs font-semibold text-[var(--color-warning)] border border-[var(--color-warning)]/20 rounded px-2 py-0.5">
-                        {pillar.badge}
-                      </span>
-                    )}
-                  </div>
-                  <div className="flex-1">
-                    <div className="grid lg:grid-cols-2 gap-8 mb-6">
-                      <div>
-                        <div className="text-xs font-bold uppercase tracking-wider text-[var(--color-text-muted)] mb-3">
-                          The Problem
-                        </div>
-                        <p className="text-[var(--color-text-secondary)] leading-relaxed text-sm">
-                          {pillar.problem}
-                        </p>
-                      </div>
-                      <div>
-                        <div className="text-xs font-bold uppercase tracking-wider text-[var(--color-text-muted)] mb-3">
-                          The Solution
-                        </div>
-                        <p className="text-[var(--color-text-secondary)] leading-relaxed text-sm">
-                          {pillar.solution}
-                        </p>
-                      </div>
+          <div>
+            {pillars.map((pillar, i) => {
+              const isLast = i === pillars.length - 1;
+              return (
+                <div key={pillar.number} className="row-hover flex gap-5 sm:gap-6 -mx-3 px-3 sm:-mx-4 sm:px-4">
+                  <div className="flex-shrink-0 w-9 flex flex-col items-center pt-1">
+                    <div className="w-9 h-9 rounded-full border border-[var(--color-border-strong)] bg-[var(--color-bg-primary)] flex items-center justify-center font-mono text-sm text-[var(--color-primary)] flex-shrink-0">
+                      {pillar.number.replace(/^0/, '')}
                     </div>
-
-                    <div className="pt-6 border-t border-[var(--color-border)]">
-                      <div className="text-xs font-bold uppercase tracking-wider text-[var(--color-text-muted)] mb-4">
-                        Key Proof Points
+                    {!isLast && <div className="flex-1 w-px bg-[var(--color-border)] my-2" />}
+                  </div>
+                  <div className={`flex-1 pt-1 ${isLast ? 'pb-2' : 'pb-12'}`}>
+                    <div className="flex flex-col lg:flex-row lg:items-start gap-8 mb-8">
+                      <div className="flex-shrink-0 lg:w-56">
+                        <div className="font-bold text-white text-2xl">{pillar.product}</div>
+                        <div className="mono-label mt-1">{pillar.label}</div>
+                        {pillar.badge && (
+                          <span className="inline-block mt-3 text-xs font-semibold text-[var(--color-primary-light)] border border-[var(--color-border-strong)] rounded px-2 py-0.5">
+                            {pillar.badge}
+                          </span>
+                        )}
                       </div>
-                      <div className="grid sm:grid-cols-2 gap-3 mb-6">
-                        {pillar.proofPoints.map((point) => (
-                          <div key={point} className="flex items-start gap-2">
-                            <CheckCircle className="w-4 h-4 text-[var(--color-primary)] flex-shrink-0 mt-0.5" />
-                            <span className="text-sm text-[var(--color-text-secondary)]">{point}</span>
+                      <div className="flex-1">
+                        <div className="grid lg:grid-cols-2 gap-8 mb-6">
+                          <div>
+                            <div className="mono-label mb-3">
+                              The Problem
+                            </div>
+                            <p className="text-[var(--color-text-secondary)] leading-relaxed text-sm">
+                              {pillar.problem}
+                            </p>
                           </div>
-                        ))}
-                      </div>
-                      {pillar.links && (
-                        <div className="flex flex-wrap gap-4">
-                          {pillar.links.map((link) => (
-                            <a
-                              key={link.label}
-                              href={link.href}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="inline-flex items-center gap-1.5 text-sm text-[var(--color-primary)] hover:text-white transition-colors"
-                            >
-                              {'icon' in link && link.icon ? <Github className="w-4 h-4" /> : <ExternalLink className="w-4 h-4" />}
-                              {link.label}
-                            </a>
-                          ))}
+                          <div>
+                            <div className="mono-label mb-3">
+                              The Solution
+                            </div>
+                            <p className="text-[var(--color-text-secondary)] leading-relaxed text-sm">
+                              {pillar.solution}
+                            </p>
+                          </div>
                         </div>
-                      )}
+
+                        <div className="pt-6 border-t border-[var(--color-border)]">
+                          <div className="mono-label mb-4">
+                            Key Proof Points
+                          </div>
+                          <div className="grid sm:grid-cols-2 gap-3 mb-6">
+                            {pillar.proofPoints.map((point) => (
+                              <div key={point} className="flex items-start gap-2">
+                                <span className="text-[var(--color-primary)] font-mono text-xs mt-0.5">+</span>
+                                <span className="text-sm text-[var(--color-text-secondary)]">{point}</span>
+                              </div>
+                            ))}
+                          </div>
+                          {pillar.links && (
+                            <div className="flex flex-wrap gap-4">
+                              {pillar.links.map((link) => (
+                                <a
+                                  key={link.label}
+                                  href={link.href}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="inline-flex items-center gap-1.5 text-sm text-[var(--color-primary)] link-underline"
+                                >
+                                  {'icon' in link && link.icon ? <Github className="w-4 h-4" /> : <ExternalLink className="w-4 h-4" />}
+                                  {link.label}
+                                </a>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
@@ -308,7 +322,7 @@ export default function Thesis() {
 
           <div className="grid sm:grid-cols-2 gap-px bg-[var(--color-border)] border border-[var(--color-border)] rounded-xl overflow-hidden">
             {principles.map((p) => (
-              <div key={p.number} className="bg-[var(--color-bg-secondary)] p-8">
+              <div key={p.number} className="bg-[var(--color-bg-secondary)] hover:bg-[var(--color-bg-tertiary)] transition-colors p-8">
                 <div className="text-4xl font-bold text-[var(--color-primary)]/20 font-mono mb-4">
                   {p.number}
                 </div>
@@ -370,7 +384,7 @@ export default function Thesis() {
                   href="https://en.wikipedia.org/wiki/Richard_Cantillon"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-sm text-[var(--color-primary)] hover:text-white transition-colors"
+                  className="inline-flex items-center gap-1.5 text-sm text-[var(--color-primary)] link-underline"
                 >
                   <ExternalLink className="w-4 h-4" />
                   Richard Cantillon -- Wikipedia
@@ -379,7 +393,7 @@ export default function Thesis() {
                   href="https://cdn.mises.org/An%20Essay%20on%20Economic%20Theory_2.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-sm text-[var(--color-primary)] hover:text-white transition-colors"
+                  className="inline-flex items-center gap-1.5 text-sm text-[var(--color-primary)] link-underline"
                 >
                   <BookOpen className="w-4 h-4" />
                   Read the Essay (PDF)
@@ -407,18 +421,18 @@ export default function Thesis() {
       </section>
 
       {/* CTA */}
-      <section className="section-padding">
-        <div className="max-w-2xl mx-auto px-6 text-center">
-          <h2 className="display-text mb-6">See the same infrastructure gap?</h2>
-          <p className="body-large mb-10 max-w-xl mx-auto">
+      <section className="bg-[var(--color-primary)]">
+        <div className="max-w-2xl mx-auto px-6 text-center section-padding-tight">
+          <h2 className="display-text text-white mb-6">See the same infrastructure gap?</h2>
+          <p className="text-white/85 text-lg leading-relaxed mb-10 max-w-xl mx-auto">
             Whether you are a VC evaluating the agent economy, a technical partner building on x402,
             or an enterprise exploring autonomous settlement -- we should talk.
           </p>
           <div className="flex flex-wrap gap-3 justify-center">
-            <Link to="/contact" className="btn-primary">
+            <Link to="/contact" className="btn-on-blue">
               Get in Touch <ArrowRight className="w-4 h-4" />
             </Link>
-            <Link to="/stack" className="btn-secondary">
+            <Link to="/stack" className="btn-on-blue-ghost">
               See the Stack
             </Link>
           </div>

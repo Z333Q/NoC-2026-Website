@@ -1,10 +1,11 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import {
-  ArrowRight, ExternalLink, Github, Shield, CheckCircle,
+  ArrowRight, ExternalLink, Github, Shield,
   BookOpen
 } from 'lucide-react';
 import { useSeoMeta } from '../hooks/useSeoMeta';
+import MolecularOrb from '../components/MolecularOrb';
 import { fadeUp } from '../lib/motion';
 
 const stackLayers = [
@@ -153,8 +154,11 @@ export default function Stack() {
   return (
     <main>
       {/* Hero */}
-      <section className="relative pt-32 pb-20 blueprint-grid">
-        <div className="max-w-7xl mx-auto px-6">
+      <section className="relative pt-32 pb-20 blueprint-grid overflow-hidden">
+        <div className="absolute top-8 right-0 opacity-30 pointer-events-none hidden lg:block">
+          <MolecularOrb size={320} delay={0} />
+        </div>
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
           <motion.div variants={fadeUp} initial="hidden" animate="visible">
             <span className="section-label-minimal mb-8 block">What We Are Building</span>
             <h1 className="hero-text max-w-4xl mb-8">The Technology Stack</h1>
@@ -177,24 +181,32 @@ export default function Stack() {
             </p>
           </div>
 
-          <div className="divide-y divide-[var(--color-border)] border-y border-[var(--color-border)]">
-            {stackLayers.map((layer) => (
-              <div key={layer.number} className="py-5 flex flex-col sm:flex-row sm:items-center gap-4">
-                <div className="flex items-center gap-4 sm:w-52 flex-shrink-0">
-                  <span className="text-[var(--color-primary)] font-bold text-lg font-mono w-8">{layer.number}</span>
-                  <span className="text-sm font-semibold uppercase tracking-wider text-white">
-                    {layer.label}
-                  </span>
+          <div>
+            {stackLayers.map((layer, i) => {
+              const isLast = i === stackLayers.length - 1;
+              return (
+                <div key={layer.number} className="row-hover flex gap-5 sm:gap-6 -mx-3 px-3 sm:-mx-4 sm:px-4">
+                  <div className="flex-shrink-0 w-9 flex flex-col items-center pt-1">
+                    <div className="w-9 h-9 rounded-full border border-[var(--color-border-strong)] bg-[var(--color-bg-primary)] flex items-center justify-center font-mono text-sm text-[var(--color-primary)] flex-shrink-0">
+                      {layer.number}
+                    </div>
+                    {!isLast && <div className="flex-1 w-px bg-[var(--color-border)] my-2" />}
+                  </div>
+                  <div className={`flex-1 pt-2.5 ${isLast ? 'pb-2' : 'pb-8'}`}>
+                    <div className="text-sm font-semibold uppercase tracking-wider text-white mb-3">
+                      {layer.label}
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {layer.items.map((item) => (
+                        <span key={item} className="text-sm text-[var(--color-text-secondary)] surface-card px-3 py-1.5">
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
                 </div>
-                <div className="flex flex-wrap gap-2">
-                  {layer.items.map((item) => (
-                    <span key={item} className="text-sm text-[var(--color-text-secondary)] surface-card px-3 py-1.5">
-                      {item}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
@@ -207,20 +219,20 @@ export default function Stack() {
             <h2 className="display-text mb-4">What is being built now</h2>
           </div>
 
-          <div className="divide-y divide-[var(--color-border)] border-y border-[var(--color-border)]">
+          <div className="border-y border-[var(--color-border)] divide-y divide-[var(--color-border)]">
             {activeVentures.map((venture) => (
-              <div key={venture.name} className="py-10">
+              <div key={venture.name} className="row-hover py-10 lg:px-6 lg:-mx-6">
                 <div className="flex flex-col lg:flex-row lg:items-start gap-8">
                   <div className="flex-shrink-0 lg:w-56">
                     <div className="flex items-center gap-3 mb-2">
                       <h3 className="text-xl font-bold text-white">{venture.name}</h3>
-                      <span className="text-xs text-[var(--color-text-muted)]">{venture.year}</span>
+                      <span className="mono-label">{venture.year}</span>
                     </div>
                     <div className="flex items-center gap-2 mb-2">
-                      <span className="text-xs font-semibold text-[var(--color-primary)]">{venture.status}</span>
+                      <span className="mono-label !text-[var(--color-primary-light)]">{venture.status}</span>
                     </div>
                     {venture.badge && (
-                      <span className="inline-block text-xs font-semibold text-[var(--color-warning)] border border-[var(--color-warning)]/20 rounded px-2 py-0.5">
+                      <span className="inline-block text-xs font-semibold text-[var(--color-primary-light)] border border-[var(--color-border-strong)] rounded px-2 py-0.5">
                         <Shield className="w-3 h-3 inline mr-1" />
                         {venture.badge}
                       </span>
@@ -237,7 +249,7 @@ export default function Stack() {
                     <div className="grid grid-cols-2 gap-2 mb-4">
                       {venture.facts.map((fact) => (
                         <div key={fact} className="flex items-start gap-2">
-                          <CheckCircle className="w-3.5 h-3.5 text-[var(--color-primary)] flex-shrink-0 mt-0.5" />
+                          <span className="text-[var(--color-primary)] font-mono text-xs mt-0.5">+</span>
                           <span className="text-xs text-[var(--color-text-muted)]">{fact}</span>
                         </div>
                       ))}
@@ -248,16 +260,16 @@ export default function Stack() {
                       ))}
                     </div>
                     <div className="flex flex-wrap items-center gap-4 pt-4 border-t border-[var(--color-border)]">
-                      <span className="text-xs text-[var(--color-text-muted)] uppercase tracking-wider">
+                      <span className="mono-label">
                         {venture.entity}
                       </span>
                       {venture.link && (
-                        <a href={venture.link} target="_blank" rel="noopener noreferrer" className="ml-auto inline-flex items-center gap-1.5 text-sm text-[var(--color-primary)] hover:text-white transition-colors">
+                        <a href={venture.link} target="_blank" rel="noopener noreferrer" className="ml-auto inline-flex items-center gap-1.5 text-sm text-[var(--color-primary)] link-underline">
                           <ExternalLink className="w-4 h-4" />Visit
                         </a>
                       )}
                       {venture.githubLink && (
-                        <a href={venture.githubLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-sm text-[var(--color-text-muted)] hover:text-white transition-colors">
+                        <a href={venture.githubLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-sm text-[var(--color-text-muted)] hover:text-white transition-colors link-underline">
                           <Github className="w-4 h-4" />GitHub
                         </a>
                       )}
@@ -286,9 +298,9 @@ export default function Stack() {
 
           <div className="divide-y divide-[var(--color-border)] border-y border-[var(--color-border)]">
             {trackRecord.map((item) => (
-              <div key={item.name} className="py-6 flex flex-col sm:flex-row gap-6">
+              <div key={item.name} className="row-hover py-6 px-3 -mx-3 flex flex-col sm:flex-row gap-6">
                 <div className="sm:w-48 flex-shrink-0">
-                  <div className="text-xs font-mono text-[var(--color-primary)] mb-1">{item.era}</div>
+                  <div className="mono-label !text-[var(--color-primary)] mb-1">{item.era}</div>
                   <div className="text-white font-bold leading-tight">{item.name}</div>
                   <div className="text-xs text-[var(--color-text-muted)] mt-1">{item.role}</div>
                 </div>
@@ -322,7 +334,7 @@ export default function Stack() {
               href="https://github.com/orgs/ZA-KIU-Classroom"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-sm text-[var(--color-primary)] hover:text-white transition-colors"
+              className="inline-flex items-center gap-2 text-sm text-[var(--color-primary)] link-underline"
             >
               <Github className="w-4 h-4" />
               github.com/orgs/ZA-KIU-Classroom
@@ -337,12 +349,12 @@ export default function Stack() {
               { title: 'Digital Disruption, Innovation & Transformation', type: 'Elective, MBA' },
               { title: 'Blockchain & Cryptography Fundamentals', type: 'Elective, CS (Previous)' },
             ].map((course) => (
-              <div key={course.title} className="bg-[var(--color-bg-primary)] p-5 flex flex-col">
+              <div key={course.title} className="bg-[var(--color-bg-primary)] hover:bg-[var(--color-bg-secondary)] transition-colors p-5 flex flex-col">
                 <BookOpen className="w-5 h-5 text-[var(--color-primary)] mb-3" />
                 <div className="text-white font-semibold text-sm mb-1 flex-1">{course.title}</div>
-                <div className="text-[var(--color-text-muted)] text-xs mb-3">{course.type}</div>
+                <div className="mono-label mb-3">{course.type}</div>
                 {course.link && (
-                  <a href={course.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-xs text-[var(--color-primary)] hover:text-white transition-colors">
+                  <a href={course.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-xs text-[var(--color-primary)] link-underline">
                     <Github className="w-3.5 h-3.5" />View repo
                   </a>
                 )}
@@ -353,17 +365,17 @@ export default function Stack() {
       </section>
 
       {/* CTA */}
-      <section className="section-padding bg-[var(--color-bg-secondary)] border-t border-[var(--color-border)]">
-        <div className="max-w-2xl mx-auto px-6 text-center">
-          <h2 className="display-text mb-6">Read the full thesis</h2>
-          <p className="body-large mb-10 max-w-xl mx-auto">
+      <section className="bg-[var(--color-primary)]">
+        <div className="max-w-2xl mx-auto px-6 text-center section-padding-tight">
+          <h2 className="display-text text-white mb-6">Read the full thesis</h2>
+          <p className="text-white/85 text-lg leading-relaxed mb-10 max-w-xl mx-auto">
             Why these three infrastructure pillars form an interlocking system -- and why the market timing is right.
           </p>
           <div className="flex flex-wrap gap-3 justify-center">
-            <Link to="/thesis" className="btn-primary">
+            <Link to="/thesis" className="btn-on-blue">
               Read the Thesis <ArrowRight className="w-4 h-4" />
             </Link>
-            <Link to="/contact" className="btn-secondary">
+            <Link to="/contact" className="btn-on-blue-ghost">
               Get in Touch
             </Link>
           </div>

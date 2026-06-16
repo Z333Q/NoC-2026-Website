@@ -31,10 +31,10 @@ export default function Navbar() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-200 border-b ${
           scrolled
-            ? 'py-3 bg-[var(--color-bg-primary)]/90 backdrop-blur-md border-b border-[var(--color-border)]'
-            : 'py-5'
+            ? 'py-3 bg-[var(--color-bg-primary)]/95 border-[var(--color-border)]'
+            : 'py-5 border-transparent'
         }`}
       >
         <nav className="max-w-7xl mx-auto px-6 flex items-center justify-between">
@@ -43,20 +43,33 @@ export default function Navbar() {
             <span className="hidden sm:block text-sm font-semibold tracking-tight">Nature of Commerce</span>
           </Link>
 
-          <div className="hidden lg:flex items-center gap-6">
-            {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                className={`nav-link font-medium ${location.pathname === link.path ? 'active text-white' : ''}`}
-              >
-                {link.label}
-              </Link>
-            ))}
+          <div className="hidden lg:flex items-center gap-1">
+            {navLinks.map((link) => {
+              const isActive = location.pathname === link.path;
+              return (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  className={`relative px-3 py-2 text-sm font-medium transition-colors ${
+                    isActive ? 'text-white' : 'text-[var(--color-text-muted)] hover:text-white'
+                  }`}
+                >
+                  {link.label}
+                  {isActive && (
+                    <span className="absolute left-3 right-3 -bottom-[1px] h-[2px] bg-[var(--color-primary)]" />
+                  )}
+                </Link>
+              );
+            })}
           </div>
 
-          <div className="hidden lg:flex items-center gap-3">
-            <Link to="/contact" className="nav-link font-medium">Contact</Link>
+          <div className="hidden lg:flex items-center gap-5">
+            <Link
+              to="/contact"
+              className="text-sm font-medium text-[var(--color-text-muted)] hover:text-white link-underline transition-colors"
+            >
+              Contact
+            </Link>
             <Link to="/thesis" className="btn-primary text-sm py-2 px-4">
               Builder Thesis <ArrowRight className="w-3.5 h-3.5" />
             </Link>
@@ -76,15 +89,18 @@ export default function Navbar() {
       {isOpen && (
         <div className="fixed inset-0 z-40 lg:hidden bg-[var(--color-bg-primary)] flex flex-col justify-center px-8">
           <nav className="space-y-1">
-            {[...navLinks, { path: '/contact', label: 'Contact' }].map((link) => (
+            {[...navLinks, { path: '/contact', label: 'Contact' }].map((link, i) => (
               <Link
                 key={link.path}
                 to={link.path}
-                className={`block text-3xl font-bold py-2 ${
+                className={`flex items-baseline gap-4 py-2 transition-colors ${
                   location.pathname === link.path ? 'text-[var(--color-primary)]' : 'text-white/50 hover:text-white'
-                } transition-colors`}
+                }`}
               >
-                {link.label}
+                <span className="font-mono text-xs text-[var(--color-text-muted)]">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <span className="text-3xl font-bold">{link.label}</span>
               </Link>
             ))}
           </nav>

@@ -35,7 +35,7 @@ export default function Footer() {
             <p className="text-[var(--color-text-muted)] text-xs mb-6">
               Nature of Commerce LLC, Wyoming.
             </p>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2">
               {[
                 { href: 'https://linkedin.com/in/zeshanahmad', Icon: Linkedin, label: 'LinkedIn' },
                 { href: 'https://github.com/Z333Q', Icon: Github, label: 'GitHub' },
@@ -47,7 +47,7 @@ export default function Footer() {
                   href={href}
                   target={href.startsWith('mailto') ? undefined : '_blank'}
                   rel={href.startsWith('mailto') ? undefined : 'noopener noreferrer'}
-                  className="text-[var(--color-text-muted)] hover:text-white transition-colors"
+                  className="flex items-center justify-center w-9 h-9 rounded-md border border-[var(--color-border)] text-[var(--color-text-muted)] hover:text-white hover:border-[var(--color-border-strong)] transition-colors"
                   aria-label={label}
                 >
                   <Icon className="w-4 h-4" />
@@ -57,11 +57,14 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-muted)] mb-4">Navigate</h4>
+            <h4 className="mono-label mb-4">Navigate</h4>
             <ul className="space-y-2">
               {footerLinks.navigate.map((link) => (
                 <li key={link.path}>
-                  <Link to={link.path} className="text-[var(--color-text-secondary)] hover:text-white text-sm transition-colors">
+                  <Link
+                    to={link.path}
+                    className="text-[var(--color-text-secondary)] hover:text-white text-sm transition-colors link-underline"
+                  >
                     {link.label}
                   </Link>
                 </li>
@@ -70,17 +73,22 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-muted)] mb-4">Ventures</h4>
+            <h4 className="mono-label mb-4">Ventures</h4>
             <ul className="space-y-2 mb-8">
               {footerLinks.ventures.map((link) => (
                 <li key={link.href}>
-                  <a href={link.href} target="_blank" rel="noopener noreferrer" className="text-[var(--color-text-secondary)] hover:text-white text-sm transition-colors">
+                  <a
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[var(--color-text-secondary)] hover:text-white text-sm transition-colors link-underline"
+                  >
                     {link.label}
                   </a>
                 </li>
               ))}
             </ul>
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-muted)] mb-4">GitHub</h4>
+            <h4 className="mono-label mb-4">GitHub</h4>
             <ul className="space-y-2">
               {[
                 { label: 'Personal', href: 'https://github.com/Z333Q' },
@@ -88,8 +96,14 @@ export default function Footer() {
                 { label: 'Course Materials', href: 'https://github.com/orgs/ZA-KIU-Classroom' },
               ].map((link) => (
                 <li key={link.href}>
-                  <a href={link.href} target="_blank" rel="noopener noreferrer" className="text-[var(--color-text-secondary)] hover:text-white text-sm transition-colors inline-flex items-center gap-1.5">
-                    <Github className="w-3 h-3 text-[var(--color-text-muted)]" />{link.label}
+                  <a
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[var(--color-text-secondary)] hover:text-white text-sm transition-colors inline-flex items-center gap-1.5 link-underline"
+                  >
+                    <Github className="w-3 h-3 text-[var(--color-text-muted)]" />
+                    {link.label}
                   </a>
                 </li>
               ))}
@@ -102,8 +116,8 @@ export default function Footer() {
             &copy; {currentYear} Nature of Commerce LLC
           </p>
           <div className="flex items-center gap-6 text-xs text-[var(--color-text-muted)]">
-            <Link to="/privacy" className="hover:text-white transition-colors">Privacy</Link>
-            <Link to="/terms" className="hover:text-white transition-colors">Terms</Link>
+            <Link to="/privacy" className="hover:text-white transition-colors link-underline">Privacy</Link>
+            <Link to="/terms" className="hover:text-white transition-colors link-underline">Terms</Link>
           </div>
         </div>
       </div>
