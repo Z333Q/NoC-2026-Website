@@ -99,22 +99,24 @@ export default function Team() {
             <div className="lg:col-span-1">
               <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
                 <div className="glass-card rounded-2xl p-6 mb-6">
-                  <div className="grid grid-cols-2 gap-2 mb-6">
+                  <div className="relative mb-6">
                     <img
                       src="/zeshan-bio-photo-2022-square.jpg"
                       alt="Zeshan Ahmad"
-                      className="w-full aspect-square object-cover rounded-xl col-span-2"
+                      className="w-full aspect-[3/4] object-cover object-top rounded-xl"
                     />
-                    <img
-                      src="/555681785_10161866851656408_4519368290982062114_n.jpg"
-                      alt="Zeshan Ahmad speaking at Futurum Dubai"
-                      className="w-full aspect-[4/3] object-cover rounded-lg"
-                    />
-                    <img
-                      src="/zeshan-degamefi.webp"
-                      alt="Zeshan Ahmad on DeGameFi panel"
-                      className="w-full aspect-[4/3] object-cover rounded-lg"
-                    />
+                    <div className="absolute -bottom-4 left-3 right-3 flex gap-2">
+                      <img
+                        src="/555681785_10161866851656408_4519368290982062114_n.jpg"
+                        alt="Zeshan Ahmad speaking at Futurum Dubai"
+                        className="w-1/2 aspect-[3/2] object-cover rounded-lg ring-2 ring-[var(--color-bg-primary)] shadow-lg"
+                      />
+                      <img
+                        src="/zeshan-degamefi.webp"
+                        alt="Zeshan Ahmad on DeGameFi panel"
+                        className="w-1/2 aspect-[3/2] object-cover rounded-lg ring-2 ring-[var(--color-bg-primary)] shadow-lg"
+                      />
+                    </div>
                   </div>
                   <h2 className="text-2xl font-bold text-white mb-1">Zeshan Ahmad</h2>
                   <p className="text-[var(--color-primary)] text-sm font-semibold mb-4">
