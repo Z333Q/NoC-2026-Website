@@ -7,6 +7,7 @@ import {
 } from 'lucide-react';
 import { LinkedInFeed } from '../components/LinkedInFeed';
 import { useSeoMeta } from '../hooks/useSeoMeta';
+import { PartnerLogoGrid } from '../components/PartnerLogos';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -192,27 +193,7 @@ export default function Team() {
                     <span className="text-xs uppercase tracking-[0.15em] text-[var(--color-text-muted)] font-medium block mb-4">
                       Network & Affiliations
                     </span>
-                    <div className="grid grid-cols-3 gap-3">
-                      {[
-                        { src: '/logo-amii.webp', alt: 'AMII' },
-                        { src: '/logo-nextai.webp', alt: 'NEXT AI' },
-                        { src: '/logo-venturelabs.webp', alt: 'VentureLabs' },
-                        { src: '/logo-outlier-ventures.webp', alt: 'Outlier Ventures' },
-                        { src: '/logo-chainlink.webp', alt: 'Chainlink Labs' },
-                        { src: '/logo-google-startups.webp', alt: 'Google for Startups' },
-                      ].map((logo) => (
-                        <div
-                          key={logo.alt}
-                          className="flex items-center justify-center rounded-lg bg-white/5 p-2 h-12"
-                        >
-                          <img
-                            src={logo.src}
-                            alt={logo.alt}
-                            className="h-5 w-auto object-contain brightness-0 invert opacity-60"
-                          />
-                        </div>
-                      ))}
-                    </div>
+                    <PartnerLogoGrid />
                   </div>
                 </div>
 

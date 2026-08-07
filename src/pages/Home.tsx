@@ -6,6 +6,7 @@ import {
 } from 'lucide-react';
 import { useSeoMeta } from '../hooks/useSeoMeta';
 import MolecularOrb from '../components/MolecularOrb';
+import { PartnerLogoStrip } from '../components/PartnerLogos';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -212,30 +213,8 @@ export default function Home() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="flex flex-wrap items-center justify-center gap-x-12 gap-y-8"
           >
-            {[
-              { src: '/logo-amii.webp', alt: 'AMII – Alberta Machine Intelligence Institute', href: 'https://www.amii.ca' },
-              { src: '/logo-nextai.webp', alt: 'NEXT AI', href: 'https://www.nextai.com' },
-              { src: '/logo-venturelabs.webp', alt: 'VentureLabs', href: 'https://www.venturelabs.ca' },
-              { src: '/logo-outlier-ventures.webp', alt: 'Outlier Ventures', href: 'https://outlierventures.io' },
-              { src: '/logo-chainlink.webp', alt: 'Chainlink Labs', href: 'https://chain.link' },
-              { src: '/logo-google-startups.webp', alt: 'Google for Startups', href: 'https://startup.google.com' },
-            ].map((logo) => (
-              <a
-                key={logo.alt}
-                href={logo.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex-shrink-0"
-              >
-                <img
-                  src={logo.src}
-                  alt={logo.alt}
-                  className="h-8 md:h-10 w-auto object-contain brightness-0 invert opacity-50 group-hover:opacity-90 transition-opacity duration-300"
-                />
-              </a>
-            ))}
+            <PartnerLogoStrip />
           </motion.div>
         </div>
       </section>
