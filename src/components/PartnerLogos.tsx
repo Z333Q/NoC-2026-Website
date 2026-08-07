@@ -82,7 +82,12 @@ const logos = [
     name: 'Anthropic',
     href: 'https://www.anthropic.com/news/canadian-ai-research',
     render: () => (
-      <span className="font-semibold tracking-wide text-[14px]">Anthropic</span>
+      <span className="text-[13px] flex items-center gap-1.5">
+        <svg viewBox="0 0 256 176" className="w-5 h-5 fill-current" aria-hidden="true">
+          <path d="M153.1 0H191l-65 176h-37.9L153.1 0zM0 176l65-176h37.9L37.9 176H0z" />
+        </svg>
+        <span className="font-medium tracking-wide">Anthropic</span>
+      </span>
     ),
   },
   {
