@@ -120,7 +120,7 @@ const activeVentures = [
     name: 'Wholesome Linen',
     oneLiner: 'Organic baby and toddler bedding essentials from 100% European flax linen.',
     description:
-      'DTC e-commerce brand specializing in handmade organic baby mattresses, bedding, and sleep essentials. OEKO-TEX Standard 100 certified -- no chemicals, dyes, or bleaches. European flax sourced from farms in Eastern Europe. Ships globally. Includes Eco Eve, an AI-powered pregnancy companion. Independent entity co-founded with Yuliia Ahmad.',
+      'DTC e-commerce brand specializing in handmade organic baby mattresses, bedding, and sleep essentials. OEKO-TEX Standard 100 certified -- no chemicals, dyes, or bleaches. European flax sourced from farms in Eastern Europe. Ships globally. Includes Eco Eve, an AI-powered pregnancy companion. Independent entity.',
     entity: 'Independent Entity — Wholesome Linen LLC (Denver, CO) — Co-Founded',
     entityColor: 'text-emerald-400',
     accentColor: 'border-emerald-500/30',
@@ -132,7 +132,6 @@ const activeVentures = [
     year: '2015',
     status: 'Active',
     statusColor: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20',
-    cofounder: 'Co-founded with Yuliia Ahmad',
   },
 ];
 

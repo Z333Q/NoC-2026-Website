@@ -339,16 +339,7 @@ export default function Insights() {
               </div>
               <h3 className="text-2xl font-bold text-white mb-3">Exploration & Discovery</h3>
               <p className="text-[var(--color-text-secondary)] leading-relaxed mb-6">
-                Adventures and reflections from around the world with my wife{' '}
-                <a
-                  href="https://linkedin.com/in/yulkin"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-amber-400 hover:text-white transition-colors underline underline-offset-2"
-                >
-                  Yuliia
-                </a>
-                . Travel, culture, food, and the occasional philosophical tangent. Building is only part of the story.
+                Adventures and reflections from around the world. Travel, culture, food, and the occasional philosophical tangent. Building is only part of the story.
               </p>
               <a
                 href="https://weexploreanddiscover.tumblr.com"

@@ -266,60 +266,6 @@ export default function Team() {
               whileInView="visible"
               viewport={{ once: true }}
               custom={1}
-              className="glass-card rounded-2xl p-8 border border-teal-500/20"
-            >
-              <div className="flex items-start gap-4 mb-6">
-                <img
-                  src="/DrYuliiav2.jpeg"
-                  alt="Yuliia Barbashova-Ahmad"
-                  className="w-16 h-16 rounded-xl object-cover flex-shrink-0"
-                />
-                <div>
-                  <h3 className="text-xl font-bold text-white">Yuliia Barbashova-Ahmad</h3>
-                  <p className="text-teal-400 text-sm">Co-Founder</p>
-                  <p className="text-[var(--color-text-muted)] text-xs">MBBS (MD Candidate) · Neonatology & SIDS Research · Infant Sleep Environment & Safety Advocate · Founder @ Wholesome Linen</p>
-                </div>
-              </div>
-              <p className="text-[var(--color-text-secondary)] text-sm leading-relaxed mb-4">
-                MD candidate with a focus on neonatology and SIDS research. Her clinical background in infant
-                sleep environment and safety directly informs Wholesome Linen -- a 10-year DTC brand
-                specializing in OEKO-TEX certified organic baby and toddler bedding from European flax linen.
-                Built and scaled from the ground up, shipping globally.
-              </p>
-              <div className="space-y-2 mb-4">
-                {[
-                  'MBBS · Neonatology & SIDS research focus',
-                  'Infant sleep environment & safety advocate',
-                  'DTC brand building & operations (10 years)',
-                ].map((item) => (
-                  <div key={item} className="flex items-start gap-2">
-                    <div className="w-1.5 h-1.5 rounded-full bg-teal-400 flex-shrink-0 mt-1.5" />
-                    <span className="text-[var(--color-text-muted)] text-xs">{item}</span>
-                  </div>
-                ))}
-              </div>
-              <div className="flex flex-wrap gap-2 mb-4">
-                {['Neonatology', 'SIDS Research', 'Infant Safety', 'DTC E-commerce'].map((tag) => (
-                  <span key={tag} className="px-3 py-1 rounded-full bg-teal-500/10 border border-teal-500/20 text-teal-400 text-xs font-semibold">{tag}</span>
-                ))}
-              </div>
-              <a
-                href="https://linkedin.com/in/yulkin"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-sm text-teal-400 hover:text-white transition-colors glass-card px-3 py-2 rounded-lg"
-              >
-                <ExternalLink className="w-4 h-4" />
-                LinkedIn
-              </a>
-            </motion.div>
-
-            <motion.div
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              custom={2}
               className="glass-card rounded-2xl p-8 border border-emerald-500/20"
             >
               <div className="flex items-start gap-4 mb-6">

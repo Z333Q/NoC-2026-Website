@@ -25,7 +25,6 @@ Nature of Commerce (NoC) is a Wyoming LLC based in Edmonton, Alberta, Canada. We
 - University of Alberta alumnus
 - USPTO patent filed for ReFi Trading algorithmic trading architecture
 
-### Yuliia Barbashova-Ahmad — Co-Founder
 ### Daniel Oosthuyzen — Co-Founder (ReFi Trading)
 
 ## What We Build
@@ -99,7 +98,7 @@ We publish across three outlets:
 - URL: https://www.p402.io/intelligence
 - Topics: Agentic payment protocols, x402 standard, verifiable compute, agent swarm economics, AP2 governance, flash crash protection
 
-### Personal Blog (Zeshan & Yuliia Ahmad)
+### Personal Blog
 - URL: https://weexploreanddiscover.tumblr.com
 - Topics: Travel, culture, exploration
 
