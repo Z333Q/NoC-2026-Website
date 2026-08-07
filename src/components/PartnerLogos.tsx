@@ -93,6 +93,27 @@ const logos = [
     ),
   },
   {
+    name: 'Base',
+    href: 'https://www.base.org/',
+    render: () => (
+      <span className="font-bold tracking-wide text-[14px]">Base</span>
+    ),
+  },
+  {
+    name: 'Cloudflare',
+    href: 'https://www.cloudflare.com/startups/',
+    render: () => (
+      <span className="font-semibold tracking-wide text-[13px]">Cloudflare</span>
+    ),
+  },
+  {
+    name: 'Stripe',
+    href: 'https://stripe.com/en-ca/startups',
+    render: () => (
+      <span className="font-bold tracking-wider text-[14px] italic">Stripe</span>
+    ),
+  },
+  {
     name: 'Startup Grind',
     href: 'https://pitchbattleroyale.com/competition-winners/refi-trading',
     render: () => (
