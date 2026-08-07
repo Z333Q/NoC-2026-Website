@@ -3,9 +3,7 @@ const logos = [
     name: 'AMII',
     href: 'https://app-na1.hubspotdocuments.com/documents/4771956/view/1672146498?accessId=c22707',
     render: () => (
-      <span className="font-bold tracking-wide text-[15px]">
-        A<span className="text-emerald-400 group-hover:text-emerald-300 transition-colors">M</span>II
-      </span>
+      <span className="font-bold tracking-wide text-[15px]">AMII</span>
     ),
   },
   {
@@ -47,6 +45,13 @@ const logos = [
         <span className="font-normal">Google for </span>
         <span className="font-bold">Startups</span>
       </span>
+    ),
+  },
+  {
+    name: 'Outlier Ventures',
+    href: 'https://outlierventures.io',
+    render: () => (
+      <span className="font-semibold tracking-wide text-[12px] uppercase">Outlier Ventures</span>
     ),
   },
   {
