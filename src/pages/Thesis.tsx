@@ -168,6 +168,7 @@ export default function Thesis() {
     ogTitle: 'Investment Thesis | Nature of Commerce',
     ogDescription: 'Nature of Commerce invests in the convergence of AI agents, decentralized finance, and open financial infrastructure. Pre-seed and seed stage Web3 and DeFi startups.',
     canonical: 'https://natureofcommerce.com/thesis',
+    keywords: 'investment thesis, agent economy, DeFi infrastructure, Web3 venture capital, agentic commerce, autonomous payments',
   });
   return (
     <main className="overflow-hidden">
@@ -406,6 +407,7 @@ export default function Thesis() {
                 <img
                   src="/natureofcommerce-book.jpeg"
                   alt="Essai Sur La Nature Du Commerce En General — La Nature De Commerce Generale 1st Edition (1755)"
+                  loading="lazy"
                   className="relative rounded-2xl w-full max-w-sm mx-auto shadow-2xl border border-[var(--color-border)]"
                 />
               </div>

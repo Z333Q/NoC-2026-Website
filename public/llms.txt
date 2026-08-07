@@ -146,7 +146,9 @@ We publish across three outlets:
 - **Technology Stack**: https://natureofcommerce.com/stack — Five-layer architecture, active ventures, technical details
 - **Research & Insights**: https://natureofcommerce.com/insights — All published research, Market Wars series
 - **Team**: https://natureofcommerce.com/about — Zeshan Ahmad bio, co-founders, teaching at KIU
-- **Contact**: https://natureofcommerce.com/contact — Investment inquiries, apply for funding, schedule a call
+- **Contact**: https://natureofcommerce.com/contact — Partnership inquiries, collaboration, advisory
+- **Privacy Policy**: https://natureofcommerce.com/privacy — Data collection, security, and your rights
+- **Terms of Service**: https://natureofcommerce.com/terms — Terms governing use of Nature of Commerce services
 
 ## Contact & Social
 

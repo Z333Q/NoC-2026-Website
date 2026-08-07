@@ -29,10 +29,11 @@ const topics = [
 export default function Contact() {
   useSeoMeta({
     title: 'Contact | Nature of Commerce',
-    description: 'Get in touch with Nature of Commerce. Apply for funding, inquire about the Launchpad program, or reach out to discuss investment opportunities in Web3, DeFi, and agentic commerce.',
+    description: 'Get in touch with Nature of Commerce. Discuss partnerships, P402 integration, research collaboration, or advisory opportunities.',
     ogTitle: 'Contact Nature of Commerce',
-    ogDescription: 'Apply for funding or reach out to the Nature of Commerce team. We invest $50K–$500K in pre-seed and seed Web3, DeFi, and agentic AI startups.',
+    ogDescription: 'Reach out to the Nature of Commerce team for partnerships, P402 integration, research collaboration, or advisory inquiries.',
     canonical: 'https://natureofcommerce.com/contact',
+    keywords: 'contact Nature of Commerce, Zeshan Ahmad contact, P402 partnership, Web3 consulting',
   });
 
   const [formData, setFormData] = useState({

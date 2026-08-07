@@ -91,6 +91,7 @@ export default function Team() {
     ogTitle: 'Team | Nature of Commerce',
     ogDescription: 'Meet Zeshan Ahmad and the Nature of Commerce team. Technical founders investing in the future of Web3, DeFi, and agentic commerce.',
     canonical: 'https://natureofcommerce.com/about',
+    keywords: 'Zeshan Ahmad, Nature of Commerce team, Daniel Oosthuyzen, Web3 founders, blockchain professor, NVIDIA DLI instructor',
   });
   return (
     <main className="overflow-hidden">
@@ -112,6 +113,7 @@ export default function Team() {
                       <img
                         src="/Dr-Sutton-AMII.jpeg"
                         alt="With Dr. Richard Sutton at AMII"
+                        loading="lazy"
                         className="w-full aspect-square object-cover object-top"
                       />
                     </div>
@@ -119,6 +121,7 @@ export default function Team() {
                       <img
                         src="/Zeshan-Defy-Conf.jpg"
                         alt="Speaking at Defy Conference"
+                        loading="lazy"
                         className="w-full aspect-square object-cover object-center"
                       />
                     </div>
@@ -126,6 +129,7 @@ export default function Team() {
                       <img
                         src="/Zeshan-Impact-Web-Summit.jpg"
                         alt="Presenting at Web Summit"
+                        loading="lazy"
                         className="w-full aspect-[3/4] object-cover object-top"
                       />
                     </div>
@@ -133,6 +137,7 @@ export default function Team() {
                       <img
                         src="/Zeshan-DeGameFi.jpg"
                         alt="Panel at DeGameFi"
+                        loading="lazy"
                         className="w-full aspect-[3/4] object-cover object-center"
                       />
                     </div>
@@ -140,11 +145,12 @@ export default function Team() {
                       <img
                         src="/Zeshan-Startup-Grind.JPG"
                         alt="Presenting at Startup Grind"
+                        loading="lazy"
                         className="w-full aspect-[3/4] object-cover object-center"
                       />
                     </div>
                   </div>
-                  <h2 className="text-2xl font-bold text-white mb-1">Zeshan Ahmad</h2>
+                  <h1 className="text-2xl font-bold text-white mb-1">Zeshan Ahmad</h1>
                   <p className="text-[var(--color-primary)] text-sm font-semibold mb-4">
                     Founder, Nature of Commerce
                   </p>
@@ -307,6 +313,7 @@ export default function Team() {
                 <img
                   src="/zeshan-bio-photo-2022-square.jpg"
                   alt="Zeshan Ahmad"
+                  loading="lazy"
                   className="w-16 h-16 rounded-xl object-cover flex-shrink-0"
                 />
                 <div>
@@ -339,6 +346,7 @@ export default function Team() {
                 <img
                   src="/dan-refi-trading.jpg"
                   alt="Daniel Oosthuyzen"
+                  loading="lazy"
                   className="w-16 h-16 rounded-xl object-cover flex-shrink-0"
                 />
                 <div>

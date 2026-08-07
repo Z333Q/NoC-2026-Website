@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { ExternalLink, Clock, ArrowRight, BookOpen, Calendar, User, Linkedin } from 'lucide-react';
 import { LinkedInFeed } from '../components/LinkedInFeed';
 import { articles, sourceConfig, type ArticleCategory, type ArticleSource } from '../data/insightsData';
+import { useSeoMeta } from '../hooks/useSeoMeta';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -113,19 +114,17 @@ export default function Insights() {
   const [activeCategory, setActiveCategory] = useState<FilterCategory>('All');
   const [activeSource, setActiveSource] = useState<FilterSource>('All');
 
-  useEffect(() => {
-    document.title = 'Insights & Research | Nature of Commerce';
-    const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) metaDesc.setAttribute('content', 'Research, technical papers, and thought leadership from Nature of Commerce. Covering AI trading infrastructure, agentic payments, zero-knowledge compliance, and market structure.');
-    const ogTitle = document.querySelector('meta[property="og:title"]');
-    if (ogTitle) ogTitle.setAttribute('content', 'Insights & Research | Nature of Commerce');
-    const ogDesc = document.querySelector('meta[property="og:description"]');
-    if (ogDesc) ogDesc.setAttribute('content', 'Technical papers and market research from the Nature of Commerce studio. AI trading, agentic payments, ZK compliance, and the future of digital commerce.');
-    const twitterTitle = document.querySelector('meta[name="twitter:title"]');
-    if (twitterTitle) twitterTitle.setAttribute('content', 'Insights & Research | Nature of Commerce');
-    const canonical = document.querySelector('link[rel="canonical"]');
-    if (canonical) canonical.setAttribute('href', 'https://natureofcommerce.com/insights');
+  useSeoMeta({
+    title: 'Insights & Research | Nature of Commerce',
+    description: 'Research, technical papers, and thought leadership from Nature of Commerce. AI trading infrastructure, agentic payments, zero-knowledge compliance, and market structure.',
+    ogTitle: 'Insights & Research | Nature of Commerce',
+    ogDescription: 'Technical papers and market research from Nature of Commerce. AI trading, agentic payments, ZK compliance, and digital commerce.',
+    canonical: 'https://natureofcommerce.com/insights',
+    ogType: 'blog',
+    keywords: 'AI trading, agentic payments, zero-knowledge proofs, market structure, DeFi research, Web3 research',
+  });
 
+  useEffect(() => {
     const schema = {
       '@context': 'https://schema.org',
       '@type': 'CollectionPage',
@@ -140,10 +139,13 @@ export default function Insights() {
         description: a.excerpt,
         author: { '@type': 'Person', name: a.author },
         datePublished: a.publishedDate,
+        dateModified: a.publishedDate,
         url: a.sourceUrl,
         image: a.image,
         keywords: a.tags.join(', '),
         timeRequired: `PT${parseInt(a.readTime)}M`,
+        publisher: { '@id': 'https://natureofcommerce.com/#organization' },
+        mainEntityOfPage: a.sourceUrl,
       })),
     };
 
@@ -157,10 +159,6 @@ export default function Insights() {
     scriptTag.textContent = JSON.stringify(schema);
 
     return () => {
-      document.title = 'Nature of Commerce | Early-Stage VC Fund & Startup Launchpad';
-      if (metaDesc) metaDesc.setAttribute('content', 'Nature of Commerce is an early-stage venture capital fund, startup launchpad, and strategic consulting firm. We invest in founders building the future of digital commerce, Web3, DeFi, and tokenized economies. Apply for funding or join our accelerator program.');
-      if (ogTitle) ogTitle.setAttribute('content', 'Nature of Commerce | Early-Stage VC Fund & Startup Launchpad');
-      if (canonical) canonical.setAttribute('href', 'https://natureofcommerce.com/');
       const el = document.getElementById('insights-schema');
       if (el) el.remove();
     };

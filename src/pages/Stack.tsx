@@ -180,6 +180,7 @@ export default function Stack() {
     ogTitle: 'Tech Stack | Nature of Commerce',
     ogDescription: 'Explore the open, verifiable technology stack behind Nature of Commerce portfolio companies: AI trading, ZK proofs, account abstraction, and agentic payment infrastructure.',
     canonical: 'https://natureofcommerce.com/stack',
+    keywords: 'P402 tech stack, ReFi Trading technology, ERC-4337, zero-knowledge proofs, x402 protocol, reinforcement learning trading, Web3 infrastructure',
   });
   return (
     <main className="overflow-hidden">
