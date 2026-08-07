@@ -55,6 +55,23 @@ const logos = [
     ),
   },
   {
+    name: 'Web Summit',
+    href: 'https://qatar.websummit.com/',
+    render: () => (
+      <span className="font-black tracking-tight text-[13px] uppercase">Web Summit</span>
+    ),
+  },
+  {
+    name: 'Edmonton Unlimited',
+    href: 'https://edmontonunlimited.com/alumni-companies/',
+    render: () => (
+      <span className="text-[12px]">
+        <span className="font-bold">Edmonton</span>
+        <span className="font-light"> Unlimited</span>
+      </span>
+    ),
+  },
+  {
     name: 'Startup Grind',
     href: 'https://pitchbattleroyale.com/competition-winners/refi-trading',
     render: () => (
