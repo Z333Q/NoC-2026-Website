@@ -135,7 +135,7 @@ export default function Team() {
                     </div>
                     <div>
                       <img
-                        src="/Zeshan-DeGameFi.jpg"
+                        src="/zeshan-degamefi.webp"
                         alt="Panel at DeGameFi"
                         loading="lazy"
                         className="w-full aspect-[3/4] object-cover object-center"
