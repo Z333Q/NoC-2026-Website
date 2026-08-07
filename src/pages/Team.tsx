@@ -2,7 +2,8 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import {
   ArrowRight, ExternalLink, Github, BookOpen, Award,
-  Cpu, TrendingUp, Building2, GraduationCap, Zap, Shield
+  Cpu, TrendingUp, Building2, GraduationCap, Zap, Shield,
+  Linkedin, MessageSquare, Repeat2, ThumbsUp
 } from 'lucide-react';
 import { useSeoMeta } from '../hooks/useSeoMeta';
 
@@ -147,6 +148,36 @@ export default function Team() {
                       </div>
                     ))}
                   </div>
+                </div>
+
+                <div className="glass-card rounded-2xl p-6 mt-6 border border-[#0A66C2]/20" style={{ background: 'linear-gradient(135deg, rgba(10,102,194,0.06) 0%, rgba(10,10,16,0.95) 100%)' }}>
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-8 h-8 rounded-lg bg-[#0A66C2]/20 flex items-center justify-center">
+                      <Linkedin className="w-4 h-4 text-[#0A66C2]" />
+                    </div>
+                    <span className="text-sm font-semibold text-white">LinkedIn Activity</span>
+                  </div>
+                  <div className="space-y-3 mb-5">
+                    {[
+                      { icon: MessageSquare, text: 'Agentic commerce & x402' },
+                      { icon: Repeat2, text: 'DeFi & AI infrastructure' },
+                      { icon: ThumbsUp, text: 'P402 & ReFi updates' },
+                    ].map((item) => (
+                      <div key={item.text} className="flex items-center gap-2.5">
+                        <item.icon className="w-3.5 h-3.5 text-[#0A66C2]/70 flex-shrink-0" />
+                        <span className="text-[var(--color-text-muted)] text-xs">{item.text}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <a
+                    href="https://linkedin.com/in/zeshanahmad"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-xl bg-[#0A66C2] hover:bg-[#004182] text-white font-semibold text-xs transition-colors"
+                  >
+                    <Linkedin className="w-3.5 h-3.5" />
+                    Follow on LinkedIn
+                  </a>
                 </div>
               </motion.div>
             </div>

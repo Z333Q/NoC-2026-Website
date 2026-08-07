@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
-import { ExternalLink, Clock, ArrowRight, BookOpen, Calendar, User } from 'lucide-react';
+import { ExternalLink, Clock, ArrowRight, BookOpen, Calendar, User, Linkedin, MessageSquare, ThumbsUp, Repeat2 } from 'lucide-react';
 import { articles, sourceConfig, type ArticleCategory, type ArticleSource } from '../data/insightsData';
 
 const fadeUp = {
@@ -323,12 +323,57 @@ export default function Insights() {
 
       <section className="section-padding bg-[var(--color-bg-secondary)] border-y border-[var(--color-border)]" aria-label="Personal content">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-8">
+          <div className="grid lg:grid-cols-3 gap-8">
             <motion.div
               variants={fadeUp}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
+              className="rounded-2xl p-8 border border-[#0A66C2]/30 lg:row-span-2 flex flex-col"
+              style={{ background: 'linear-gradient(135deg, rgba(10,102,194,0.08) 0%, rgba(10,10,16,0.95) 100%)' }}
+            >
+              <div className="flex items-center gap-3 mb-5">
+                <div className="w-10 h-10 rounded-lg bg-[#0A66C2]/20 flex items-center justify-center">
+                  <Linkedin className="w-5 h-5 text-[#0A66C2]" />
+                </div>
+                <div>
+                  <span className="text-white font-semibold text-sm block">Zeshan Ahmad</span>
+                  <span className="text-[var(--color-text-muted)] text-xs">LinkedIn Activity</span>
+                </div>
+              </div>
+              <h3 className="text-2xl font-bold text-white mb-3">Live from LinkedIn</h3>
+              <p className="text-[var(--color-text-secondary)] leading-relaxed mb-6">
+                Thoughts on agentic commerce, financial infrastructure, AI payments, and the intersection of teaching and building -- posted in real time.
+              </p>
+              <div className="space-y-4 mb-6 flex-1">
+                {[
+                  { icon: MessageSquare, label: 'Commentary on x402, A2A protocols, and autonomous agent payments' },
+                  { icon: Repeat2, label: 'Curated shares from the DeFi, AI, and infrastructure ecosystem' },
+                  { icon: ThumbsUp, label: 'Updates on P402, ReFi Trading, and KIU courses' },
+                ].map((item) => (
+                  <div key={item.label} className="flex items-start gap-3">
+                    <item.icon className="w-4 h-4 text-[#0A66C2] flex-shrink-0 mt-0.5" />
+                    <span className="text-[var(--color-text-muted)] text-sm leading-relaxed">{item.label}</span>
+                  </div>
+                ))}
+              </div>
+              <a
+                href="https://linkedin.com/in/zeshanahmad"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 w-full px-5 py-3 rounded-xl bg-[#0A66C2] hover:bg-[#004182] text-white font-semibold text-sm transition-colors"
+              >
+                <Linkedin className="w-4 h-4" />
+                Follow on LinkedIn
+              </a>
+            </motion.div>
+
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              custom={1}
               className="rounded-2xl p-8 border border-amber-500/20"
               style={{ background: 'linear-gradient(135deg, rgba(245,158,11,0.05) 0%, rgba(10,10,16,0.9) 100%)' }}
             >
@@ -357,7 +402,7 @@ export default function Insights() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
-              custom={1}
+              custom={2}
               className="rounded-2xl p-8 border border-amber-500/20"
               style={{ background: 'linear-gradient(135deg, rgba(245,158,11,0.05) 0%, rgba(10,10,16,0.9) 100%)' }}
             >
