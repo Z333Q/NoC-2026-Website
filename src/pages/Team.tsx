@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 import {
   ArrowRight, ExternalLink, Github, BookOpen, Award,
   Cpu, TrendingUp, Building2, GraduationCap, Zap, Shield,
-  Linkedin, MessageSquare, Repeat2, ThumbsUp
+  Linkedin
 } from 'lucide-react';
+import { LinkedInFeed } from '../components/LinkedInFeed';
 import { useSeoMeta } from '../hooks/useSeoMeta';
 
 const fadeUp = {
@@ -157,18 +158,7 @@ export default function Team() {
                     </div>
                     <span className="text-sm font-semibold text-white">LinkedIn Activity</span>
                   </div>
-                  <div className="space-y-3 mb-5">
-                    {[
-                      { icon: MessageSquare, text: 'Agentic commerce & x402' },
-                      { icon: Repeat2, text: 'DeFi & AI infrastructure' },
-                      { icon: ThumbsUp, text: 'P402 & ReFi updates' },
-                    ].map((item) => (
-                      <div key={item.text} className="flex items-center gap-2.5">
-                        <item.icon className="w-3.5 h-3.5 text-[#0A66C2]/70 flex-shrink-0" />
-                        <span className="text-[var(--color-text-muted)] text-xs">{item.text}</span>
-                      </div>
-                    ))}
-                  </div>
+                  <LinkedInFeed className="overflow-y-auto max-h-[360px] mb-4 -mx-1 px-1 scrollbar-thin" />
                   <a
                     href="https://linkedin.com/in/zeshanahmad"
                     target="_blank"

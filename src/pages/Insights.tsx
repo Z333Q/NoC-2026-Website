@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
-import { ExternalLink, Clock, ArrowRight, BookOpen, Calendar, User, Linkedin, MessageSquare, ThumbsUp, Repeat2 } from 'lucide-react';
+import { ExternalLink, Clock, ArrowRight, BookOpen, Calendar, User, Linkedin } from 'lucide-react';
+import { LinkedInFeed } from '../components/LinkedInFeed';
 import { articles, sourceConfig, type ArticleCategory, type ArticleSource } from '../data/insightsData';
 
 const fadeUp = {
@@ -337,31 +338,16 @@ export default function Insights() {
                   <Linkedin className="w-5 h-5 text-[#0A66C2]" />
                 </div>
                 <div>
-                  <span className="text-white font-semibold text-sm block">Zeshan Ahmad</span>
-                  <span className="text-[var(--color-text-muted)] text-xs">LinkedIn Activity</span>
+                  <span className="text-white font-semibold text-sm block">Live from LinkedIn</span>
+                  <span className="text-[var(--color-text-muted)] text-xs">Latest posts & updates</span>
                 </div>
               </div>
-              <h3 className="text-2xl font-bold text-white mb-3">Live from LinkedIn</h3>
-              <p className="text-[var(--color-text-secondary)] leading-relaxed mb-6">
-                Thoughts on agentic commerce, financial infrastructure, AI payments, and the intersection of teaching and building -- posted in real time.
-              </p>
-              <div className="space-y-4 mb-6 flex-1">
-                {[
-                  { icon: MessageSquare, label: 'Commentary on x402, A2A protocols, and autonomous agent payments' },
-                  { icon: Repeat2, label: 'Curated shares from the DeFi, AI, and infrastructure ecosystem' },
-                  { icon: ThumbsUp, label: 'Updates on P402, ReFi Trading, and KIU courses' },
-                ].map((item) => (
-                  <div key={item.label} className="flex items-start gap-3">
-                    <item.icon className="w-4 h-4 text-[#0A66C2] flex-shrink-0 mt-0.5" />
-                    <span className="text-[var(--color-text-muted)] text-sm leading-relaxed">{item.label}</span>
-                  </div>
-                ))}
-              </div>
+              <LinkedInFeed className="flex-1 overflow-y-auto max-h-[480px] mb-4 -mx-2 px-2 scrollbar-thin" />
               <a
                 href="https://linkedin.com/in/zeshanahmad"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 w-full px-5 py-3 rounded-xl bg-[#0A66C2] hover:bg-[#004182] text-white font-semibold text-sm transition-colors"
+                className="inline-flex items-center justify-center gap-2 w-full px-5 py-3 rounded-xl bg-[#0A66C2] hover:bg-[#004182] text-white font-semibold text-sm transition-colors flex-shrink-0"
               >
                 <Linkedin className="w-4 h-4" />
                 Follow on LinkedIn
