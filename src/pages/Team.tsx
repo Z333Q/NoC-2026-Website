@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import {
   ArrowRight, ExternalLink, Github, BookOpen, Award,
   Cpu, TrendingUp, Building2, GraduationCap, Zap, Shield,
-  Linkedin
+  Linkedin, Play
 } from 'lucide-react';
 import { LinkedInFeed } from '../components/LinkedInFeed';
 import { useSeoMeta } from '../hooks/useSeoMeta';
@@ -284,6 +284,43 @@ export default function Team() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className="section-padding">
+        <div className="max-w-7xl mx-auto px-6">
+          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-12">
+            <div className="flex items-center gap-3 mb-6">
+              <Play className="w-5 h-5 text-emerald-400" />
+              <span className="section-label block w-fit">Watch</span>
+            </div>
+            <h2 className="display-text mb-4">
+              In{' '}
+              <span className="text-gradient">Action</span>
+            </h2>
+            <p className="text-white/60 max-w-2xl text-lg leading-relaxed">
+              Speaking, building, and sharing ideas on the future of agentic commerce and decentralized infrastructure.
+            </p>
+          </motion.div>
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="relative rounded-2xl overflow-hidden border border-[var(--color-border)] bg-black/40 backdrop-blur-sm"
+          >
+            <div className="aspect-video w-full">
+              <iframe
+                src="https://www.youtube.com/embed/TK5aTVzOC-g?si=EgjcCFSeGVNoEa7y"
+                title="Zeshan Ahmad — Nature of Commerce"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+                loading="lazy"
+                className="w-full h-full"
+              />
+            </div>
+          </motion.div>
         </div>
       </section>
 
