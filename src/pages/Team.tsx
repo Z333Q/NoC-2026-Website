@@ -193,7 +193,11 @@ export default function Team() {
                     <span className="text-xs uppercase tracking-[0.15em] text-[var(--color-text-muted)] font-medium block mb-4">
                       Network & Affiliations
                     </span>
-                    <PartnerLogoGrid />
+                    <img
+                      src="/Zeshan-Network-Affiliations.png"
+                      alt="Network & Affiliations"
+                      className="w-full rounded-lg"
+                    />
                   </div>
                 </div>
 
