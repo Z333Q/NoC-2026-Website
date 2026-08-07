@@ -72,6 +72,27 @@ const logos = [
     ),
   },
   {
+    name: 'Summit',
+    href: 'https://summit.co/community',
+    render: () => (
+      <span className="font-black tracking-widest text-[13px] uppercase">Summit</span>
+    ),
+  },
+  {
+    name: 'Anthropic',
+    href: 'https://www.anthropic.com/news/canadian-ai-research',
+    render: () => (
+      <span className="font-semibold tracking-wide text-[14px]">Anthropic</span>
+    ),
+  },
+  {
+    name: 'NVIDIA',
+    href: 'https://www.nvidia.com/en-us/startups/',
+    render: () => (
+      <span className="font-bold tracking-wider text-[14px] uppercase">NVIDIA</span>
+    ),
+  },
+  {
     name: 'Startup Grind',
     href: 'https://pitchbattleroyale.com/competition-winners/refi-trading',
     render: () => (
