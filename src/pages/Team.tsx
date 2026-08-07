@@ -99,11 +99,23 @@ export default function Team() {
             <div className="lg:col-span-1">
               <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
                 <div className="glass-card rounded-2xl p-6 mb-6">
-                  <img
-                    src="/zeshan-bio-photo-2022-square.jpg"
-                    alt="Zeshan Ahmad"
-                    className="w-full aspect-square object-cover rounded-xl mb-6"
-                  />
+                  <div className="grid grid-cols-2 gap-2 mb-6">
+                    <img
+                      src="/zeshan-bio-photo-2022-square.jpg"
+                      alt="Zeshan Ahmad"
+                      className="w-full aspect-square object-cover rounded-xl col-span-2"
+                    />
+                    <img
+                      src="/555681785_10161866851656408_4519368290982062114_n.jpg"
+                      alt="Zeshan Ahmad speaking at Futurum Dubai"
+                      className="w-full aspect-[4/3] object-cover rounded-lg"
+                    />
+                    <img
+                      src="/zeshan-degamefi.webp"
+                      alt="Zeshan Ahmad on DeGameFi panel"
+                      className="w-full aspect-[4/3] object-cover rounded-lg"
+                    />
+                  </div>
                   <h2 className="text-2xl font-bold text-white mb-1">Zeshan Ahmad</h2>
                   <p className="text-[var(--color-primary)] text-sm font-semibold mb-4">
                     Founder, Nature of Commerce
@@ -141,13 +153,39 @@ export default function Team() {
                       Recognition
                     </span>
                   </div>
-                  <div className="space-y-3">
+                  <div className="space-y-3 mb-6">
                     {credentials.map((c) => (
                       <div key={c.label} className="flex items-start gap-2">
                         <div className="w-1.5 h-1.5 rounded-full bg-amber-400 flex-shrink-0 mt-2" />
                         <span className="text-[var(--color-text-secondary)] text-sm">{c.label}</span>
                       </div>
                     ))}
+                  </div>
+                  <div className="pt-5 border-t border-[var(--color-border)]">
+                    <span className="text-xs uppercase tracking-[0.15em] text-[var(--color-text-muted)] font-medium block mb-4">
+                      Network & Affiliations
+                    </span>
+                    <div className="grid grid-cols-3 gap-3">
+                      {[
+                        { src: '/logo-amii.webp', alt: 'AMII' },
+                        { src: '/logo-nextai.webp', alt: 'NEXT AI' },
+                        { src: '/logo-venturelabs.webp', alt: 'VentureLabs' },
+                        { src: '/logo-outlier-ventures.webp', alt: 'Outlier Ventures' },
+                        { src: '/logo-chainlink.webp', alt: 'Chainlink Labs' },
+                        { src: '/logo-google-startups.webp', alt: 'Google for Startups' },
+                      ].map((logo) => (
+                        <div
+                          key={logo.alt}
+                          className="flex items-center justify-center rounded-lg bg-white/5 p-2 h-12"
+                        >
+                          <img
+                            src={logo.src}
+                            alt={logo.alt}
+                            className="h-5 w-auto object-contain brightness-0 invert opacity-60"
+                          />
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
 
