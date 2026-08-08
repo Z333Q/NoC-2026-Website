@@ -160,7 +160,7 @@ export default function Team() {
                   </p>
                   <div className="flex flex-wrap gap-3">
                     <a
-                      href="https://linkedin.com/in/zeshanahmad"
+                      href="https://linkedin.com/in/zeshan"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-1.5 text-sm text-[var(--color-primary)] hover:text-white transition-colors glass-card px-3 py-2 rounded-lg"
@@ -212,7 +212,7 @@ export default function Team() {
                   </div>
                   <LinkedInFeed className="overflow-y-auto max-h-[360px] mb-4 -mx-1 px-1 scrollbar-thin" />
                   <a
-                    href="https://linkedin.com/in/zeshanahmad"
+                    href="https://linkedin.com/in/zeshan"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-xl bg-[#0A66C2] hover:bg-[#004182] text-white font-semibold text-xs transition-colors"

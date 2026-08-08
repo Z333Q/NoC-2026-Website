@@ -41,7 +41,7 @@ export default function Footer() {
 
             <div className="flex items-center gap-4">
               <a
-                href="https://linkedin.com/in/zeshanahmad"
+                href="https://linkedin.com/in/zeshan"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 glass-card rounded-lg text-[var(--color-text-muted)] hover:text-[var(--color-primary)] transition-colors"

@@ -170,7 +170,7 @@ export default function Home() {
               className="w-9 h-9 rounded-full object-cover opacity-80 flex-shrink-0"
             />
             <p className="text-[var(--color-text-muted)] text-sm leading-snug">
-              <a href="https://linkedin.com/in/zeshanahmad" target="_blank" rel="noopener noreferrer" className="text-[var(--color-text-secondary)] hover:text-[var(--color-primary)] transition-colors">Zeshan Ahmad</a>
+              <a href="https://linkedin.com/in/zeshan" target="_blank" rel="noopener noreferrer" className="text-[var(--color-text-secondary)] hover:text-[var(--color-primary)] transition-colors">Zeshan Ahmad</a>
               {' '}— Professor and technical founder with 20+ years building financial infrastructure across mobile payments, sovereign systems, institutional capital, cryptographic compliance, and autonomous commerce.{' '}
               <Link to="/about" className="text-[var(--color-primary)]/70 hover:text-[var(--color-primary)] transition-colors underline underline-offset-2 decoration-dotted">
                 full bio

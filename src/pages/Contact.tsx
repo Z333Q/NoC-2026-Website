@@ -269,7 +269,7 @@ export default function Contact() {
                 <h3 className="text-lg font-bold text-white mb-4">Connect Online</h3>
                 <div className="space-y-3">
                   <a
-                    href="https://linkedin.com/in/zeshanahmad"
+                    href="https://linkedin.com/in/zeshan"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 text-[var(--color-text-secondary)] hover:text-white transition-colors"

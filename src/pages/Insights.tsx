@@ -342,7 +342,7 @@ export default function Insights() {
               </div>
               <LinkedInFeed className="flex-1 overflow-y-auto max-h-[480px] mb-4 -mx-2 px-2 scrollbar-thin" />
               <a
-                href="https://linkedin.com/in/zeshanahmad"
+                href="https://linkedin.com/in/zeshan"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 w-full px-5 py-3 rounded-xl bg-[#0A66C2] hover:bg-[#004182] text-white font-semibold text-sm transition-colors flex-shrink-0"
