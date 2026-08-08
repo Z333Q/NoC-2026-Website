@@ -130,7 +130,7 @@ export default function Team() {
                         src="/Zeshan-Impact-Web-Summit.jpg"
                         alt="Presenting at Web Summit"
                         loading="lazy"
-                        className="w-full aspect-[3/4] object-cover object-top"
+                        className="w-full aspect-[3/4] object-cover object-[center_70%]"
                       />
                     </div>
                     <div>
