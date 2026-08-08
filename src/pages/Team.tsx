@@ -302,25 +302,46 @@ export default function Team() {
               Speaking, building, and sharing ideas on the future of agentic commerce and decentralized infrastructure.
             </p>
           </motion.div>
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="relative rounded-2xl overflow-hidden border border-[var(--color-border)] bg-black/40 backdrop-blur-sm"
-          >
-            <div className="aspect-video w-full">
-              <iframe
-                src="https://www.youtube.com/embed/TK5aTVzOC-g?si=EgjcCFSeGVNoEa7y"
-                title="Zeshan Ahmad — Nature of Commerce"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerPolicy="strict-origin-when-cross-origin"
-                allowFullScreen
-                loading="lazy"
-                className="w-full h-full"
-              />
-            </div>
-          </motion.div>
+          <div className="grid md:grid-cols-2 gap-6">
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="relative rounded-2xl overflow-hidden border border-[var(--color-border)] bg-black/40 backdrop-blur-sm"
+            >
+              <div className="aspect-video w-full">
+                <iframe
+                  src="https://www.youtube.com/embed/TK5aTVzOC-g?si=EgjcCFSeGVNoEa7y"
+                  title="Zeshan Ahmad — Nature of Commerce"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                  loading="lazy"
+                  className="w-full h-full"
+                />
+              </div>
+            </motion.div>
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="relative rounded-2xl overflow-hidden border border-[var(--color-border)] bg-black/40 backdrop-blur-sm"
+            >
+              <div className="aspect-video w-full">
+                <iframe
+                  src="https://www.youtube.com/embed/eNxqyjVUfnY?si=850FcwfPaS0wDHnw&start=5"
+                  title="Zeshan Ahmad — Speaking"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                  loading="lazy"
+                  className="w-full h-full"
+                />
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
