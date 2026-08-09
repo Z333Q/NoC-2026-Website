@@ -8,19 +8,19 @@ export function LinkedInFeed({ className = '' }: { className?: string }) {
 
     containerRef.current.innerHTML = '';
     const widgetDiv = document.createElement('div');
-    widgetDiv.className = 'sk-ww-linkedin-page-post';
+    widgetDiv.className = 'sk-ww-linkedin-profile-post';
     widgetDiv.setAttribute('data-embed-id', '25703650');
     containerRef.current.appendChild(widgetDiv);
 
     const existingScript = document.querySelector(
-      'script[src="https://widgets.sociablekit.com/linkedin-page-posts/widget.js"]'
+      'script[src="https://widgets.sociablekit.com/linkedin-profile-posts/widget.js"]'
     );
     if (existingScript) {
       existingScript.remove();
     }
 
     const script = document.createElement('script');
-    script.src = 'https://widgets.sociablekit.com/linkedin-page-posts/widget.js';
+    script.src = 'https://widgets.sociablekit.com/linkedin-profile-posts/widget.js';
     script.async = true;
     document.body.appendChild(script);
 
