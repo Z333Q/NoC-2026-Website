@@ -321,17 +321,17 @@ export default function Insights() {
       </section>
 
       <section className="section-padding bg-[var(--color-bg-secondary)] border-y border-[var(--color-border)]" aria-label="Personal content">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-3 gap-8">
-            <motion.div
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              className="rounded-2xl p-8 border border-[#0A66C2]/30 lg:row-span-2 flex flex-col"
-              style={{ background: 'linear-gradient(135deg, rgba(10,102,194,0.08) 0%, rgba(10,10,16,0.95) 100%)' }}
-            >
-              <div className="flex items-center gap-3 mb-5">
+        <div className="max-w-7xl mx-auto px-6 space-y-8">
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="rounded-2xl p-8 border border-[#0A66C2]/30"
+            style={{ background: 'linear-gradient(135deg, rgba(10,102,194,0.08) 0%, rgba(10,10,16,0.95) 100%)' }}
+          >
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-lg bg-[#0A66C2]/20 flex items-center justify-center">
                   <Linkedin className="w-5 h-5 text-[#0A66C2]" />
                 </div>
@@ -340,18 +340,20 @@ export default function Insights() {
                   <span className="text-[var(--color-text-muted)] text-xs">Latest posts & updates</span>
                 </div>
               </div>
-              <LinkedInFeed className="flex-1 overflow-y-auto max-h-[480px] mb-4 -mx-2 px-2 scrollbar-thin" />
               <a
                 href="https://linkedin.com/in/zeshan"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 w-full px-5 py-3 rounded-xl bg-[#0A66C2] hover:bg-[#004182] text-white font-semibold text-sm transition-colors flex-shrink-0"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#0A66C2] hover:bg-[#004182] text-white font-semibold text-sm transition-colors"
               >
                 <Linkedin className="w-4 h-4" />
                 Follow on LinkedIn
               </a>
-            </motion.div>
+            </div>
+            <LinkedInFeed className="overflow-hidden [&_.sk-ww-linkedin-profile-post]:grid [&_.sk-ww-linkedin-profile-post]:grid-cols-1 [&_.sk-ww-linkedin-profile-post]:sm:grid-cols-2 [&_.sk-ww-linkedin-profile-post]:lg:grid-cols-3 [&_.sk-ww-linkedin-profile-post]:gap-6" />
+          </motion.div>
 
+          <div className="grid md:grid-cols-2 gap-8">
             <motion.div
               variants={fadeUp}
               initial="hidden"
