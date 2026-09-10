@@ -434,14 +434,15 @@ export default function Home() {
             </div>
             <div className="lg:col-span-8">
               <p className="text-lg text-[var(--color-text-secondary)] leading-relaxed mb-6">
-                P402 is open-source payment infrastructure for autonomous agents, built on the x402 pattern.
-                Developer-first: drop in the SDK, wire it up from the command line, or connect it to any agent
-                through the MCP server, and your software can pay, settle, and prove compliance without a human
-                in the loop. Where Metergrade is enterprise and ReFi is a platform, P402 is the open layer the
-                whole agent economy can build on.
+                P402 makes AI spend accountable. It turns every AI request, from a person or an autonomous
+                agent, into an economic event with a clear owner, workflow, model, cost, budget, policy
+                result, and verifiable evidence, private and metadata-only by default. A drop-in,
+                OpenAI-compatible SDK routes each call to the best of 300+ models, budgets and agent mandates
+                are enforced cryptographically, and settlement is recorded on-chain, giving teams and their
+                agents one accountable ledger for AI. Developer-first, with an open-source core.
               </p>
               <div className="flex flex-wrap gap-2 mb-6">
-                {['SDK', 'CLI', 'MCP server', 'x402 protocol'].map((tag) => (
+                {['OpenAI-compatible SDK', 'MCP server', '300+ models', 'On-chain settlement'].map((tag) => (
                   <span
                     key={tag}
                     className="text-xs font-medium px-3 py-1 rounded-full border border-[var(--color-primary)]/30 text-[var(--color-primary)]"
