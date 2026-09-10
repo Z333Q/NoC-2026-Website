@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { ArrowRight, ExternalLink, Copy, Check, Download, Gamepad2 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { useSeoMeta } from '../hooks/useSeoMeta';
 import MolecularOrb from '../components/MolecularOrb';
 
@@ -133,9 +134,9 @@ export default function Home() {
             initial="hidden"
             animate="visible"
             custom={1}
-            className="hero-text-large max-w-[16ch] mb-8"
+            className="hero-text-large max-w-[18ch] mb-8"
           >
-            Commerce is changing its <span className="text-gradient">nature.</span>
+            Build technology that creates <span className="text-gradient">opportunity.</span>
           </motion.h1>
 
           <motion.p
@@ -143,10 +144,9 @@ export default function Home() {
             initial="hidden"
             animate="visible"
             custom={2}
-            className="body-large max-w-[52ch] mb-12"
+            className="body-large max-w-[52ch] mb-8"
           >
-            AI agents now spend, trade, and decide at machine speed. I build the control layer for the
-            machine economy, and I train the people who will direct it.
+            20 years of creating access to global markets.
           </motion.p>
 
           <motion.div
@@ -154,14 +154,41 @@ export default function Home() {
             initial="hidden"
             animate="visible"
             custom={3}
+            className="mb-3 flex flex-wrap items-center gap-x-6 gap-y-2"
+          >
+            {['Payments', 'Trading', 'Education', 'Ownership'].map((pillar) => (
+              <span
+                key={pillar}
+                className="text-sm font-bold uppercase tracking-widest text-[var(--color-primary)]"
+              >
+                {pillar}
+              </span>
+            ))}
+          </motion.div>
+
+          <motion.p
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+            custom={4}
+            className="text-lg text-[var(--color-text-secondary)] mb-12"
+          >
+            The mechanics of participation. The nature of commerce.
+          </motion.p>
+
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+            custom={5}
             className="flex flex-wrap gap-4 items-center"
           >
-            <a href="#thesis" className="btn-primary flex items-center gap-2">
-              <span>The thesis</span>
+            <Link to="/stack" className="btn-primary flex items-center gap-2">
+              <span>See the Stack</span>
               <ArrowRight className="w-5 h-5" />
-            </a>
-            <a href="#work" className="btn-secondary flex items-center gap-2">
-              <span>The work</span>
+            </Link>
+            <a href="#thesis" className="btn-secondary flex items-center gap-2">
+              <span>The thesis</span>
             </a>
           </motion.div>
         </div>
