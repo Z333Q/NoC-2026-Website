@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { ArrowRight, ExternalLink, Copy, Check, Download } from 'lucide-react';
+import { ArrowRight, ExternalLink, Copy, Check, Download, Gamepad2 } from 'lucide-react';
 import { useSeoMeta } from '../hooks/useSeoMeta';
 import MolecularOrb from '../components/MolecularOrb';
 
@@ -143,12 +143,10 @@ export default function Home() {
             initial="hidden"
             animate="visible"
             custom={2}
-            className="body-large max-w-[62ch] mb-12"
+            className="body-large max-w-[52ch] mb-12"
           >
-            Software is becoming an economic actor. AI agents now spend, trade, negotiate, and decide,
-            at machine speed and machine scale. Every economy runs on trust, and trust has to be
-            engineered. I build the control layer for the machine economy, and I train the people who
-            will direct it.
+            AI agents now spend, trade, and decide at machine speed. I build the control layer for the
+            machine economy, and I train the people who will direct it.
           </motion.p>
 
           <motion.div
@@ -169,24 +167,32 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SECTION 2: MOMENTUM STRIP */}
-      <section id="signals" className="py-10 bg-[var(--color-bg-secondary)] border-y border-[var(--color-border)]">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-6">
-            {momentum.map((item, i) => (
-              <motion.p
-                key={i}
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                custom={i}
-                className="text-xs leading-relaxed text-[var(--color-text-muted)] border-l border-[var(--color-border)] pl-4"
-              >
+      {/* SECTION 2: MOMENTUM TICKER */}
+      <section id="signals" className="py-8 bg-[var(--color-bg-secondary)] border-y border-[var(--color-border)] overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6 mb-5 flex items-center gap-3">
+          <span className="relative flex h-2.5 w-2.5">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--color-primary)] opacity-75" />
+            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[var(--color-primary)]" />
+          </span>
+          <h2 className="text-xs font-bold uppercase tracking-widest text-[var(--color-primary)]">
+            Latest momentum
+          </h2>
+        </div>
+        <div className="relative">
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-16 z-10 bg-gradient-to-r from-[var(--color-bg-secondary)] to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-16 z-10 bg-gradient-to-l from-[var(--color-bg-secondary)] to-transparent" />
+          <motion.div
+            className="flex gap-12 whitespace-nowrap"
+            animate={{ x: ['0%', '-50%'] }}
+            transition={{ duration: 45, ease: 'linear', repeat: Infinity }}
+          >
+            {[...momentum, ...momentum].map((item, i) => (
+              <span key={i} className="inline-flex items-center gap-4 text-sm text-[var(--color-text-secondary)]">
+                <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-primary)]/70 flex-shrink-0" />
                 {item}
-              </motion.p>
+              </span>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -303,15 +309,26 @@ export default function Home() {
                 <p className="text-sm text-[var(--color-text-secondary)]">Top 10 selection by Osler, Pitch Stage, Montreal.</p>
                 <p className="text-sm text-[var(--color-text-secondary)]">Featured at the Amii Startup Spotlight, Edmonton Startup Week 2026.</p>
               </div>
-              <a
-                href="https://play.refi.trading"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-sm text-[var(--color-primary)] hover:text-white transition-colors"
-              >
-                <ExternalLink className="w-4 h-4" />
-                play.refi.trading
-              </a>
+              <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
+                <a
+                  href="https://play.refi.trading"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-sm text-[var(--color-primary)] hover:text-white transition-colors"
+                >
+                  <ExternalLink className="w-4 h-4" />
+                  play.refi.trading
+                </a>
+                <a
+                  href="https://game.refi.trading"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-sm text-[var(--color-primary)] hover:text-white transition-colors"
+                >
+                  <Gamepad2 className="w-4 h-4" />
+                  Man vs Machine: play the game
+                </a>
+              </div>
             </div>
             <div className="lg:col-span-4 lg:order-1">
               <div className="text-xs font-bold uppercase tracking-widest text-[var(--color-primary)] mb-3">
@@ -321,6 +338,45 @@ export default function Home() {
               <p className="text-sm text-[var(--color-text-muted)]">Co-founder.</p>
             </div>
           </motion.div>
+
+          {/* Man vs Machine game callout */}
+          <motion.a
+            href="https://game.refi.trading"
+            target="_blank"
+            rel="noopener noreferrer"
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="group relative block overflow-hidden rounded-2xl border border-[var(--color-primary)]/30 p-8 md:p-10 mb-24"
+            style={{ background: 'linear-gradient(135deg, rgba(74,144,217,0.12) 0%, rgba(10,10,16,0.85) 60%)' }}
+          >
+            <div
+              className="glow-orb w-[360px] h-[360px] -top-24 -right-24 opacity-30 group-hover:opacity-50 transition-opacity"
+              style={{ background: 'radial-gradient(circle, rgba(74,144,217,0.5) 0%, transparent 70%)' }}
+            />
+            <div className="relative flex flex-col md:flex-row md:items-center gap-6 md:gap-10">
+              <div className="flex-shrink-0 w-16 h-16 rounded-2xl bg-[var(--color-primary)]/15 border border-[var(--color-primary)]/30 flex items-center justify-center">
+                <Gamepad2 className="w-8 h-8 text-[var(--color-primary)]" />
+              </div>
+              <div className="flex-1">
+                <div className="text-xs font-bold uppercase tracking-widest text-[var(--color-primary)] mb-2">
+                  Try it yourself
+                </div>
+                <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">
+                  Man vs Machine
+                </h3>
+                <p className="text-[var(--color-text-secondary)] max-w-xl">
+                  Trade against ReFi Trading&rsquo;s reinforcement learning agent and see whether human
+                  instinct can beat the machine. A two-minute way to feel the thesis in action.
+                </p>
+              </div>
+              <div className="inline-flex items-center gap-2 text-[var(--color-primary)] font-semibold group-hover:text-white transition-colors">
+                <span>Play now</span>
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </div>
+            </div>
+          </motion.a>
 
           {/* P402 (subordinate) */}
           <motion.div
