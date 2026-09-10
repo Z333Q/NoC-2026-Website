@@ -3,7 +3,7 @@ import Layout from './components/Layout';
 import Home from './pages/Home';
 import Stack from './pages/Stack';
 import Thesis from './pages/Thesis';
-import Team from './pages/Team';
+import Portfolio from './pages/Portfolio';
 import Insights from './pages/Insights';
 import Contact from './pages/Contact';
 import Privacy from './pages/Privacy';
@@ -17,7 +17,7 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="stack" element={<Stack />} />
-          <Route path="about" element={<Team />} />
+          <Route path="work" element={<Portfolio />} />
           <Route path="thesis" element={<Thesis />} />
           <Route path="insights" element={<Insights />} />
           <Route path="contact" element={<Contact />} />

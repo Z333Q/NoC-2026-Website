@@ -3,17 +3,16 @@ import { Linkedin, Twitter, Github, Mail, MapPin, ArrowUpRight } from 'lucide-re
 
 const footerLinks = {
   navigate: [
-    { label: 'Stack', path: '/stack' },
     { label: 'Thesis', path: '/thesis' },
-    { label: 'About', path: '/about' },
+    { label: 'Work', path: '/work' },
     { label: 'Insights', path: '/insights' },
-    { label: 'Contact', path: '/contact' },
+    { label: 'About', path: '/#about' },
+    { label: 'Contact', path: '/#contact' },
   ],
   ventures: [
-    { label: 'P402.io', href: 'https://www.p402.io', external: true },
-    { label: 'ReFi Trading', href: 'https://refi.trading', external: true },
-    { label: 'RapMath', href: 'https://www.rapmath.com', external: true },
-    { label: 'EYEcercise', href: 'https://eyecercise.com', external: true },
+    { label: 'Metergrade', href: 'https://metergrade.com', external: true },
+    { label: 'ReFi Trading', href: 'https://play.refi.trading', external: true },
+    { label: 'P402', href: 'https://www.p402.io', external: true },
   ],
 };
 
@@ -41,7 +40,7 @@ export default function Footer() {
 
             <div className="flex items-center gap-4">
               <a
-                href="https://linkedin.com/in/zeshan"
+                href="https://www.linkedin.com/in/zeshanahmad"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 glass-card rounded-lg text-[var(--color-text-muted)] hover:text-[var(--color-primary)] transition-colors"
@@ -84,13 +83,23 @@ export default function Footer() {
             <ul className="space-y-3">
               {footerLinks.navigate.map((link) => (
                 <li key={link.path}>
-                  <Link
-                    to={link.path}
-                    className="text-[var(--color-text-secondary)] hover:text-white text-sm transition-colors flex items-center gap-1 group"
-                  >
-                    {link.label}
-                    <ArrowUpRight className="w-3 h-3 opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" />
-                  </Link>
+                  {link.path.includes('#') ? (
+                    <a
+                      href={link.path}
+                      className="text-[var(--color-text-secondary)] hover:text-white text-sm transition-colors flex items-center gap-1 group"
+                    >
+                      {link.label}
+                      <ArrowUpRight className="w-3 h-3 opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" />
+                    </a>
+                  ) : (
+                    <Link
+                      to={link.path}
+                      className="text-[var(--color-text-secondary)] hover:text-white text-sm transition-colors flex items-center gap-1 group"
+                    >
+                      {link.label}
+                      <ArrowUpRight className="w-3 h-3 opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" />
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>

@@ -13,8 +13,8 @@ interface SeoMeta {
 
 const BASE_URL = 'https://natureofcommerce.com';
 const DEFAULT_OG_IMAGE = `${BASE_URL}/nature-of-commerce-vis.png`;
-const defaultTitle = 'Nature of Commerce | Zeshan Ahmad — Builder, Researcher & Web3 Infrastructure Architect';
-const defaultDescription = 'Zeshan Ahmad is a technical founder, researcher, and educator building the infrastructure layer for the autonomous agent economy. Creator of P402 (x402 agentic payments), co-founder of ReFi Trading (algorithmic portfolio management), and professor of Blockchain & AI.';
+const defaultTitle = 'Nature of Commerce | Zeshan Ahmad. The Control Layer for the Machine Economy';
+const defaultDescription = 'Commerce is changing its nature. Zeshan Ahmad builds the control layer for the machine economy, inventor of Metergrade, co-founder of ReFi Trading, creator of P402, and educator teaching AI-directed product thinking from the classroom to the boardroom.';
 const defaultCanonical = `${BASE_URL}/`;
 
 export function useSeoMeta({ title, description, canonical, ogTitle, ogDescription, ogImage, ogType, keywords }: SeoMeta) {

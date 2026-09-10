@@ -172,6 +172,21 @@ export default function Thesis() {
   });
   return (
     <main className="overflow-hidden">
+      <section className="relative blueprint-grid pt-32 pb-16 border-b border-[var(--color-border)]">
+        <div className="max-w-4xl mx-auto px-6">
+          <motion.p variants={fadeUp} initial="hidden" animate="visible" custom={0} className="text-xs font-bold uppercase tracking-widest text-[var(--color-primary)] mb-6">
+            The lineage
+          </motion.p>
+          <motion.p variants={fadeUp} initial="hidden" animate="visible" custom={1} className="text-2xl md:text-3xl font-semibold text-white leading-snug mb-6">
+            The name is three centuries old. Richard Cantillon&rsquo;s 1730 Essai sur la Nature du Commerce en G&eacute;n&eacute;ral was the first treatise to describe commerce as a system and the entrepreneur as its risk-bearer.
+          </motion.p>
+          <motion.p variants={fadeUp} initial="hidden" animate="visible" custom={2} className="body-large">
+            The nature of commerce is changing again: its newest actors are machines. An economy of autonomous
+            actors has three questions to answer, and everything built here answers one of them.
+          </motion.p>
+        </div>
+      </section>
+
       <section className="relative min-h-[70vh] flex items-center blueprint-grid pt-24">
         <div className="absolute inset-0 pointer-events-none">
           <div className="glow-orb glow-orb-primary w-[600px] h-[600px] -top-20 -right-20 opacity-15" />

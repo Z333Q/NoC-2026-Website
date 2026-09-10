@@ -5,10 +5,11 @@ import { Menu, X, ArrowRight } from 'lucide-react';
 
 const navLinks = [
   { path: '/', label: 'Home' },
-  { path: '/stack', label: 'Stack' },
   { path: '/thesis', label: 'Thesis' },
-  { path: '/about', label: 'About' },
+  { path: '/work', label: 'Work' },
   { path: '/insights', label: 'Insights' },
+  { path: '/#about', label: 'About' },
+  { path: '/#contact', label: 'Contact' },
 ];
 
 export default function Navbar() {
@@ -51,25 +52,35 @@ export default function Navbar() {
           </Link>
 
           <div className="hidden lg:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                className={`nav-link text-sm font-medium ${
-                  location.pathname === link.path ? 'active text-white' : ''
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
+            {navLinks.map((link) =>
+              link.path.includes('#') ? (
+                <a
+                  key={link.path}
+                  href={link.path}
+                  className="nav-link text-sm font-medium"
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  className={`nav-link text-sm font-medium ${
+                    location.pathname === link.path ? 'active text-white' : ''
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              )
+            )}
           </div>
 
           <div className="hidden lg:flex items-center gap-4">
-            <Link to="/contact" className="btn-secondary text-sm py-2 px-5">
+            <a href="/#contact" className="btn-secondary text-sm py-2 px-5">
               Contact
-            </Link>
+            </a>
             <Link to="/thesis" className="btn-primary text-sm py-2 px-5 flex items-center gap-2">
-              <span>Builder Thesis</span>
+              <span>The thesis</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
@@ -110,32 +121,43 @@ export default function Navbar() {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: i * 0.1 }}
                   >
-                    <Link
-                      to={link.path}
-                      className={`text-2xl font-semibold transition-colors ${
-                        location.pathname === link.path
-                          ? 'text-[var(--color-primary)]'
-                          : 'text-white hover:text-[var(--color-primary)]'
-                      }`}
-                    >
-                      {link.label}
-                    </Link>
+                    {link.path.includes('#') ? (
+                      <a
+                        href={link.path}
+                        onClick={() => setIsOpen(false)}
+                        className="text-2xl font-semibold transition-colors text-white hover:text-[var(--color-primary)]"
+                      >
+                        {link.label}
+                      </a>
+                    ) : (
+                      <Link
+                        to={link.path}
+                        className={`text-2xl font-semibold transition-colors ${
+                          location.pathname === link.path
+                            ? 'text-[var(--color-primary)]'
+                            : 'text-white hover:text-[var(--color-primary)]'
+                        }`}
+                      >
+                        {link.label}
+                      </Link>
+                    )}
                   </motion.div>
                 ))}
               </div>
 
               <div className="mt-12 pt-8 border-t border-[var(--color-border)] space-y-4">
-                <Link
-                  to="/contact"
+                <a
+                  href="/#contact"
+                  onClick={() => setIsOpen(false)}
                   className="block w-full text-center btn-secondary py-3"
                 >
                   Contact
-                </Link>
+                </a>
                 <Link
                   to="/thesis"
                   className="block w-full text-center btn-primary py-3"
                 >
-                  <span>Builder Thesis</span>
+                  <span>The thesis</span>
                 </Link>
               </div>
             </motion.nav>

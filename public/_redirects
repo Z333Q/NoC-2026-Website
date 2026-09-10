@@ -1,0 +1,14 @@
+# Legacy WordPress-era paths to current pages (301 permanent)
+/resume/*      /work       301
+/portfolio/*   /work       301
+/project/*     /work       301
+/category/*    /insights   301
+/home/*        /           301
+/2020/*        /insights   301
+/2021/*        /insights   301
+/2022/*        /insights   301
+/2023/*        /insights   301
+/2024/*        /insights   301
+
+# SPA fallback: all other routes handled by the app
+/*             /index.html 200
