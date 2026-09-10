@@ -29,17 +29,17 @@ const momentum = [
 const questions = [
   {
     number: '1',
-    title: 'What does it cost?',
+    title: 'Cost you can attribute',
     text: 'Machine work consumes real money at machine speed. Most organizations cannot attribute their AI spend to an accountable workload, and what cannot be attributed cannot be governed.',
   },
   {
     number: '2',
-    title: 'Can it be proven safe?',
+    title: 'Safety you can prove',
     text: '"Trust me" does not survive contact with regulators or markets. When software makes financial decisions, control has to be cryptographically provable, not promised in the terms of service.',
   },
   {
     number: '3',
-    title: 'Who directs it?',
+    title: 'People who direct it',
     text: 'Infrastructure without capable people is a liability. The durable skills of the AI era are product thinking, judgment, and taste: knowing what to build, and directing machines to build it.',
   },
 ];
@@ -231,10 +231,21 @@ export default function Home() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="display-text max-w-4xl mb-16"
+            className="display-text max-w-4xl mb-6"
           >
-            An economy of autonomous actors has three questions to answer.
+            Every economy runs on trust. In the machine economy, that trust has to be engineered.
           </motion.h2>
+
+          <motion.p
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="body-large max-w-3xl mb-16"
+          >
+            When software spends, trades, and decides on its own, trust comes down to three things. They
+            are what I build and teach toward.
+          </motion.p>
 
           <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
             {questions.map((q, i) => (
@@ -260,7 +271,7 @@ export default function Home() {
             viewport={{ once: true }}
             className="text-xl md:text-2xl font-semibold text-white text-center max-w-3xl mx-auto mt-20"
           >
-            Everything I build and teach answers one of these three.
+            Metergrade, ReFi Trading, and P402 build these into working infrastructure.
           </motion.p>
         </div>
       </section>
@@ -271,7 +282,8 @@ export default function Home() {
           <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="max-w-3xl mb-20">
             <h2 className="display-text mb-6">The work</h2>
             <p className="body-large">
-              Three ventures, each an answer. Each operates as its own entity with its own team and roadmap.
+              Three ventures, one thesis, at three altitudes: enterprise, platform, and open source. Each
+              operates as its own entity with its own team and roadmap.
             </p>
           </motion.div>
 
@@ -285,7 +297,7 @@ export default function Home() {
           >
             <div className="lg:col-span-4">
               <div className="text-xs font-bold uppercase tracking-widest text-[var(--color-primary)] mb-3">
-                Question one, answered.
+                Enterprise
               </div>
               <h3 className="text-3xl font-bold text-white mb-3">Metergrade</h3>
               <p className="text-sm text-[var(--color-text-muted)]">
@@ -359,7 +371,7 @@ export default function Home() {
             </div>
             <div className="lg:col-span-4 lg:order-1">
               <div className="text-xs font-bold uppercase tracking-widest text-[var(--color-primary)] mb-3">
-                Question two, answered.
+                Platform
               </div>
               <h3 className="text-3xl font-bold text-white mb-3">ReFi Trading</h3>
               <p className="text-sm text-[var(--color-text-muted)]">Co-founder.</p>
@@ -405,25 +417,49 @@ export default function Home() {
             </div>
           </motion.a>
 
-          {/* P402 (subordinate) */}
+          {/* P402 */}
           <motion.div
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="max-w-3xl border-t border-[var(--color-border)] pt-12"
+            className="grid lg:grid-cols-12 gap-8 items-start"
           >
-            <div className="text-xs font-bold uppercase tracking-widest text-[var(--color-text-muted)] mb-3">
-              Where the questions converge.
+            <div className="lg:col-span-4">
+              <div className="text-xs font-bold uppercase tracking-widest text-[var(--color-primary)] mb-3">
+                Open source
+              </div>
+              <h3 className="text-3xl font-bold text-white mb-3">P402</h3>
+              <p className="text-sm text-[var(--color-text-muted)]">Creator.</p>
             </div>
-            <h3 className="text-2xl font-bold text-white mb-2">P402</h3>
-            <p className="text-sm text-[var(--color-text-muted)] mb-5">Creator.</p>
-            <p className="text-[var(--color-text-secondary)] leading-relaxed">
-              P402 is protocol research in agentic payments built on the x402 pattern: rails that let
-              autonomous agents transact, settle, and prove compliance without a human in the loop. At the
-              point of payment, cost, safety, and human oversight meet. This research is the connective
-              tissue of the portfolio.
-            </p>
+            <div className="lg:col-span-8">
+              <p className="text-lg text-[var(--color-text-secondary)] leading-relaxed mb-6">
+                P402 is open-source payment infrastructure for autonomous agents, built on the x402 pattern.
+                Developer-first: drop in the SDK, wire it up from the command line, or connect it to any agent
+                through the MCP server, and your software can pay, settle, and prove compliance without a human
+                in the loop. Where Metergrade is enterprise and ReFi is a platform, P402 is the open layer the
+                whole agent economy can build on.
+              </p>
+              <div className="flex flex-wrap gap-2 mb-6">
+                {['SDK', 'CLI', 'MCP server', 'x402 protocol'].map((tag) => (
+                  <span
+                    key={tag}
+                    className="text-xs font-medium px-3 py-1 rounded-full border border-[var(--color-primary)]/30 text-[var(--color-primary)]"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <a
+                href="https://p402.io"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-sm text-[var(--color-primary)] hover:text-white transition-colors"
+              >
+                <ExternalLink className="w-4 h-4" />
+                p402.io
+              </a>
+            </div>
           </motion.div>
         </div>
       </section>
@@ -434,8 +470,8 @@ export default function Home() {
           <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="max-w-3xl mb-16">
             <h2 className="display-text mb-6">The teaching</h2>
             <p className="body-large">
-              Question three cannot be answered with software. It is answered with people. I teach the same
-              discipline at every altitude, and each level sharpens the others.
+              Infrastructure is only half of it. The other half is people who can direct these systems. I
+              teach the same discipline at every altitude, and each level sharpens the others.
             </p>
           </motion.div>
 
