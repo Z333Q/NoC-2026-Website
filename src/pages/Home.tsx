@@ -338,13 +338,13 @@ export default function Home() {
               </div>
               <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
                 <a
-                  href="https://play.refi.trading"
+                  href="https://refi.trading"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 text-sm text-[var(--color-primary)] hover:text-white transition-colors"
                 >
                   <ExternalLink className="w-4 h-4" />
-                  play.refi.trading
+                  refi.trading
                 </a>
                 <a
                   href="https://game.refi.trading"
