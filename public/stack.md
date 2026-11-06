@@ -162,7 +162,7 @@ The through-line: removing gatekeepers from financial systems using the best tec
 
 Role: Senior Investment Officer
 
-$1.2B+ in transactions across institutional capital. E-Trade (major shareholders), Summit Entertainment slate financing (later acquired by Lionsgate, $412M), Aman Resorts M&A ($350M+), real estate and CPG portfolio.
+$1.2B+ in transactions across institutional capital. E-Trade (major shareholders), Summit Entertainment slate financing (later acquired by Lionsgate, $412M), Aman Resorts M&A ($328M), real estate and CPG portfolio.
 
 Tags: Private Equity, M&A, $1.2B+
 
@@ -186,7 +186,7 @@ Tags: FinTech, 46 Patents, Mobile Banking, Melbourne
 
 Role: Founder
 
-CharityDreams.com celebrity auction platform ($4M+ raised for charity, partnerships with Fergie/Black Eyed Peas, 50 Cent UN initiative). Scaled DTC bedding brand to $4M+ in sales. Successful exit 2021.
+CharityDreams.com celebrity auction platform ($4M+ raised for charity, partnerships with Fergie/Black Eyed Peas, 50 Cent UN initiative). Scaled DTC bedding brand to $4M+ in sales.
 
 Tags: E-commerce, DTC, $4M Exit
 

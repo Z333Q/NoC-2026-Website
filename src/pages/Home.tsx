@@ -6,7 +6,7 @@ import { useSeoMeta } from '../hooks/useSeoMeta';
 import MolecularOrb from '../components/MolecularOrb';
 
 const EMAIL = 'zeshan@natureofcommerce.com';
-const LINKEDIN_URL = 'https://www.linkedin.com/in/zeshanahmad';
+const LINKEDIN_URL = 'https://linkedin.com/in/zeshan';
 const X_URL = 'https://x.com/NatureofCommerce';
 const HEADSHOT = '/zeshan-ahmad-headshot.jpg';
 

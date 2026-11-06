@@ -140,7 +140,7 @@ const trackRecord = [
     era: '2009 – 2015',
     name: 'Peak Venture Partners',
     role: 'Senior Investment Officer',
-    description: '$1.2B+ in transactions across institutional capital. E-Trade (major shareholders), Summit Entertainment slate financing (later acquired by Lionsgate, $412M), Aman Resorts M&A ($350M+), real estate and CPG portfolio.',
+    description: '$1.2B+ in transactions across institutional capital. E-Trade (major shareholders), Summit Entertainment slate financing (later acquired by Lionsgate, $412M), Aman Resorts M&A ($328M), real estate and CPG portfolio.',
     tags: ['Private Equity', 'M&A', '$1.2B+'],
   },
   {
@@ -161,7 +161,7 @@ const trackRecord = [
     era: '2010 – 2021',
     name: 'E-commerce & DTC',
     role: 'Founder',
-    description: 'CharityDreams.com celebrity auction platform ($4M+ raised for charity, partnerships with Fergie/Black Eyed Peas, 50 Cent UN initiative). Scaled DTC bedding brand to $4M+ in sales. Successful exit 2021.',
+    description: 'CharityDreams.com celebrity auction platform ($4M+ raised for charity, partnerships with Fergie/Black Eyed Peas, 50 Cent UN initiative). Scaled DTC bedding brand to $4M+ in sales.',
     tags: ['E-commerce', 'DTC', '$4M Exit'],
   },
   {

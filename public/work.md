@@ -142,20 +142,22 @@ Tags: Gaming, NFTs, Polygon, AI Agents
 
 Sustainable DTC Bedding Brand
 
-- Category: Previous
-- Stage: Exited 2021
-- Status: Exited
-- Years: 2015-2021
+- Category: E-commerce
+- Stage: Co-Founded
+- Status: Active
+- Year: 2015
 
-Co-founded and scaled two direct-to-consumer bedding brands to $4M+ in sales before successful exit.
+Co-founded and scaled direct-to-consumer bedding brands to $4M+ in sales.
 
 Features:
 - $4M+ in sales
 - Featured in major publications
 - Sustainable materials
-- Successful exit 2021
+- Ships globally
 
-Tags: E-commerce, DTC, Sustainable, Exit
+Tags: E-commerce, DTC, Sustainable, Organic
+
+[Visit Website](https://wholesomelinen.com)
 
 ### Peak Venture Partners
 
@@ -221,7 +223,7 @@ Banking Infrastructure for Emerging Markets
 - Category: Previous
 - Stage: VP Comms/BizDev
 - Status: Exited
-- Years: 2005-2007
+- Years: 2003-2007
 
 Wireless connectivity enabling mobile banking in rural areas. Brought modern financial services to underserved populations.
 

@@ -119,7 +119,7 @@ The name is three centuries old. Richard Cantillon's 1730 Essai sur la Nature du
 
 Based in Edmonton, Canada. Nature of Commerce LLC is registered in Wyoming, USA.
 
-- [LinkedIn](https://www.linkedin.com/in/zeshanahmad)
+- [LinkedIn](https://linkedin.com/in/zeshan)
 - [X](https://x.com/NatureofCommerce)
 
 ## Press and speaking
