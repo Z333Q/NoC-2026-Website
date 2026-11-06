@@ -139,22 +139,27 @@ We publish across three outlets:
 - Tokenomics and DeFi structure
 - GTM strategy for Web3 founders
 
-## Navigation
+## Machine-Readable Pages
 
-- **Home**: https://natureofcommerce.com/ — Builder studio overview, infrastructure stack, why now
-- **Investment Thesis**: https://natureofcommerce.com/thesis — Detailed thesis on AI agents, open infrastructure, tokenization
-- **Technology Stack**: https://natureofcommerce.com/stack — Five-layer architecture, active ventures, technical details
-- **Research & Insights**: https://natureofcommerce.com/insights — All published research, Market Wars series
-- **Team**: https://natureofcommerce.com/about — Zeshan Ahmad bio, co-founders, teaching at KIU
-- **Contact**: https://natureofcommerce.com/contact — Partnership inquiries, collaboration, advisory
-- **Privacy Policy**: https://natureofcommerce.com/privacy — Data collection, security, and your rights
-- **Terms of Service**: https://natureofcommerce.com/terms — Terms governing use of Nature of Commerce services
+Every page is available as plain Markdown (no JavaScript required). The complete site in a single file is at https://natureofcommerce.com/llms-full.txt
+
+- [Home](https://natureofcommerce.com/index.md): Zeshan Ahmad, latest momentum, the three pillars of trust in the machine economy (HTML: https://natureofcommerce.com/)
+- [Investment Thesis](https://natureofcommerce.com/thesis.md): Agent-native commerce, open infrastructure, tokenization, why now (HTML: https://natureofcommerce.com/thesis)
+- [The Studio](https://natureofcommerce.com/work.md): Ventures, portfolio companies, and track record (HTML: https://natureofcommerce.com/work)
+- [Technology Stack](https://natureofcommerce.com/stack.md): Layered architecture, active ventures, technical details (HTML: https://natureofcommerce.com/stack)
+- [Research & Insights](https://natureofcommerce.com/insights.md): All published research and the Market Wars series (HTML: https://natureofcommerce.com/insights)
+- [Contact](https://natureofcommerce.com/contact.md): Partnership inquiries, contact form fields, emails and socials (HTML: https://natureofcommerce.com/contact)
+
+## Optional
+
+- [Privacy Policy](https://natureofcommerce.com/privacy.md): Data collection, security, and your rights
+- [Terms of Service](https://natureofcommerce.com/terms.md): Terms governing use of Nature of Commerce services
 
 ## Contact & Social
 
 - Website: https://natureofcommerce.com
 - Investment inquiries: invest@natureofcommerce.com
-- Apply for funding: https://natureofcommerce.com/contact
+- Contact form: https://natureofcommerce.com/contact
 - LinkedIn: https://linkedin.com/company/natureofcommerce
 - Twitter/X: https://twitter.com/NatureofCommerce
 - GitHub: https://github.com/Z333Q

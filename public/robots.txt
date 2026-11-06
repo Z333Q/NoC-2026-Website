@@ -71,3 +71,7 @@ Disallow: /api/
 Disallow: /.env
 
 Sitemap: https://natureofcommerce.com/sitemap.xml
+
+# Machine-readable content for AI agents
+# Summary: https://natureofcommerce.com/llms.txt
+# Full site: https://natureofcommerce.com/llms-full.txt
