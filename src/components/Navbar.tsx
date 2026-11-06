@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ArrowRight } from 'lucide-react';
+import ViewModeToggle, { type ViewMode } from './ViewModeToggle';
 
 const navLinks = [
   { path: '/', label: 'Home' },
@@ -12,7 +13,12 @@ const navLinks = [
   { path: '/#contact', label: 'Contact' },
 ];
 
-export default function Navbar() {
+interface NavbarProps {
+  mode: ViewMode;
+  onModeChange: (mode: ViewMode) => void;
+}
+
+export default function Navbar({ mode, onModeChange }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
@@ -76,6 +82,7 @@ export default function Navbar() {
           </div>
 
           <div className="hidden lg:flex items-center gap-4">
+            <ViewModeToggle mode={mode} onChange={onModeChange} />
             <a href="/#contact" className="btn-secondary text-sm py-2 px-5">
               Contact
             </a>
@@ -85,14 +92,17 @@ export default function Navbar() {
             </Link>
           </div>
 
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden p-2 text-[var(--color-text-secondary)] hover:text-white transition-colors"
-            aria-label="Toggle menu"
-            aria-expanded={isOpen}
-          >
-            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+          <div className="flex items-center gap-3 lg:hidden">
+            <ViewModeToggle mode={mode} onChange={onModeChange} compact />
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="p-2 text-[var(--color-text-secondary)] hover:text-white transition-colors"
+              aria-label="Toggle menu"
+              aria-expanded={isOpen}
+            >
+              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
         </nav>
       </motion.header>
 
