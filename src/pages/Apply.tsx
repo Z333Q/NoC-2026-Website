@@ -83,9 +83,8 @@ export default function Apply() {
       if (submitError) throw submitError;
 
       setIsSubmitted(true);
-    } catch (err) {
+    } catch {
       setError('There was an error submitting your application. Please try again.');
-      console.error(err);
     } finally {
       setIsSubmitting(false);
     }

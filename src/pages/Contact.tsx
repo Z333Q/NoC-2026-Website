@@ -57,7 +57,7 @@ export default function Contact() {
         name: formData.name,
         email: formData.email,
         company: formData.company || null,
-        subject: formData.topic,
+        inquiry_type: formData.topic || 'General Inquiry',
         message: formData.message,
       }]);
       if (error) throw error;
